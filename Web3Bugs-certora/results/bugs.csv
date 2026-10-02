@@ -1,0 +1,4 @@
+Contest ID, Bug ID, Bug Label, Severity, Bug Description, Reference, Comment
+1,L-01,O1,Low,"Unexpected revert of queued actions",reports/1.md#issue-unexpected-revert-of-queued-actions,"Property violated: independentQueuedActions. Technical mechanism is S2-3-like, but primary Web3Bugs label is O1."
+1,L-02,O6,Low,"Impossible to queue two similar actions",reports/1.md#issue-impossible-to-queue-two-similar-actions,"Duplicate-action rejection is treated by AAVE as an accepted design constraint/workaround case."
+1,L-03,O6,Low,"Unexpected action occurrence upon low-level call",reports/1.md#issue-unexpected-action-occurrence-upon-low-level-call,"Low-level-call behavior is L8-like technically, but AAVE identifies a legitimate intended use case; primary label O6."

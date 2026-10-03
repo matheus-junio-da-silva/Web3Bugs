@@ -1,0 +1,28 @@
+INCOMPLETE DEPENDENCY
+
+Property: LendIsBackedByAave
+Original spec: contracts/3/specs/rescueLendMigrator.spec
+Target Contract: LendToAaveMigrator
+
+Missing or unresolved dependency/context:
+- DummyERC20Impl: referenced by using DummyERC20Impl as LEND1 at line 1. No implementation exists in the aave_rescue_mission snapshot.
+- DummyERC20Impl2: referenced by using DummyERC20Impl2 as AAVE1 at line 2. No implementation exists in the aave_rescue_mission snapshot.
+
+Search performed:
+- Searched the complete Project 3 snapshot and the original /home/mat/certora-ac-audit/PropertyGPT/certora_projects/aave_rescue_mission.
+- Searched the full PropertyGPT tree for DummyERC20Impl, DummyERC20Impl2, LEND1, and AAVE1.
+- Generic DummyERC20Impl implementations were found only in unrelated projects such as aave_staked_token, notional_finance_v2, and furucombo. No evidence links those files to this Rescue Mission verification.
+- No applicable DummyERC20Impl2 implementation was found.
+- CVL methods declarations were not treated as proof that a corresponding Solidity/harness implementation exists.
+
+Upstream corroboration performed during independent review:
+- The exact bgd-labs/rescue-mission-phase-1 repository contains certora/harness/ERC20Dummy.sol defining DummyERC20Impl and certora/harness/ERC20Dummy2.sol defining DummyERC20Impl2, plus certora/harness/SafeMath.sol.
+- certora/scripts/verifyRescueLendMigrator.sh verifies LendToAaveMigrator, links LEND=DummyERC20Impl and AAVE=DummyERC20Impl2, supplies AaveTokenV2, uses --optimistic_loop, and maps the solidity-utils package.
+- The PropertyGPT rescueLendMigrator.spec hash exactly matches the upstream Certora Review copy.
+- These historical files are not present in the supplied PropertyGPT project snapshot. They are evidence of what is missing, not permission to import them and reclassify the example as complete.
+- LendToAaveMigrator.sol also imports solidity-utils/contracts/oz-common/interfaces/IERC20.sol, which is absent from the supplied Project 3 snapshot; this further prevents exact local recompilation.
+
+Why incomplete:
+The invariant's observed LEND supply/balance and AAVE balance are provided through the missing linked token models. Importing an unrelated dummy ERC20 would invent historical verification context, so the source property is preserved without a replacement.
+
+This classification concerns dependency completeness in the available snapshot, not CVL1/CVL2 syntax compatibility.

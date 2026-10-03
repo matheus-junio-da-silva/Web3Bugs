@@ -1,0 +1,31 @@
+INCOMPLETE DEPENDENCY
+
+Property: LendIsBackedByAaveIncInitialize
+Original spec: contracts/3/specs/rescueLendMigrator.spec
+Target Contract: LendToAaveMigrator
+
+Missing or unresolved dependency/context:
+- DummyERC20Impl: referenced by using DummyERC20Impl as LEND1 at line 1. No implementation exists in the aave_rescue_mission snapshot.
+- DummyERC20Impl2: referenced by using DummyERC20Impl2 as AAVE1 at line 2. No implementation exists in the aave_rescue_mission snapshot.
+
+Resolved related dependency:
+- AaveTokenV2, used as AAVE_ORIG, is present at contracts/3/contracts/AaveTokenV2.sol and contains initialize(address[],uint256[],address,address,uint256).
+
+Search performed:
+- Searched the complete Project 3 snapshot and the original /home/mat/certora-ac-audit/PropertyGPT/certora_projects/aave_rescue_mission.
+- Searched the full PropertyGPT tree for the dummy-token names and aliases.
+- Same-named generic DummyERC20Impl implementations in other projects were treated as unrelated and were not imported.
+- No applicable DummyERC20Impl2 implementation was found.
+- CVL methods declarations were not treated as substitute Solidity/harness implementations.
+
+Upstream corroboration performed during independent review:
+- The exact bgd-labs/rescue-mission-phase-1 repository contains certora/harness/ERC20Dummy.sol defining DummyERC20Impl and certora/harness/ERC20Dummy2.sol defining DummyERC20Impl2, plus certora/harness/SafeMath.sol.
+- certora/scripts/verifyRescueLendMigrator.sh verifies LendToAaveMigrator, links LEND=DummyERC20Impl and AAVE=DummyERC20Impl2, supplies AaveTokenV2, uses --optimistic_loop, and maps the solidity-utils package.
+- The PropertyGPT rescueLendMigrator.spec hash exactly matches the upstream Certora Review copy.
+- These historical files are absent from the supplied PropertyGPT snapshot and therefore are not imported into Project 3.
+- LendToAaveMigrator.sol also imports solidity-utils/contracts/oz-common/interfaces/IERC20.sol, which is absent from Project 3 and is another exact-reproduction dependency.
+
+Why incomplete:
+The rule's precondition and final assertion depend on the missing LEND/AAVE linked token models. The concrete AaveTokenV2 resolves only the AAVE_ORIG.initialize branch and does not resolve LEND1 or AAVE1.
+
+This classification concerns dependency completeness in the available snapshot, not CVL1/CVL2 syntax compatibility.

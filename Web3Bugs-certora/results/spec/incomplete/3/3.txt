@@ -1,0 +1,29 @@
+INCOMPLETE DEPENDENCY
+
+Property: StkAaveIsBackedByAave
+Original spec: contracts/3/specs/rescueSTKAAVE.spec
+Target Contract: StakedTokenV2Rev4
+
+Missing or unresolved dependency/context:
+- DummyERC20Impl: referenced by using DummyERC20Impl as STAKED_TOKEN1 at line 1. No implementation exists in the aave_rescue_mission snapshot.
+
+Resolved related dependencies:
+- totalSupply() is provided by the inherited ERC20 implementation in StakedTokenV2Rev4.sol.
+- REWARDS_VAULT is a public immutable target variable and therefore has a concrete ABI getter in the target contract.
+
+Search performed:
+- Searched the complete Project 3 snapshot and the original /home/mat/certora-ac-audit/PropertyGPT/certora_projects/aave_rescue_mission.
+- Searched the full PropertyGPT tree for DummyERC20Impl and STAKED_TOKEN1.
+- Generic DummyERC20Impl files exist in unrelated projects, including aave_staked_token, but no harness/config/link evidence in the Rescue Mission snapshot identifies one as the historical dependency.
+- CVL methods declarations were not treated as substitute implementations.
+
+Upstream corroboration performed during independent review:
+- The exact bgd-labs/rescue-mission-phase-1 repository contains certora/harness/ERC20Dummy.sol defining DummyERC20Impl and its certora/harness/SafeMath.sol dependency.
+- certora/scripts/verifyRescueStkAAVE.sh verifies StakedTokenV2Rev4 and links both STAKED_TOKEN and REWARD_TOKEN to DummyERC20Impl while using --optimistic_loop.
+- The PropertyGPT rescueSTKAAVE.spec hash exactly matches the upstream Certora Review copy.
+- This upstream evidence explains the source preservation restriction involving REWARDS_VAULT and claimRewards, but the harness and run script are absent from the supplied PropertyGPT snapshot and are not imported into Project 3.
+
+Why incomplete:
+The backing side of the invariant is read from the missing linked STAKED_TOKEN1 model. Reusing an unrelated dummy token implementation would manufacture verification context not present in the snapshot.
+
+This classification concerns dependency completeness in the available snapshot, not CVL1/CVL2 syntax compatibility.

@@ -1,0 +1,20 @@
+INCOMPLETE DEPENDENCY
+
+Property: integrityOfDisableAssets
+Original spec: contracts/2/specs/executorV2.spec
+Target Contract: ProofOfReserveExecutorV2
+
+Missing or unresolved dependency/context:
+- disableAsset: declared at executorV2.spec:13 but no Solidity/harness implementation exists.
+- getAssetState: declared at executorV2.spec:14 but no Solidity/harness implementation exists.
+- getAssetsLength: declared at executorV2.spec:15 but no Solidity/harness implementation exists.
+
+Search performed:
+- Searched the complete copied Project 2 snapshot under contracts/2, including all Solidity, interface, helper, proposal, and spec files.
+- Searched the original source snapshot at /home/mat/certora-ac-audit/PropertyGPT/certora_projects/aave_proof_of_reserve.
+- Method declarations in a CVL methods block were not treated as proof that a corresponding Solidity/harness implementation exists.
+
+Why incomplete:
+The property depends on the missing historical helper/harness behavior above. Reconstructing it from nearby production functions would add unverified semantics, so the original property is preserved without inventing a replacement.
+
+This classification concerns dependency completeness in the available snapshot, not CVL1/CVL2 syntax compatibility.

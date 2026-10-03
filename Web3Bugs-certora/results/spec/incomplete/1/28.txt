@@ -1,0 +1,10 @@
+INCOMPLETE DEPENDENCY
+
+Property: queue2Reachability
+Original spec: contracts/1/specs/Optimism_ArbitrumBridge.spec
+
+Missing or unresolved dependency/context:
+- queue2 (historical simplified verification helper/harness is not present in the snapshot)
+
+This classification concerns dependency completeness in the available snapshot, not CVL1/CVL2 syntax compatibility.
+The original property text is preserved; missing historical helpers are not silently reconstructed.

@@ -1,0 +1,10 @@
+INCOMPLETE DEPENDENCY
+
+Property: whoChangedBalanceOf
+Original spec: contracts/1/specs/complexity.spec
+
+Missing or unresolved dependency/context:
+- target contract / original Certora run configuration for complexity.spec is not present in the snapshot
+
+This classification concerns dependency completeness in the available snapshot, not CVL1/CVL2 syntax compatibility.
+The original property text is preserved; missing historical helpers are not silently reconstructed.

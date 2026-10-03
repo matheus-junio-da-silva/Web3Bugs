@@ -1,0 +1,11 @@
+INCOMPLETE DEPENDENCY
+
+Property: onlyQueuedAreExecuted
+Original spec: contracts/1/specs/Optimism_ArbitrumBridge.spec
+
+Missing or unresolved dependency/context:
+- ID2actionHash (declared in the historical spec but no matching Solidity implementation is present in the snapshot)
+- _mock(env) (historical helper/address resolver referenced by the CVL property is not declared in the specs or implemented in the available snapshot)
+
+This classification concerns dependency completeness in the available snapshot, not CVL1/CVL2 syntax compatibility.
+The original property text is preserved; missing historical helpers are not silently reconstructed.

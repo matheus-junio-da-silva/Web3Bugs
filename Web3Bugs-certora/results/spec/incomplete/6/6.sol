@@ -1,0 +1,81 @@
+// Project 6 - Aave Static aToken
+// Solidity context for property: sumAllBalance_eq_totalSupply
+// Literal excerpts from the supplied PropertyGPT Solidity snapshot.
+// Context only: historical verification harness/linked contracts are missing.
+// StaticATokenLM.sol matches upstream commit 13a004738c533f11710400c1757b9570ef1e0466,
+// while the final report states latest reviewed commit ac92951.
+
+// ===== ERC20.sol =====
+// Original source: contracts/6/ERC20.sol:35-39
+  uint256 public totalSupply;
+
+  mapping(address => uint256) public balanceOf;
+
+  mapping(address => mapping(address => uint256)) public allowance;
+
+// Original source: contracts/6/ERC20.sol:84-121
+  function transfer(address to, uint256 amount) public virtual returns (bool) {
+    _beforeTokenTransfer(msg.sender, to, amount);
+    balanceOf[msg.sender] -= amount;
+
+    // Cannot overflow because the sum of all user
+    // balances can't exceed the max uint256 value.
+    unchecked {
+      balanceOf[to] += amount;
+    }
+
+    emit Transfer(msg.sender, to, amount);
+
+    return true;
+  }
+
+  function transferFrom(
+    address from,
+    address to,
+    uint256 amount
+  ) public virtual returns (bool) {
+    _beforeTokenTransfer(from, to, amount);
+    uint256 allowed = allowance[from][msg.sender]; // Saves gas for limited approvals.
+
+    if (allowed != type(uint256).max)
+      allowance[from][msg.sender] = allowed - amount;
+
+    balanceOf[from] -= amount;
+
+    // Cannot overflow because the sum of all user
+    // balances can't exceed the max uint256 value.
+    unchecked {
+      balanceOf[to] += amount;
+    }
+
+    emit Transfer(from, to, amount);
+
+    return true;
+  }
+
+// Original source: contracts/6/ERC20.sol:202-226
+  function _mint(address to, uint256 amount) internal virtual {
+    _beforeTokenTransfer(address(0), to, amount);
+    totalSupply += amount;
+
+    // Cannot overflow because the sum of all user
+    // balances can't exceed the max uint256 value.
+    unchecked {
+      balanceOf[to] += amount;
+    }
+
+    emit Transfer(address(0), to, amount);
+  }
+
+  function _burn(address from, uint256 amount) internal virtual {
+    _beforeTokenTransfer(from, address(0), amount);
+    balanceOf[from] -= amount;
+
+    // Cannot underflow because a user's balance
+    // will never be larger than the total supply.
+    unchecked {
+      totalSupply -= amount;
+    }
+
+    emit Transfer(from, address(0), amount);
+  }

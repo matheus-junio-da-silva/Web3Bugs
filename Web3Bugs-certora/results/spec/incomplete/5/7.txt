@@ -1,0 +1,5 @@
+Project 5 example 7 — underlying2ATokenConsistency
+
+INCOMPLETE DEPENDENCY
+
+BridgeHarness.sol is required for getUnderlyingAssetOfAToken(); ATokenWithPoolA_L1.sol and ATokenWithPoolB_L1.sol provide the modeled UNDERLYING_ASSET_ADDRESS values. The target harness is absent from the supplied snapshot. Search scope: the complete supplied aave_starknet_bridge project snapshot and an exact-filename search across the full PropertyGPT tree. No BridgeHarness.sol, BridgeL2Harness.sol, SymbolicLendingPoolL1.sol, or project-specific dummy token/aToken/static-aToken harness files were found in PropertyGPT. Other projects contain unrelated erc20.spec files, but the selected project does not. The public upstream commit 4c010c18 was used only to confirm the exact historical filenames/implementations and run configuration; importing those recovered files would incorrectly turn snapshot-incomplete examples into apparently complete ones.

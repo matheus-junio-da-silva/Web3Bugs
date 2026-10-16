@@ -1,0 +1,20 @@
+Project 6 / Example 6 - sumAllBalance_eq_totalSupply
+
+Missing dependency:
+- erc20.spec
+- historical verification target/harness/run configuration (StaticATokenLMHarness is suggested by the source but not confirmed)
+
+Where searched:
+- /home/mat/certora-ac-audit/PropertyGPT/certora_projects/aave_static_token
+- /home/mat/certora-ac-audit/PropertyGPT/certora_projects (broader cross-check)
+- public static-a-token-v3 history for source-version comparison
+
+The selected snapshot has only two .spec and two .sol files. The active import erc20.spec is absent. The specs reference historical harness-only contracts/methods; rewardPreserve.spec also uses an older ABI (for example one-argument getUnclaimedRewards and zero-argument claimRewardsToSelf) that does not match the supplied production Solidity. Unrelated erc20.spec files or mocks from other projects were not substituted.
+
+CVL1/CVL2 migration or syntax incompatibility is not treated as the missing dependency.
+
+Additional supplied-Solidity reproduction gaps:
+- StaticATokenLM.sol imports ./interfaces/IStaticATokenLM.sol, ./interfaces/IAToken.sol, ./interfaces/IInitializableStaticATokenLM.sol and ./interfaces/IERC4626.sol, which are absent from the selected snapshot.
+- StaticATokenLM.sol imports ./StaticATokenErrors.sol and ./RayMathExplicitRounding.sol, also absent.
+- Its aave-v3-core, aave-v3-periphery and solidity-utils import trees are not included in the selected four-file snapshot.
+These files are not silently borrowed from another project or a later upstream checkout.

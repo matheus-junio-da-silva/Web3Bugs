@@ -1,0 +1,9 @@
+INCOMPLETE DEPENDENCY
+
+Property: integrityAndIndependencyOfBoolSetters
+Original spec: contracts/7/specs/ReserveConfiguration.spec:186-200
+Target: MockReserveConfiguration
+
+- executeBoolSetterById(uint256,bool) and executeBoolGetterById(uint256): no implementation/harness; CVL methods declarations alone are not implementations
+
+Search evidence: checked all 128 Solidity files in PropertyGPT/certora_projects/aave_v3/contracts/, six supplied specs under specs/, public interfaces and mock/underlying implementations in the same snapshot. The expected ABI wrappers or named helper implementations are not present; methods declarations are not concrete implementations. No helper from another project has been substituted. CVL version migration alone is not the reason for incompleteness.

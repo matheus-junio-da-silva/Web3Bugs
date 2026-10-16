@@ -1,0 +1,9 @@
+INCOMPLETE DEPENDENCY
+
+Property: setActiveIntegrity
+Original spec: contracts/7/specs/ReserveConfiguration.spec:85-88
+Target: MockReserveConfiguration
+
+- Public set/get wrapper for setActive missing from MockReserveConfiguration.sol (library functions require ReserveConfigurationMap argument)
+
+Search evidence: checked all 128 Solidity files in PropertyGPT/certora_projects/aave_v3/contracts/, six supplied specs under specs/, public interfaces and mock/underlying implementations in the same snapshot. The expected ABI wrappers or named helper implementations are not present; methods declarations are not concrete implementations. No helper from another project has been substituted. CVL version migration alone is not the reason for incompleteness.

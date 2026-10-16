@@ -1,0 +1,9 @@
+INCOMPLETE DEPENDENCY
+
+Property: integrityBurn
+Original spec: contracts/7/specs/AToken.spec:207-243
+Target: AToken
+
+- SimpleERC20 as _underlyingAsset: original linked contract absent from supplied project tree
+
+Search evidence: checked all 128 Solidity files in PropertyGPT/certora_projects/aave_v3/contracts/, six supplied specs under specs/, public interfaces and mock/underlying implementations in the same snapshot. The expected ABI wrappers or named helper implementations are not present; methods declarations are not concrete implementations. No helper from another project has been substituted. CVL version migration alone is not the reason for incompleteness.

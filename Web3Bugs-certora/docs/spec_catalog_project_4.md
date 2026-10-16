@@ -79,7 +79,7 @@ exchangeRateNeverZero is the one VIOLATED active source instance because the rep
 | 15 | slashingIncreaseExchangeRate | S6-4 | VERIFIED | NOT_STATED | #7 | ❌✔, but no explicit issue-table linkage. |
 | 16 | returnFundsDecreaseExchangeRate | S6-4 | VERIFIED | FINDING | #10 | ❌✔ and explicitly linked to the first-depositor and returnFunds(0) findings. |
 | 17 | exchangeRateNeverZero | S6-4 | VIOLATED | FINDING | #14 | Explicit ❌ and issue linkage; report says deprecated/deleted while source still contains the active rule. |
-| 18 | slashAndReturnFundsOfZeroDoesntChangeExchangeRate | S6-4 | VERIFIED | FINDING | #8 | ❌✔ and explicitly linked to the slash(0) rounding finding. |
+| 18 | slashAndReturnFundsOfZeroDoesntChangeExchangeRate | S6-4 | VERIFIED | FINDING | #8 | ❌✔; the earlier rounding finding is explicit. Latest `slash(0)` and `returnFunds(0)` revert, so ✔ must not be presented as successful zero-value no-op behavior. |
 | 19 | integrityOfRedeem | S6-2 | NOT_STATED | NOT_STATED | #11 historical name only | Report checks broader vault/receiver/share deltas. Active source checks preview-vs-receiver delta only if `amount <= cooldownAmount(sender)` **after** redeem; its guard is narrower than a pre-call cooldown cap. |
 | 20 | previewStakeEquivalentStake | S6-2 | VERIFIED | NO_FINDING | #3 | Preview must match actual minted-share delta. |
 | 21 | balanceOfZero | S6-4 | VERIFIED | NO_FINDING | #27 | ERC20 share-accounting invariant. |
@@ -143,6 +143,7 @@ Several discrepancies are deliberately retained:
 - Report Property #19 rewardsMonotonicallyIncrease is ❌✔, but its published formula executes an arbitrary method and excludes claim-family decreases, whereas the active source body only compares reward getters under nondecreasing timestamps. Example 12 therefore uses NOT_STATED / NOT_STATED.
 - Report Property #11 integrityOfRedeem is ✔, but the report formula asserts a broader set of balance/share effects than the active source rule. The active assertion checks preview-vs-receiver underlying delta only when `amount <= cooldownAmount(e.msg.sender)` **after** the `redeem` invocation. The supplied `_redeem` reduces or deletes `stakersCooldowns[from]`, so the condition can be false despite the original cooldown being sufficient. For example, a redemption of 60 shares against a 100-share cooldown leaves 40, making `60 <= 40` false; no equality is then asserted. Example 19 is a partial detector and retains NOT_STATED / NOT_STATED; the historical CVL body is unchanged.
 - Report Property #14 exchangeRateNeverZero says deprecated/deleted, while the supplied source still contains an active rule of that exact name.
+- Report Property #8 slashAndReturnFundsOfZeroDoesntChangeExchangeRate is ❌✔. The active CVL rule executes `slash(0)` before assertions, while supplied Solidity requires `amount > 0`; `returnFunds(0)` also violates `LOWER_BOUND`. Thus a verified latest version can reflect rejection of both zero-amount operations rather than a successful zero-amount no-op. Example 18 does not claim successful zero-valued executions were proven.
 - Report properties previewRedeemEquivalentRedeem (#13) and collectedRewardsMonotonicallyIncrease (#20) are absent as active source declarations and are therefore not synthesized into examples.
 - lowerBoundNotZero is active in source but has no individual report entry.
 

@@ -1,0 +1,11 @@
+INCOMPLETE DEPENDENCY — PROJECT 11, EXAMPLE 12
+Property: inverseOfDepositAndWithdraw
+Original rule/invariant: contracts/11/specs/fullyBackedBonding.spec:419-438
+Target hypothesis: FullyBackedBondingHarness (historical run script missing)
+
+Required upstream Solidity sources are absent from the 47-file `contracts/11/` snapshot: `@keep-network/keep-core/contracts/{Authorizations.sol,StakeDelegatable.sol,KeepRegistry.sol}; @keep-network/sortition-pools/contracts/api/IFullyBackedBonding.sol; openzeppelin-solidity/contracts/math/SafeMath.sol`. The project contains `FullyBackedBondingHarness.sol`, but it imports a target that inherits upstream Authorizations/StakeDelegatable and calls external SafeMath. A `methods {}` declaration does not supply missing implementation. No historical Certora run script/.conf or package resolutions is available to verify the exact compiler, linking and summarization settings.
+
+Search locations: original PropertyGPT certora_projects/keep_fully/contracts/ (all contracts/api, fully-backed, test, integration), specs/ and specs/harness/, 47 source files, including inherited base contracts. Relevant harness helper declarations exist, but external @keep-network/keep-core, @keep-network/sortition-pools, and openzeppelin-solidity dependency implementations do not.
+
+The supplied source hooks also mismatch production bond IDs: harness registerBondID mapping writes are commented out, while production getBondID hashes operator/holder/reference. This is a modeling caveat, not fabricated missing Solidity code.
+No CVL2 migration is attempted or cited as a reason for incomplete.

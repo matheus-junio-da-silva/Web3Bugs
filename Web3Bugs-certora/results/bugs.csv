@@ -20,3 +20,11 @@ Contest ID, Bug ID, Bug Label, Severity, Bug Description, Reference, Comment
 6,SAT-03,L2,Low,deposit() can violate EIP-4626 by accepting a rounded-to-zero deposit without reverting,reports/6.md#issue-3,"Report issue #3, broken Properties #11/#12 depositCheck variants; those properties are absent from the selected source."
 6,SAT-04,S6-2,Informational,getUnclaimedRewards() returned a value in inconsistent units,reports/6.md#issue-4,Report issue #4. rewardsConsistencyWhenInsufficientRewards has S6-4 accounting-conservation and S6-2 getter-semantic relationships; the finding label is S6-2 because the concrete bug is a return-value unit mismatch.
 6,SAT-05,L7,Informational,totalAssets() and maxWithdraw() can theoretically revert on multiplication overflow for extreme inputs,reports/6.md#issue-5,"Report issue #5, tied to Properties #21/#26 not present in selected source; report treats the case as purely theoretical for current tokens."
+8,VAULT-01,L2,Medium,Deposit rounding misstates lastVaultBalance and causes later DoS,reports/8.md,Fixed in report PR #70; rounding of aToken minting causes later accrued-fee underflow.
+8,VAULT-02,S6-4,Medium,Unexpected gifted aTokens can make redemptions revert,reports/8.md,Report withdrawal griefing scenario involving gifted aTokens; PR #82.
+8,VAULT-03,S6-4,Medium,Claimable protocol fees can exceed aToken reserves,reports/8.md,"Report older-version insolvency, aggregate #14/#15, fixed PR #82."
+8,VAULT-04,L7,Medium,totalAssets arithmetic underflow can cause full contract DoS,reports/8.md,"Report prior violated aggregate #14, fixed PR #82."
+8,VAULT-05,S6-2,Low,previewRedeem overstates redemption payment after fee accrual,reports/8.md,"Report earlier misleading conversion result, fixed PR #82."
+8,VAULT-06,L2,Low,lastVaultBalance rounding causes fee losses or overcharges,reports/8.md,"Report earlier violated aggregate #13, fixed PR #86."
+8,VAULT-07,S6-2,Low,Existing aToken deposits unnecessarily blocked at supply cap,reports/8.md,"Supply cap for new underlying incorrectly applied to already-issued aToken, PR #80."
+8,VAULT-08,S6-4,Informational,Same-block front-running gift can avoid accrued fees,reports/8.md,"Report fee-free gifted yield in same block, fixed PR #82."

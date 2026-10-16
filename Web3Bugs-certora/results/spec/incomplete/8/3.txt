@@ -1,0 +1,14 @@
+# Missing dependency — must_not_revert (example 3)
+
+Original: contracts/8/specs/erc4626.spec:73-84
+
+1. AToken as _AToken: missing AToken.sol / _userState implementation and scaled balance model
+2. DummyERC20_aTokenUnderlying: missing dummy ERC20 contract and Underlying.b storage
+3. SymbolicLendingPoolL1: missing symbolic lending-pool harness and getLiquidityIndex()
+4. ATokenVaultHarness: missing typed EIP712Signature and handle* wrappers
+5. getAccumulatedFees(): no external getter, only _s.accumulatedFees internal state
+6. havoc_all(): symbolic harness entrypoint declared only in CVL
+7. maxAssetsWithdrawableFromAave(): external mock getter absent; only internal _maxAssetsWithdrawableFromAave exists
+8. OpenZeppelin ERC4626Upgradeable/ERC20Upgradeable inherited implementation absent from local snapshot
+
+Search scope: ALL Project 8 source snapshot files, including ten specs, ATokenVault.sol, ATokenVaultStorage.sol, ATokenVaultV2.sol, interfaces/IATokenVault.sol, libraries/Constants.sol, libraries/MetaTxHelpers.sol. Methods declarations/using aliases/ghosts are not original Solidity implementations. No historical linked mocks, verifier run scripts, package maps or .conf files exist in the provided source subtree. No helper is synthesized or borrowed from another project. Historical CVL syntax migration is separate and not the reason for incomplete.

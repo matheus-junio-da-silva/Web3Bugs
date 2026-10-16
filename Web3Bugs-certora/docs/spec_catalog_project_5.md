@@ -247,3 +247,183 @@ The validators check structure and catalog consistency; they do not rerun the Ce
 - Report transcript: `reports/5.md`
 - Preserved PDF: `resources/5/Formal-Verification-Report-of-Aave-Starknet-Bridge-3.pdf`
 - Copied supplied snapshot: `contracts/5/`
+
+## Per-example consolidated semantic audit (Boreal review — 2026-10-16)
+
+This section consolidates the five explicit semantic checks already documented in the 17 example files. For each source instance, the counterexample is conditional on the property's actual CVL preconditions and model. The Bug Label is the *technical assertion category*, not necessarily the Web3Bugs finding label. Report results and audit outcomes are recorded separately. No additional source instance, report claim, or historical harness is invented here.
+
+### 1. `integrityOfWithdraw` — `bridge.spec`
+
+**Indexed interpretation:** S6-4; Result = VERIFIED; Detection Outcome = NO_FINDING; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? If toUnderlyingAsset is true, the recipient's underlying balance decreases or its aToken balance changes; if false, the aToken balance decreases or the underlying balance changes; or the reward balance decreases.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: Additional property #4 — ✔. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 2. `balanceOfUnderlyingAssetChanged` — `bridge.spec`
+
+**Indexed interpretation:** UNMAPPED; Result = NOT_STATED; Detection Outcome = NOT_STATED; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? After arbitrary method f, either observed balance changes while f is not one of the three whitelisted selectors.
+2. Does that counterexample match the selected Bug Label? No label is forced because this is diagnostic.
+3. Is this normative or diagnostic? Diagnostic.
+4. Report attribution check: No exact report entry. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 3. `depositWithdrawReversed` — `bridge.spec`
+
+**Indexed interpretation:** S6-4; Result = NOT_STATED; Detection Outcome = NOT_STATED; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? balanceS3 differs from balanceS1, or—when the deposit/withdraw token-choice flags match—the underlying delta exceeds (indexL1/RAY()+1)/2 or the aToken balance differs from its initial value.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: Aggregate Additional property #5 — ✔*; no source-instance-specific result. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 4. `dynamicToStaticInversible1` — `bridge.spec`
+
+**Indexed interpretation:** L2; Result = VERIFIED; Detection Outcome = NO_FINDING; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? _dynamicToStaticAmount_Wrapper(_staticToDynamicAmount_Wrapper(amount)) does not equal amount.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: Additional property #1 — ✔. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 5. `dynamicToStaticInversible2` — `bridge.spec`
+
+**Indexed interpretation:** L2; Result = VIOLATED; Detection Outcome = FINDING; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? _staticToDynamicAmount_Wrapper(_dynamicToStaticAmount_Wrapper(amount)) differs from amount.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: Additional property #2 — ❌; named in the rounding Main Issue. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 6. `dynamicToStaticInversible3` — `bridge.spec`
+
+**Indexed interpretation:** L2; Result = VERIFIED; Detection Outcome = NO_FINDING; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? dynm - amount is greater than (indexL1/RAY()+1)/2 under the rule's uint256 arithmetic.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: Additional property #3 — ✔. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 7. `underlying2ATokenConsistency` — `bridge.spec`
+
+**Indexed interpretation:** S3-2; Result = NOT_STATED; Detection Outcome = NOT_STATED; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? When (asset != 0 <=> AToken != 0) holds, exactly one of getUnderlyingAssetHelper(AToken)==asset and getUnderlyingAssetOfAToken(AToken)==asset is true.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: No exact report entry. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 8. `initializeIntegrity` — `bridge.spec`
+
+**Indexed interpretation:** S3-2; Result = VERIFIED; Detection Outcome = NO_FINDING; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? After initialize, for nonzero asset and AToken, one side of the equivalence is true and the other false.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: Additional property #6 — ✔. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 9. `cancelAfterDepositGivesBackExactAmount` — `bridge.spec`
+
+**Indexed interpretation:** S6-4; Result = VIOLATED; Detection Outcome = FINDING; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? For fromUA=true, assetBalance1 != assetBalance2 + amount or ATokenBalance2 != ATokenBalance1 + amount; for fromUA=false, either observed balance changes.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: Additional property #8 — ❌; named in the rounding Main Issue. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 10. `cannotCancelDepositAndGainBothTokens` — `bridge.spec`
+
+**Indexed interpretation:** S4-1; Result = VIOLATED; Detection Outcome = ACCEPTED_BEHAVIOR; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? staticBalance2 > staticBalance1 but ATokenBalance3 != ATokenBalance2 after the cancellation sequence.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: Additional property #9 — ❌; named in the cancellation Main Issue. The counterexample is formally violated, but Aave explicitly treats timely Starknet proof generation as an accepted bridge assumption, so Detection Outcome is ACCEPTED_BEHAVIOR. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 11. `integrityApprovedTokensAndTokenData` — `bridge.spec`
+
+**Indexed interpretation:** S3-2; Result = VERIFIED; Detection Outcome = NO_FINDING; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? totalApprovedTokens differs from getApprovedL1TokensLength() for a checked state/method.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: Community property #1 — ✔. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 12. `shouldRevertInitializeTokens` — `bridge.spec`
+
+**Indexed interpretation:** S2-3; Result = VIOLATED; Detection Outcome = FINDING; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? initialize@withrevert does not revert when [l1TokenA,l1TokenB] is paired with [l2Token,l2Token] under the rule's preconditions.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: Community property #2 — ❌; named in the duplicate-token Main Issue. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 13. `integrityOfDepositExpanded` — `bridge.spec`
+
+**Indexed interpretation:** S6-4; Result = NOT_STATED; Detection Outcome = NOT_STATED; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? Any branch-specific balance assertion in integrityOfDepositExpanded fails after deposit.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: Aggregate Community property #3 — ✔*; no source-instance-specific result. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 14. `alwaysUnSent` — `setup.spec`
+
+**Indexed interpretation:** UNMAPPED; Result = NOT_STATED; Detection Outcome = NOT_STATED; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? For a method admitted by messageSentFilter, withdrawMessageStatus or bridgeRewardsMessageStatus is true in the invariant state.
+2. Does that counterexample match the selected Bug Label? No label is forced because this is modeling/diagnostic.
+3. Is this normative or diagnostic? Modeling/diagnostic.
+4. Report attribution check: No standalone report result. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 15. `ATokenAssetPair` — `setup.spec`
+
+**Indexed interpretation:** S3-2; Result = VERIFIED; Detection Outcome = NO_FINDING; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? Under the implication guard, exactly one of the two linkage relations holds.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: Additional property #7 — ✔. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 16. `depositWithdrawReversed` — `bridgeConstIndex.spec`
+
+**Indexed interpretation:** S6-4; Result = NOT_STATED; Detection Outcome = NOT_STATED; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? Under the summarized model, static balance is not restored, or—when fromUA == toUA—the underlying bound or exact aToken restoration fails.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: Aggregate Additional property #5 — ✔*; no source-instance-specific result. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### 17. `integrityOfDepositExpanded` — `bridgeConstIndex.spec`
+
+**Indexed interpretation:** S6-4; Result = NOT_STATED; Detection Outcome = NOT_STATED; Target Contract = BridgeHarness. The dependency status is `incomplete`.
+
+1. What exactly makes the assertion fail? Under the summarized model, any branch-specific sender/recipient/reward balance assertion fails.
+2. Does that counterexample match the selected Bug Label? Yes, within the partial-proof limitations stated above; the mapping follows the executable assertion rather than only its name/comment.
+3. Is this normative or diagnostic? Normative.
+4. Report attribution check: Aggregate Community property #3 — ✔*; no source-instance-specific result. No aggregate status is silently propagated across duplicate source instances.
+5. Target check: upstream verification scripts confirm BridgeHarness as the target for both bridge.spec and bridgeConstIndex.spec; supplied Bridge.sol excerpts are later production evidence, not the missing historical target implementation.
+
+### Integrity checks and execution boundary for this review
+
+- Read-only GitHub blob comparison found **51/51** supplied Solidity/Cairo/spec files byte-identical between `PropertyGPT/certora_projects/aave_starknet_bridge/{contracts,specs}` and `Web3Bugs-certora/contracts/5/{contracts,specs}`. No extra file was found inside the Project 5 copied snapshot. The preserved report PDF has the same Git blob SHA as the source PDF.
+- An independent comment-aware declaration scan identified **13** active properties in `bridge.spec`, **2** in `bridgeConstIndex.spec`, and **2** in `setup.spec`, excluding the block-commented `afterCancellationStartMustSucceed`. All **17** original active property blocks were compared as literal strings with the corresponding extracted `N.spec` files and matched. There are **17** Project 5 CSV relationships and **17** complete sets of four incomplete artifacts (`.spec`, `.sol`, `.md`, `.txt`).
+- The GitHub-connected environment used for this focused documentation follow-up could inspect blobs and repository metadata but **could not execute** the three Python validators or `git diff --check` on a local checkout: the local container cannot resolve `github.com` and the authorized remote Desktop Commander is offline. The historical PASS statements in the preceding Validation section document an earlier catalog review, **not** execution of those scripts in this follow-up. CI/independent reviewers must execute those commands before accepting this change. The read-only integrity audit does not replace CVL semantic analysis or formal prover reproduction.

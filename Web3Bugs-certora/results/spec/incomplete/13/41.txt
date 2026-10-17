@@ -1,0 +1,7 @@
+INCOMPLETE DEPENDENCY
+Project 13 / Example 41 / calculateOracleRateIsBetweenOnChainRates
+Original source: certora/asset/Valuation.spec:82-98
+Historical target: ValuationHarness
+Search: preserved certora scripts, .conf files, target harness, imported internal libraries and repository tree.
+Missing: Brownie-managed @openzeppelin/contracts (historical release 3.4.0-solc-0.7), compound-finance package mapping where used; historical solc/prover setup and settings. These are not in the PropertyGPT snapshot. No substitute code was created.
+Do not treat this as proof of historical reproducibility. CVL migration is a separate issue.

@@ -1,6 +1,6 @@
 # Project 4 — AAVE Staked Token v1.5 Spec Catalog
 
-This document records the catalog state for Project 4. The user prompt did not repeat a project path; Project 4 was selected as the next uncataloged project in the existing sequence: Project 1 aave_l2_bridge, Project 2 aave_proof_of_reserve, Project 3 aave_rescue_mission, then aave_staked_token.
+This document records the catalog state for the explicitly assigned Project ID 4, AAVE Staked Token, sourced exclusively from PropertyGPT `certora_projects/aave_staked_token/`. It follows the established Projects 1–3 methodology without changing their artifacts or the original Certora snapshot.
 
 ## Coverage
 

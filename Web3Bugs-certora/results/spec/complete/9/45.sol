@@ -38,7 +38,7 @@
 
 
 
-// Original: contracts/9/contracts/common/Initializable.sol:1-17 (inherited initialized state and initializer guard)
+// Original: contracts/9/contracts/common/Initializable.sol:1-18 (inherited initialized state and initializer guard)
 // SPDX-License-Identifier: LGPL-3.0-only
 pragma solidity >=0.5.13 <0.9.0;
 

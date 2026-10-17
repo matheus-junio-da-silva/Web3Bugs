@@ -1,30 +1,57 @@
-// Original: contracts/7/contracts/protocol/tokenization/AToken.sol, lines 86-93
-  function mint(
-    address caller,
-    address onBehalfOf,
-    uint256 amount,
-    uint256 index
-  ) external virtual override onlyPool returns (bool) {
-    return _mintScaled(caller, onBehalfOf, amount, index);
+// Original: contracts/7/contracts/protocol/tokenization/AToken.sol, lines 203-218
+function _transfer(address from, address to, uint256 amount, bool validate) internal virtual {
+    address underlyingAsset = _underlyingAsset;
+
+    uint256 index = POOL.getReserveNormalizedIncome(underlyingAsset);
+
+    uint256 fromBalanceBefore = super.balanceOf(from).rayMul(index);
+    uint256 toBalanceBefore = super.balanceOf(to).rayMul(index);
+
+    super._transfer(from, to, amount, index);
+
+    if (validate) {
+      POOL.finalizeTransfer(underlyingAsset, from, to, amount, fromBalanceBefore, toBalanceBefore);
+    }
+
+    emit BalanceTransfer(from, to, amount.rayDiv(index), index);
   }
 
-// Original: contracts/7/contracts/protocol/tokenization/AToken.sol, lines 96-106
-  function burn(
-    address from,
-    address receiverOfUnderlying,
-    uint256 amount,
-    uint256 index
-  ) external virtual override onlyPool {
-    _burnScaled(from, receiverOfUnderlying, amount, index);
-    if (receiverOfUnderlying != address(this)) {
-      IERC20(_underlyingAsset).safeTransfer(receiverOfUnderlying, amount);
-    }
+// Original: contracts/7/contracts/protocol/tokenization/AToken.sol, lines 226-228
+function _transfer(address from, address to, uint128 amount) internal virtual override {
+    _transfer(from, to, amount, true);
   }
 
 // Original: contracts/7/contracts/protocol/tokenization/AToken.sol, lines 128-132
-  function balanceOf(
+function balanceOf(
     address user
   ) public view virtual override(IncentivizedERC20, IERC20) returns (uint256) {
     return super.balanceOf(user).rayMul(POOL.getReserveNormalizedIncome(_underlyingAsset));
   }
 
+// Original: contracts/7/contracts/protocol/tokenization/base/ScaledBalanceTokenBase.sol, lines 130-155
+function _transfer(address sender, address recipient, uint256 amount, uint256 index) internal {
+    uint256 senderScaledBalance = super.balanceOf(sender);
+    uint256 senderBalanceIncrease = senderScaledBalance.rayMul(index) -
+      senderScaledBalance.rayMul(_userState[sender].additionalData);
+
+    uint256 recipientScaledBalance = super.balanceOf(recipient);
+    uint256 recipientBalanceIncrease = recipientScaledBalance.rayMul(index) -
+      recipientScaledBalance.rayMul(_userState[recipient].additionalData);
+
+    _userState[sender].additionalData = index.toUint128();
+    _userState[recipient].additionalData = index.toUint128();
+
+    super._transfer(sender, recipient, amount.rayDiv(index).toUint128());
+
+    if (senderBalanceIncrease > 0) {
+      emit Transfer(address(0), sender, senderBalanceIncrease);
+      emit Mint(_msgSender(), sender, senderBalanceIncrease, senderBalanceIncrease, index);
+    }
+
+    if (sender != recipient && recipientBalanceIncrease > 0) {
+      emit Transfer(address(0), recipient, recipientBalanceIncrease);
+      emit Mint(_msgSender(), recipient, recipientBalanceIncrease, recipientBalanceIncrease, index);
+    }
+
+    emit Transfer(sender, recipient, amount);
+  }

@@ -1,17 +1,17 @@
 // Original: contracts/7/contracts/mocks/helpers/MockReserveConfiguration.sol, lines 122-126
-  function setSupplyCap(uint256 supplyCap) external {
+function setSupplyCap(uint256 supplyCap) external {
     DataTypes.ReserveConfigurationMap memory config = configuration;
     config.setSupplyCap(supplyCap);
     configuration = config;
   }
 
 // Original: contracts/7/contracts/mocks/helpers/MockReserveConfiguration.sol, lines 128-130
-  function getSupplyCap() external view returns (uint256) {
+function getSupplyCap() external view returns (uint256) {
     return configuration.getSupplyCap();
   }
 
 // Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 394-401
-  function setSupplyCap(
+function setSupplyCap(
     DataTypes.ReserveConfigurationMap memory self,
     uint256 supplyCap
   ) internal pure {
@@ -21,9 +21,8 @@
   }
 
 // Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 408-412
-  function getSupplyCap(
+function getSupplyCap(
     DataTypes.ReserveConfigurationMap memory self
   ) internal pure returns (uint256) {
     return (self.data & ~SUPPLY_CAP_MASK) >> SUPPLY_CAP_START_BIT_POSITION;
   }
-

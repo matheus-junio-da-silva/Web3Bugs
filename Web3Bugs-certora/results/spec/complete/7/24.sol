@@ -1,17 +1,17 @@
 // Original: contracts/7/contracts/mocks/helpers/MockReserveConfiguration.sol, lines 82-86
-  function setReserveFactor(uint256 reserveFactor) external {
+function setReserveFactor(uint256 reserveFactor) external {
     DataTypes.ReserveConfigurationMap memory config = configuration;
     config.setReserveFactor(reserveFactor);
     configuration = config;
   }
 
 // Original: contracts/7/contracts/mocks/helpers/MockReserveConfiguration.sol, lines 88-90
-  function getReserveFactor() external view returns (uint256) {
+function getReserveFactor() external view returns (uint256) {
     return configuration.getReserveFactor();
   }
 
 // Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 342-351
-  function setReserveFactor(
+function setReserveFactor(
     DataTypes.ReserveConfigurationMap memory self,
     uint256 reserveFactor
   ) internal pure {
@@ -23,9 +23,8 @@
   }
 
 // Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 358-362
-  function getReserveFactor(
+function getReserveFactor(
     DataTypes.ReserveConfigurationMap memory self
   ) internal pure returns (uint256) {
     return (self.data & ~RESERVE_FACTOR_MASK) >> RESERVE_FACTOR_START_BIT_POSITION;
   }
-

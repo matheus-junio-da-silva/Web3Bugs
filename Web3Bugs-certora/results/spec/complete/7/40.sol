@@ -1,5 +1,5 @@
 // Original: contracts/7/contracts/protocol/tokenization/StableDebtToken.sol, lines 124-175
-  function mint(
+function mint(
     address user,
     address onBehalfOf,
     uint256 amount,
@@ -52,8 +52,8 @@
     return (currentBalance == 0, vars.nextSupply, vars.currentAvgStableRate);
   }
 
-// Original: contracts/7/contracts/protocol/tokenization/StableDebtToken.sol, lines 178-243
-  function burn(
+// Original: contracts/7/contracts/protocol/tokenization/StableDebtToken.sol, lines 178-245
+function burn(
     address from,
     uint256 amount
   ) external virtual override onlyPool returns (uint256, uint256) {
@@ -119,9 +119,10 @@
       emit Burn(from, amountToBurn, currentBalance, balanceIncrease, nextAvgStableRate, nextSupply);
     }
 
-
-// Original: contracts/7/contracts/protocol/tokenization/StableDebtToken.sol, lines 285-287
-  function totalSupply() public view virtual override returns (uint256) {
-    return _calcTotalSupply(_avgStableRate);
+    return (nextSupply, nextAvgStableRate);
   }
 
+// Original: contracts/7/contracts/protocol/tokenization/StableDebtToken.sol, lines 285-287
+function totalSupply() public view virtual override returns (uint256) {
+    return _calcTotalSupply(_avgStableRate);
+  }

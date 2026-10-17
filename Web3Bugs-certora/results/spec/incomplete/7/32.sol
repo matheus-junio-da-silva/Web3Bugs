@@ -1,24 +1,23 @@
-// Original: contracts/7/contracts/mocks/helpers/MockReserveConfiguration.sol, lines 12-16
-  function setLtv(uint256 ltv) external {
-    DataTypes.ReserveConfigurationMap memory config = configuration;
-    config.setLtv(ltv);
-    configuration = config;
+// Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 172-176
+function setActive(DataTypes.ReserveConfigurationMap memory self, bool active) internal pure {
+    self.data =
+      (self.data & ACTIVE_MASK) |
+      (uint256(active ? 1 : 0) << IS_ACTIVE_START_BIT_POSITION);
   }
 
-// Original: contracts/7/contracts/mocks/helpers/MockReserveConfiguration.sol, lines 18-20
-  function getLtv() external view returns (uint256) {
-    return configuration.getLtv();
+// Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 183-185
+function getActive(DataTypes.ReserveConfigurationMap memory self) internal pure returns (bool) {
+    return (self.data & ~ACTIVE_MASK) != 0;
   }
 
-// Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 73-77
-  function setLtv(DataTypes.ReserveConfigurationMap memory self, uint256 ltv) internal pure {
-    require(ltv <= MAX_VALID_LTV, Errors.INVALID_LTV);
-
-    self.data = (self.data & LTV_MASK) | ltv;
+// Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 192-196
+function setFrozen(DataTypes.ReserveConfigurationMap memory self, bool frozen) internal pure {
+    self.data =
+      (self.data & FROZEN_MASK) |
+      (uint256(frozen ? 1 : 0) << IS_FROZEN_START_BIT_POSITION);
   }
 
-// Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 84-86
-  function getLtv(DataTypes.ReserveConfigurationMap memory self) internal pure returns (uint256) {
-    return self.data & ~LTV_MASK;
+// Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 203-205
+function getFrozen(DataTypes.ReserveConfigurationMap memory self) internal pure returns (bool) {
+    return (self.data & ~FROZEN_MASK) != 0;
   }
-

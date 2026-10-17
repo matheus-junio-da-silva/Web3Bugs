@@ -1,5 +1,5 @@
 // Original: contracts/7/contracts/protocol/tokenization/VariableDebtToken.sol, lines 80-88
-  function balanceOf(address user) public view virtual override returns (uint256) {
+function balanceOf(address user) public view virtual override returns (uint256) {
     uint256 scaledBalance = super.balanceOf(user);
 
     if (scaledBalance == 0) {
@@ -10,7 +10,7 @@
   }
 
 // Original: contracts/7/contracts/protocol/tokenization/VariableDebtToken.sol, lines 91-101
-  function mint(
+function mint(
     address user,
     address onBehalfOf,
     uint256 amount,
@@ -23,7 +23,7 @@
   }
 
 // Original: contracts/7/contracts/protocol/tokenization/VariableDebtToken.sol, lines 104-111
-  function burn(
+function burn(
     address from,
     uint256 amount,
     uint256 index
@@ -31,4 +31,3 @@
     _burnScaled(from, address(0), amount, index);
     return scaledTotalSupply();
   }
-

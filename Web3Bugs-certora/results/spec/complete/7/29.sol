@@ -1,17 +1,17 @@
 // Original: contracts/7/contracts/mocks/helpers/MockReserveConfiguration.sol, lines 142-146
-  function setUnbackedMintCap(uint256 unbackedMintCap) external {
+function setUnbackedMintCap(uint256 unbackedMintCap) external {
     DataTypes.ReserveConfigurationMap memory config = configuration;
     config.setUnbackedMintCap(unbackedMintCap);
     configuration = config;
   }
 
 // Original: contracts/7/contracts/mocks/helpers/MockReserveConfiguration.sol, lines 148-150
-  function getUnbackedMintCap() external view returns (uint256) {
+function getUnbackedMintCap() external view returns (uint256) {
     return configuration.getUnbackedMintCap();
   }
 
 // Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 475-484
-  function setUnbackedMintCap(
+function setUnbackedMintCap(
     DataTypes.ReserveConfigurationMap memory self,
     uint256 unbackedMintCap
   ) internal pure {
@@ -23,9 +23,8 @@
   }
 
 // Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 491-495
-  function getUnbackedMintCap(
+function getUnbackedMintCap(
     DataTypes.ReserveConfigurationMap memory self
   ) internal pure returns (uint256) {
     return (self.data & ~UNBACKED_MINT_CAP_MASK) >> UNBACKED_MINT_CAP_START_BIT_POSITION;
   }
-

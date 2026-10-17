@@ -1,5 +1,5 @@
 // Original: contracts/7/contracts/protocol/libraries/configuration/UserConfiguration.sol, lines 71-79
-  function isUsingAsCollateralOrBorrowing(
+function isUsingAsCollateralOrBorrowing(
     DataTypes.UserConfigurationMap memory self,
     uint256 reserveIndex
   ) internal pure returns (bool) {
@@ -10,7 +10,7 @@
   }
 
 // Original: contracts/7/contracts/protocol/libraries/configuration/UserConfiguration.sol, lines 87-95
-  function isBorrowing(
+function isBorrowing(
     DataTypes.UserConfigurationMap memory self,
     uint256 reserveIndex
   ) internal pure returns (bool) {
@@ -21,7 +21,7 @@
   }
 
 // Original: contracts/7/contracts/protocol/libraries/configuration/UserConfiguration.sol, lines 103-111
-  function isUsingAsCollateral(
+function isUsingAsCollateral(
     DataTypes.UserConfigurationMap memory self,
     uint256 reserveIndex
   ) internal pure returns (bool) {
@@ -30,4 +30,3 @@
       return (self.data >> ((reserveIndex << 1) + 1)) & 1 != 0;
     }
   }
-

@@ -1,17 +1,17 @@
 // Original: contracts/7/contracts/mocks/helpers/MockReserveConfiguration.sol, lines 92-96
-  function setBorrowCap(uint256 borrowCap) external {
+function setBorrowCap(uint256 borrowCap) external {
     DataTypes.ReserveConfigurationMap memory config = configuration;
     config.setBorrowCap(borrowCap);
     configuration = config;
   }
 
 // Original: contracts/7/contracts/mocks/helpers/MockReserveConfiguration.sol, lines 98-100
-  function getBorrowCap() external view returns (uint256) {
+function getBorrowCap() external view returns (uint256) {
     return configuration.getBorrowCap();
   }
 
 // Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 369-376
-  function setBorrowCap(
+function setBorrowCap(
     DataTypes.ReserveConfigurationMap memory self,
     uint256 borrowCap
   ) internal pure {
@@ -21,9 +21,8 @@
   }
 
 // Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 383-387
-  function getBorrowCap(
+function getBorrowCap(
     DataTypes.ReserveConfigurationMap memory self
   ) internal pure returns (uint256) {
     return (self.data & ~BORROW_CAP_MASK) >> BORROW_CAP_START_BIT_POSITION;
   }
-

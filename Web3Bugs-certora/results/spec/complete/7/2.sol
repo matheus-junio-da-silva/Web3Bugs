@@ -1,15 +1,5 @@
-// Original: contracts/7/contracts/protocol/tokenization/AToken.sol, lines 86-93
-  function mint(
-    address caller,
-    address onBehalfOf,
-    uint256 amount,
-    uint256 index
-  ) external virtual override onlyPool returns (bool) {
-    return _mintScaled(caller, onBehalfOf, amount, index);
-  }
-
 // Original: contracts/7/contracts/protocol/tokenization/AToken.sol, lines 170-193
-  function permit(
+function permit(
     address owner,
     address spender,
     uint256 value,
@@ -35,7 +25,12 @@
   }
 
 // Original: contracts/7/contracts/protocol/tokenization/AToken.sol, lines 242-244
-  function nonces(address owner) public view override(IAToken, EIP712Base) returns (uint256) {
+function nonces(address owner) public view override(IAToken, EIP712Base) returns (uint256) {
     return super.nonces(owner);
   }
 
+// Original: contracts/7/contracts/protocol/tokenization/base/IncentivizedERC20.sol, lines 207-210
+function _approve(address owner, address spender, uint256 amount) internal virtual {
+    _allowances[owner][spender] = amount;
+    emit Approval(owner, spender, amount);
+  }

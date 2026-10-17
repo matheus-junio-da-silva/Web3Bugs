@@ -1,17 +1,17 @@
 // Original: contracts/7/contracts/mocks/helpers/MockReserveConfiguration.sol, lines 42-46
-  function setDecimals(uint256 decimals) external {
+function setDecimals(uint256 decimals) external {
     DataTypes.ReserveConfigurationMap memory config = configuration;
     config.setDecimals(decimals);
     configuration = config;
   }
 
 // Original: contracts/7/contracts/mocks/helpers/MockReserveConfiguration.sol, lines 48-50
-  function getDecimals() external view returns (uint256) {
+function getDecimals() external view returns (uint256) {
     return configuration.getDecimals();
   }
 
 // Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 147-154
-  function setDecimals(
+function setDecimals(
     DataTypes.ReserveConfigurationMap memory self,
     uint256 decimals
   ) internal pure {
@@ -21,9 +21,8 @@
   }
 
 // Original: contracts/7/contracts/protocol/libraries/configuration/ReserveConfiguration.sol, lines 161-165
-  function getDecimals(
+function getDecimals(
     DataTypes.ReserveConfigurationMap memory self
   ) internal pure returns (uint256) {
     return (self.data & ~DECIMALS_MASK) >> RESERVE_DECIMALS_START_BIT_POSITION;
   }
-

@@ -1,5 +1,5 @@
 // Original: contracts/7/contracts/protocol/tokenization/VariableDebtToken.sol, lines 91-101
-  function mint(
+function mint(
     address user,
     address onBehalfOf,
     uint256 amount,
@@ -12,7 +12,7 @@
   }
 
 // Original: contracts/7/contracts/protocol/tokenization/VariableDebtToken.sol, lines 104-111
-  function burn(
+function burn(
     address from,
     uint256 amount,
     uint256 index
@@ -22,7 +22,6 @@
   }
 
 // Original: contracts/7/contracts/protocol/tokenization/VariableDebtToken.sol, lines 114-116
-  function totalSupply() public view virtual override returns (uint256) {
+function totalSupply() public view virtual override returns (uint256) {
     return super.totalSupply().rayMul(POOL.getReserveNormalizedVariableDebt(_underlyingAsset));
   }
-

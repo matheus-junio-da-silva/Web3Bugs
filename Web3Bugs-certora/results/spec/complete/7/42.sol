@@ -1,24 +1,5 @@
-// Original: contracts/7/contracts/protocol/tokenization/StableDebtToken.sol, lines 96-98
-  function getUserStableRate(address user) external view virtual override returns (uint256) {
-    return _userState[user].additionalData;
-  }
-
-// Original: contracts/7/contracts/protocol/tokenization/StableDebtToken.sol, lines 101-112
-  function balanceOf(address account) public view virtual override returns (uint256) {
-    uint256 accountBalance = super.balanceOf(account);
-    uint256 stableRate = _userState[account].additionalData;
-    if (accountBalance == 0) {
-      return 0;
-    }
-    uint256 cumulatedInterest = MathUtils.calculateCompoundedInterest(
-      stableRate,
-      _timestamps[account]
-    );
-    return accountBalance.rayMul(cumulatedInterest);
-  }
-
 // Original: contracts/7/contracts/protocol/tokenization/StableDebtToken.sol, lines 124-175
-  function mint(
+function mint(
     address user,
     address onBehalfOf,
     uint256 amount,
@@ -71,3 +52,16 @@
     return (currentBalance == 0, vars.nextSupply, vars.currentAvgStableRate);
   }
 
+// Original: contracts/7/contracts/protocol/tokenization/StableDebtToken.sol, lines 101-112
+function balanceOf(address account) public view virtual override returns (uint256) {
+    uint256 accountBalance = super.balanceOf(account);
+    uint256 stableRate = _userState[account].additionalData;
+    if (accountBalance == 0) {
+      return 0;
+    }
+    uint256 cumulatedInterest = MathUtils.calculateCompoundedInterest(
+      stableRate,
+      _timestamps[account]
+    );
+    return accountBalance.rayMul(cumulatedInterest);
+  }

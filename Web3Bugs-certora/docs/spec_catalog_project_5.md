@@ -442,9 +442,9 @@ The reduced extracted N.spec files preserve direct CVL call-site declarations an
 - setup.spec line **117**: l1ToL2MessageNonce() => NONDET;
 - setup.spec lines **122–126**: token/address/reward dispatcher summaries.
 
-These are **CVL declarations available in the snapshot**, not missing Solidity implementations. Their relevance is not established solely by textual CVL rule references: Bridge.sol lines **173–176** call the lending pool or aToken during withdrawal; lines **95–120** call token/pool/index/messaging interfaces during deposit; lines **277–287** call AToken getters during initialization. Consequently, external-call settings can affect a verification even where a selected CVL rule never directly names a dispatcher.
+These are **CVL declarations available in the snapshot**, not missing Solidity implementations. This PR has now **restored selected original declarations verbatim** in the reduced N.spec files for examples **1, 3–6, 8–10, 12–13 and 16–17**. Their CVL line provenance is reflected in each N.spec header, the N.md source-range field, and the Project 5 CSV row. The restored settings are selectively relevant to observed production-code paths, **not** an exhaustive independent proof of the historical effective method environment. Their relevance is not established solely by textual CVL rule references: Bridge.sol lines **173–176** call the lending pool or aToken during withdrawal; lines **95–120** call token/pool/index/messaging interfaces during deposit; lines **277–287** call AToken getters during initialization. Consequently, external-call settings can affect a verification even where a selected CVL rule never directly names a dispatcher.
 
-Previous claims of a *property-specific recursive CVL helper closure* must be interpreted as a **lexical/direct-CVL extraction audit**, **not proof** that all transitive Solidity calls retain historical effective summaries. With BridgeHarness, linked mocks, original erc20.spec and the exact run environment absent, it is not possible to validate the full call graph or independently establish the minimal transitive summaries per example. The reduced files should **not** be treated as stand-alone, historically equivalent prover configurations; they remain **incomplete**. A subsequent reproduction pass should identify which original available methods declarations materially affect each rule, cite their original lines, and preserve the relevant declarations rather than guessing or borrowing files from another project.
+Previous claims of a *property-specific recursive CVL helper closure* must be interpreted as a **lexical/direct-CVL extraction audit**. The newly included original method declarations close identified **source-available** indirect-call gaps, but are **not proof** that all transitive Solidity calls retain historical effective summaries. With BridgeHarness, linked mocks, original erc20.spec and the exact run environment absent, it is not possible to validate the full call graph or independently establish the minimal transitive summaries per example. The reduced files should **not** be treated as stand-alone, historically equivalent prover configurations; they remain **incomplete**. A subsequent reproduction pass should identify which original available methods declarations materially affect each rule, cite their original lines, and preserve the relevant declarations rather than guessing or borrowing files from another project.
 
 ### Additional per-rule limits identified by the second review
 
@@ -463,3 +463,28 @@ The source property texts remain untouched, and examples 3, 10, 12, 13, 16 and 1
 The independent second review re-enumerated the 17 active declarations; verified each property body appears unchanged in its extracted N.spec; and checked **every nonempty, non-header line** of the 17 extracted CVL files against the cited original source-line ranges. **No unmatched extracted lines** were found. This is a positive source-provenance check, not a test for omitted transitive global summaries.
 
 The three required Python validators and git diff --check were **not rerun** in this environment because no local GitHub checkout can be accessed. No new validator PASS is claimed.
+
+## Final Boreal follow-up — source-available method-summary corrections (2026-10-16)
+
+The originally extracted CVL files included direct rule/helper declarations but omitted some original methods summaries that can influence Solidity calls reached indirectly. Rather than declaring those declarations missing, this follow-up restored verbatim selected settings from the original setup.spec in 12 examples:
+
+| Example(s) | Restored original setup.spec methods line(s) | Path-dependent relevance |
+| --- | --- | --- |
+| 1 | 76, 77, 100, 104 | withdrawal lending-pool call and index/reward reads |
+| 3, 16 | 75–77, 100, 104, 117 | deposit, withdrawal, conversion, rewards and message nonce |
+| 4, 5, 6 | 77 | normalized-income getter potentially reached by conversion wrappers |
+| 8, 12 | 88, 91, 122 | initialize token/pool/controller checks |
+| 9, 10, 13, 17 | 75, 77, 100, 104, 117 | deposit/cancellation or deposit balance flow with index/reward/nonce calls |
+
+The inserted lines are **literal original declarations**, not invented implementations; the historical rules/invariants themselves were not changed. Exact CVL provenance fields were updated consistently in their N.spec headers, individual N.md references, and the corresponding rows in spec_buglabel.csv; pre-existing file paths, property names, formal results, outcomes and labels were retained. The shared CSV retains its original CRLF style.
+
+For examples **2, 7, 11, 14, 15**, the parametric or invariant preservation domain can reach a broad set of calls. Without the historical harness and erc20.spec, it is not defensible to claim that a hand-picked short summary set reproduces the original full methods environment, so no transitive closure is claimed. All 17 individual N.md files now have a dedicated section explaining what is restored or unresolved.
+
+### Historical model reproduction procedure (not performed)
+
+1. Obtain the original formal-verification project corresponding to the report, keeping BridgeHarness, BridgeL2Harness, symbolic lending-pool and token mocks, the historical erc20.spec import and the original verification scripts together, rather than mixing them with newer production Solidity.
+2. Evaluate each spec in its original context, with its full setup.spec methods block (including dispatchers, NONDET, constants and any summaries selected by the source spec). The constant-index spec activates rayMul/rayDiv CVL summaries at bridgeConstIndex.spec:13–14; the ordinary bridge.spec does not activate those commented-out setup summaries.
+3. Match the historical config, solver settings, compiler and contract links before interpreting a verified/violated claim. The previously recovered public verification metadata refers to BridgeHarness, solc8.10, --optimistic_loop, --loop_iter 3, and -mediumTimeout=700,-depth=12, but the local PropertyGPT snapshot lacks the historical linked implementations. The exact report-era run for every property has **not** been reproduced.
+4. Compare model traces under the full original spec/harness with extracted CVL examples only after linking all historical targets and resolving imports. Their present status is incomplete; a matching structural CSV check does not establish prover equivalence.
+
+**Validation limitation:** In this connected session, a checkout of the GitHub branch is not available to the local Python runtime because github.com cannot be resolved; the authorized remote computer is offline and GitHub Actions has no workflow runs for this PR. Therefore, the three exact Python validators and literal git diff --check **have not been executed on the commit**. GitHub-only structural/provenance checks may be documented separately, but must not be represented as authoritative PASS logs. The independent orchestrator must run these commands before approving/merging the PR. This is an explicit unresolved review gate, not a completed CI check.

@@ -21,18 +21,18 @@
 
 ## Formal results and audit outcomes
 
-- **13 VERIFIED, 0 VIOLATED, 3 NOT_STATED**. Three separately named source conservation rules correspond to report item 6, a single aggregate `✔*` result; none inherits its individual verification status automatically.
-- **11 NO_FINDING, 5 NOT_STATED, 0 FINDING per source rule**. The report's issue table does not name any of the 16 active source properties exactly as a broken detector. `validOperatorState`, cited for two invalid-parameter findings, has no exact active declaration. Outcome is not calculated from the formal status.
-- Three report issues are listed in `results/bugs.csv`: zero operator, zero authorizer, and cyclic delegated authority (all labeled Low in the PDF). The cyclic issue is explicitly said to be impossible in the then-current version; its related proposed rule is postponed, not active. The catalog does **not** claim that these issue labels are the technical labels of a specific active assertion.
+- **11 VERIFIED, 0 VIOLATED, 5 NOT_STATED**. Three separately named source conservation rules correspond to report item 6, a single aggregate `✔*` result; none inherits its individual verification status automatically. Additionally, `validState` and `noFrontRunningOnWithdraw` stay NOT_STATED due to material mismatches between the executable postcondition and the report's descriptive verified property.
+- **10 NO_FINDING, 6 NOT_STATED, 0 FINDING per source rule**. The report's issue table does not name any of the 16 active source properties exactly as a broken detector. `validOperatorState`, cited for two invalid-parameter findings, has no exact active declaration. Outcome is not calculated from the formal status.
+- Three report issues are listed in `results/bugs.csv`: zero operator, zero authorizer, and cyclic delegated authority (all labeled Low in the PDF). The cyclic issue is explicitly said to be impossible in the then-current version; its related proposed rule is postponed, not active. Its final finding classification is therefore conservatively O7 (doubtful/inapplicable for current implementation), **not SC as a proven exploitable implementation bug**. The catalog does **not** claim that these issue labels are the technical labels of a specific active assertion.
 - Report marks `noBankruptcy`, user-can't-gain-assets and change-to-total-locked-bonds descriptions **✔***, i.e. proved under unspecified assumptions/simplified code. The report's total-assets-conservation aggregate is also **✔***, without individual exact source results. Remaining descriptive verified items are **✔**. The report does not provide sufficiently specific per-rule original summarization settings.
 - The transitive `requireInvariant validOperator` in `validState` requires the `authorizerOf` declaration from source line 15. The independent dependency recheck caught and restored it before submitting the PR.
 - The source comment beside `validState` says ❌ although the report's “Valid state of an Operator” is ✔; **source/report inconsistency preserved**, not silently reconciled. Its post-assertion only checks owner and beneficiary, while report prose additionally mentions authorizer.
 
 ## Bug Label audit
 
-- 9 instances **S6-4** (asset conservation, deposit accounting, collateral obligations, withdrawal sums), 5 **S3-2** (operator state / ETH and bond ledger mutations), 1 **S2-1** (operator and authority address validation), 1 **SE-1** (operation sequence that blocks an otherwise independent withdrawal).
-- **UNMAPPED: 0**. All source assertions impose explicit normative invariants or transition equations; none is pure reachability, sanity or a “who changed X?” exploratory query. Labels describe the counterexample encoded by the assertion, not severity or reporting disposition. Multilabel rows: 0.
-- The `noFrontRunningOnWithdraw` executable spec asserts the second scenario succeeds unconditionally, unlike report text implying equivalence between both withdrawals; it does not prove the stronger biconditional.
+- 9 instances **S6-4** (asset conservation, deposit accounting, collateral obligations, withdrawal sums), 5 **S3-2** (operator state / ETH and bond ledger mutations), 1 **S2-1** (operator and authority address validation), 1 **UNMAPPED** (the front-running rule's unguarded second-withdraw revert oracle does not establish an SE-1 cause).
+- **UNMAPPED: 1**. The single UNMAPPED case has normative independence intent but does not isolate its named front-running cause: an ordinary rejected withdrawal can falsify it even without interference. Other source assertions impose explicit normative invariants or transition equations. Labels describe the counterexample encoded by the assertion, not severity or reporting disposition. Multilabel rows: 0.
+- The `noFrontRunningOnWithdraw` executable spec asserts the second scenario succeeds unconditionally, unlike report text implying equivalence between both withdrawals; it does not prove the stronger biconditional. Its `eWithdraw` may be unauthorized or underfunded and `succSceanrio1` is unused. Accordingly, the assertion cannot establish SE-1 on its own and the report's descriptive ✔ is not assigned to the source instance.
 - `maximalWithdraw` only asserts zero balances if the chosen withdrawal succeeds; it does not prove every maximal withdrawal is callable.
 - `assetsLessThanEverDepositedAsRule` has a post-call require that can filter changes; potential vacuity and the harness-only counter limit interpretation.
 
@@ -43,7 +43,7 @@ Each row answers (a) what falsifies the assertion, (b) Bug Label justification, 
 | Example | Exact rule/invariant | Counterexample to executable assertion | Defensible relationship | Report / interpretation boundary |
 | --- | --- | --- | --- | --- |
 | 1 | `validOperator` | Invalid zero operator or missing owner/authorizer with inconsistent beneficiary | S2-1: Nonzero operator ID, beneficiary and authorization identity invariant | Report broken rule is called validOperatorState, not this exact invariant. |
-| 2 | `validState` | Operator retains tracked funds after owner or beneficiary disappears | S3-2: Accounted operator funds imply valid owner and beneficiary | Source ❌ / report ✔ mismatch; no named finding attribution. |
+| 2 | `validState` | Operator retains tracked funds after owner or beneficiary disappears | S3-2: Accounted operator funds imply valid owner and beneficiary | **NOT_STATED**: source ❌ / report ✔ mismatch, source omits authorizer postcondition; seize branch is not restricted to the observed operator. |
 | 3 | `noBankruptcy` | Global ledger liabilities exceed the contract Ether balance | S6-4: Aggregate tracked obligations do not exceed held ETH collateral | Report ✔*; assumptions/simplification unspecified. |
 | 4 | `assetsLessThanEverDepositedAsRule` | Operator holdings exceed everDeposited | S6-4: Ever-deposited funds upper-bound operator holdings | Report ✔*; assumptions/simplification unspecified. |
 | 5 | `totalAssetsPreserved` | Ordinary method changes operator holdings unexpectedly | S6-4: Operator asset conservation across ordinary calls | Report item 6 is aggregate ✔*; individual NOT_STATED. |
@@ -52,7 +52,7 @@ Each row answers (a) what falsifies the assertion, (b) Bug Label justification, 
 | 8 | `integrityOfWithdraw` | Withdraw mis-debits or mis-credits ETH | S6-4: Withdraw performs exact debits and beneficiary credit | Report-backed descriptive verified status; no exact finding linkage. |
 | 9 | `maximalWithdraw` | Successful maximal withdraw leaves nonzero bonded or unbonded assets | S6-4: Successful maximal withdraw leaves no operator assets | Report-backed descriptive verified status; no exact finding linkage. |
 | 10 | `additiveWithdraw` | Split and combined withdrawals diverge in success or balance | S6-4: Two withdrawals equal one combined withdrawal | Report-backed descriptive verified status; no exact finding linkage. |
-| 11 | `noFrontRunningOnWithdraw` | Another operator's operation makes second scenario withdraw revert | SE-1: Other-operator action does not obstruct withdrawal | Report claims equivalence, but assertion only checks second success. |
+| 11 | `noFrontRunningOnWithdraw` | Any second withdrawal revert, including unauthorized sender, insufficient unbonded amount or active delegation lock | **UNMAPPED**: no SE-1 causation established | **NOT_STATED**: report claims relational equivalence ✔, but executable assertion ignores baseline success and has unconstrained withdrawal environment. |
 | 12 | `inverseOfDepositAndWithdraw` | Deposit followed by permitted withdraw fails to restore balances | S6-4: Depositing and withdrawing amount restores balances | Report-backed descriptive verified status; no exact finding linkage. |
 | 13 | `validChangeToBalanceOf` | ETH balance changes via a method outside allowed payment flows | S3-2: Only supported operations may change user ETH balances | Report-backed descriptive verified status; no exact finding linkage. |
 | 14 | `validChangeToTotalBondAmount` | Locked bond ledger updates in wrong direction or by excess | S3-2: Bond creation and release change locked totals in permitted directions | Report ✔*; harness bondID mapping assignment disabled. |
@@ -63,8 +63,8 @@ Each row answers (a) what falsifies the assertion, (b) Bug Label justification, 
 
 1. Different namespaces for report “validOperatorState” and source `validOperator`/`validState` prevent a forced FINDING relation.
 2. Aggregate report item 6 lists 3 operational cases, but the source contains 3 separately named rules. All 3 remain NOT_STATED rather than propagating ✔*.
-3. The report status ✔ for valid state contradicts the source's ❌ marker; its assertion does not require poststate authorizer nonzero even though report prose does.
-4. The frontend report's “No front running” equivalence is stronger than the `succSceanrio2` check; no correction was made.
+3. The report status ✔ for valid state contradicts the source's ❌ marker; its assertion does not require poststate authorizer nonzero even though report prose does. Its exact source rule is NOT_STATED, not automatically VERIFIED.
+4. The report's “No front running” equivalence is stronger than the `succSceanrio2` check, which ignores `succSceanrio1`. The unrestricted withdrawal caller, amount and lock state create ordinary revert counterexamples. The original rule is preserved literally, but result/outcome are NOT_STATED and Bug Label is UNMAPPED.
 5. CVL uses ghost hooks on harness tracking data; harness registerBondID lacks the actual storage mapping update and source-era types differ from modern CVL2. No migration or invented repair.
 6. Seize conservation restricts destination to an OtherBeneficiary using-contract. `otherBeneficiary` as harness state name may not have identical semantics; historic linking is unknown.
 7. The historical verified items are not claims of a rerun; ✔* restrictions, arbitrary method calls, call success assumptions and source-level `require` guards remain explicit.
@@ -89,3 +89,7 @@ Each row answers (a) what falsifies the assertion, (b) Bug Label justification, 
 - Index: `results/spec/spec_buglabel.csv`; artifacts: `results/spec/incomplete/11/`.
 - Historical report: `reports/11.md`, original PDF: `resources/11/KeepFullyBackedBondingNov2020.pdf`.
 - Snapshot: `contracts/11/`. Metadata: `results/contests.csv`. Report findings: `results/bugs.csv`.
+
+## Adversarial review amendment
+
+An independent follow-up review cross-checked all source assertions with the original report's status table, focusing on exact equivalence rather than similar titles. It changed the individual Result of `validState` and `noFrontRunningOnWithdraw` to NOT_STATED because the report's verified descriptions have materially different postconditions from the executable CVL. The latter also changed to UNMAPPED and NOT_STATED outcome because its failure can arise from ordinary access controls rather than an unexpected call sequence. Original `.spec` and source snapshot bytes remain unchanged. Report-level cyclic authorization was reclassified O7 in the findings CSV because the report itself says cycles cannot occur in the current implementation. See the affected examples' expanded semantic review.

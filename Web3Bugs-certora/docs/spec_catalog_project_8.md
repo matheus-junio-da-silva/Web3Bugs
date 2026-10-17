@@ -15,7 +15,7 @@ Read-only historical source: https://github.com/matheus-junio-da-silva/PropertyG
 - `rayMul_rayDiv_mulDiv_properties.spec`: 3 active CVL `rule`/`invariant` declarations.
 - `totalSupply_EQ_sumAllBal.spec`: 4 active CVL `rule`/`invariant` declarations.
 
-**Total: 42** active property instances; **0 complete**, **42 incomplete**, with a literal property body in each `.spec`, genuine Solidity excerpts in each `.sol`, a five-point audit in each `.md`, and missing-symbol evidence in each `.txt`. Exactly **42 CSV rows** reference exactly **42 bundles**. Results: {"VERIFIED":6,"VIOLATED":5,"NOT_STATED":31}. Detection outcomes: {"NO_FINDING":6,"ACCEPTED_BEHAVIOR":5,"NOT_STATED":31}. Technical Bug Labels: {"S3-2":1,"S3-1":1,"L7":3,"S6-2":8,"UNMAPPED":8,"S6-4":18,"L2":3} (UNMAPPED only for auxiliary modeled external-token invariant instances). All filenames, source ranges and exact property identities are preserved.
+**Total: 42** active property instances; **0 complete**, **42 incomplete**, with a literal property body in each `.spec`, genuine Solidity excerpts in each `.sol`, a five-point audit in each `.md`, and missing-symbol evidence in each `.txt`. Exactly **42 CSV rows** reference exactly **42 bundles**. Results: {"VERIFIED":6,"VIOLATED":5,"NOT_STATED":31}. Detection outcomes: {"NO_FINDING":6,"ACCEPTED_BEHAVIOR":5,"NOT_STATED":31}. Technical Bug Labels: {"S3-2":1,"S3-1":1,"L7":0,"S6-2":8,"UNMAPPED":11,"S6-4":18,"L2":3} (UNMAPPED only for auxiliary modeled external-token invariant instances). All filenames, source ranges and exact property identities are preserved.
 
 ## Property-by-property status and trace
 
@@ -23,9 +23,9 @@ Read-only historical source: https://github.com/matheus-junio-da-silva/PropertyG
 |---:|---|---|---|---|---|
 | 1 | accrueYieldCheck.spec:39-45 | `accrueYieldCheck` | S3-2 | VERIFIED | NO_FINDING |
 | 2 | changeInContractBalanceShouldCauseAccrual.spec:33-53 | `changeInContractBalanceShouldCauseAccrual` | S3-1 | VERIFIED | NO_FINDING |
-| 3 | erc4626.spec:73-84 | `must_not_revert` | L7 | VIOLATED | ACCEPTED_BEHAVIOR |
-| 4 | erc4626.spec:94-104 | `must_not_revert_unless_large_input__convertToShares` | L7 | NOT_STATED | NOT_STATED |
-| 5 | erc4626.spec:114-124 | `must_not_revert_unless_large_input__convertToAssets` | L7 | NOT_STATED | NOT_STATED |
+| 3 | erc4626.spec:73-84 | `must_not_revert` | UNMAPPED | VIOLATED | ACCEPTED_BEHAVIOR |
+| 4 | erc4626.spec:94-104 | `must_not_revert_unless_large_input__convertToShares` | UNMAPPED | NOT_STATED | NOT_STATED |
+| 5 | erc4626.spec:114-124 | `must_not_revert_unless_large_input__convertToAssets` | UNMAPPED | NOT_STATED | NOT_STATED |
 | 6 | erc4626.spec:142-165 | `previewDeposit_amount_check` | S6-2 | VERIFIED | NO_FINDING |
 | 7 | erc4626.spec:179-195 | `previewDeposit_has_NO_threshold` | S6-2 | VIOLATED | ACCEPTED_BEHAVIOR |
 | 8 | erc4626.spec:211-233 | `previewMint_amount_check` | S6-2 | VERIFIED | NO_FINDING |
@@ -68,7 +68,7 @@ Read-only historical source: https://github.com/matheus-junio-da-silva/PropertyG
 
 All ten specs were examined, including pure helper files `erc20.spec` and `methods_base.spec` (zero properties each). Recursively relevant shared definitions, helper functions, methods, imports, `using`, ghosts and hooks are included in extracted specs with original headers. No source rule or invariant assertion was modernized. The Solidity source set consists of six supplied files: `ATokenVault.sol`, `ATokenVaultStorage.sol`, `ATokenVaultV2.sol`, `interfaces/IATokenVault.sol`, `libraries/Constants.sol`, `libraries/MetaTxHelpers.sol`.
 
-Required historical implementations that are absent include `AToken` (scaled balance and `_userState` hooks), `DummyERC20_aTokenUnderlying` (`Underlying.b`), `SymbolicLendingPoolL1`, `ATokenVaultHarness` typed signatures and entrypoint wrappers, getter `getAccumulatedFees`, external `accrueYield`, `havoc_all`, arithmetic probes `rayMul__`, `rayDiv__`, `mulDiv__`, plus required external OpenZeppelin/Aave dependencies. Internal `_accrueYield` is not a substitute for a missing external harness, and storage `_s.accumulatedFees` is not a declared external getter. No original verifier run scripts, .conf, package/link map, target assignments or pinned dependency checkout exist within the source snapshot. All 42 text explanations name absent dependencies and search scope. This is independent of CVL1/CVL2 syntax age; `complete` would mean only dependency closure, not a reproducible historical prover run.
+Missing implementation artifacts are now accounted for by **each rule's effective closure in its N.txt** (not by this old generic superset); external Aave/OZ dependencies, selected symbolic token models, public getters, probes, or handle wrappers are only required when used by the corresponding instance.
 
 ## Result versus finding interpretation and report limitations
 
@@ -157,3 +157,68 @@ The original 800982-byte report PDF has Git blob SHA-1 `f750a5be51c8ea48c1a1efb0
 - `git diff --check` — **NOT EXECUTED** in a checkout; original CRLF CSV conventions were retained where present, but PASS is not claimed.
 
 Before merging, the independent reviewer must run these checks from the **inner** `Web3Bugs-certora/` root, compare original Git blobs to the snapshot, and review each conservative dependency/semantic decision. These checks do not compile CVL or reproduce Certora Prover results.
+
+## Echo — mandatory second-pass repair log (2026-10-16)
+
+**Same PR, same Project 8; no PropertyGPT edits and no merge.** The original Solidity/spec source in `contracts/8/` and both PDF copies remain byte-identical. GitHub commits: `86f7a774` (all 42 extraction/missing lists), `e9d20e7f` (recursive definitions and storage ghost hooks), `9402a078` (all 42 individual MD audits, provenance and labels). Later documentation commits only correct Project 8 files.
+
+**Resolved:** dangling duplicate imports to `methods_base.spec` and `erc20.spec` were removed from extracted copies, replacing them with selectively included original definitions and method declarations. The native original `contracts/8/specs/*.spec` files remain unchanged. This extracted closure is a catalog unit, not claimed historically identical prover configuration. The explicit audit `N.txt` now lists only rule-relevant missing external implementations, rather than a project-wide superset; the symbolic probe example 36 needs only `rayMul__`/`rayDiv__` implementations (and retains the original imported `RAY()` definition).
+
+**Axiomatic soundness blocker:** universally quantified `rayMul_g` axioms in `fees_LEQ_ATokenBal.spec:26-33`, `lastVaultBal_LEQ_ATokenBalThis.spec:20-27`, and `positiveSupply_imply_positiveAssets.spec:29-36` have direct inconsistent witness `x=1,y=0`; `accrueYieldCheck.spec:17-18` has witness `x=y=denominator=0, rounding=0`. Potential vacuous proofs are documented in the corresponding `N.md` for all 23 instances whose originating spec contains these contradictions (1 and 14–35). Certora sanity execution was **not** reproducible from the supplied mock/config environment and no historical outcome was changed based on this independent observation.
+
+**Outcome and classification:** all 42 examples remain `incomplete` because each has one or more identified missing concrete implementation dependencies, not merely an absent CLI config or old CVL syntax. Exactly six unique source properties retain report-supported `VERIFIED/NO_FINDING`; five retain `VIOLATED/ACCEPTED_BEHAVIOR`; 31 remain `NOT_STATED/NOT_STATED`. Generic ERC-4626 nonrevert checks (3–5) were relabeled `UNMAPPED`: this broad oracle does not exclusively detect L7 overflow/underflow, even if those were observed in a report counterexample. The separate reported bug VAULT-07 was relabeled SC (incorrect reuse of new-asset cap for already-issued assets) and VAULT-08 S3-1 (missing same-block accrual state update). These finding classifications are **not** the labels of every property.
+
+**Provenance:** the index now records explicit filename-qualified CVL dependency source line intervals per example, with removed import lines excluded. The 42 individual `.md` records contain the same intervals; `N.spec` headers correspond to the original text. A complete source-to-excerpt comparison checked **203/203 Solidity line intervals** across the 42 `N.sol` files versus the six preserved source files (164 ATokenVault.sol, 39 ATokenVaultStorage.sol), with zero mismatches; this is an independent textual check, not a Solidity compiler pass.
+
+**Report reconciliation:** `reports/8.md` now carries page-indexed issue table, numerical examples, all 17 report formal properties and six numbered footnote assumptions, while the unchanged PDF remains the exact original. Differences documented: report #3 previewMint mentions shares/deposit whereas original `erc4626.spec` compares assets/mint; report #7 allows ±1 for previewRedeem whereas CVL permits one direction; historical lastUpdated accrual exists in earlier revisions, not the preserved ATokenVaultStorage deprecated gap; do not propagate report #11–15 aggregate statuses to duplicated/spec-specific source variants.
+
+**Validator status / real tool attempts:** `python scripts/check_specs.py .`, `python scripts/check_contests_csv.py .`, `python scripts/check_contracts.py .`, `git diff --check`, and Certora Prover sanity are **NOT RUN** on the complete working tree. The container command `git ls-remote https://github.com/matheus-junio-da-silva/Web3Bugs.git HEAD` returned `fatal: ... Could not resolve host: github.com`; the authorized Desktop Commander device `DESKTOP-5E26TVU` reported **Offline** (last seen ~311h). GitHub connector supplies remote file reads/writes but no shell execution. The structural source/CSV and Solidity textual scans in this document are auxiliary checks only, **not** PASS results of repository Python validators. CI/status checks must be executed on an accessible complete clone before merge.
+
+### Final status ledger — individually identified non-builtin missing dependencies
+
+| Example | Source property | Missing actual external dependency | Original-spec axiom risk | Category |
+|---:|---|---|---|---|
+| 1 | `accrueYieldCheck` | `accrueYield()`; `getAccumulatedFees()` | mulDiv (zero denominator) | incomplete / S3-2 |
+| 2 | `changeInContractBalanceShouldCauseAccrual` | `_AToken.balanceOf()`; `Underlying.balanceOf()`; `_accrueYield() ghost instrumentation` | none identified | incomplete / S3-1 |
+| 3 | `must_not_revert` | `ERC4626Upgradeable / ERC20Upgradeable`; `Aave pool / AToken` | none identified | incomplete / UNMAPPED |
+| 4 | `must_not_revert_unless_large_input__convertToShares` | `ERC4626Upgradeable / ERC20Upgradeable`; `Aave pool / AToken` | none identified | incomplete / UNMAPPED |
+| 5 | `must_not_revert_unless_large_input__convertToAssets` | `ERC4626Upgradeable / ERC20Upgradeable`; `Aave pool / AToken` | none identified | incomplete / UNMAPPED |
+| 6 | `previewDeposit_amount_check` | `ERC4626Upgradeable / ERC20Upgradeable`; `Aave pool / AToken` | none identified | incomplete / S6-2 |
+| 7 | `previewDeposit_has_NO_threshold` | `ERC4626Upgradeable / ERC20Upgradeable`; `Aave pool / AToken`; `havoc_all()` | none identified | incomplete / S6-2 |
+| 8 | `previewMint_amount_check` | `ERC4626Upgradeable / ERC20Upgradeable`; `Aave pool / AToken` | none identified | incomplete / S6-2 |
+| 9 | `previewMint_has_NO_threshold` | `ERC4626Upgradeable / ERC20Upgradeable`; `Aave pool / AToken`; `havoc_all()` | none identified | incomplete / S6-2 |
+| 10 | `previewWithdraw_amount_check` | `ERC4626Upgradeable / ERC20Upgradeable`; `Aave pool / AToken` | none identified | incomplete / S6-2 |
+| 11 | `previewWithdraw_has_NO_threshold` | `ERC4626Upgradeable / ERC20Upgradeable`; `Aave pool / AToken`; `havoc_all()` | none identified | incomplete / S6-2 |
+| 12 | `previewRedeem_amount_check` | `ERC4626Upgradeable / ERC20Upgradeable`; `Aave pool / AToken` | none identified | incomplete / S6-2 |
+| 13 | `previewRedeem_has_NO_threshold` | `ERC4626Upgradeable / ERC20Upgradeable`; `Aave pool / AToken`; `havoc_all()` | none identified | incomplete / S6-2 |
+| 14 | `inv_sumAllBalance_eq_totalSupply__underline` | `Underlying.totalSupply()/Underlying.b` | rayMul (x=1,y=0) | incomplete / UNMAPPED |
+| 15 | `inv_sumAllBalance_eq_totalSupply__atoken` | `_AToken.scaledTotalSupply()/_userState` | rayMul (x=1,y=0) | incomplete / UNMAPPED |
+| 16 | `inv_sumAllBalance_eq_totalSupply` | `_balances / ERC20Upgradeable` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 17 | `lastVaultBalance_OK` | `_AToken.balanceOf()` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 18 | `getCLMFees_LEQ_ATokenBAL_DM_other` | `getAccumulatedFees()`; `_AToken.balanceOf()`; `SymbolicLendingPoolL1.getLiquidityIndex()` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 19 | `getCLMFees_LEQ_ATokenBAL_RW` | `getAccumulatedFees()`; `_AToken.balanceOf()`; `SymbolicLendingPoolL1.getLiquidityIndex()` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 20 | `inv_sumAllBalance_eq_totalSupply__underline` | `Underlying.totalSupply()/Underlying.b` | rayMul (x=1,y=0) | incomplete / UNMAPPED |
+| 21 | `inv_sumAllBalance_eq_totalSupply__atoken` | `_AToken.scaledTotalSupply()/_userState` | rayMul (x=1,y=0) | incomplete / UNMAPPED |
+| 22 | `inv_sumAllBalance_eq_totalSupply` | `_balances / ERC20Upgradeable` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 23 | `lastVaultBalance_LEQ_ATokenBalThis` | `_AToken.balanceOf()` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 24 | `inv_sumAllBalance_eq_totalSupply__underline` | `Underlying.totalSupply()/Underlying.b` | rayMul (x=1,y=0) | incomplete / UNMAPPED |
+| 25 | `inv_sumAllBalance_eq_totalSupply__atoken` | `_AToken.scaledTotalSupply()/_userState` | rayMul (x=1,y=0) | incomplete / UNMAPPED |
+| 26 | `inv_sumAllBalance_eq_totalSupply` | `_balances / ERC20Upgradeable` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 27 | `lastVaultBalance_OK` | `_AToken.balanceOf()` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 28 | `inv_fee_LEQ_ATokenBal` | `getAccumulatedFees()`; `_AToken.balanceOf()`; `SymbolicLendingPoolL1.getLiquidityIndex()` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 29 | `positiveSupply_imply_positiveAssets_all_deposit` | `ATokenVaultHarness handle*() wrappers`; `_AToken / Underlying`; `getAccumulatedFees()`; `SymbolicLendingPoolL1.getLiquidityIndex()` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 30 | `positiveSupply_imply_positiveAssets_all_mint` | `ATokenVaultHarness handle*() wrappers`; `_AToken / Underlying`; `getAccumulatedFees()`; `SymbolicLendingPoolL1.getLiquidityIndex()` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 31 | `positiveSupply_imply_positiveAssets_other` | `ATokenVaultHarness handle*() wrappers`; `_AToken / Underlying`; `getAccumulatedFees()`; `SymbolicLendingPoolL1.getLiquidityIndex()` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 32 | `positiveSupply_imply_positiveAssets_specific_DM` | `ATokenVaultHarness handle*() wrappers`; `_AToken / Underlying`; `getAccumulatedFees()`; `SymbolicLendingPoolL1.getLiquidityIndex()` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 33 | `positiveSupply_imply_positiveAssets_all_withdraw` | `ATokenVaultHarness handle*() wrappers`; `_AToken / Underlying`; `getAccumulatedFees()`; `SymbolicLendingPoolL1.getLiquidityIndex()` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 34 | `positiveSupply_imply_positiveAssets_all_redeem` | `ATokenVaultHarness handle*() wrappers`; `_AToken / Underlying`; `getAccumulatedFees()`; `SymbolicLendingPoolL1.getLiquidityIndex()` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 35 | `positiveSupply_imply_positiveAssets_specific_RW` | `ATokenVaultHarness handle*() wrappers`; `_AToken / Underlying`; `getAccumulatedFees()`; `SymbolicLendingPoolL1.getLiquidityIndex()` | rayMul (x=1,y=0) | incomplete / S6-4 |
+| 36 | `rayMul_prop_1` | `rayMul__() / rayDiv__()` | none identified | incomplete / L2 |
+| 37 | `rayMul_prop_2` | `rayMul__() / rayDiv__()` | none identified | incomplete / L2 |
+| 38 | `mulDiv_properties` | `mulDiv__()` | none identified | incomplete / L2 |
+| 39 | `inv_sumAllBalance_eq_totalSupply` | `_balances / ERC20Upgradeable` | none identified | incomplete / S6-4 |
+| 40 | `inv_balanceOf_leq_totalSupply` | `_balances / ERC20Upgradeable` | none identified | incomplete / S6-4 |
+| 41 | `inv_sumAllBalance_eq_totalSupply__underline` | `Underlying.totalSupply()/Underlying.b` | none identified | incomplete / UNMAPPED |
+| 42 | `inv_sumAllBalance_eq_totalSupply__atoken` | `_AToken.scaledTotalSupply()/_userState` | none identified | incomplete / UNMAPPED |
+
+This table is the individual audit ledger, not an attribution of a distinct Certora run to every extracted property. The full five-part semantic audit is in each `results/spec/incomplete/8/N.md`.

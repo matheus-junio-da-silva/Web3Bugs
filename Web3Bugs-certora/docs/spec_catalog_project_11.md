@@ -210,3 +210,95 @@ git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
 Previous independent, GitHub-readonly algorithm checks and whitespace patch inspection provide supplementary evidence only; they must never be labeled as execution logs for the four official commands. No new official log has been fabricated or attributed to `2010c0ef`. A runner able to clone the merged head must capture each command, exact tested SHA, standard output/error and process exit code.
 
 **Release decision:** PR #5 converted to **draft** pending the four authentic command logs and a complete 12-page PDF visual inspection. The independent semantics and index reconciliation are documented above. **Do not merge**; final approval/integration is delegated to the orchestrator.
+
+## Verified execution and 12-page visual audit — 2026-10-17 (supersedes prior blocked-gate status)
+
+**This section replaces the previously recorded NOT EXECUTED / NOT VISUALLY VERIFIED gate status above; those earlier entries remain as the historical record of the previous environment limitations.** The final three Python validators and the whitespace check were actually executed on an isolated, real Git checkout of the existing PR branch, using the authorized terminal machine only after the initial VM could not resolve github.com and the GitHub connector exposed no suitable workflow invocation. No source CVL, source snapshot, Solidity logic, or other agents' data was altered.
+
+### Real checkout and exact Git validation
+
+- Temporary checkout (not a developer working copy): `/tmp/helix-p11-y6zoeq/repo/` on device `DESKTOP-5E26TVU`.
+- Terminal shell: Bash, Git `2.53.0`, Python executable `python3` version `3.14.4`. The machine does not provide a `python` alias, so the exact checked-in scripts were run using `python3` without modifying their contents.
+- Branch: `catalog/p11-helix-keep-fully`.
+- Origin main during this check: `4a1bea89d88aa3b6aa165e8d81b8dd523c7afb82`.
+- Actual successful test SHA: **`62b2384f1490290cf96a890679c47184fb670b44`**. The four extracted `N.sol` files for examples 3, 9, 10 and 16 each previously ended in one extra blank line. Removing only these trailing blank lines in this commit made the `git diff --check` command succeed; literal Solidity logic was not modified. The test before correction at SHA `092abceac5b67a36592d30c381cfdb4daf2a68f5` reported four `new blank line at EOF` errors and exited **2**, while all three Python validators exited **0**.
+- The following authentic output is from the second execution, recorded at **2026-10-17T17:57:02Z**, testing SHA `62b2384f...` against the specified main:
+
+```text
+RUN_TIME_UTC=2026-10-17T17:57:02Z
+TESTED_HEAD=62b2384f1490290cf96a890679c47184fb670b44
+BASE_MAIN=4a1bea89d88aa3b6aa165e8d81b8dd523c7afb82
+DIFF_EXIT=0
+START:check_specs.py
+Check passed! 180 spec examples and 185 Bug Label relationships are structurally consistent.
+EXIT:check_specs.py=0
+START:check_contests_csv.py
+Check passed!
+
+        `./results/contests.csv` is consistant with `./reports`
+EXIT:check_contests_csv.py=0
+START:check_contracts.py
+Check passed!
+
+        `./contracts` is consistant with `./reports`
+EXIT:check_contracts.py=0
+```
+
+Commands executed from the real repository checkout (the Git diff from the Git root, the Python scripts from `Web3Bugs-certora`):
+
+```bash
+git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+cd Web3Bugs-certora
+python3 scripts/check_specs.py .
+python3 scripts/check_contests_csv.py .
+python3 scripts/check_contracts.py .
+```
+
+All four **genuinely passed with process exit code 0**, and should no longer be described as unexecuted. Documentation-only commits after `62b2384f` must either receive a new final-HEAD test or be explicitly distinguished from this tested SHA.
+
+### PDF raster rendering / visual-to-transcript comparison
+
+The archived `resources/11/KeepFullyBackedBondingNov2020.pdf` was opened with PyMuPDF in a temporary isolated Python package directory, all **12/12 pages** were rendered to image files and then reviewed visually as three four-page contact sheets. The source binary was not modified. The contents and layout were checked against the page-labeled `reports/11.md` transcript:
+
+| PDF pages | Actual visually checked content and reconciliation |
+| --- | --- |
+| 1–2 | Main Issues table: two invalid-parameter rows printed on page 1; **the cyclic-authorization row is at the top of page 2 before Disclaimer and Notations**. The previous text-layer extraction had put that third row after the page-2 footer. This was corrected by moving the identical textual row to the visual page-2 position in `reports/11.md`, without changing its wording. |
+| 3 | Scope and Figure 1 finite-state-machine diagram visible; the text transcription preserves the descriptive caption/prose, but **does not reproduce the diagram image**. The original PDF must be consulted for its visual topology. |
+| 4 | Five numbered invariant descriptions: Valid Operator ✔, Valid State of an Operator ✔, No Bankruptcy ✔*, User Cannot Gain Assets ✔*, and postponed cyclic authorization. The report's authorizer condition is stronger than the source `validState` rule's postcondition. |
+| 5 | One **aggregate** `Total assets are preserved ✔*` item with separate ordinary, withdraw and seize operational descriptions. Its single historical result cannot be credited individually to three separately named source rules. |
+| 6–7 | Withdrawal integrity, maximal withdrawal, additive withdrawal, front-running prose, and inverse deposit/withdraw descriptive outcomes, including the stronger two-scenario equivalence claimed in the report. |
+| 8–9 | Valid-change properties: balance ✔, locked bonds ✔*, unbonded and lifetime deposits ✔, followed by postponed items 16–21. |
+| 10–12 | Getter and operation lists, including the two final operation descriptions on page 12. No second table, hidden extra issue row, or new active CVL assertion was discovered. |
+
+An additional non-authoritative token-coverage comparison used word counts from each original PDF page against its corresponding transcript section: **100% of alphabetic PDF tokens matched on eleven pages and 99.2% on page 4** (one tokenization difference); all substantive descriptions, qualification markers and finding text inspected visually were represented. This is **not** equivalent to typographic or diagram identity. Mathematical symbols and zero-width Unicode spacing in the old PDF can still differ when presented as Markdown. The original PDF remains authoritative.
+
+### Renewed semantic audit of all 16 examples
+
+The previous per-example semantic matrix remains applicable; this additional review checked the actual original property bodies and all referenced Solidity text again and distinguished historical result, detector intent, and report-level issue:
+
+| Example | Encoded condition / essential limitation |
+| --- | --- |
+| 1 `validOperator` | Biconditional of beneficiary presence and nonzero operator/owner/authorizer; two report findings cite a different name (`validOperatorState`), so no invented exact property-to-finding attribution. |
+| 2 `validState` | Preserves transitive `requireInvariant validOperator` and `authorizerOf`; postcondition omits authorizer and the seize branch can affect a different operator. NOT_STATED retained. |
+| 3 `noBankruptcy` | Ether collateral versus ghost-modeled locked/unbonded aggregates; report ✔* only under undocumented simplifications, and the harness's bond-tracking model may not represent production. |
+| 4 `assetsLessThanEverDepositedAsRule` | Holdings bounded by the harness-only historical deposit counter; post-call `require` may filter meaningful transitions, risking vacuity. |
+| 5 `totalAssetsPreserved` | Ordinary-call conservation permits either unchanged assets or increase by `msg.value`; aggregate report ✔* is not an individual formal result. |
+| 6 `totalAssetsPreservedOnWithdraw` | Conserves operator funds plus beneficiary balance for the encoded withdrawal call; aggregate report ✔* is not an individual formal result. |
+| 7 `totalAssetsPreservedOnSeizeBond` | Conserves operator funds and destination balance under restricted OtherBeneficiary linking; possible missing linkage/vacuity; aggregate report ✔* is not an individual formal result. |
+| 8 `integrityOfWithdraw` | Exact successful withdrawal ledger and balance differences; subject to the encoded preconditions and beneficiary transfer mechanics. |
+| 9 `maximalWithdraw` | Zero outstanding funds only **if** maximal withdrawal succeeds; its implication does not establish universal withdrawal success. |
+| 10 `additiveWithdraw` | Compares split and combined withdrawal success and state; does not justify a claim about untested transaction sequences or all external-call environments. |
+| 11 `noFrontRunningOnWithdraw` | Baseline `succSceanrio1` is not used; `succSceanrio2` is asserted unconditionally. Ordinary authorization, lock or funding reverts can falsify it without proving cross-operator interference. UNMAPPED / NOT_STATED retained. |
+| 12 `inverseOfDepositAndWithdraw` | Deposit followed by selected authorized withdrawal must restore observed balances; beneficiary transfer acceptance/linking cannot be inferred from the assertion alone. |
+| 13 `validChangeToBalanceOf` | Limits per-user Ether balance changes to described operation directions, conditioned by selected method and environment. |
+| 14 `validChangeToTotalBondAmount` | Bounds decreases and increases of ghost-modeled locked bond totals; addition threshold lacks an explicit local overflow guard, and harness bondID registration writes are commented. |
+| 15 `validChangeToUnbondedValue` | Restricts operator unbonded-ledger changes to permitted transition directions; check exact method selectors rather than inferring exclusive caller authority. |
+| 16 `validChangeToEverDeposited` | Restricts changes of the historical deposit counter to expected value-bearing deposit-family methods on the harness; it is not a production contract getter. |
+
+A fresh audit command on the real checkout (SHA `62b2384f...`) compared all **16/16 property bodies literally** to the archived original, all **81/81 Solidity slices** to their line-cited Solidity originals, all **16 per-example `.txt`** for precise absent third-party imports/target-hypothesis notes, and all **16 index rows** to individual descriptions. It reported `TOTAL_ACTIVE 16`, `RULES 14`, `INVARIANTS 2`, `TOTAL_SOL_SLICES 81`, `TOTAL_INDEX_ROWS 16`, and `ERROR_COUNT 0`. This is a separate evidence audit from the four official validators, whose real logs are supplied above.
+
+### Remaining historical limitations and merge policy
+
+All 16 entries remain intentionally **incomplete** because the preserved snapshot omits historical dependencies from `@keep-network/keep-core`, `@keep-network/sortition-pools` and `openzeppelin-solidity`. No invented imported Solidity, `methods {}` substitution or CVL1→CVL2 rewriting was introduced. The report says `FullyBackedBonding` while the specific `FullyBackedBondingHarness` compilation target remains an inference; original configuration and exact prover assumptions are not recovered. Outcomes remain **11 VERIFIED / 5 NOT_STATED** and **10 NO_FINDING / 6 NOT_STATED**; two zero-address findings and a historically impossible cyclic-authority finding remain report-level entries, not attributed directly to a nonexistent matching active rule.
+
+**PR remains draft / no merge** until the orchestrator reviews semantic acceptability and determines whether the documented historical non-reproducibility is acceptable under the dataset's `incomplete` rules.

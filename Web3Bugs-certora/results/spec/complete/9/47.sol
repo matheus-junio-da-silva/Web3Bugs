@@ -1,21 +1,38 @@
-// Original: contracts/9/contracts/governance/Governance.sol:285-304 (function onlyOwner)
-  function setApprover(address _approver) public onlyOwner {
-    require(_approver != address(0), "Approver cannot be 0");
-    require(_approver != approver, "Approver unchanged");
-    approver = _approver;
-    emit ApproverSet(_approver);
-  }
+// Original: contracts/9/contracts/governance/Governance.sol:1-37 (concrete target inheritance and Ownable import)
+pragma solidity ^0.5.13;
 
-  /**
-   * @notice Updates the number of proposals to dequeue at a time.
-   * @param _concurrentProposals The number of proposals to dequeue at at a time.
-   */
-  function setConcurrentProposals(uint256 _concurrentProposals) public onlyOwner {
-    require(_concurrentProposals != 0, "Number of proposals must be larger than zero");
-    require(_concurrentProposals != concurrentProposals, "Number of proposals unchanged");
-    concurrentProposals = _concurrentProposals;
-    emit ConcurrentProposalsSet(_concurrentProposals);
-  }
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "openzeppelin-solidity/contracts/math/Math.sol";
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "openzeppelin-solidity/contracts/utils/Address.sol";
 
-  /**
-   * @notice Updates the minimum deposit needed to make a proposal.
+import "./interfaces/IGovernance.sol";
+import "./Proposals.sol";
+import "../common/interfaces/IAccounts.sol";
+import "../common/ExtractFunctionSignature.sol";
+import "../common/Initializable.sol";
+import "../common/FixidityLib.sol";
+import "../common/linkedlists/IntegerSortedLinkedList.sol";
+import "../common/UsingRegistry.sol";
+import "../common/UsingPrecompiles.sol";
+import "../common/interfaces/ICeloVersionedContract.sol";
+import "../common/libraries/ReentrancyGuard.sol";
+
+/**
+ * @title A contract for making, passing, and executing on-chain governance proposals.
+ */
+contract Governance is
+  IGovernance,
+  ICeloVersionedContract,
+  Ownable,
+  Initializable,
+  ReentrancyGuard,
+  UsingRegistry,
+  UsingPrecompiles
+{
+  using Proposals for Proposals.Proposal;
+  using FixidityLib for FixidityLib.Fraction;
+  using SafeMath for uint256;
+  using IntegerSortedLinkedList for SortedLinkedList.List;
+  using BytesLib for bytes;
+  using Address for address payable; // prettier-ignore

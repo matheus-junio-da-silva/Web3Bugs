@@ -205,3 +205,31 @@ The **real** checkout-based command `python scripts/check_specs.py .`, `python s
 - Actual attempted checkout: `git clone --quiet --depth 1 --branch catalog/p10-gaia-furucombo https://github.com/matheus-junio-da-silva/Web3Bugs.git /mnt/data/web3bugs-p10-checkout` returned **exit code 128** with `Could not resolve host: github.com`. **No true checkout exists** in the execution environment. Therefore the requested Python checks and Git diff whitespace check have **NOT RUN**, with **no exit codes available** for those four required commands. The available authorized remote desktop was also offline and the PR had no CI checks at time of inspection.
 
 **Release decision remains DRAFT.** In particular, the handler-run applicability matrix identifies material target-specific contexts missing from the 36 individual example records. Source text identity and manifest structural checks cannot substitute for those records, historical ABI reconciliation or the four requested checkout validators.
+
+
+## 9. Reconciliação de precondições por target — risco de provas vacuamente verdadeiras
+
+**Evidência:** `specs/scripts/_runHandler.sh:34–63,114–118` seleciona `--verify ${handler}:${spec}` e tenta inserir `isHandler() { return true; }` no alvo via substituição textual. `specs/scripts/proxy.sh:7–10` seleciona separadamente `ProxyHarness:specs/proxy.spec`. O mesmo arquivo CVL, portanto, é executado sob universos de métodos e Solidity distintos. A transformação via Perl pode falhar contra o código mais recente e não equivale a um replay compilado.
+
+| Instâncias atuais | Precondição/asserção efetiva | Aplicabilidade a handlers |
+| --- | --- | --- |
+| 13 `notTouchingCache`, 14 `sanity` | Respectivamente ghost/hook para escrita de cache e `assert false` diagnóstico | Só probe; não se infere bug ou resultado histórico per-handler |
+| 15–16 `startStateCleanup` / `noOverwrite` | Limpeza de slots inicialmente zero e imutabilidade dos inicialmente não zero, exceto stack | Os getters injetados referenciam `stack_slot` inexistente no `Storage.sol` preservado. Relatório #31/#32 registra `None` em cada handler histórico, não resolve a dependência |
+| 17–18 `stackLengthIncreaseIsBounded` / `senderIsAlwaysCleanedUp` | Limite 1.000.000 e preservação do marcador de sender zero | Requer getters injetados e transformação aplicável; relatório #27/#28: `None` para os 23 handlers, não prova individual do snapshot |
+| 19–20 `cubeCounterIsAlwaysCleanedUp` / `cacheIsAlwaysCleanedUp` | Counter zero permanece zero; cache zero permanece zero fora de duas chaves | `_getCubeCounter()` e `CUBE_COUNTER_KEY()` permanecem ausentes na revisão preservada; relatório #29/#30: `None` por handler |
+| **21–24** ban, halt, sender não inicializado/inicializado | As **quatro** rules começam com **`require !isHandler()`** | **Precondição insatisfatível em handler instrumentado com `isHandler()==true`**. Uma verificação aparentemente bem-sucedida seria vacuamente verdadeira; as exceções de `receive`, `execs` e `batchExec` são apenas do Proxy histórico |
+| 25 `transferredTokensMeanThatStackIsUpdated` | Aumento de saldo de token não-ETH exige aumento de stack | Contextos por handler diferem: report #22, pp19–20, identifica casos *expected* e overapproximations específicos |
+| 26 `approvedTokensAreTemporary` | Allowance zero antes da chamada permanece zero | Report #23, pp21–22: HCurve, HCurveDao, HSushiSwap, HUniswapV2 contêm exceções específicas |
+| 27 `tokenMovementCorrectness` | Consumo previsto e token gerado aumentado | Report #25 p24 não supera a leitura do saldo gerado sem `at initialStorage` em `proxy.spec:527`; pode ser `x > x` para cada target |
+| 28 `noOtherPartyModified` | Os dois saldos simbólicos de terceiros excluídos não mudam | Report #26 p25: HFunds, HComptroller, HCurveDao e callbacks têm interpretações próprias |
+| 29, invariant counter/sender | Biequivalência counter positivo ⇔ sender inicializado | Getter `getCubeCounter` injetado pelos scripts chama `_getCubeCounter` ausente no `Storage.sol`; ✔ p15 do Proxy não prova o handler |
+
+A propriedade #24 do **relatório** sobre destinos DSProxy permitidos corresponde às specs distintas `hmaker.spec` (HMaker, HBProtocol), `hscompound.spec` (HSCompound) e `hbalancer.spec` (HBalancer ausente), **não** à rule de `proxy.spec` ID 24. A homonímia numérica entre *ID de exemplo* e *número do relatório* jamais é evidência de equivalência.
+
+A seção 8 traz as **23 linhas históricas** separadas para as propriedades #22–26 e a observação de `None` para cada handler em #27–32. Os 15 nomes que coincidem com implementações disponíveis só estabelecem presença nominal, não identidade de revisão; outros oito não têm implementação histórica correspondente. **Os 36 exemplos atuais não constituem todas as instâncias de `proxy.spec` por target**. A expansão requer instanciar separadamente as condições, ABI, dependências e Result/Detection Outcome de cada alvo; duplicar os 17 corpos para os 23 handlers produziria exemplos redundantes, em parte vacuosos e não verificáveis. Esta lacuna é um bloqueio explícito de release, não uma afirmação de cobertura completa.
+
+**Falhas adicionais de replay:** `ProxyHarness.sol` invoca construtor `Proxy(registry)`, mas o `Proxy.sol` copiado exige dois argumentos; seu `_exec(address,bytes)` não corresponde ao `_exec(address,bytes,uint256)` atual. `applyHarnesses.sh` contém padrões de funções antigas e limita stack a 2 elementos, mas não reconstitui tais mudanças de interface. Declarar métodos em CVL não supre getters Solidity ausentes. Flags `-assumeUnwindCond`, limites `-b=2/3/64`, assembly simplificado e summaries de protocolos externos são parte da semântica histórica, não provas de compilação atual.
+
+**Incongruência adicional do PDF:** a propriedade #6 do Registry, p.11, está sob título de *caller* mas imprime `unregisterHandler` e `handlers` no pseudocódigo. A regra ativa `unregisterCallerIsPermanent` usa `callers`; preservar o equívoco narrativo, sem reivindicar correspondência textual.
+
+**Veredito:** os casos handler-específicos não inventariados permanecem bloqueadores; o PR #8 deve continuar draft. Os resultados de um target jamais são propagados para outro, e observações `None`, `🔎`, `✔` e `❌` não substituem execuções nem fechamentos das dependências atuais.

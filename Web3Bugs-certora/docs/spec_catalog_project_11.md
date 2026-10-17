@@ -80,6 +80,7 @@ Each row answers (a) what falsifies the assertion, (b) Bug Label justification, 
 ## Validation status
 
 - **Generated and checked during extraction:** 16 active rule/invariant names, 16 source-property blocks, 16 sets of literal Solidity code slices, 64 artifacts, 47 Git blob source hashes.
+- **Executed independently via GitHub API in JavaScript:** read-only structural replay of the three Python validator checks against branch tree, entire CSV and taxonomy, plus report and contract directory enumeration — **0 errors**, **185 relationship rows**, **180 unique examples**, **7 reports**, **7 contract project directories**, **0 orphan artifacts**; all 16 Project 11 rows resolve to four existing artifacts. This provides partial cross-checking but is not equivalent to running the original Python scripts.
 - **Not executed:** `python scripts/check_specs.py .`, `python scripts/check_contests_csv.py .`, `python scripts/check_contracts.py .` and `git diff --check`. GitHub connector supports repository writes and reads but does not supply a local working checkout/terminal; the local container cannot resolve github.com. **No PASS is claimed.** An independent runner must execute these exact checks from `Web3Bugs-certora/` before merge.
 - These structural checks cannot re-verify the old CVL proof or certify the semantic interpretation of assertions. The semantic review above separately addresses such limits.
 

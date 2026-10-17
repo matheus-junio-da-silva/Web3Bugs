@@ -451,12 +451,12 @@ Previous claims of a *property-specific recursive CVL helper closure* must be in
 | Source example(s) | Literal observation | Interpretation |
 | --- | --- | --- |
 | 3 and 16: depositWithdrawReversed | Both specs require RAY() <= indexL1 <= 2*RAY() and compare balanceU3 - balanceU1 <= (indexL1/RAY()+1)/2. | This is a **one-sided subtraction**, not an absolute-error bound. The ✔* report footnotes do not remove the explicit source precondition. |
-| 10: cannotCancelDepositAndGainBothTokens | staticBalance3 is never asserted. Unlike the other cancellation rule, no explicit require imposes timestamp ordering on e1/e2/e3. | The rule tests conditional aToken non-refund after an observed static mint; historical harness timing/message restrictions remain unknown from this snapshot. |
+| 10: cannotCancelDepositAndGainBothTokens | staticBalance3 is never asserted. Unlike the other cancellation rule, no explicit require imposes timestamp ordering on e1/e2/e3. | The rule demands equality of aToken balances after observed static minting, without asserting whether any differing balance is an increase or decrease. Interpreting a change as a refund requires the modeled cancellation implementation; historical harness timing/message restrictions remain unknown. |
 | 12: shouldRevertInitializeTokens | The rule does not require l1TokenA != l1TokenB or directly require a valid nonzero l2Token. | Some symbolic cases can revert for other reasons and satisfy lastReverted; the report's violated instance still supports the duplicate-L2 finding, not universal input-array uniqueness. |
 | 13 and 17: integrityOfDepositExpanded | The fromUnderlyingAsset=false aToken assertions use different one-sided subtraction directions. | They are not interchangeable formulas or absolute-error bounds; no report-wide ✔* attribution to either whole instance. |
 | setup.spec:309–316 | requireValidTokens is declared but never invoked by an active Project 5 property. | setupTokens constrains token membership/linkage through other helpers, not through this pairwise-address-inequality helper. |
 
-The source property texts remain untouched, and examples 3, 10, 12, 13, 16 and 17 have had their explanatory .md files narrowed. These facts do not independently require changes to Bug Label, Result, Detection Outcome or Target Contract.
+The source property texts remain untouched, and examples 3, 10, 12, 13, 16 and 17 have had their explanatory .md files narrowed. The *Detection Intent* prose in the Project 5 CSV row for example 10 was also corrected from categorical 'refund' to the literal condition 'balance change', without altering any other CSV row or its CRLF line endings. The Bug Label, Result, Detection Outcome and Target Contract remain unchanged.
 
 ### Follow-up provenance checks and execution boundary
 

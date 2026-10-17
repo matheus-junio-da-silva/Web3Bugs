@@ -1,0 +1,644 @@
+REAL COMMAND EXECUTION LOG - INITIAL COMMIT f6a2c739513195cca9518179d30806524ae2df4a
+UTC_START=2026-10-17T17:51:27+00:00
+GIT_MAIN_SHA=4a1bea89d88aa3b6aa165e8d81b8dd523c7afb82
+$ cd Web3Bugs-certora && python3 scripts/check_specs.py .
+Check passed! 206 spec examples and 211 Bug Label relationships are structurally consistent.
+EXIT_CODE=0
+$ python3 scripts/check_contests_csv.py .
+Check passed!
+
+	`./results/contests.csv` is consistant with `./reports`
+EXIT_CODE=0
+$ python3 scripts/check_contracts.py .
+Check passed!
+
+	`./contracts` is consistant with `./reports`
+EXIT_CODE=0
+$ git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+Web3Bugs-certora/contracts/8/specs/accrueYieldCheck.spec:13: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/accrueYieldCheck.spec:16: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/accrueYieldCheck.spec:17: trailing whitespace.
++    axiom forall uint256 x. forall uint256 y. forall uint256 denominator. forall uint8 rounding. 
+Web3Bugs-certora/contracts/8/specs/accrueYieldCheck.spec:19: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/accrueYieldCheck.spec:43: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/accrueYieldCheck.spec:46: new blank line at EOF.
+Web3Bugs-certora/contracts/8/specs/changeInContractBalanceShouldCauseAccrual.spec:31: trailing whitespace.
++// rule to check that accrueYield function is called everytime some function causes a change 
+Web3Bugs-certora/contracts/8/specs/changeInContractBalanceShouldCauseAccrual.spec:40: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/changeInContractBalanceShouldCauseAccrual.spec:48: trailing whitespace.
++    assert (contractATokenBal_ != _contractATokenBal || _contractULBal != contractULBal_) && 
+Web3Bugs-certora/contracts/8/specs/changeInContractBalanceShouldCauseAccrual.spec:49: trailing whitespace.
++            (f.selector != withdrawFees(address, uint256).selector && 
+Web3Bugs-certora/contracts/8/specs/changeInContractBalanceShouldCauseAccrual.spec:50: trailing whitespace.
++            f.selector != emergencyRescue(address, address, uint256).selector) => 
+Web3Bugs-certora/contracts/8/specs/changeInContractBalanceShouldCauseAccrual.spec:54: new blank line at EOF.
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:9: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:42: trailing whitespace.
++    return 
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:80: trailing whitespace.
++    f@withrevert(e, args); 
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:99: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:119: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:134: trailing whitespace.
++// 1. MUST return as close to and no more than the exact amount of Vault shares that would 
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:146: trailing whitespace.
++    address receiver;   
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:157: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:160: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:170: trailing whitespace.
++  The EIP4626 spec requires that the previewDeposit function must not account for maxDeposit 
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:186: trailing whitespace.
++    uint256 total_assets_1 = totalAssets(e1);   
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:199: trailing whitespace.
++// *        previewMint       
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:203: trailing whitespace.
++// 1. MUST return as close to and no more than the exact amount of Vault shares that would 
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:228: trailing whitespace.
++        
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:238: trailing whitespace.
++  The EIP4626 spec requires that the previewMint function must not account for mint limits 
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:239: trailing whitespace.
++  like those returned from maxMint and should always act as though the mint would be accepted, 
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:251: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:255: trailing whitespace.
++    uint256 total_assets_1 = totalAssets(e1);   
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:300: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:307: trailing whitespace.
++  The EIP4626 spec requires that the previewWithdraw function must not account for withdrawal 
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:308: trailing whitespace.
++  limits like those returned from maxWithdraw and should always act as though the withdrawal 
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:309: trailing whitespace.
++  would be accepted, regardless of whether or not the user has enough shares, etc. 
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:324: trailing whitespace.
++    uint256 total_assets_1 = totalAssets(e1);   
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:360: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:374: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:375: trailing whitespace.
++    assert previewAssets == assets 
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:377: trailing whitespace.
++        //        || previewAssets + 2 == assets        
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:383: trailing whitespace.
++  The EIP4626 spec requires that the previewRedeem function must not account for redemption 
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:384: trailing whitespace.
++  limits like those returned by the maxRedeem function and should always act as though the 
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:397: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:401: trailing whitespace.
++    uint256 total_assets_1 = totalAssets(e1);   
+Web3Bugs-certora/contracts/8/specs/erc4626.spec:411: new blank line at EOF.
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:11: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:73: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:79: trailing whitespace.
++// 
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:90: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:100: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:101: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:104: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:114: trailing whitespace.
++    // The following require means: (x/ind+z)*ind == x+z*ind 
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:118: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:125: trailing whitespace.
++        
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:133: trailing whitespace.
++        
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:166: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:172: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:173: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:176: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:180: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:186: trailing whitespace.
++    // The following require means: (x/ind+z)*ind == x+z*ind 
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:190: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/fees_LEQ_ATokenBal.spec:194: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:11: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:50: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:76: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:77: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:79: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:81: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:92: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:108: trailing whitespace.
++        
+Web3Bugs-certora/contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:116: trailing whitespace.
++        
+Web3Bugs-certora/contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:133: new blank line at EOF.
+Web3Bugs-certora/contracts/8/specs/methods_base.spec:23: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/methods_base.spec:25: trailing whitespace.
++    previewRedeem(uint256) returns (uint256); 
+Web3Bugs-certora/contracts/8/specs/methods_base.spec:52: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/methods_base.spec:58: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/methods_base.spec:208: trailing whitespace.
++                                              
+Web3Bugs-certora/contracts/8/specs/positiveSupply_imply_positiveAssets.spec:11: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/positiveSupply_imply_positiveAssets.spec:93: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/positiveSupply_imply_positiveAssets.spec:99: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/contracts/8/specs/positiveSupply_imply_positiveAssets.spec:100: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/contracts/8/specs/positiveSupply_imply_positiveAssets.spec:104: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/positiveSupply_imply_positiveAssets.spec:113: trailing whitespace.
++    //The following require means: (x/ind+z)*ind == x+z*ind 
+Web3Bugs-certora/contracts/8/specs/positiveSupply_imply_positiveAssets.spec:126: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/positiveSupply_imply_positiveAssets.spec:166: trailing whitespace.
++        !is_redeem_method(f) 
+Web3Bugs-certora/contracts/8/specs/positiveSupply_imply_positiveAssets.spec:186: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/positiveSupply_imply_positiveAssets.spec:192: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/contracts/8/specs/positiveSupply_imply_positiveAssets.spec:193: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/contracts/8/specs/positiveSupply_imply_positiveAssets.spec:197: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/positiveSupply_imply_positiveAssets.spec:210: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/rayMul_rayDiv_mulDiv_properties.spec:13: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/rayMul_rayDiv_mulDiv_properties.spec:23: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/rayMul_rayDiv_mulDiv_properties.spec:37: trailing whitespace.
++    
+Web3Bugs-certora/contracts/8/specs/totalSupply_EQ_sumAllBal.spec:74: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/1.md:53: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/1.sol:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/1.spec:27: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/1.spec:30: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/1.spec:31: trailing whitespace.
++    axiom forall uint256 x. forall uint256 y. forall uint256 denominator. forall uint8 rounding. 
+Web3Bugs-certora/results/spec/incomplete/8/1.spec:33: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/1.spec:60: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/1.spec:63: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/10.md:53: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/10.sol:161: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/10.spec:35: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/10.spec:68: trailing whitespace.
++    return 
+Web3Bugs-certora/results/spec/incomplete/8/10.spec:120: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/10.spec:123: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/11.md:54: trailing whitespace.
++  The report expressly accepts reliance on Aave restrictions despite a violated ERC4626 independence rule.  
+Web3Bugs-certora/results/spec/incomplete/8/11.sol:124: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/11.spec:22: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/11.spec:55: trailing whitespace.
++    return 
+Web3Bugs-certora/results/spec/incomplete/8/11.spec:96: trailing whitespace.
++    uint256 total_assets_1 = totalAssets(e1);   
+Web3Bugs-certora/results/spec/incomplete/8/11.spec:106: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/12.md:53: trailing whitespace.
++ Footnote #4 requires a maxAssetsWithdrawableFromAave conversion-inverse identity.   
+Web3Bugs-certora/results/spec/incomplete/8/12.sol:161: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/12.spec:18: trailing whitespace.
++    previewRedeem(uint256) returns (uint256); 
+Web3Bugs-certora/results/spec/incomplete/8/12.spec:37: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/12.spec:70: trailing whitespace.
++    return 
+Web3Bugs-certora/results/spec/incomplete/8/12.spec:110: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/12.spec:124: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/12.spec:125: trailing whitespace.
++    assert previewAssets == assets 
+Web3Bugs-certora/results/spec/incomplete/8/12.spec:127: trailing whitespace.
++        //        || previewAssets + 2 == assets        
+Web3Bugs-certora/results/spec/incomplete/8/12.spec:130: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/13.md:54: trailing whitespace.
++  The report expressly accepts reliance on Aave restrictions despite a violated ERC4626 independence rule.  
+Web3Bugs-certora/results/spec/incomplete/8/13.sol:124: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/13.spec:11: trailing whitespace.
++    previewRedeem(uint256) returns (uint256); 
+Web3Bugs-certora/results/spec/incomplete/8/13.spec:23: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/13.spec:56: trailing whitespace.
++    return 
+Web3Bugs-certora/results/spec/incomplete/8/13.spec:93: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/13.spec:97: trailing whitespace.
++    uint256 total_assets_1 = totalAssets(e1);   
+Web3Bugs-certora/results/spec/incomplete/8/13.spec:107: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/14.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/14.sol:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/14.spec:34: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/14.spec:67: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/15.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/15.sol:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/15.spec:40: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/15.spec:73: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/16.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/16.sol:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/16.spec:39: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/16.spec:72: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/17.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/17.sol:87: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/17.spec:28: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/17.spec:61: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/18.sol:100: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/18.spec:56: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/18.spec:113: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/results/spec/incomplete/8/18.spec:114: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/results/spec/incomplete/8/18.spec:117: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/18.spec:127: trailing whitespace.
++    // The following require means: (x/ind+z)*ind == x+z*ind 
+Web3Bugs-certora/results/spec/incomplete/8/18.spec:131: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/18.spec:138: trailing whitespace.
++        
+Web3Bugs-certora/results/spec/incomplete/8/18.spec:146: trailing whitespace.
++        
+Web3Bugs-certora/results/spec/incomplete/8/18.spec:274: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/19.sol:100: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/19.spec:54: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/19.spec:105: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/19.spec:111: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/results/spec/incomplete/8/19.spec:112: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/results/spec/incomplete/8/19.spec:115: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/19.spec:119: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/19.spec:125: trailing whitespace.
++    // The following require means: (x/ind+z)*ind == x+z*ind 
+Web3Bugs-certora/results/spec/incomplete/8/19.spec:129: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/19.spec:133: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/19.spec:251: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/2.md:54: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/2.sol:171: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/2.spec:71: trailing whitespace.
++// rule to check that accrueYield function is called everytime some function causes a change 
+Web3Bugs-certora/results/spec/incomplete/8/2.spec:83: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/2.spec:91: trailing whitespace.
++    assert (contractATokenBal_ != _contractATokenBal || _contractULBal != contractULBal_) && 
+Web3Bugs-certora/results/spec/incomplete/8/2.spec:92: trailing whitespace.
++            (f.selector != withdrawFees(address, uint256).selector && 
+Web3Bugs-certora/results/spec/incomplete/8/2.spec:93: trailing whitespace.
++            f.selector != emergencyRescue(address, address, uint256).selector) => 
+Web3Bugs-certora/results/spec/incomplete/8/2.spec:97: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/20.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/20.sol:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/20.spec:34: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/20.spec:68: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/21.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/21.sol:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/21.spec:40: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/21.spec:74: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/22.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/22.sol:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/22.spec:39: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/22.spec:73: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/23.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/23.sol:87: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/23.spec:54: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/23.spec:159: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/results/spec/incomplete/8/23.spec:160: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/results/spec/incomplete/8/23.spec:162: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/23.spec:164: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/23.spec:175: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/23.spec:191: trailing whitespace.
++        
+Web3Bugs-certora/results/spec/incomplete/8/23.spec:199: trailing whitespace.
++        
+Web3Bugs-certora/results/spec/incomplete/8/23.spec:216: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/24.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/24.sol:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/24.spec:34: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/24.spec:87: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/25.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/25.sol:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/25.spec:40: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/25.spec:93: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/26.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/26.sol:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/26.spec:39: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/26.spec:92: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/27.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/27.sol:87: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/27.spec:28: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/27.spec:81: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/28.md:54: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/28.sol:100: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/28.spec:29: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/28.spec:84: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/29.md:55: trailing whitespace.
++   The source assumes quantified ray algebra identities and previous balance invariants, and the report aggregates this result rather than identifying this source variant. 
+Web3Bugs-certora/results/spec/incomplete/8/29.sol:175: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/29.spec:39: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/29.spec:95: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/29.spec:101: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/results/spec/incomplete/8/29.spec:102: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/results/spec/incomplete/8/29.spec:106: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/29.spec:115: trailing whitespace.
++    //The following require means: (x/ind+z)*ind == x+z*ind 
+Web3Bugs-certora/results/spec/incomplete/8/29.spec:128: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/29.spec:227: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/3.md:53: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/3.sol:124: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/3.spec:21: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/3.spec:54: trailing whitespace.
++    return 
+Web3Bugs-certora/results/spec/incomplete/8/3.spec:95: trailing whitespace.
++    f@withrevert(e, args); 
+Web3Bugs-certora/results/spec/incomplete/8/3.spec:100: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/30.md:55: trailing whitespace.
++   The source assumes quantified ray algebra identities and previous balance invariants, and the report aggregates this result rather than identifying this source variant. 
+Web3Bugs-certora/results/spec/incomplete/8/30.sol:175: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/30.spec:39: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/30.spec:95: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/30.spec:101: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/results/spec/incomplete/8/30.spec:102: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/results/spec/incomplete/8/30.spec:106: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/30.spec:115: trailing whitespace.
++    //The following require means: (x/ind+z)*ind == x+z*ind 
+Web3Bugs-certora/results/spec/incomplete/8/30.spec:128: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/30.spec:227: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/31.md:55: trailing whitespace.
++   The source assumes quantified ray algebra identities and previous balance invariants, and the report aggregates this result rather than identifying this source variant. 
+Web3Bugs-certora/results/spec/incomplete/8/31.sol:175: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/31.spec:54: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/31.spec:110: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/31.spec:116: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/results/spec/incomplete/8/31.spec:117: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/results/spec/incomplete/8/31.spec:121: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/31.spec:130: trailing whitespace.
++    //The following require means: (x/ind+z)*ind == x+z*ind 
+Web3Bugs-certora/results/spec/incomplete/8/31.spec:143: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/31.spec:310: trailing whitespace.
++        !is_redeem_method(f) 
+Web3Bugs-certora/results/spec/incomplete/8/31.spec:315: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/32.md:55: trailing whitespace.
++   The source assumes quantified ray algebra identities and previous balance invariants, and the report aggregates this result rather than identifying this source variant. 
+Web3Bugs-certora/results/spec/incomplete/8/32.sol:175: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/32.spec:39: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/32.spec:95: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/32.spec:101: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/results/spec/incomplete/8/32.spec:102: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/results/spec/incomplete/8/32.spec:106: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/32.spec:115: trailing whitespace.
++    //The following require means: (x/ind+z)*ind == x+z*ind 
+Web3Bugs-certora/results/spec/incomplete/8/32.spec:128: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/32.spec:226: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/33.md:55: trailing whitespace.
++   The source assumes quantified ray algebra identities and previous balance invariants, and the report aggregates this result rather than identifying this source variant. 
+Web3Bugs-certora/results/spec/incomplete/8/33.sol:175: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/33.spec:39: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/33.spec:95: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/33.spec:101: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/results/spec/incomplete/8/33.spec:102: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/results/spec/incomplete/8/33.spec:106: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/33.spec:119: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/33.spec:209: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/34.md:55: trailing whitespace.
++   The source assumes quantified ray algebra identities and previous balance invariants, and the report aggregates this result rather than identifying this source variant. 
+Web3Bugs-certora/results/spec/incomplete/8/34.sol:175: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/34.spec:39: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/34.spec:95: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/34.spec:101: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/results/spec/incomplete/8/34.spec:102: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/results/spec/incomplete/8/34.spec:106: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/34.spec:119: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/34.spec:209: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/35.md:55: trailing whitespace.
++   The source assumes quantified ray algebra identities and previous balance invariants, and the report aggregates this result rather than identifying this source variant. 
+Web3Bugs-certora/results/spec/incomplete/8/35.sol:175: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/35.spec:39: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/35.spec:95: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/35.spec:101: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__underline(); 
+Web3Bugs-certora/results/spec/incomplete/8/35.spec:102: trailing whitespace.
++    requireInvariant inv_sumAllBalance_eq_totalSupply__atoken(); 
+Web3Bugs-certora/results/spec/incomplete/8/35.spec:106: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/35.spec:119: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/35.spec:208: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/36.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/36.sol:87: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/36.spec:22: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/36.spec:30: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/37.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/37.sol:87: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/37.spec:22: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/37.spec:30: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/38.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/38.sol:87: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/38.spec:33: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/39.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/39.sol:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/39.spec:62: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/4.md:53: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/4.sol:124: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/4.spec:24: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/4.spec:57: trailing whitespace.
++    return 
+Web3Bugs-certora/results/spec/incomplete/8/4.spec:96: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/4.spec:102: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/40.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/40.sol:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/40.spec:75: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/41.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/41.sol:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/41.spec:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/42.md:52: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/42.sol:59: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/42.spec:65: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/5.md:53: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/5.sol:124: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/5.spec:24: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/5.spec:57: trailing whitespace.
++    return 
+Web3Bugs-certora/results/spec/incomplete/8/5.spec:96: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/5.spec:102: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/6.md:53: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/6.sol:161: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/6.spec:36: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/6.spec:69: trailing whitespace.
++    return 
+Web3Bugs-certora/results/spec/incomplete/8/6.spec:107: trailing whitespace.
++    address receiver;   
+Web3Bugs-certora/results/spec/incomplete/8/6.spec:118: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/6.spec:121: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/6.spec:127: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/7.md:54: trailing whitespace.
++  The report expressly accepts reliance on Aave restrictions despite a violated ERC4626 independence rule.  
+Web3Bugs-certora/results/spec/incomplete/8/7.sol:124: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/7.spec:22: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/7.spec:55: trailing whitespace.
++    return 
+Web3Bugs-certora/results/spec/incomplete/8/7.spec:96: trailing whitespace.
++    uint256 total_assets_1 = totalAssets(e1);   
+Web3Bugs-certora/results/spec/incomplete/8/7.spec:106: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/8.md:53: trailing whitespace.
++Footnote #3 requires a maxDeposit conversion-inverse identity.    
+Web3Bugs-certora/results/spec/incomplete/8/8.sol:161: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/8.spec:35: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/8.spec:68: trailing whitespace.
++    return 
+Web3Bugs-certora/results/spec/incomplete/8/8.spec:119: trailing whitespace.
++        
+Web3Bugs-certora/results/spec/incomplete/8/8.spec:125: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/9.md:54: trailing whitespace.
++  The report expressly accepts reliance on Aave restrictions despite a violated ERC4626 independence rule.  
+Web3Bugs-certora/results/spec/incomplete/8/9.sol:124: new blank line at EOF.
+Web3Bugs-certora/results/spec/incomplete/8/9.spec:22: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/9.spec:55: trailing whitespace.
++    return 
+Web3Bugs-certora/results/spec/incomplete/8/9.spec:92: trailing whitespace.
++    
+Web3Bugs-certora/results/spec/incomplete/8/9.spec:96: trailing whitespace.
++    uint256 total_assets_1 = totalAssets(e1);   
+Web3Bugs-certora/results/spec/incomplete/8/9.spec:106: new blank line at EOF.
+EXIT_CODE=2
+ISSUE_COUNT=357

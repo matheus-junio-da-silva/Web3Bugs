@@ -27,3 +27,6 @@ fatal: unable to access 'https://github.com/matheus-junio-da-silva/Web3Bugs.git/
 exit=128
 
 **No validator PASS.** These commands were genuinely attempted in the available container but DID NOT run against an authentic repository checkout. The full raw stderr transcript is available in the delivered conversation's sandbox log; this abbreviated log records exact first lines and exit codes. GitHub connector can read/write Git objects but does not expose a repository terminal. No other project's data was modified.
+
+
+2026-10-17 — SUPERSEDED: an authenticated Git clone was subsequently available on DESKTOP-5E26TVU. See docs/spec_catalog_project_8_validation_20261017_final.log for all four official commands, exact outputs and successful exit codes. Prior errors in this file reflect the earlier *local VM* without repository, not the final authoritative execution.

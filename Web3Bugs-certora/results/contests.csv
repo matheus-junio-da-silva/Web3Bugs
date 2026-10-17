@@ -5,3 +5,4 @@ ID, Name, Type, Award Pool, # Auditor, Time, # High, Defillama
 4, AAVE Staked Token v1.5, -, -, -, 2023-03, -, -
 5,Aave-StarkNet L1-L2 Bridge,Cross Chain,-,-,2022-10,-,-
 6,Aave Static aToken,-,-,-,2023-04,0,https://defillama.com/protocol/aave
+10,Furucombo,DeFi Infrastructure,-,-,2021-04,1,-

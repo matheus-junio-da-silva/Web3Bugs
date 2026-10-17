@@ -140,6 +140,8 @@ For every row below: **(a)** the last column describes the security/consistency 
 
 **Independent connector-based structural audit on the branch:** after reading the full CSV as RFC-4180 (quoted fields, commas and CRLF), the branch tree was checked for all referenced example paths, `complete`/ `incomplete` file-shapes, permitted labels, allowed result/outcome values, a single Project 9 contest entry, numeric IDs, orphan artifacts and the seven report findings. Result: **61 valid rows, 61 unique examples, 52 complete, 9 incomplete, 4 UNMAPPED, 192 referenced artifacts, 7 report issues, 0 detected structural inconsistencies**. This is **not** a substitute for the project's Python validators.
 
+**Subsequent source-literal audit:** all **61 of 61** extracted property bodies were compared byte-for-byte as textual spans against their original `.spec` file/line interval; no altered or missing assertions, filters, or `preserved` blocks were detected. Separately, all 61 CSV Property values and start lines were checked against live source declarations, with **0 mismatches**. Comparing the branch tree to its main-branch base identified exactly **393 changed paths**: 195 snapshot source files, 192 example artifacts, the PDF, the report index, this document and 3 shared CSVs; **0 paths outside the allowed Project 9 scope** and **0 deleted files**. These are executed connector-assisted integrity checks, not proof of CVL compilation.
+
 **Requested exact commands, not yet executed in an eligible repository shell:**
 
 ```sh

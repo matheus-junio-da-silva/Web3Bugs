@@ -1,5 +1,5 @@
 // Original: contracts/9/specs/governance.spec:164-209; property text copied without modification.
-// Original CVL syntax preserved. Status: complete.
+// Original CVL syntax preserved. Status: incomplete.
 using Accounts as accounts
 
 methods {

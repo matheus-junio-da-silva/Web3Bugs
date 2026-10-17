@@ -22,16 +22,16 @@ All `rule` and `invariant` declarations were enumerated after masking `//` and `
 | `accountsPrivileged.spec` | 1 | 1 | 0 |
 | `goverance_with_dequeue.spec` | 3 | 2 | 1 |
 | `governance-referendumVotes.spec` | 1 | 0 | 1 |
-| `governance.spec` | 16 | 16 | 0 |
+| `governance.spec` | 16 | 14 | 2 |
 | `governancePrivileged.spec` | 1 | 1 | 0 |
 | `governance_old_rules.spec` | 3 | 0 | 3 |
 | `lockedGold.spec` | 7 | 7 | 0 |
 | `locked_gold_linked.spec` | 3 | 0 | 3 |
 | `reserve.spec` | 1 | 0 | 1 |
-| **Total** | **61** | **52** | **9** |
+| **Total** | **61** | **50** | **11** |
 
 - `61` distinct `Project ID=9` property rows in `results/spec/spec_buglabel.csv`; `61` distinct example IDs 1–61; each example uses one technically justified classification, including `UNMAPPED`.
-- `52` complete triples (`.spec`, `.sol`, `.md`) and `9` incomplete quadruples (also `.txt`): **192** generated example artifacts. No `.txt` for complete.
+- `50` complete triples (`.spec`, `.sol`, `.md`) and `11` incomplete quadruples (also `.txt`): **194** generated example artifacts. No `.txt` for complete.
 - `4` `UNMAPPED` examples: `11:viewFunctionsDoNotRevert`, `20:check_no_fallback`, `27:may_dequeue`, `50:constitution_change_legal`.
 - All 61 individual `Result` fields are `NOT_STATED` and all 61 `Detection Outcome` fields are `NOT_STATED`, rather than inheriting the report's aggregate assertion of verification. No source rule is independently identified by name, complete target context, and individual result in the preserved 2020 final report.
 
@@ -45,6 +45,8 @@ The report's checked high-level properties, with their check marks, do not provi
 
 | Example | Missing or unestablished requirement | Locations inspected and implications |
 | --- | --- | --- |
+| 36 — `cant_unvote` | In the original `governance.spec` method block `getVoteRecord(address,uint256)` is declared with **three** `uint256` returns, but the preserved `Governance.sol` getter actually returns **six** `uint256` values. | `GovernanceHarness` does not override that method. The published run script identifies this harness but gives no three-return adapter. Source-version compatibility is unestablished; conservatively incomplete. |
+| 37 — `no_double_vote_referendum_all_but_vote` | The same exact three-return / six-return ABI mismatch affects this second rule, which destructures three returned values. | Independently checked the original spec, extracted spec, `Governance.sol` and `GovernanceHarness.sol`; there is no historical matching three-return implementation or recorded adaptation in this snapshot. |
 | 27 — `may_dequeue` | `callArbitrary(f)` is used without a declaration/import in `goverance_with_dequeue.spec`; a helper with that name appears only in sibling `governance.spec:386-390`. | No run script/linkage for this standalone variant; did not silently import the sibling helper. |
 | 30 — `referendumVotesAreConsistent` | `requireInvariant referendumVoteIDIsLessThanOrEqCounter(v)` names an invariant absent locally; `governance.spec:211` has a **two-argument** invariant. | No import/run target establishes the one-argument signature. The local `votedFor` ghost and Sstore/Sload hooks are preserved; ghost initialization also quantifies `address p` where the ghost's second formal parameter is `uint256`, a possible historical typing inconsistency. |
 | 48 — `no_double_vote_referendum_vote` | References `accounts.voteSignerToAccount`, without local `using Accounts as accounts` or import. | This alias appears only in `governance.spec:1`; no runner links the old file to it. |
@@ -109,8 +111,8 @@ For every row below: **(a)** the last column describes the security/consistency 
 | 33 | `governance.spec:80-97` / `no_double_upvote` | C | `S6-4` | Normative | A second upvote from a previously upvoting account must not increase that proposal's upvote total. |
 | 34 | `governance.spec:99-114` / `proposal_count_monotonic_increasing` | C | `S3-1` | Normative | Successful proposal creation must increment proposalCount, while other successful actions must not decrease it. |
 | 35 | `governance.spec:118-141` / `no_referendum_votes_unless_approved` | C | `S5-2` | Normative | No initial referendum vote totals may become positive unless the proposal was already approved. |
-| 36 | `governance.spec:143-161` / `cant_unvote` | C | `S5-2` | Normative | Voting with the special None option cannot change a previous vote record or weight. |
-| 37 | `governance.spec:164-209` / `no_double_vote_referendum_all_but_vote` | C | `S6-4` | Normative | Operations other than vote and revokeVotes must not illegitimately inflate/rewrite the recorded proposal vote totals. |
+| 36 | `governance.spec:143-161` / `cant_unvote` | I | `S5-2` | Normative | Voting with the special None option cannot change a previous vote record or weight. |
+| 37 | `governance.spec:164-209` / `no_double_vote_referendum_all_but_vote` | I | `S6-4` | Normative | Operations other than vote and revokeVotes must not illegitimately inflate/rewrite the recorded proposal vote totals. |
 | 38 | `governance.spec:211-215` / `referendumVoteIDIsLessThanOrEqCounter` | C | `S2-1` | Normative | Ghost-recorded referendum proposal IDs must not exceed the proposal counter. |
 | 39 | `governance.spec:218-241` / `approval_only_if_promoted_and_allowed` | C | `S5-3` | Normative | New approval requires dequeued presence and the documented approver identity. |
 | 40 | `governance.spec:244-268` / `approved_proposals_invariants` | C | `S3-2` | Normative | Approval must not result in nonexistent proposals or be reversed while a proposal still exists. |
@@ -138,9 +140,11 @@ For every row below: **(a)** the last column describes the security/consistency 
 
 ## Validation evidence and unresolved quality work
 
-**Independent connector-based structural audit on the branch:** after reading the full CSV as RFC-4180 (quoted fields, commas and CRLF), the branch tree was checked for all referenced example paths, `complete`/ `incomplete` file-shapes, permitted labels, allowed result/outcome values, a single Project 9 contest entry, numeric IDs, orphan artifacts and the seven report findings. Result: **61 valid rows, 61 unique examples, 52 complete, 9 incomplete, 4 UNMAPPED, 192 referenced artifacts, 7 report issues, 0 detected structural inconsistencies**. This is **not** a substitute for the project's Python validators.
+**Independent connector-based structural audit on the branch:** after reading the full CSV as RFC-4180 (quoted fields, commas and CRLF), the branch tree was checked for all referenced example paths, `complete`/ `incomplete` file-shapes, permitted labels, allowed result/outcome values, a single Project 9 contest entry, numeric IDs, orphan artifacts and the seven report findings. Result: **61 valid rows, 61 unique examples, 50 complete, 11 incomplete, 4 UNMAPPED, 194 referenced artifacts, 7 report issues, 0 detected structural inconsistencies**. This is **not** a substitute for the project's Python validators.
 
-**Subsequent source-literal audit:** all **61 of 61** extracted property bodies were compared byte-for-byte as textual spans against their original `.spec` file/line interval; no altered or missing assertions, filters, or `preserved` blocks were detected. Separately, all 61 CSV Property values and start lines were checked against live source declarations, with **0 mismatches**. Comparing the branch tree to its main-branch base identified exactly **393 changed paths**: 195 snapshot source files, 192 example artifacts, the PDF, the expanded report companion, this document and 3 shared CSVs; **0 paths outside the allowed Project 9 scope** and **0 deleted files**. These are executed connector-assisted integrity checks, not proof of CVL compilation.
+**Subsequent source-literal audit:** all **61 of 61** extracted property bodies were compared byte-for-byte as textual spans against their original `.spec` file/line interval; no altered or missing assertions, filters, or `preserved` blocks were detected. Separately, all 61 CSV Property values and start lines were checked against live source declarations, with **0 mismatches**. Comparing the branch tree to its main-branch base identified exactly **393 changed paths**: 195 snapshot source files, 194 example artifacts, the PDF, the expanded report companion, this document and 3 shared CSVs; **0 paths outside the allowed Project 9 scope** and **0 deleted files**. These are executed connector-assisted integrity checks, not proof of CVL compilation.
+
+**Additional signature reconciliation (2026-10-17):** name-only source lookup found a material ABI incompatibility in `GovernanceHarness` examples **36** and **37**: CVL declares a three-value `getVoteRecord(address,uint256)` return tuple, whereas preserved `Governance.sol` implements six return values, and the harness does not supply an adapter. Neither the original `governance.sh` nor `applyHarness.sh` addresses this mismatch. The historical spec text remains untouched; both examples have been moved to `incomplete/9` with `.txt` reasons, giving a **50 complete / 11 incomplete** classification and **194 artifacts**. This is a conservatively unresolved historical dependency, not proof that an original Prover invocation failed.
 
 **Independent Solidity source-range audit (2026-10-17):** all 61 extracted `.sol` artifacts were fetched and their 151 individually attributed `// Original:` source intervals were compared with the actual corresponding original Solidity or harness files. Three originally inaccurate example records were corrected without modifying the original snapshot: example **54** erroneously included unrelated zero-argument `Governance.withdraw()` (refunded deposits) in a rule concerning `LockedGold.withdraw(uint256)`; this has been removed and the source ranges in the excerpt, Markdown and shared CSV aligned. Examples **45** and **46** included `Initializable.sol`'s closing brace at line 18 while declaring a `1-17` interval; their line ranges in the excerpts, Markdown and CSV now read `1-18`. **151/151 exact referenced Solidity-source blocks match after correction** (whitespace-preserving, with CRLF/LF normalization only). These checks establish excerpt integrity, not ABI resolution, bytecode equivalence, target-link validity or correctness of the Prover results.
 
@@ -160,7 +164,7 @@ git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
 
 The connected Desktop Commander machine is offline, and the local execution container cannot resolve github.com or raw.githubusercontent.com; it cannot clone/check the full remote branch. Therefore the **three Python checks and the exact Git whitespace command have no genuine PASS/FAIL logs or process exit codes yet** and must be run by the independent reviewer or CI. The source snapshot contains legacy trailing whitespace and historical line endings; do not normalize them merely to make diff checks quiet.
 
-**Other open review items:** independently verify all 52 complete dependency closures and every `.sol` excerpt against the historical target ABI and transformed harness behavior; obtain missing configurations/harnesses for the nine incomplete examples; run the three official Python validators and exact whitespace command with captured exit codes in a checked-out repository. The newly expanded `reports/9.md` is paraphrased, not a page-by-page verbatim transcription; the original PDF remains the definitive source. The PR must remain **Draft** until the relevant verification evidence is recorded.
+**Other open review items:** independently verify all 50 remaining complete dependency closures and every `.sol` excerpt against the historical target ABI and transformed harness behavior; obtain missing configurations/harnesses for the nine incomplete examples; run the three official Python validators and exact whitespace command with captured exit codes in a checked-out repository. The newly expanded `reports/9.md` is paraphrased, not a page-by-page verbatim transcription; the original PDF remains the definitive source. The PR must remain **Draft** until the relevant verification evidence is recorded.
 
 ## Catalog locations
 

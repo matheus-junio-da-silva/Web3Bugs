@@ -143,4 +143,6 @@ python scripts/check_contracts.py .
 git diff --check
 ```
 
+Additional read-only PR patch inspection covered all **117** changed-file patches. No newly added line ended in space or tab. **17** added lines retained a CR byte at EOL (16 in `results/spec/spec_buglabel.csv`, 1 in `results/contests.csv`), preserving the pre-existing shared CSV format. A distinct **synthetic local Git test**, not the actual Project 11 checkout, gave `git diff --check` exit code **2** with CRLF addition (`trailing whitespace`), and `git -c core.whitespace=cr-at-eol diff --check` exit code **0**. This is supporting diagnosis of a probable default-check obstacle, **not** a PASS/FAIL log for the real branch. Do not normalize the shared CSVs or infer the exact branch command's exit status without running it.
+
 The separate GitHub-readonly validations above do **not** constitute captured output of these four programs. The pre-existing CRLF-on-added-CSV warning still applies to the default `git diff --check`; its exact branch outcome must be recorded from a checkout rather than guessed. PDF visual inspection and original Prover reproduction likewise remain open prerequisites for approval. **Do not merge** until these are resolved by the orchestrator or a runner with repository access.

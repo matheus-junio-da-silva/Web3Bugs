@@ -1,0 +1,53 @@
+name: Project 12 catalog validation
+on:
+  push:
+    branches:
+      - catalog/p12-ceres-aave-v2
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  p12-validators:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Execute exact required validators and record exit codes
+        shell: bash
+        run: |
+          mkdir -p /tmp/p12-validation
+          echo "HEAD=$(git rev-parse HEAD)" | tee /tmp/p12-validation/provenance.log
+          echo "ORIGIN_MAIN=$(git rev-parse origin/main)" | tee -a /tmp/p12-validation/provenance.log
+          set +e
+          cd Web3Bugs-certora
+          python scripts/check_specs.py . > /tmp/p12-validation/check_specs.log 2>&1
+          s1=$?
+          cat /tmp/p12-validation/check_specs.log
+          echo "EXIT check_specs=$s1" | tee -a /tmp/p12-validation/provenance.log
+          python scripts/check_contests_csv.py . > /tmp/p12-validation/check_contests_csv.log 2>&1
+          s2=$?
+          cat /tmp/p12-validation/check_contests_csv.log
+          echo "EXIT check_contests_csv=$s2" | tee -a /tmp/p12-validation/provenance.log
+          python scripts/check_contracts.py . > /tmp/p12-validation/check_contracts.log 2>&1
+          s3=$?
+          cat /tmp/p12-validation/check_contracts.log
+          echo "EXIT check_contracts=$s3" | tee -a /tmp/p12-validation/provenance.log
+          cd ..
+          git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD > /tmp/p12-validation/git_diff_check.log 2>&1
+          s4=$?
+          cat /tmp/p12-validation/git_diff_check.log
+          echo "EXIT git_diff_check=$s4" | tee -a /tmp/p12-validation/provenance.log
+          if [ "$s1" -ne 0 ] || [ "$s2" -ne 0 ] || [ "$s3" -ne 0 ] || [ "$s4" -ne 0 ]; then
+            exit 1
+          fi
+      - name: Preserve command outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p12-validator-results
+          path: /tmp/p12-validation/
+          if-no-files-found: warn

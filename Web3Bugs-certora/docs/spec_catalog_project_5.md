@@ -428,3 +428,38 @@ This section consolidates the five explicit semantic checks already documented i
 - An independent comment-aware declaration scan identified **13** active properties in `bridge.spec`, **2** in `bridgeConstIndex.spec`, and **2** in `setup.spec`, excluding the block-commented `afterCancellationStartMustSucceed`. All **17** original active property blocks were compared as literal strings with the corresponding extracted `N.spec` files and matched. There are **17** Project 5 CSV relationships and **17** complete sets of four incomplete artifacts (`.spec`, `.sol`, `.md`, `.txt`).
 - A source-range review compared **31/31** literal Solidity excerpt segments across the 17 `.sol` files with their exact original line ranges in `contracts/5/contracts/l1/Bridge.sol`; all matched. A read-only structural audit of the complete branch tree and CSV content, implementing the key checks of the three validators independently in JavaScript, found no mismatched paths, orphaned spec artifacts, invalid labels/results/outcomes, or inconsistent contest/contract pairs (**164** examples, **169** label relationships overall). This is **not** an execution of the Python scripts.
 - The GitHub-connected environment used for this focused documentation follow-up could inspect blobs and repository metadata but **could not execute** the three Python validators or `git diff --check` on a local checkout: the local container cannot resolve `github.com` and the authorized remote Desktop Commander is offline. The historical PASS statements in the preceding Validation section document an earlier catalog review, **not** execution of those scripts in this follow-up. CI/independent reviewers must execute those commands before accepting this change. The read-only integrity audit does not replace CVL semantic analysis or formal prover reproduction.
+
+## Adversarial follow-up: transitive CVL summaries and literal-assertion limits
+
+This independent review on 2026-10-16 found additional interpretive limitations after inspecting the preserved source bodies and per-example documentation. These are **not** new formal-verification results or new security findings.
+
+### Available CVL methods summaries are not proven transitively preserved
+
+The reduced extracted N.spec files preserve direct CVL call-site declarations and lexically reached helpers. However, a direct CVL helper closure is not necessarily the **full historical methods summarization environment** for a Solidity execution path. The original setup.spec contains potentially relevant external-call summaries that are not reproduced in reduced examples:
+
+- setup.spec lines **75–77**: lending-pool deposit, withdraw, and getReserveNormalizedIncome dispatcher summaries;
+- setup.spec lines **84–104**: AToken and incentives-controller dispatcher/constant summaries;
+- setup.spec line **117**: l1ToL2MessageNonce() => NONDET;
+- setup.spec lines **122–126**: token/address/reward dispatcher summaries.
+
+These are **CVL declarations available in the snapshot**, not missing Solidity implementations. Their relevance is not established solely by textual CVL rule references: Bridge.sol lines **173–176** call the lending pool or aToken during withdrawal; lines **95–120** call token/pool/index/messaging interfaces during deposit; lines **277–287** call AToken getters during initialization. Consequently, external-call settings can affect a verification even where a selected CVL rule never directly names a dispatcher.
+
+Previous claims of a *property-specific recursive CVL helper closure* must be interpreted as a **lexical/direct-CVL extraction audit**, **not proof** that all transitive Solidity calls retain historical effective summaries. With BridgeHarness, linked mocks, original erc20.spec and the exact run environment absent, it is not possible to validate the full call graph or independently establish the minimal transitive summaries per example. The reduced files should **not** be treated as stand-alone, historically equivalent prover configurations; they remain **incomplete**. A subsequent reproduction pass should identify which original available methods declarations materially affect each rule, cite their original lines, and preserve the relevant declarations rather than guessing or borrowing files from another project.
+
+### Additional per-rule limits identified by the second review
+
+| Source example(s) | Literal observation | Interpretation |
+| --- | --- | --- |
+| 3 and 16: depositWithdrawReversed | Both specs require RAY() <= indexL1 <= 2*RAY() and compare balanceU3 - balanceU1 <= (indexL1/RAY()+1)/2. | This is a **one-sided subtraction**, not an absolute-error bound. The ✔* report footnotes do not remove the explicit source precondition. |
+| 10: cannotCancelDepositAndGainBothTokens | staticBalance3 is never asserted. Unlike the other cancellation rule, no explicit require imposes timestamp ordering on e1/e2/e3. | The rule tests conditional aToken non-refund after an observed static mint; historical harness timing/message restrictions remain unknown from this snapshot. |
+| 12: shouldRevertInitializeTokens | The rule does not require l1TokenA != l1TokenB or directly require a valid nonzero l2Token. | Some symbolic cases can revert for other reasons and satisfy lastReverted; the report's violated instance still supports the duplicate-L2 finding, not universal input-array uniqueness. |
+| 13 and 17: integrityOfDepositExpanded | The fromUnderlyingAsset=false aToken assertions use different one-sided subtraction directions. | They are not interchangeable formulas or absolute-error bounds; no report-wide ✔* attribution to either whole instance. |
+| setup.spec:309–316 | requireValidTokens is declared but never invoked by an active Project 5 property. | setupTokens constrains token membership/linkage through other helpers, not through this pairwise-address-inequality helper. |
+
+The source property texts remain untouched, and examples 3, 10, 12, 13, 16 and 17 have had their explanatory .md files narrowed. These facts do not independently require changes to Bug Label, Result, Detection Outcome or Target Contract.
+
+### Follow-up provenance checks and execution boundary
+
+The independent second review re-enumerated the 17 active declarations; verified each property body appears unchanged in its extracted N.spec; and checked **every nonempty, non-header line** of the 17 extracted CVL files against the cited original source-line ranges. **No unmatched extracted lines** were found. This is a positive source-provenance check, not a test for omitted transitive global summaries.
+
+The three required Python validators and git diff --check were **not rerun** in this environment because no local GitHub checkout can be accessed. No new validator PASS is claimed.

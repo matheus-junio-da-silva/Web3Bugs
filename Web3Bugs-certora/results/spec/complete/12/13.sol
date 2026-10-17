@@ -77,4 +77,3 @@
 
     uint256 oldAccountBalance = _balances[account];
     _balances[account] = oldAccountBalance.sub(amount, 'ERC20: burn amount exceeds balance');
-

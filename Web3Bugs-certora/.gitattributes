@@ -1,0 +1,5 @@
+# Preserve literal historical Project 12 source and CVL properties. Do not normalize their whitespace.
+# This is narrowly scoped: new code/docs/CSV remain checked by git diff --check.
+contracts/12/** -whitespace
+results/spec/complete/12/*.spec -whitespace
+results/spec/incomplete/12/*.spec -whitespace

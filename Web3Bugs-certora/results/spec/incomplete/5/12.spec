@@ -2,7 +2,7 @@
 // Property: shouldRevertInitializeTokens
 // Dependency status: incomplete
 // CVL2 migration is intentionally out of scope.
-// Included original CVL ranges: specs/setup.spec:4;13-14;16;33;39;50;61;123-124;136;296-305 | specs/bridge.spec:346-370
+// Included original CVL ranges: specs/setup.spec:4;13-14;16;33;39;50;61;88;91;122-124;136;296-305 | specs/bridge.spec:346-370
 
 import "./erc20.spec"
     using ATokenWithPoolA_L1 as ATOKEN_A
@@ -14,6 +14,9 @@ methods {
     getL2TokenOfAToken(address) returns (uint256) envfree
     ATOKEN_A.UNDERLYING_ASSET_ADDRESS() returns (address) envfree
     ATOKEN_B.UNDERLYING_ASSET_ADDRESS() returns (address) envfree  
+    POOL() returns (address) => DISPATCHER(true)
+    getIncentivesController() => DISPATCHER(true)
+    UNDERLYING_ASSET_ADDRESS() returns (address) => DISPATCHER(true)
 }
 function getUnderlyingAssetHelper(address AToken) returns address {
     if (AToken == ATOKEN_A) {

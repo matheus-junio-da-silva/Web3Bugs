@@ -156,3 +156,57 @@ git diff --check
 Additional read-only PR patch inspection covered all **117** changed-file patches. No newly added line ended in space or tab. **17** added lines retained a CR byte at EOL (16 in `results/spec/spec_buglabel.csv`, 1 in `results/contests.csv`), preserving the pre-existing shared CSV format. A distinct **synthetic local Git test**, not the actual Project 11 checkout, gave `git diff --check` exit code **2** with CRLF addition (`trailing whitespace`), and `git -c core.whitespace=cr-at-eol diff --check` exit code **0**. This is supporting diagnosis of a probable default-check obstacle, **not** a PASS/FAIL log for the real branch. Do not normalize the shared CSVs or infer the exact branch command's exit status without running it.
 
 The separate GitHub-readonly validations above do **not** constitute captured output of these four programs. The pre-existing CRLF-on-added-CSV warning still applies to the default `git diff --check`; its exact branch outcome must be recorded from a checkout rather than guessed. PDF visual inspection and original Prover reproduction likewise remain open prerequisites for approval. **Do not merge** until these are resolved by the orchestrator or a runner with repository access.
+
+## Finalization gate review — 2026-10-17
+
+**Review revision (pre-documentation merge commit):** `2010c0ef76f4d87c3d37ba42a1d2cce0586621d1`, on `catalog/p11-helix-keep-fully`; integrated current main `4a1bea89d88aa3b6aa165e8d81b8dd523c7afb82` as the second parent, **without merging PR #5 into main**. Subsequent documentation-only commits advance the branch HEAD and must not be confused with the historical Certora-tested code revision.
+
+### Updated main reconciliation
+
+The two commits incorporated from main affected Project 4/5 documentation and specs as well as `results/spec/spec_buglabel.csv`. The merge preserved the authoritative current main versions of all Project 4/5 files. After the merge, a GitHub compare against `main` returned **behind=0**, and the PR retained **117 changed files**, all confined to Project 11 plus the three permitted shared CSV indices.
+
+- `results/spec/spec_buglabel.csv`: original **169** current-main data records preserved in the same order, plus **16** original Project 11 relationships (Example IDs 1–16).
+- `results/contests.csv`: original **6** current-main data records preserved, plus **one** Project 11 record.
+- `results/bugs.csv`: original **21** current-main data records preserved, plus **three** Project 11 historical findings (`KFB-01`, `KFB-02`, `KFB-03`).
+- Exact line-prefix comparisons of all three branch index files against their respective main versions returned **match**; no other project's row was silently replaced or dropped.
+
+### Source / interpretation / dependency verification
+
+- Re-read the project workflow, taxonomy, Project 1 reference, and representative Projects 2–3 examples. The authoritative original `fullyBackedBonding.spec` (Git blob `5241b30db6e5781033c5ff422926477aa2bcb60a`) has **14 rules and 2 invariants**. A fresh name-based comparison against the reconciled branch returned **16/16 literal original property bodies identical**, including the full body of `validState` (Example 2 carries the additional original `validOperator` declaration as a dependency).
+- The previously performed **81/81 literal Solidity slice-to-original-line comparisons** remain applicable: the merge imported only current main changes to Projects 4/5 and their shared index, not a modification of the Project 11 excerpt artifacts.
+- All 16 examples remain **incomplete** due to transitive unavailable historical `@keep-network/keep-core`, `@keep-network/sortition-pools` and OpenZeppelin Solidity sources. Every `N.txt` identifies real missing packages/import sites and keeps the `FullyBackedBondingHarness` target **inferred**, not equated to the report's stated `FullyBackedBonding` or to the unknown command line used on historical commit `658b02f237e25c370feaba80a7a3b13824190c4`. Neither `methods {}` nor CVL migration is treated as a Solidity implementation.
+- Preserved statuses: **11 VERIFIED / 5 NOT_STATED**; **10 NO_FINDING / 6 NOT_STATED**, 9 S6-4 / 5 S3-2 / 1 S2-1 / 1 UNMAPPED. `totalAssetsPreserved`, `totalAssetsPreservedOnWithdraw`, and `totalAssetsPreservedOnSeizeBond` remain NOT_STATED individually despite the single report aggregate `✔*`.
+- `validState` original executable assertion only requires poststate owner/beneficiary, not poststate `authorizerOf`, unlike report prose. `noFrontRunningOnWithdraw` ignores `succSceanrio1` and may fail on a routine second-scenario revert; no front-running causality is claimed.
+- Three report findings remain separate from technical property Bug Labels. `validOperatorState`, named for two input-validation findings, is not an exact active rule; cyclic authorization was marked postponed/not possible in the then-current implementation, so its report-level O7 classification is explicitly qualified, not claimed as an exploitable contract flaw.
+
+### Original 12-page PDF audit boundary
+
+`reports/11.md` has exactly twelve individually numbered embedded-text sections (pages 1–12). Text inspection located the Main Issues table content (invalid operator and invalid authorizer on page 1, cyclic authorization issue continuing on page 2), source-report disagreement on `validState`, the `✔*` qualifier's definition and aggregate conservation statement, and the disclaimer. The archived PDF is byte-preserved by matching Git blob SHA `230fe69345766969b4038ca414a710c6aecadd20`. **However, no successful PDF page rasterization or screenshot viewing occurred. Visual fidelity of the table layout, figure, page continuations, symbols and notes is still an OPEN gate.** This text-layer check is **not** described as a visual 12-page inspection.
+
+### Authentic execution availability and required four commands
+
+The reviewer attempted to access the exact public Git checkout in the local runner. Actual captured environment output (UTC):
+
+```text
+2026-10-17T17:28:26Z
+/mnt/data
+CHECKOUT_EXISTS_EXIT=1
+fatal: unable to access 'https://github.com/matheus-junio-da-silva/Web3Bugs.git/': Could not resolve host: github.com
+GIT_LS_REMOTE_EXIT=128
+/opt/pyvenv/bin/python
+/usr/bin/git
+```
+
+The authorized Desktop Commander machine was reported offline. The GitHub Actions API reported **0 workflow runs** on the reviewed branch and on the post-merge commit. **None** of the following four commands was run on an authentic working checkout; their actual exit codes and official PASS/FAIL are therefore **NOT AVAILABLE**, not inferred from the prior JavaScript structure replay:
+
+```bash
+cd Web3Bugs-certora
+python scripts/check_specs.py .
+python scripts/check_contests_csv.py .
+python scripts/check_contracts.py .
+git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+```
+
+Previous independent, GitHub-readonly algorithm checks and whitespace patch inspection provide supplementary evidence only; they must never be labeled as execution logs for the four official commands. No new official log has been fabricated or attributed to `2010c0ef`. A runner able to clone the merged head must capture each command, exact tested SHA, standard output/error and process exit code.
+
+**Release decision:** PR #5 converted to **draft** pending the four authentic command logs and a complete 12-page PDF visual inspection. The independent semantics and index reconciliation are documented above. **Do not merge**; final approval/integration is delegated to the orchestrator.

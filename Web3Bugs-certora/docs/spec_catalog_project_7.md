@@ -27,7 +27,7 @@ All 74 examples have exactly one semantic Bug Label row; **74 CSV relationship r
 - `UserConfiguration.spec`: `b89918ce07d8401857f643333730b0a1fcb49d9a`
 - `VariableDebtToken.spec`: `89afd41f9732ef3c8f487e46059a8f1154f8e013`
 - `pool.spec`: `a94fa404a2cb416ee5a0d6a19e295c5ed7680d20`
-- The Git object storage does not accept binary fetching through the available connector. The original PDF has source Git blob SHA `4e2907f9830c990c08e71a7dbe222696f4f8d150` but **the PDF has not been copied or byte-verified**. Do not mark the entire provenance requirement complete. Source text files are prepared as exact UTF-8 content; compare Git blobs after commit.
+- **Original report PDF preserved byte-identically:** `resources/7/AaveV3Jan2022-1.pdf` has source and destination Git blob `4e2907f9830c990c08e71a7dbe222696f4f8d150` (115,198 bytes). `reports/7.md` now contains a section-wise Markdown rendering, with normalization/paraphrase disclosures; PDF remains authoritative for exact legal and mathematical wording.
 
 ## Missing dependency evidence
 
@@ -110,14 +110,14 @@ Columns explicitly record (a) false assertion/counterexample, (b) label, (c) nor
 | 49 | UserConfiguration / `setBorrowingNoChangeToOther` | Changing a reserve's borrowing/collateral bit changes an unrelated reserve's borrowing or collateral bit | S3-2 | Normative | VERIFIED/NO_FINDING; UserConfiguration (library; historical harness unresolved) |
 | 50 | UserConfiguration / `setUsingAsCollateral` | A borrowing/collateral setter fails to make the corresponding bit getter equal to the supplied boolean | S3-2 | Normative | VERIFIED/NO_FINDING; UserConfiguration (library; historical harness unresolved) |
 | 51 | UserConfiguration / `setCollateralNoChangeToOther` | Changing a reserve's borrowing/collateral bit changes an unrelated reserve's borrowing or collateral bit | S3-2 | Normative | VERIFIED/NO_FINDING; UserConfiguration (library; historical harness unresolved) |
-| 52 | UserConfiguration / `isUsingAsCollateralOrBorrowing` | The combined flag disagrees with the logical OR of borrowing and collateral bits | S3-2 | Normative | VERIFIED/NO_FINDING; UserConfiguration (library; historical harness unresolved) |
-| 53 | UserConfiguration / `integrityOfisUsingAsCollateralOne` | The one-reserve flag is true although two distinct reserve positions satisfy the underlying bit predicate | S3-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
-| 54 | UserConfiguration / `integrityOfisUsingAsCollateralAny` | A particular reserve bit is true although the aggregate any-reserve flag is false | S3-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
-| 55 | UserConfiguration / `integrityOfisBorrowingOne` | The one-reserve flag is true although two distinct reserve positions satisfy the underlying bit predicate | S3-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
-| 56 | UserConfiguration / `integrityOfisBorrowingAny` | A particular reserve bit is true although the aggregate any-reserve flag is false | S3-2 | Normative | VERIFIED/NO_FINDING; UserConfiguration (library; historical harness unresolved) |
-| 57 | UserConfiguration / `integrityOfEmpty` | isEmpty is true even though borrowing-any or a borrowing/collateral bit is true | S3-2 | Normative | VERIFIED/NO_FINDING; UserConfiguration (library; historical harness unresolved) |
-| 58 | UserConfiguration / `integrityOfIsolationModeState` | getIsolationModeState reports isolation despite isUsingAsCollateralOne being false | S3-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
-| 59 | UserConfiguration / `integrityOfSiloedBorrowingState` | getSiloedBorrowingState reports siloed borrowing despite isBorrowingOne being false | S3-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
+| 52 | UserConfiguration / `isUsingAsCollateralOrBorrowing` | The combined flag disagrees with the logical OR of borrowing and collateral bits | S6-2 | Normative | VERIFIED/NO_FINDING; UserConfiguration (library; historical harness unresolved) |
+| 53 | UserConfiguration / `integrityOfisUsingAsCollateralOne` | The one-reserve flag is true although two distinct reserve positions satisfy the underlying bit predicate | S6-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
+| 54 | UserConfiguration / `integrityOfisUsingAsCollateralAny` | A particular reserve bit is true although the aggregate any-reserve flag is false | S6-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
+| 55 | UserConfiguration / `integrityOfisBorrowingOne` | The one-reserve flag is true although two distinct reserve positions satisfy the underlying bit predicate | S6-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
+| 56 | UserConfiguration / `integrityOfisBorrowingAny` | A particular reserve bit is true although the aggregate any-reserve flag is false | S6-2 | Normative | VERIFIED/NO_FINDING; UserConfiguration (library; historical harness unresolved) |
+| 57 | UserConfiguration / `integrityOfEmpty` | isEmpty is true even though borrowing-any or a borrowing/collateral bit is true | S6-2 | Normative | VERIFIED/NO_FINDING; UserConfiguration (library; historical harness unresolved) |
+| 58 | UserConfiguration / `integrityOfIsolationModeState` | getIsolationModeState reports isolation despite isUsingAsCollateralOne being false | S6-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
+| 59 | UserConfiguration / `integrityOfSiloedBorrowingState` | getSiloedBorrowingState reports siloed borrowing despite isBorrowingOne being false | S6-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
 | 60 | VariableDebtToken / `totalSupplyEqualsSumAllBalance` | Total supply disagrees with the CVL ghost sum of account balances after the scale-conversion helper | S6-4 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
 | 61 | VariableDebtToken / `whoChangeTotalSupply` | A non-pool caller or a method other than mint/burn changes total supply; this restricts mutation but does not prove who the legitimate pool is independently | S5-3 | Normative | VERIFIED/NO_FINDING; VariableDebtToken |
 | 62 | VariableDebtToken / `balanceOfChange` | An arbitrary non-view operation changes the balances of too many distinct users | S3-2 | Normative | VERIFIED/NO_FINDING; VariableDebtToken |
@@ -133,3 +133,29 @@ Columns explicitly record (a) false assertion/counterexample, (b) label, (c) nor
 | 72 | VariableDebtToken / `mintNoChangeToOther` | A burn/mint changes an unrelated account's balance or tracked additional data | S3-2 | Normative | VERIFIED/NO_FINDING; VariableDebtToken |
 | 73 | VariableDebtToken / `disallowedFunctionalities` | A debt-token transfer/approval method selected by disAllowedFunctions completes rather than reverting | SC | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
 | 74 | pool / `getReserveNormalizedVariableDebtCheck` | When pre-existing scaled variable debt is nonzero, supply lowers the normalized variable-debt index | S3-2 | Normative | NOT_STATED/NOT_STATED; Pool |
+
+## Closure re-extraction and semantic re-audit — 2026-10-16
+
+**Branch:** `catalog/p07-delta-aave-v3`; existing PR #3 remains draft. **Exactly 74 original property instances** (65 rules and 9 invariants) across six source specs. Historical snapshot under `contracts/7/` was not modified.
+
+- The 74 generated `.spec` files no longer contain the full global preamble; `methods {}` declarations are selected by transitive symbol use and modeling side effects. Necessary original `definition`, `function`, `ghost`, `hook`, `using` spans are retained literally, including historical syntax. Original per-instance dependency source ranges have been recomputed in `spec_buglabel.csv` and the example markdown.
+- **46 complete / 28 incomplete remain PROVISIONAL classifications**, inherited from the first audit. They have undergone an in-source dependency-closure pass, but exact ABI/harness/linked-target closure and historical Certora execution remain unproven. The status is not an execution result.
+- All 74 per-instance `.md` files now contain literal original assertions or invariants whose negation describes a falsification; no generic named-rule method invocation is passed off as a Solidity call. Implication guards, `require`s and the difference between state mutation and getter behavior are documented.
+- The eight UserConfiguration instances 52–59 have been relabeled from `S3-2` to `S6-2` where their predicates compare getters/booleans without asserting a state mutation; this is a rule-level categorization, not a historical finding.
+- The report explicitly records two **aggregate** ReserveConfiguration conditions; its Pool proof list covers reserve lists, EModes, caps and flags, **not** the active snapshot's `getReserveNormalizedVariableDebtCheck`. No aggregated result has been assigned to the 20 ReserveConfiguration rules or the lone Pool rule.
+- The report's verified commit `a87d546` is different from the later PropertyGPT Solidity snapshot. The 2022 version lacks several later UserConfiguration/ReserveConfiguration methods, including siloed-borrowing support; historical proof results must be qualified accordingly.
+- Historical source context: `aave/aave-v3-core@a87d546` contains `specs/harness/UserConfigurationHarness.sol`, `StableDebtTokenHarness.sol`, `PoolHarnessForVariableDebtToken.sol` and historical CLI scripts. These are **not** silently copied into the PropertyGPT snapshot or used to declare in-snapshot completeness.
+- Findings in `results/bugs.csv` are report-level findings. **None is spuriously equated to the one active Pool rule or the other source properties.** Detection Outcome remains a separate column.
+
+### Validation not yet evidenced
+
+The GitHub connector permits exact Git blob/tree verification and structural CSV checks but does not provide a live checkout/terminal. The authorized Desktop Commander target is offline, and the local execution environment has no GitHub DNS connectivity. Consequently the following remain **NOT RUN**, not PASS:
+
+```bash
+python scripts/check_specs.py .
+python scripts/check_contests_csv.py .
+python scripts/check_contracts.py .
+git diff --check
+```
+
+The PR must remain draft until the orquestrator has reviewed actual script logs and confirmed any remaining semantic/target issues. Git object and CSV checks are not substitutes for CVL2 compilation or historical Certora reproduction.

@@ -39,7 +39,7 @@
 
     _mint(onBehalfOf, amount.add(balanceIncrease), vars.previousSupply);
 
-// Original: contracts/12/contracts/protocol/tokenization/StableDebtToken.sol:197-249
+// Original: contracts/12/contracts/protocol/tokenization/StableDebtToken.sol:197-255
   function burn(address user, uint256 amount) external override onlyLendingPool {
     (, uint256 currentBalance, uint256 balanceIncrease) = _calculateBalanceIncrease(user);
 
@@ -93,6 +93,12 @@
         newAvgStableRate,
         nextSupply
       );
+    } else {
+      uint256 amountToBurn = amount.sub(balanceIncrease);
+      _burn(user, amountToBurn, previousSupply);
+      emit Burn(user, amountToBurn, currentBalance, balanceIncrease, newAvgStableRate, nextSupply);
+    }
+
 
 // Original: contracts/12/specs/harness/StableDebtTokenHarness.sol:18-24
   function balanceOf(address account) public view override returns (uint256) {

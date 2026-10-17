@@ -10,7 +10,7 @@
     return accountBalance.rayMul(cumulatedInterest);
   }
 
-// Original: contracts/12/contracts/protocol/tokenization/StableDebtToken.sol:136-165
+// Original: contracts/12/contracts/protocol/tokenization/StableDebtToken.sol:136-176
   function mint(
     address user,
     address onBehalfOf,
@@ -42,7 +42,18 @@
     //solium-disable-next-line
     _totalSupplyTimestamp = _timestamps[onBehalfOf] = uint40(block.timestamp);
 
-// Original: contracts/12/contracts/protocol/tokenization/StableDebtToken.sol:197-235
+    // Calculates the updated average stable rate
+    vars.currentAvgStableRate = _avgStableRate = vars
+      .currentAvgStableRate
+      .rayMul(vars.previousSupply.wadToRay())
+      .add(rate.rayMul(vars.amountInRay))
+      .rayDiv(vars.nextSupply.wadToRay());
+
+    _mint(onBehalfOf, amount.add(balanceIncrease), vars.previousSupply);
+
+    emit Transfer(address(0), onBehalfOf, amount);
+
+// Original: contracts/12/contracts/protocol/tokenization/StableDebtToken.sol:197-255
   function burn(address user, uint256 amount) external override onlyLendingPool {
     (, uint256 currentBalance, uint256 balanceIncrease) = _calculateBalanceIncrease(user);
 
@@ -82,6 +93,26 @@
     }
     //solium-disable-next-line
     _totalSupplyTimestamp = uint40(block.timestamp);
+
+    if (balanceIncrease > amount) {
+      uint256 amountToMint = balanceIncrease.sub(amount);
+      _mint(user, amountToMint, previousSupply);
+      emit Mint(
+        user,
+        user,
+        amountToMint,
+        currentBalance,
+        balanceIncrease,
+        userStableRate,
+        newAvgStableRate,
+        nextSupply
+      );
+    } else {
+      uint256 amountToBurn = amount.sub(balanceIncrease);
+      _burn(user, amountToBurn, previousSupply);
+      emit Burn(user, amountToBurn, currentBalance, balanceIncrease, newAvgStableRate, nextSupply);
+    }
+
 
 // Original: contracts/12/specs/harness/StableDebtTokenHarness.sol:18-24
   function balanceOf(address account) public view override returns (uint256) {

@@ -7,7 +7,7 @@
   function getUserStableRate(address user) external view virtual override returns (uint256) {
     return _usersStableRate[user];
 
-// Original: contracts/12/contracts/protocol/tokenization/StableDebtToken.sol:197-239
+// Original: contracts/12/contracts/protocol/tokenization/StableDebtToken.sol:197-255
   function burn(address user, uint256 amount) external override onlyLendingPool {
     (, uint256 currentBalance, uint256 balanceIncrease) = _calculateBalanceIncrease(user);
 
@@ -51,6 +51,22 @@
     if (balanceIncrease > amount) {
       uint256 amountToMint = balanceIncrease.sub(amount);
       _mint(user, amountToMint, previousSupply);
+      emit Mint(
+        user,
+        user,
+        amountToMint,
+        currentBalance,
+        balanceIncrease,
+        userStableRate,
+        newAvgStableRate,
+        nextSupply
+      );
+    } else {
+      uint256 amountToBurn = amount.sub(balanceIncrease);
+      _burn(user, amountToBurn, previousSupply);
+      emit Burn(user, amountToBurn, currentBalance, balanceIncrease, newAvgStableRate, nextSupply);
+    }
+
 
 // Original: contracts/12/contracts/protocol/tokenization/StableDebtToken.sol:318-320
   function totalSupply() public view override returns (uint256) {

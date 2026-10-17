@@ -1,0 +1,5 @@
+Missing dependency or historical linkage for no_vote_delegation_when_voting in locked_gold_linked.spec:20-39
+
+delegateVoting and isVoting are called at lines 29 and 32. isVoting is implemented on Governance, but no matching delegateVoting implementation or linked-spec runner appears in the supplied snapshot.
+
+Search: contracts/9/contracts (full original snapshot), contracts/9/specs, specs/harnesses and specs/scripts. No cross-project replacement or imagined implementation has been supplied.

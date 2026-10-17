@@ -1,0 +1,5 @@
+Missing dependency or historical linkage for no_validate_delegation_when_validating in locked_gold_linked.spec:1-19
+
+delegateValidating and _isValidating are called at lines 9 and 12. No linked-spec runner or matching implementation of this historical delegation API exists in the supplied LockedGold/Governance/Accounts harnesses. Legacy target linkage is unresolved.
+
+Search: contracts/9/contracts (full original snapshot), contracts/9/specs, specs/harnesses and specs/scripts. No cross-project replacement or imagined implementation has been supplied.

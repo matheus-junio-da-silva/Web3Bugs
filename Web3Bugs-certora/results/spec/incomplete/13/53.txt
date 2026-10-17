@@ -1,0 +1,7 @@
+INCOMPLETE DEPENDENCY
+Example 53: onlyOwnerCanUpdateGovernace
+CVL: certora/governance/GovernanceOwner.spec:5-12
+Target: GovernanceActionHarness
+Missing historical dependencies / provenance:
+Historical Brownie OpenZeppelin 3.4.0 and compound-finance package mappings and matching prover/solc 0.7.x environment are not supplied.
+The nonview filter is overbroad and the original CVL uses historical sinvoke syntax. It does not restrict f to governance functions.

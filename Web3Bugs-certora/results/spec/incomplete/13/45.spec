@@ -1,10 +1,11 @@
 // Project 13 — historical Notional Finance V2; original property is verbatim.
 // Property: riskAdjustedLiquidityTokenValueMatchesClaims; instance 45; Status: incomplete.
 // Original property: certora/asset/Valuation.spec:155-186
-// Included original CVL ranges: certora/asset/Valuation.spec:41-41; certora/asset/Valuation.spec:42-42; certora/asset/Valuation.spec:43-43; certora/asset/Valuation.spec:46-46; certora/asset/Valuation.spec:155-186
+// Included original CVL ranges: certora/asset/Valuation.spec:41-41; certora/asset/Valuation.spec:42-42; certora/asset/Valuation.spec:43-43; certora/asset/Valuation.spec:46-46; certora/asset/Valuation.spec:155-186; certora/asset/Valuation.spec:45-45
 // No migration to CVL2.
 
 methods {
+getRiskAdjustedPresentValue(int256 notional, uint256 maturity, uint256 blockTime, uint256 oracleRate) returns (int256) envfree;
     calculateOracleRate(uint256 maturity, uint256 blockTime) returns (uint256) envfree;
     getMarketValues() returns (uint256, uint256, uint256, uint256) envfree;
     getLiquidityHaircut(uint256 assetType) returns (uint256) envfree;

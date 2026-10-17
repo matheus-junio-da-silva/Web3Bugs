@@ -1,0 +1,7 @@
+INCOMPLETE DEPENDENCY
+Example 50: cashGroupGetterSetters
+CVL: certora/governance/CashGroup.spec:19-67
+Target: CashGroupHarness
+Missing historical dependencies / provenance:
+Historical Brownie OpenZeppelin 3.4.0 and compound-finance package mappings and matching prover/solc 0.7.x environment are not supplied.
+The rule uses marketIndex without declaration; many getter names are not in the methods block. The source says calldata support is required. CashGroupHarness is inferred without a matching run script.

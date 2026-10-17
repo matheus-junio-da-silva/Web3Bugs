@@ -1,0 +1,7 @@
+INCOMPLETE DEPENDENCY
+Example 54: enablingBitmapCannotLeaveBehindAssets
+CVL: certora/oldAccountContext.spec:47-67
+Target: AccountPortfolioHarness
+Missing historical dependencies / provenance:
+Historical Brownie OpenZeppelin 3.4.0 and compound-finance package mappings and matching prover/solc 0.7.x environment are not supplied.
+The original oldAccountContext.spec is not selected by any supplied run script; target is inferred. Keep distinct from the newer active spec and never inherit its results.

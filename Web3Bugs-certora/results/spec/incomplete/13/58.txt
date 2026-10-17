@@ -1,0 +1,7 @@
+INCOMPLETE DEPENDENCY
+Example 58: r
+CVL: certora/sanity.spec:1-6
+Target: FreeCollateralExternal
+Missing historical dependencies / provenance:
+Historical Brownie OpenZeppelin 3.4.0 and compound-finance package mappings and matching prover/solc 0.7.x environment are not supplied.
+The original runSanity.sh invokes FreeCollateralExternal; an unconditional false assertion is intentionally diagnostic.

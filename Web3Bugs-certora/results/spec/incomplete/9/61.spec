@@ -1,4 +1,4 @@
-// Original: contracts/9/specs/reserve.spec:9-29 — literal property body, preserved historical syntax.
+// Original: contracts/9/specs/reserve.spec:10-29 — literal property body, preserved historical syntax.
 // Dependency status: incomplete.
 pragma specify 0.1
 

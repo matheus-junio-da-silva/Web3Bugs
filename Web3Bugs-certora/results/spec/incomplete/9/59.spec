@@ -1,4 +1,4 @@
-// Original: contracts/9/specs/locked_gold_linked.spec:20-39 — literal property body, preserved historical syntax.
+// Original: contracts/9/specs/locked_gold_linked.spec:24-39 — literal property body, preserved historical syntax.
 // Dependency status: incomplete.
 
 /**

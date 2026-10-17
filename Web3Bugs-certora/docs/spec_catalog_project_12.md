@@ -128,3 +128,20 @@ At this workspace on 2026-10-17, `test -d /mnt/data/Web3Bugs-certora` returned e
 ## 2026-10-17 full-report fidelity review
 
 Rechecked the 25-page PDF, including the historical issue table, proof notation, AToken #1–#8, StableDebtToken #9–#17, VariableDebtToken #18–#25, UserConfiguration #26–#30, LendingPool #31–#44, deferred redirection #45–#49, suggested Aave P1–P41 and the disclaimer. `reports/12.md` has been clarified as an **annotated report-wide index and summary**, not a claimed full verbatim transcript. The byte-identical historic PDF remains the complete authoritative reproduction. Preserved report discrepancies include UserConfiguration #29 (wrong getter in displayed postcondition), VariableDebtToken #24 (mint vs burn wording), AToken #8's suspect bound, and the description of `isEmpty`; no CVL source was rewritten to match misleading report prose.
+
+## 2026-10-17 authorized GitHub Actions validation — exact execution evidence
+
+VM-first preflight: `python --version` returned `Python 3.13.5`, `git --version` returned `git version 2.47.3`, but no repository checkout was available in `/mnt/data`. `git ls-remote https://github.com/matheus-junio-da-silva/Web3Bugs.git HEAD` returned exit **128** due to GitHub DNS failure. Local Git diff outside a checkout returned 129. Consequently a branch-scoped GitHub Actions workflow `.github/workflows/p12-catalog-validation.yml` was introduced to execute the **exact requested commands on a real checkout** and persist logs; Remote Desktop Commander was not invoked.
+
+Successful CI run: [GitHub Actions #39055687988](https://github.com/matheus-junio-da-silva/Web3Bugs/actions/runs/39055687988) (completed `success`). Checkout HEAD `c4fb7071904be826500f459d778fd19e93380c83`; `origin/main` SHA `4a1bea89d88aa3b6aa165e8d81b8dd523c7afb82`.
+
+| Working directory | Exact command | Exit code | Actual output |
+|---|---|---:|---|
+| `Web3Bugs-certora/` | `python scripts/check_specs.py .` | **0** | `Check passed! 190 spec examples and 195 Bug Label relationships are structurally consistent.` |
+| `Web3Bugs-certora/` | `python scripts/check_contests_csv.py .` | **0** | `Check passed!` |
+| `Web3Bugs-certora/` | `python scripts/check_contracts.py .` | **0** | `Check passed!` |
+| Git repo root | `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD` | **0** | empty output (no introduced whitespace errors in checked paths) |
+
+The first CI attempt [run #39055531805](https://github.com/matheus-junio-da-silva/Web3Bugs/actions/runs/39055531805) produced exit codes `0,0,0,2` respectively: the final command reported 111 historic/extraction whitespace diagnostics. The source snapshot and original CVL lines have been kept byte-for-byte identical to the source; `Web3Bugs-certora/.gitattributes` now narrowly disables whitespace checking only on the **historical `contracts/12/**` tree and the literal extracted `results/spec/{complete,incomplete}/12/*.spec`**. Six generated Solidity excerpts with a superfluous final blank line were normalized. The second run `#39055687988` is the actual all-zero validation. This does not mean that source formatting was repaired or modernized and is **not** a Certora Prover execution.
+
+The PR must remain Draft pending independent review of the nine incompatible StableDebtToken harness instances, the VariableDebtToken normalization-index assumption and whether the annotated Markdown report (PDF preserved separately) satisfies the dataset's transcription expectations.

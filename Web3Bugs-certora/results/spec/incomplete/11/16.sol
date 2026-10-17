@@ -78,4 +78,3 @@
         unbondedValue[operator] = unbondedValue[operator].add(msg.value);
         emit UnbondedValueDeposited(operator, beneficiary, msg.value);
     }
-

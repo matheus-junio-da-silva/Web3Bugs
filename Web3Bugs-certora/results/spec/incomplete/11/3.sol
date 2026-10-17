@@ -182,4 +182,3 @@
         everDeposited[operator] = everDeposited[operator].add(msg.value);
         super.deposit(operator);
     }
-

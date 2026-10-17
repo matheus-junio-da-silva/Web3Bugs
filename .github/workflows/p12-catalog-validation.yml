@@ -44,6 +44,15 @@ jobs:
           if [ "$s1" -ne 0 ] || [ "$s2" -ne 0 ] || [ "$s3" -ne 0 ] || [ "$s4" -ne 0 ]; then
             exit 1
           fi
+      - name: Audit all 26 literal CVL/Solidity source intervals and Git object hashes
+        shell: bash
+        run: |
+          set +e
+          python Web3Bugs-certora/resources/12/audit_catalog.py Web3Bugs-certora > /tmp/p12-validation/provenance_audit.log 2>&1
+          rc=$?
+          cat /tmp/p12-validation/provenance_audit.log
+          echo "EXIT provenance_audit=$rc" | tee -a /tmp/p12-validation/provenance.log
+          exit "$rc"
       - name: Preserve command outputs
         if: always()
         uses: actions/upload-artifact@v4

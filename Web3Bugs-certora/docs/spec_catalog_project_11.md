@@ -105,3 +105,42 @@ An independent follow-up review cross-checked all source assertions with the ori
 - `inverseOfDepositAndWithdraw`: report describes beneficiary transfer acceptance, but the CVL rule does not explicitly require this. The supplied Beneficiary harness is payable, but historical linkage to arbitrary beneficiaryOf addresses is unestablished.
 - `validChangeToTotalBondAmount`: the `lockedBondsBefore + unbondedBefore` threshold lacks a local `safeAdd` requirement; no historical arithmetic fix is invented.
 - Per-example `.txt` evidence now gives exact missing import sites (`FullyBackedBonding.sol:19-23`, `AbstractBonding.sol:19-21`) and separates ghost-model caveats from properties without ghost dependencies. The extracted CVL source remains byte-for-byte unchanged in its literal property bodies.
+
+
+## Independent follow-up audit — 2026-10-17 UTC
+
+This follow-up inspects the **existing Project 11 branch**, retaining historical source and all other projects unchanged. Its GitHub-readonly comparisons are substantive evidence but do not replace the official local validators or Certora Prover.
+
+### Independently observed evidence (not an original-Prover rerun)
+
+| Verification | Observed result | Method |
+| --- | --- | --- |
+| Original subtree integrity | MATCH | GitHub Contents API: source `certora_projects/keep_fully/` and destination `contracts/11/` have identical three root entries and identical Git blob/tree SHAs (`contracts/ = 29f8f200a81937574b6454a428f98798205a2ec0`, `specs/ = dbaa766df6fce096b722d2a9f81f7cdf8f635b85`, PDF blob `230fe69345766969b4038ca414a710c6aecadd20`). The extra resource PDF also matches. Matching subtree Git tree object IDs covers all children recursively. |
+| Active original declarations | 14 rules, 2 invariants | Inspected top-level declarations in the historical `fullyBackedBonding.spec`. |
+| Literal CVL property bodies | 16/16 MATCH | Compared each original named rule/invariant body against the corresponding `N.spec` body. Example 2 also includes the original `validOperator` invariant as a transitive dependency, not an extra separately cataloged source instance. |
+| Solidity excerpt fidelity | 81/81 MATCH | Parsed every `// Extracted from` block and its cited line interval across all `N.sol`, then compared literal extracted text against the archived original `AbstractBonding.sol`, `FullyBackedBonding.sol`, and `FullyBackedBondingHarness.sol`. |
+| Per-example metadata | 16/16 MATCH | Compared the 16 Project 11 CSV rows to the property heading, Result and Detection Outcome in the individual `N.md` files; no mismatch. |
+| Target attribution | Inferred harness / reported production target remain distinct | No run configuration establishes that the original proof targeted the harness, although harness-only getters support the inference. |
+| Dependencies | 16 incomplete; external package closure still absent | The original snapshot root matches; the included Solidity inherits/imports absent historical `@keep-network` and OpenZeppelin implementations. No `methods {}` signature is treated as an implementation. |
+| Historic finding links | 3 report findings, 0 proved one-to-one source rule findings | The report cites `validOperatorState` rather than any exact active source rule for its two invalid-parameter issues; the cyclic-authorization discussion concerns a postponed property. |
+| Report page-layout fidelity | **NOT VISUALLY VERIFIED** | The original PDF is preserved byte-identically and `reports/11.md` contains its 12 individually labeled text-layer pages; binary PDF rendering/screenshots were unavailable to this reviewer. Thus table placement, figure and continuation order are not certified. |
+
+A further wording correction was committed to `results/spec/incomplete/11/11.md`: a revert in `noFrontRunningOnWithdraw` does **not** in itself establish *any* cross-operator sequence interference, let alone exploitable front-running. Its unguarded second success assertion is not a causal oracle.
+
+### Official validator execution / environment blockers — actual observations
+
+**No official PASS claim is made** for any of the four requested commands. The available local container has no cloned `Web3Bugs-certora/` working tree; `git ls-remote https://github.com/matheus-junio-da-silva/Web3Bugs.git refs/heads/catalog/p11-helix-keep-fully` returned:
+```text
+fatal: unable to access 'https://github.com/matheus-junio-da-silva/Web3Bugs.git/': Could not resolve host: github.com
+```
+The authorized Desktop Commander device was offline. GitHub's Actions API reported `{"total_count":0,"workflow_runs":[]}` for the branch at the time checked. Therefore, the exact branch versions of the following commands **remain blocked / not executed on a real checkout**:
+
+```bash
+cd Web3Bugs-certora
+python scripts/check_specs.py .
+python scripts/check_contests_csv.py .
+python scripts/check_contracts.py .
+git diff --check
+```
+
+The separate GitHub-readonly validations above do **not** constitute captured output of these four programs. The pre-existing CRLF-on-added-CSV warning still applies to the default `git diff --check`; its exact branch outcome must be recorded from a checkout rather than guessed. PDF visual inspection and original Prover reproduction likewise remain open prerequisites for approval. **Do not merge** until these are resolved by the orchestrator or a runner with repository access.

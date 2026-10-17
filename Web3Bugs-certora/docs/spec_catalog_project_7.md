@@ -159,3 +159,12 @@ git diff --check
 ```
 
 The PR must remain draft until the orquestrator has reviewed actual script logs and confirmed any remaining semantic/target issues. Git object and CSV checks are not substitutes for CVL2 compilation or historical Certora reproduction.
+
+
+### Remote checks performed after re-extraction
+
+- **PASS (remote literal-source comparison only):** All **74/74** extracted CVL property bodies match the text of their active source `rule` or `invariant` in the six PropertyGPT spec files. Comparison used GitHub's PR changed-file patches and original spec text, not execution of a prover.
+- **PASS (remote Git-tree consistency only):** 74 Project-7 index rows reference all 250 expected files (46×3 complete files plus 28×4 incomplete files), with zero missing/orphan Project-7 example files. Original contract and spec source trees are byte-identical to PropertyGPT, and the report PDF blob matches its source SHA.
+- **PASS (remote permitted-path check only):** All 390 currently changed PR file paths fall under the Project-7 source/spec/resource/report/documentation paths or the three explicitly permitted shared CSV indexes.
+- **WARNING (not an executed `git diff --check`):** GitHub's diff adds lines containing trailing whitespace in **49 files**, of which 6 are original historical source specs and 43 are literal extracted CVL specs. The user-required historical byte-preservation forbids silently stripping those original whitespaces. Standard `git diff --check` may fail; its actual return code is not known because no shell execution environment is available.
+- **NOT RUN:** All three official Python scripts and `git diff --check`, for reasons detailed above. Do not present the remote checks as a validator PASS.

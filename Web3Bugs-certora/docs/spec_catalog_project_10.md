@@ -138,3 +138,54 @@ git diff --check
 **Open blockers before final approval:** (1) run actual structural and byte-identity validators; (2) independently reconcile generic `proxy.spec` execution and report `🔎` per handler/selector — do not multiply generic success or failure; (3) decide missing eight historical handlers and same-name but version-shifted contracts without substituting a modern target; (4) resolve or explicitly waive historic harness constructor/`_exec` mismatch and missing symbols before claiming prover reproducibility; (5) independently review issue-label mapping, source-range metadata, and the seven incomplete entries. A **Draft PR**, not a ready-to-merge PR, is appropriate until these gates are satisfied.
 
 **Execution discipline:** source originals were not edited; no private auditor reasoning was invented; no merge or self-approval was attempted. Results and outcomes remain separate in every row.
+
+## 8. Per-target report reconciliation (historical pages 19–31)
+
+This matrix records **each of the 23 historically reported targets** independently. It is evidence of the report's stated *violating functions* and **not** evidence that the exact preserved 0.8.10 source was proved. “None” means no violating functions were listed in the indicated report table, not an independently attributable `VERIFIED`. “N/A” means the report did not consider that property applicable. “Expected” and “overapprox” are report interpretations, not independently recovered current counterexamples. Names are preserved exactly; the eight absent implementations are **not** substituted.
+
+| 2021 handler | Source | #22 stack-on-receipt (p19–20) | #23 temporary approvals (p21–22) | #24 DSProxy allowlist (p23) | #25 token movements (p24) | #26 nonparty balances (p25) |
+| --- | --- | --- | --- | --- | --- | --- |
+| `HMaker` | present | overapprox: DSProxy operations | None | None | N/A DSProxy | N/A DSProxy |
+| `HAaveProtocol` | absent | redeem overapprox; flashLoan expected | None | N/A | None | flashloan potential callback |
+| `HAaveProtocolV2` | present | flashloan: nonzero mode | None | N/A | None | flashloan potential callback |
+| `HSCompound` | present | overapprox: DSProxy, market methods | None | None | N/A DSProxy | N/A DSProxy |
+| `HFunds` | present | None | None | N/A no intermediate | N/A no intermediate | inject/sendToken/sendTokens expected |
+| `HOneInchExchange` | absent | None | None | N/A | swap | None |
+| `HBProtocol` | present | overapprox: DSProxy operations | None | None | N/A DSProxy | N/A DSProxy |
+| `HBalancer` | absent | None | None (join*) | None (join*) | exitswapPoolAmountIn; join* N/A | join* N/A |
+| `HCEther` | present | redeem/redeemUnderlying expected ETH | None | N/A | None | None |
+| `HCToken` | present | None | None | N/A | None | None |
+| `HComptroller` | present | claimComp expected (proxy itself) | None | N/A | None | claimComp expected |
+| `HCurve` | present | exchange/removeLiquidity* addressed | exchange*/addLiquidity*; dust expected | N/A | exchange/exchangeUnderlying | None |
+| `HCurveDao` | present | None | deposit | N/A | None | mint/mintMany expected |
+| `HFurucomboStaking` | present | claimAll expected overapprox | None | N/A | None | None |
+| `HGasTokens` | absent | None | None | N/A | None | None |
+| `HKyberNetwork` | absent | None | None | N/A | swapTokenToToken | None |
+| `HMooniswap` | absent | None | None | N/A | deposit/withdraw: min may be zero | None |
+| `HStakingRewardsAdapter` | present | None | None | N/A | None | None |
+| `HSushiSwap` | present | None | add/remove liquidity variants | N/A | None | None |
+| `HUniswap` | absent | None | None | N/A | tokenToTokenSwap | None |
+| `HUniswapV2` | present | None | add/removeLiquidity / ETH caveats | N/A | None | None |
+| `HWeth` | absent | None | None | N/A | None | None |
+| `HYVault` | present | None | None | N/A | deposit/withdraw may produce zero | None |
+
+**Per-handler six additional table checks:** report properties **#27 bounded stack**, **#28 sender cleanup**, **#29 cube-counter cleanup**, **#30 cache cleanup**, **#31 flat-slot cleanup**, and **#32 flat-slot non-overwrite** each show **“None” for all 23 handlers** (PDF pp26–31). This should be read as a *report-table observation for each individual handler*, not as proof of complete symbol closure or of a later Solidity build. Their closest source rules are `stackLengthIncreaseIsBounded` (17), `senderIsAlwaysCleanedUp` (18), `cubeCounterIsAlwaysCleanedUp` (19), `cacheIsAlwaysCleanedUp` (20), `startStateCleanup` (15) and `noOverwrite` (16). In the copied harness, examples 15, 16, 19 and 20 remain incomplete, independently of the 2021 report-table “None”.
+
+### Executed entrypoint and required target-specific follow-up
+
+`_runHandler.sh:114–118` calls `certoraRun <individual handler>.sol ... --verify ${handler}:${spec} --settings -assumeUnwindCond,-b=${B},-ciMode=true`; `B` defaults to **2**. Thus `runHMaker.sh` (for example) selects **HMaker as target**, not `ProxyHarness`, even though the same `proxy.spec` is used. Fifteen historical names have a same-named file and a generic `run*.sh` driver. **Three drivers** reference absent historical implementations (`HAaveProtocol`, `HBalancer`, `HGasTokens`); **five additional historical targets** lack both a matching source file and a corresponding run script (`HOneInchExchange`, `HKyberNetwork`, `HMooniswap`, `HUniswap`, `HWeth`). A same-named file is not evidence of identity with the 2021 commit.
+
+**Important scope finding:** The existing 36 indexed examples enumerate all **34 active declarations** and four DSProxy allowlist target contexts, but they do **not** enumerate every **material `proxy.spec` × handler** target instance as an individual `N.spec/N.sol/N.md` record. Since the target contract, execution script, method universe and report observations differ, at minimum each of the 15 same-named generic handler targets must receive an individual applicability/dependency assessment against the 11 report-table checks above; the eight missing sources require explicitly unresolved target contexts. Some of those checks have distinct counterexamples (e.g. `HCurve`/approval reset, `HFunds`/third-party balances, `HYVault`/zero output) and cannot be collapsed into `ProxyHarness` or another handler. An *unreconciled* context is not silently counted `complete`. The 36-example figure is therefore a **baseline**, not a certified exhaustive per-target cardinality. This is a **blocking coverage gap** for declaring the catalog final; keep PR #8 draft.
+
+### Scope of these report results vs source formulas
+
+- Report #22 corresponds most closely to `transferredTokensMeanThatStackIsUpdated`, but historical function-level “violating functions” may be expected/overapproximated and do not prove a failure of the later exact assertion.
+- Report #23 is broadly approval-cleanup; the modern `approvedTokensAreTemporary` references modeled allowance and may not encode the same single-handler assumption as the report pseudocode.
+- Report #24 applies `hmaker.spec` to **HMaker and HBProtocol**, `hscompound.spec` to **HSCompound**, and `hbalancer.spec` to **HBalancer**; distinct target address constants and different `-b` settings prohibit transplanting a result, even though each table cell says “None”. The 4 indexed contexts remain `NOT_STATED` in their formal `Result` fields.
+- Report #25 is **not equivalent to conservation** under the preserved `tokenMovementCorrectness` because the generated pre-balance is read without `at initialStorage` (`proxy.spec:527`), causing a potential post-state strict self-comparison.
+- Report #26 is not a general “no one else ever changes balance” guarantee: `noOtherPartyModified` excludes modeled addresses and treats callback effects under abstractions; the `HFunds`, `HComptroller` and `HCurveDao` exceptions are explicitly expected in the report.
+- Scripts change both the handler source and other files in-place before invoking the prover; no valid snapshot equality between source of `HMaker.sol` now and the code actually transformed during a 2021 run has been established.
+
+### Local execution evidence remains absent
+
+The **real** checkout-based command `python scripts/check_specs.py .`, `python scripts/check_contests_csv.py .`, `python scripts/check_contracts.py .`, and `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD` were **not run** in this connector-only revision. The container's `git ls-remote` failed with `Could not resolve host: github.com`, the authorized Desktop Commander device is offline, and PR #8 has no GitHub Actions runs/checks to substitute. There are **no exit codes to report**. GitHub blob/content comparison and CVL bracket checks are review aids, not substitutes for a real checkout or Certora run.

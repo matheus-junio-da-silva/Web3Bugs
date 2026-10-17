@@ -5,7 +5,6 @@ methods {
 	isStatic(bytes32) returns (bool) envfree
 	getNumOfReferences(bytes32) returns (uint256) envfree
 }
-}
 
 rule noThrow(method f) {
 	env e;

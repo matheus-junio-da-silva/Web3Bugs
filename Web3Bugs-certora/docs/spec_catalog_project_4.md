@@ -1,6 +1,6 @@
 # Project 4 — AAVE Staked Token v1.5 Spec Catalog
 
-This document records the catalog state for Project 4. The user prompt did not repeat a project path; Project 4 was selected as the next uncataloged project in the existing sequence: Project 1 aave_l2_bridge, Project 2 aave_proof_of_reserve, Project 3 aave_rescue_mission, then aave_staked_token.
+This document records the catalog state for the explicitly assigned Project ID 4, AAVE Staked Token, sourced exclusively from PropertyGPT `certora_projects/aave_staked_token/`. It follows the established Projects 1–3 methodology without changing their artifacts or the original Certora snapshot.
 
 ## Coverage
 
@@ -13,7 +13,7 @@ This document records the catalog state for Project 4. The user prompt did not r
 - Bug Label relationship rows added to results/spec/spec_buglabel.csv: **28**
 - Multi-label properties: **1** — integrityOfSlashing has S6-4 for its value-accounting assertions and S3-2 for the required inPostSlashingPeriod state update.
 
-previewRedeemEquivalentRedeem and collectedRewardsMonotonicallyIncrease appear in the report but are not active declarations in the supplied source snapshot, so they are not invented as catalog examples. Conversely, lowerBoundNotZero is active in the source but is not individually reported.
+previewRedeemEquivalentRedeem and collectedRewardsMonotonicallyIncrease appear in the report but are not active declarations in the supplied source snapshot, so they are not invented as catalog examples. The supplemental certora/properties.md checklist also mentions whoDecreasedDeservedRewards and allStakedAaveBacked, but neither is an active rule/invariant declaration in any supplied .spec; governance-property ideas marked not implemented in that checklist are likewise not source properties. Conversely, lowerBoundNotZero is active in the source but is not individually reported.
 
 ## Dependency status
 
@@ -62,14 +62,14 @@ exchangeRateNeverZero is the one VIOLATED active source instance because the rep
 
 | Ex. | Property | Label(s) | Result | Detection Outcome | Report ref. | Review note |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | integrityOfStaking | S6-4 | VERIFIED | NO_FINDING | #1 | Exact-name report status and active source semantics are consistent. |
-| 2 | noStakingPostSlashingPeriod | S5-2 | VERIFIED | NO_FINDING | #16 | Exact-name report status and active source semantics are consistent. |
+| 1 | integrityOfStaking | S6-4 | VERIFIED | NO_FINDING | #1 | Share delta is checked against the **post-call** exchange rate; current `_stake` does not update it, but no pre-call rate snapshot is asserted. |
+| 2 | noStakingPostSlashingPeriod | S5-2 | VERIFIED | NO_FINDING | #16 | Pre-call slashing flag is required; `lastReverted` accepts any revert cause, not necessarily the slashing guard. |
 | 3 | noSlashingMoreThanMax | S6-4 | VERIFIED | NO_FINDING | #6 | Exact-name report status and active source semantics are consistent. |
-| 4 | integrityOfSlashing | S6-4; S3-2 | VERIFIED | NO_FINDING | #5 | Separate accounting and post-slashing-state assertions justify two technical relationships. |
-| 5 | integrityOfReturnFunds | S6-4 | VERIFIED | NO_FINDING | #9 | Exact-name report status and active source semantics are consistent. |
-| 6 | noEntryUntilSlashingSettled | S5-2 | VERIFIED | NOT_STATED | #4 | ❌✔, but no explicit issue-table linkage. |
+| 4 | integrityOfSlashing | S6-4; S3-2 | VERIFIED | NO_FINDING | #5 | Accounting and flag assertions justify two labels; the clamping percentage is read **after** slash, not snapshotted as a stable pre-call parameter. |
+| 5 | integrityOfReturnFunds | S6-4 | VERIFIED | NO_FINDING | #9 | The **post-call** `require(balanceStakeTokenVaultAfter > 0)` filters out a zero-vault outcome before accounting assertions. |
+| 6 | noEntryUntilSlashingSettled | S5-2 | VERIFIED | NOT_STATED | #4 | ❌✔ with no issue-table linkage; the slashing flag is read **after** stake, so this tests a conditional post-state implication, not all pre-state entry violations. |
 | 7 | airdropNotMutualized | S3-2 | VERIFIED | NO_FINDING | #15 | Direct transfer must not update the internal exchange rate. |
-| 8 | noRedeemOutOfUnstakeWindow | S5-2 | VERIFIED | NO_FINDING | #12 | Counterexample is successful redemption at a forbidden time. |
+| 8 | noRedeemOutOfUnstakeWindow | S5-2 | VERIFIED | NO_FINDING | #12 | Successful redeem outside the permitted window is detected using pre-call cooldown timestamp, but the slashing flag and cooldown duration are read **after** the call. |
 | 9 | totalSupplyDoesNotDropToZero | S3-2 | VERIFIED | NO_FINDING | #25 | Counterexample is an unexpected zeroing state transition by a non-redeem method. |
 | 10 | cooldownCorrectness | S6-4 | NOT_STATED | NOT_STATED | #17 historical name only | Active source checks redeemed-share cap; report #17 describes a materially different cooldown-window formula. |
 | 11 | rewardsGetterEquivalentClaim | S6-2 | VERIFIED | NO_FINDING | #18 | Getter/claim observational equivalence. |
@@ -79,8 +79,8 @@ exchangeRateNeverZero is the one VIOLATED active source instance because the rep
 | 15 | slashingIncreaseExchangeRate | S6-4 | VERIFIED | NOT_STATED | #7 | ❌✔, but no explicit issue-table linkage. |
 | 16 | returnFundsDecreaseExchangeRate | S6-4 | VERIFIED | FINDING | #10 | ❌✔ and explicitly linked to the first-depositor and returnFunds(0) findings. |
 | 17 | exchangeRateNeverZero | S6-4 | VIOLATED | FINDING | #14 | Explicit ❌ and issue linkage; report says deprecated/deleted while source still contains the active rule. |
-| 18 | slashAndReturnFundsOfZeroDoesntChangeExchangeRate | S6-4 | VERIFIED | FINDING | #8 | ❌✔ and explicitly linked to the slash(0) rounding finding. |
-| 19 | integrityOfRedeem | S6-2 | NOT_STATED | NOT_STATED | #11 historical name only | Report formula checks broader vault/receiver/share deltas; active source checks preview-vs-receiver delta only under the cooldown-amount condition. |
+| 18 | slashAndReturnFundsOfZeroDoesntChangeExchangeRate | S6-4 | VERIFIED | FINDING | #8 | ❌✔; the earlier rounding finding is explicit. Latest `slash(0)` and `returnFunds(0)` revert, so ✔ must not be presented as successful zero-value no-op behavior. |
+| 19 | integrityOfRedeem | S6-2 | NOT_STATED | NOT_STATED | #11 historical name only | Report checks broader vault/receiver/share deltas. Active source checks preview-vs-receiver delta only if `amount <= cooldownAmount(sender)` **after** redeem; its guard is narrower than a pre-call cooldown cap. |
 | 20 | previewStakeEquivalentStake | S6-2 | VERIFIED | NO_FINDING | #3 | Preview must match actual minted-share delta. |
 | 21 | balanceOfZero | S6-4 | VERIFIED | NO_FINDING | #27 | ERC20 share-accounting invariant. |
 | 22 | lowerBoundNotZero | UNMAPPED | NOT_STATED | NOT_STATED | — | Configuration/sanity invariant absent from report; no label is forced. |
@@ -105,6 +105,8 @@ The report lists six issues; they are recorded separately in results/bugs.csv so
 
 The active detector properties remain technically classified by what their assertions test. For example, returnFundsDecreaseExchangeRate is S6-4 even though one report finding it exposed is classified L2 from the finding's explicit rounding root cause.
 
+**Finding classification uncertainty to preserve (STK-05):** The supplied `_getExchangeRate` computes a ceiling division (StakedTokenV3.sol:545-552). A zero-amount `returnFunds` exchange-rate change could therefore have a rounding/precision root cause, which would favor **L2** under the standard's simple-oracle precedence rather than the currently recorded S6-4. Unlike STK-03 (explicitly attributed to rounding by the report) or STK-06 (explicitly attributed to rounding up), the STK-05 narrative does **not** explicitly state the arithmetic root cause, and the preserved Solidity snapshot includes a post-fix nonzero amount guard. Without the original failing trace/commit, this review keeps the existing STK-05 finding label S6-4 and flags L2 as a **plausible alternative requiring corroboration**, not a demonstrated correction. This uncertainty does not change the active rule's S6-4 detection-intent mapping.
+
 ## Bug Label mapping and UNMAPPED
 
 There are **28** relationships for 27 properties:
@@ -117,7 +119,7 @@ There are **28** relationships for 27 properties:
 
 lowerBoundNotZero is intentionally UNMAPPED. It is a narrow configuration/sanity invariant asserting only LOWER_BOUND() > 0; forcing it into an S-category would overstate the counterexample semantics.
 
-All 27 active source properties are treated as normative requirements, not reachability probes. lowerBoundNotZero is a normative configuration sanity condition without a defensible taxonomy mapping.
+Twenty-six source properties encode substantive state, accounting, return-value, or access-time requirements rather than exploratory reachability probes. The remaining lowerBoundNotZero is a configuration sanity invariant (`LOWER_BOUND() > 0`), not an exploit detector by itself; it is UNMAPPED rather than being forced into a security category.
 
 ## Assumptions and important qualifiers
 
@@ -135,14 +137,30 @@ The report explicitly states:
 
 For allSharesAreBacked, the editable DOCX places footnote [1] on that invariant and explains that _getRewards(...) and _getAssetIndex(...) are summarized as nondeterministic because the invariant is agnostic to reward accounting. The PDF text extraction used to create reports/4.md displaces the footnote marker near balanceOfZero because of page/footnote reading order; the substantive footnote text and the DOCX placement support associating the simplification with allSharesAreBacked.
 
+## Additional assertion-scope review
+
+These concrete interpretation limits are independent of historical formal result, finding linkage, and dependency status. They were found by reading the executable `require`, `@withrevert`, and `assert` placement:
+
+- **Example 1 — integrityOfStaking:** the expected shares are calculated using the rate fetched **after** `stake`; current `_stake` does not change that rate, but the original assertion does not directly compare against a saved pre-call rate.
+- **Example 2 — noStakingPostSlashingPeriod:** `require(inPostSlashingPeriod())` is evaluated before staking, but `assert lastReverted` does **not** establish the reason for a revert or reachability of a valid stake call.
+- **Example 4 — integrityOfSlashing:** the formula multiplies the pre-call vault balance by the **post-call** `getMaxSlashablePercentage()`. Current `slash` does not change this configuration, but mutation of that value is not independently excluded by the formula.
+- **Example 5 — integrityOfReturnFunds:** the body calls `returnFunds`, reads the balances, then imposes `require(balanceStakeTokenVaultAfter > 0)`. Consequently, zero-vault post-states never reach either balance-delta assertion.
+- **Example 6 — noEntryUntilSlashingSettled:** `inPostSlashingPeriod()` is read **after** `stake@withrevert`. A successful hypothetical stake that cleared the flag would not violate the implication; any revert cause also satisfies it. The concrete supplied `_stake` checks the flag and does not clear it, but that does not change what the CVL formula literally asserts.
+- **Example 8 — noRedeemOutOfUnstakeWindow:** the cooldown timestamp is pre-call, but the flag and duration are read post-call; current `_redeem` does not modify them.
+- **Example 18 — slashAndReturnFundsOfZeroDoesntChangeExchangeRate:** latest-version zero-value call reverts mean `VERIFIED` must not be overstated as confirming successful no-op behavior; see the documented historical `❌✔` limitation.
+- **Example 19 — integrityOfRedeem:** `cooldownAmount(sender)` is read **after** the redemption has reduced/deleted cooldown state, so the consequent is checked only under the remaining post-call cap.
+
+All eight rules retain their literal historical bodies and their independently sourced report results. The technical Bug Labels still describe the kinds of failures that can falsify these **restricted** assertions, not full protocol guarantees.
+
 ## Source/report drift and result attribution
 
 Several discrepancies are deliberately retained:
 
 - Report Property #17 cooldownCorrectness describes a historical monotonic unstake-window formula and is marked ❌ / replaced. The active source cooldownCorrectness instead constrains soldShares against sharesCooldownStart. Example 10 therefore uses NOT_STATED / NOT_STATED.
 - Report Property #19 rewardsMonotonicallyIncrease is ❌✔, but its published formula executes an arbitrary method and excludes claim-family decreases, whereas the active source body only compares reward getters under nondecreasing timestamps. Example 12 therefore uses NOT_STATED / NOT_STATED.
-- Report Property #11 integrityOfRedeem is ✔, but the report formula asserts a broader set of balance/share effects than the active source rule, which only checks preview-vs-receiver underlying delta under amount <= cooldownAmount. The active body is preserved literally and the formula difference is documented. Example 19 therefore uses NOT_STATED / NOT_STATED rather than propagating the historical ✔.
+- Report Property #11 integrityOfRedeem is ✔, but the report formula asserts a broader set of balance/share effects than the active source rule. The active assertion checks preview-vs-receiver underlying delta only when `amount <= cooldownAmount(e.msg.sender)` **after** the `redeem` invocation. The supplied `_redeem` reduces or deletes `stakersCooldowns[from]`, so the condition can be false despite the original cooldown being sufficient. For example, a redemption of 60 shares against a 100-share cooldown leaves 40, making `60 <= 40` false; no equality is then asserted. Example 19 is a partial detector and retains NOT_STATED / NOT_STATED; the historical CVL body is unchanged.
 - Report Property #14 exchangeRateNeverZero says deprecated/deleted, while the supplied source still contains an active rule of that exact name.
+- Report Property #8 slashAndReturnFundsOfZeroDoesntChangeExchangeRate is ❌✔. The active CVL rule executes `slash(0)` before assertions, while supplied Solidity requires `amount > 0`; `returnFunds(0)` also violates `LOWER_BOUND`. Thus a verified latest version can reflect rejection of both zero-amount operations rather than a successful zero-amount no-op. Example 18 does not claim successful zero-valued executions were proven.
 - Report properties previewRedeemEquivalentRedeem (#13) and collectedRewardsMonotonicallyIncrease (#20) are absent as active source declarations and are therefore not synthesized into examples.
 - lowerBoundNotZero is active in source but has no individual report entry.
 

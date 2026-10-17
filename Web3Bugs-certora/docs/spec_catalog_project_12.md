@@ -124,3 +124,7 @@ The exhaustive current snapshot supplies all symbol names required by the nine s
 ## Current execution blockade
 
 At this workspace on 2026-10-17, `test -d /mnt/data/Web3Bugs-certora` returned exit **1**, and `git ls-remote https://github.com/matheus-junio-da-silva/Web3Bugs.git HEAD` returned exit **128** with `Could not resolve host: github.com`. The registered Desktop Commander machine remained offline. **The four mandatory project validators cannot be executed against a checked-out repository here.** Their actual test exit codes are unavailable; do not report PASS. This Draft PR remains blocked. Merge SHA and GitHub API-level integrity checks are reported separately, not substituted for CLI validations.
+
+## 2026-10-17 full-report fidelity review
+
+Rechecked the 25-page PDF, including the historical issue table, proof notation, AToken #1–#8, StableDebtToken #9–#17, VariableDebtToken #18–#25, UserConfiguration #26–#30, LendingPool #31–#44, deferred redirection #45–#49, suggested Aave P1–P41 and the disclaimer. `reports/12.md` has been clarified as an **annotated report-wide index and summary**, not a claimed full verbatim transcript. The byte-identical historic PDF remains the complete authoritative reproduction. Preserved report discrepancies include UserConfiguration #29 (wrong getter in displayed postcondition), VariableDebtToken #24 (mint vs burn wording), AToken #8's suspect bound, and the description of `isEmpty`; no CVL source was rewritten to match misleading report prose.

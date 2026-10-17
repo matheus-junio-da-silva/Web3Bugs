@@ -63,11 +63,11 @@ exchangeRateNeverZero is the one VIOLATED active source instance because the rep
 | Ex. | Property | Label(s) | Result | Detection Outcome | Report ref. | Review note |
 | ---: | --- | --- | --- | --- | --- | --- |
 | 1 | integrityOfStaking | S6-4 | VERIFIED | NO_FINDING | #1 | Exact-name report status and active source semantics are consistent. |
-| 2 | noStakingPostSlashingPeriod | S5-2 | VERIFIED | NO_FINDING | #16 | Exact-name report status and active source semantics are consistent. |
+| 2 | noStakingPostSlashingPeriod | S5-2 | VERIFIED | NO_FINDING | #16 | Pre-call slashing flag is required; `lastReverted` accepts any revert cause, not necessarily the slashing guard. |
 | 3 | noSlashingMoreThanMax | S6-4 | VERIFIED | NO_FINDING | #6 | Exact-name report status and active source semantics are consistent. |
 | 4 | integrityOfSlashing | S6-4; S3-2 | VERIFIED | NO_FINDING | #5 | Separate accounting and post-slashing-state assertions justify two technical relationships. |
-| 5 | integrityOfReturnFunds | S6-4 | VERIFIED | NO_FINDING | #9 | Exact-name report status and active source semantics are consistent. |
-| 6 | noEntryUntilSlashingSettled | S5-2 | VERIFIED | NOT_STATED | #4 | ❌✔, but no explicit issue-table linkage. |
+| 5 | integrityOfReturnFunds | S6-4 | VERIFIED | NO_FINDING | #9 | The **post-call** `require(balanceStakeTokenVaultAfter > 0)` filters out a zero-vault outcome before accounting assertions. |
+| 6 | noEntryUntilSlashingSettled | S5-2 | VERIFIED | NOT_STATED | #4 | ❌✔ with no issue-table linkage; the slashing flag is read **after** stake, so this tests a conditional post-state implication, not all pre-state entry violations. |
 | 7 | airdropNotMutualized | S3-2 | VERIFIED | NO_FINDING | #15 | Direct transfer must not update the internal exchange rate. |
 | 8 | noRedeemOutOfUnstakeWindow | S5-2 | VERIFIED | NO_FINDING | #12 | Counterexample is successful redemption at a forbidden time. |
 | 9 | totalSupplyDoesNotDropToZero | S3-2 | VERIFIED | NO_FINDING | #25 | Counterexample is an unexpected zeroing state transition by a non-redeem method. |
@@ -134,6 +134,18 @@ The report explicitly states:
 - ❌ means the property was violated under at least one tested version.
 
 For allSharesAreBacked, the editable DOCX places footnote [1] on that invariant and explains that _getRewards(...) and _getAssetIndex(...) are summarized as nondeterministic because the invariant is agnostic to reward accounting. The PDF text extraction used to create reports/4.md displaces the footnote marker near balanceOfZero because of page/footnote reading order; the substantive footnote text and the DOCX placement support associating the simplification with allSharesAreBacked.
+
+## Additional assertion-scope review
+
+These concrete interpretation limits are independent of historical formal result, finding linkage, and dependency status. They were found by reading the executable `require`, `@withrevert`, and `assert` placement:
+
+- **Example 2 — noStakingPostSlashingPeriod:** `require(inPostSlashingPeriod())` is evaluated before staking, but `assert lastReverted` does **not** establish the reason for a revert or reachability of a valid stake call.
+- **Example 5 — integrityOfReturnFunds:** the body calls `returnFunds`, reads the balances, then imposes `require(balanceStakeTokenVaultAfter > 0)`. Consequently, zero-vault post-states never reach either balance-delta assertion.
+- **Example 6 — noEntryUntilSlashingSettled:** `inPostSlashingPeriod()` is read **after** `stake@withrevert`. A successful hypothetical stake that cleared the flag would not violate the implication; any revert cause also satisfies it. The concrete supplied `_stake` checks the flag and does not clear it, but that does not change what the CVL formula literally asserts.
+- **Example 18 — slashAndReturnFundsOfZeroDoesntChangeExchangeRate:** latest-version zero-value call reverts mean `VERIFIED` must not be overstated as confirming successful no-op behavior; see the documented historical `❌✔` limitation.
+- **Example 19 — integrityOfRedeem:** `cooldownAmount(sender)` is read **after** the redemption has reduced/deleted cooldown state, so the consequent is checked only under the remaining post-call cap.
+
+All five rules retain their literal historical bodies and their independently sourced report results. The technical Bug Labels still describe the kinds of failures that can falsify these **restricted** assertions, not full protocol guarantees.
 
 ## Source/report drift and result attribution
 

@@ -1,9 +1,10 @@
 // Source: contracts/11/specs/fullyBackedBonding.spec
 // Property: validState (original lines 115-150)
-// Original CVL dependency source lines: 14,17,18,23,24,25,26,28;32-33;35-36;43;46;50-53;70-73;85-91;104-105;115-150
+// Original CVL dependency source lines: 14,15,17,18,23,24,25,26,28;32-33;35-36;43;46;50-53;70-73;85-91;104-105;115-150
 // Dependency status: incomplete; historical source syntax kept unchanged.
 
 methods {
+    authorizerOf(address) returns address envfree
     beneficiaryOf(address) returns address envfree
     bondAmount(address, address, uint256) returns uint256 envfree
     init_state() envfree

@@ -488,3 +488,20 @@ For examples **2, 7, 11, 14, 15**, the parametric or invariant preservation doma
 4. Compare model traces under the full original spec/harness with extracted CVL examples only after linking all historical targets and resolving imports. Their present status is incomplete; a matching structural CSV check does not establish prover equivalence.
 
 **Validation limitation:** In this connected session, a checkout of the GitHub branch is not available to the local Python runtime because github.com cannot be resolved; the authorized remote computer is offline and GitHub Actions has no workflow runs for this PR. Therefore, the three exact Python validators and literal git diff --check **have not been executed on the commit**. GitHub-only structural/provenance checks may be documented separately, but must not be represented as authoritative PASS logs. The independent orchestrator must run these commands before approving/merging the PR. This is an explicit unresolved review gate, not a completed CI check.
+
+### Actual checkout attempt and validation log — 2026-10-17 02:21:55 UTC
+
+The following is the literal stderr/stdout and exit code of a command **executed in this session's Linux environment** before attempting to run the required scripts. It documents why the exact validator commands could not be run on the PR commit; it is not a PASS log.
+
+```text
+DATE UTC: 2026-10-17T02:21:55Z
+COMMAND: git clone --depth=1 --branch catalog/p05-boreal-aave-starknet-bridge https://github.com/matheus-junio-da-silva/Web3Bugs.git /mnt/data/boreal_p5_validation/Web3Bugs
+Cloning into '/mnt/data/boreal_p5_validation/Web3Bugs'...
+fatal: unable to access 'https://github.com/matheus-junio-da-silva/Web3Bugs.git/': Could not resolve host: github.com
+CLONE_EXIT_CODE: 128
+Validator execution and git diff --check on the requested branch: BLOCKED (checkout did not exist).
+```
+
+The required commands, `python3 scripts/check_specs.py .`, `python3 scripts/check_contests_csv.py .`, `python3 scripts/check_contracts.py .`, and `git diff --check`, consequently have **no successful or failed script-run logs** for this commit (they were not executed against a checkout). The absence of checkout is the blocker, not evidence of a validator failure or success. GitHub Actions reports zero workflow runs in this repository. The independent reviewer must execute all four commands from the internal project root when an authorized checkout is available.
+
+An independent **GitHub tree/CSV structural check** on PR head `7e30c10a6375d02ec3f71cf2c82ff3e695c2eb5e` found 164 spec examples, 169 label rows, 17 Project 5 entries, zero schema/path/orphan/relationship errors, and no trailing spaces in added patch lines. This check is not the actual Python validators and GitHub patch scanning is not `git diff --check`; neither is presented as a substitute.

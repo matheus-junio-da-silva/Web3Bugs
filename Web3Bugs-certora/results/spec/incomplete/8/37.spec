@@ -7,7 +7,7 @@
 definition RAY() returns uint256 = 10^27;
 
 
-// Original CVL: contracts/8/specs/rayMul_rayDiv_mulDiv_properties.spec:7-8
+// Original CVL: contracts/8/specs/rayMul_rayDiv_mulDiv_properties.spec:8-9
 methods {
     rayMul__(uint256 a,uint256 b) returns (uint256) envfree;
     rayDiv__(uint256 a,uint256 b) returns (uint256) envfree ;

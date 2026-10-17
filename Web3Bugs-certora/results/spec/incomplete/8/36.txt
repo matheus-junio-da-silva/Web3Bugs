@@ -7,7 +7,7 @@
 
 ## Included original source ranges
 - contracts/8/specs/methods_base.spec:65
-- contracts/8/specs/rayMul_rayDiv_mulDiv_properties.spec:7-8
+- contracts/8/specs/rayMul_rayDiv_mulDiv_properties.spec:8-9
 - contracts/8/specs/rayMul_rayDiv_mulDiv_properties.spec:19-30
 
 ## Resolution policy and negative findings

@@ -238,3 +238,9 @@ LIMITATION: Not a Certora Prover run and not a reconstruction of CVL bitvector/s
 ```
 
 The actual logs are preserved as `docs/spec_catalog_project_8_sanity.log`. A GitHub-tree/index consistency scan corresponding to the Python scripts' basic file/CSV predicates checked **16,934 repository blobs, 211 catalog rows, 42 Project 8 rows, 206 unique examples, zero unreferenced artifacts, and zero structural errors**, but was a JavaScript port, not the requested Python execution. Likewise, a raw PR unified-diff scan found **268 new lines with trailing whitespace in 85 files**; these include exact historical original CVL snapshots and verbatim extracted bodies. We do **not** rewrite historical evidence just to satisfy `git diff --check`. The official Git command was attempted locally without a clone and exited 129; it must be re-run on a full clone and its genuine failures assessed.
+
+## Final mathematical review crossreference
+
+The 42-row per-instance axiom-exposure register, concrete witnesses W1–W3, independent arithmetic run limitations, and historical result separation are available in `docs/spec_catalog_project_8_math_review.md`. The original source axioms are preserved unchanged. Provenance for math examples #36–38 has been corrected to the original method-declaration lines 8–9 and 10.
+
+**Current branch base:** the shared catalog CSV must be reconciled with the latest `main` before the PR can be accepted; do not overwrite changes from Projects 4 or 5. The four mandatory validation scripts and exact Git diff command require a complete authentic checkout and remain blocked locally; see the updated real command log.

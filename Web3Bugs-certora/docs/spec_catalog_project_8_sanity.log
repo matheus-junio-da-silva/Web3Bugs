@@ -1,7 +1,9 @@
-RUN: sympy arithmetic sanity; source axioms evaluated at x=1,y=0
-Conditions: ['Eq(rayMul_g(1,0), 0)', 'rayMul_g(1,0) >= 1']
-Satisfiability: False
-RUN: accrueYieldCheck strict inequality denominator=0, rounding=0, x=y=0
-Evaluate: 0 < 0 -> False
-RESULT: UNSAT witnesses confirmed under standard mathematical integers
-LIMITATION: Not a Certora Prover run and not a reconstruction of CVL bitvector/solver semantics
+UTC: 2026-10-17T17:24:xxZ
+$ python /mnt/data/p08_review/axiom_witness.py
+rayMul_g(1,0): rayMul_g=0 AND rayMul_g>=1 -> False
+mulDiv_g x=y=denominator=0 rounding=0: 0 < 0 -> False
+rayDiv_g x=y=0: 0 < 0 -> False
+RESULT: independent UNSAT witnesses; NOT a Certora Prover run
+exit=0
+
+The checked Python program uses sympy.satisfiable(And(Eq(u,0),u>=1),use_lra_theory=True) for W1; W2/W3 are evaluations of strict comparisons at explicit valuations. The *first* attempt lacked use_lra_theory and raised an AssertionError after propositional abstraction returned a spurious model. That failed attempt is not proof evidence. No actual historical CVL model was executed.

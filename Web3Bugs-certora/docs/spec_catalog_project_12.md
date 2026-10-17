@@ -99,14 +99,7 @@ All original `contracts/` and `specs/` source files from the PropertyGPT AAVE V2
 
 The GitHub repository APIs confirmed 26 Project 12 CSV rows and 26 each `.spec`, `.sol`, `.md`; 17 complete examples and 9 incomplete examples additionally require nine `.txt` reasons. No example is promoted to complete solely because a function name appears in `methods {}`. Source block extraction was scripted and every active source block was checked against its known starting declaration before writing.
 
-**Required CLI validators were NOT executed** on a complete local repository. Attempting to clone both public repositories in the available Python/container environment failed with `fatal: unable to access https://github.com/...: Could not resolve host: github.com`. An alternate authorized Desktop Commander device was reported offline, so the full project working tree was unavailable for local execution. Consequently **no PASS is claimed** for:
-```sh
-python scripts/check_specs.py .
-python scripts/check_contests_csv.py .
-python scripts/check_contracts.py .
-git diff --check
-```
-Nor has CVL parsing, compilation, satisfiability or prover verification been rerun. This is a material release gate: do not mark the PR ready for review until those checks actually run and an independent semantic reviewer accepts the limitations above.
+The initial local VM preflight did not have a checkout or working GitHub DNS resolution, and therefore none of the validators could be run **locally** at that time. **This blockade was resolved by the actual CI execution on GitHub Actions** (see the 2026-10-17 evidence table below): all three Python structural checks and the exact requested Git whitespace command returned exit **0** in a full checked-out repository at SHA `c4fb7071904be826500f459d778fd19e93380c83`. The former NOT RUN statements apply only to the initial VM attempt, not to the final validated branch. Modern CVL compilation, Prover satisfiability and Solidity harness linkage **were not** rerun; the nine historical target-incompatibility cases remain incomplete.
 
 ## Catalog locations
 
@@ -121,9 +114,9 @@ Nor has CVL parsing, compilation, satisfiability or prover verification been rer
 
 The exhaustive current snapshot supplies all symbol names required by the nine stable rules, but its Solidity class versions are not mutually compatible: `StableDebtTokenHarness.sol:7-13` invokes a nonexistent base constructor and `:26-28` conflicts with the current inherited getter at `StableDebtToken.sol:355-357`. This is a **missing historical compatible target implementation**, not absence of CVL1-to-CVL2 migration. No invented replacement is permitted; all nine stable properties are now `incomplete`. The original CVL text, Solidity excerpts, source snapshot, report Result and per-instance Bug Labels are preserved. Each `N.txt` records concrete missing signatures and searched paths.
 
-## Current execution blockade
+## Historical VM execution blockade (superseded by actual GitHub CI)
 
-At this workspace on 2026-10-17, `test -d /mnt/data/Web3Bugs-certora` returned exit **1**, and `git ls-remote https://github.com/matheus-junio-da-silva/Web3Bugs.git HEAD` returned exit **128** with `Could not resolve host: github.com`. The registered Desktop Commander machine remained offline. **The four mandatory project validators cannot be executed against a checked-out repository here.** Their actual test exit codes are unavailable; do not report PASS. This Draft PR remains blocked. Merge SHA and GitHub API-level integrity checks are reported separately, not substituted for CLI validations.
+At the initial VM preflight on 2026-10-17, `test -d /mnt/data/Web3Bugs-certora` returned exit **1**, and `git ls-remote https://github.com/matheus-junio-da-silva/Web3Bugs.git HEAD` returned exit **128** with `Could not resolve host: github.com`. Remote Desktop Commander was not used. This VM access restriction **no longer prevents the four structural GitHub Actions checks**: see the successful run and exit-code evidence below. The Draft PR stays open for *semantic* and *historical harness* review, rather than for missing Python/Git test execution.
 
 ## 2026-10-17 full-report fidelity review
 

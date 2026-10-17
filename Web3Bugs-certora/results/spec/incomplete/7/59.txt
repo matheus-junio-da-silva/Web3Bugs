@@ -1,9 +1,20 @@
-INCOMPLETE DEPENDENCY
+INCOMPLETE DEPENDENCY — audited 2026-10-17
 
-Property: integrityOfSiloedBorrowingState
-Original spec: contracts/7/specs/UserConfiguration.spec:154-159
-Target: UserConfiguration (library; historical harness unresolved)
+Project 7 / source `contracts/7/specs/UserConfiguration.spec` / property `integrityOfSiloedBorrowingState` / target `UserConfiguration (library; historical harness unresolved)`.
+Original source property and dependency ranges: `1;9;13;16;154-159`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
 
-- Historical UserConfiguration wrapper/harness exposing map-backed public integrityOfSiloedBorrowingState operations: absent; original library requires DataTypes.UserConfigurationMap and for some getters reserve mappings
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- isBorrowingOne() returns (bool) envfree
+- getSiloedBorrowingState() returns (bool, address) envfree
 
-Search evidence: checked all 128 Solidity files in PropertyGPT/certora_projects/aave_v3/contracts/, six supplied specs under specs/, public interfaces and mock/underlying implementations in the same snapshot. The expected ABI wrappers or named helper implementations are not present; methods declarations are not concrete implementations. No helper from another project has been substituted. CVL version migration alone is not the reason for incompleteness.
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+All referenced methods are library functions taking a DataTypes.UserConfigurationMap memory argument (and, in isolation/siloed cases, storage mappings). The property calls map-backed no-argument wrappers that are absent from the PropertyGPT contracts tree. An external historical UserConfigurationHarness exists in aave/aave-v3-core@a87d546 but is NOT preserved in the supplied snapshot, uses old Solidity source assumptions and may lack later methods. No synthetic wrapper has been substituted. getSiloedBorrowingState requires reservesData/reservesList mappings and postdates the report's reviewed library revision.
+
+CVL methods declarations actually included in this example:
+- isBorrowingOne() returns (bool) envfree
+- getSiloedBorrowingState() returns (bool, address) envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.

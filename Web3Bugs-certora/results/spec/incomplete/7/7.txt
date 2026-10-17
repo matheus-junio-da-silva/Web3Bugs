@@ -1,9 +1,21 @@
-INCOMPLETE DEPENDENCY
+INCOMPLETE DEPENDENCY — audited 2026-10-17
 
-Property: integrityTransfer
-Original spec: contracts/7/specs/AToken.spec:147-171
-Target: AToken
+Project 7 / source `contracts/7/specs/AToken.spec` / property `integrityTransfer` / target `AToken`.
+Original source property and dependency ranges: `7;9;12-14;16;21;23;25;30;37-39;147-171`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
 
-- SimpleERC20 as _underlyingAsset: original linked contract absent from supplied project tree
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- using SimpleERC20 as _underlyingAsset
 
-Search evidence: checked all 128 Solidity files in PropertyGPT/certora_projects/aave_v3/contracts/, six supplied specs under specs/, public interfaces and mock/underlying implementations in the same snapshot. The expected ABI wrappers or named helper implementations are not present; methods declarations are not concrete implementations. No helper from another project has been substituted. CVL version migration alone is not the reason for incompleteness.
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The source spec requires a linked SimpleERC20 alias for underlying-balance observations. No corresponding historical SimpleERC20 contract and linking configuration is present in the PropertyGPT Aave V3 snapshot. An IERC20 interface or later ERC20 token is not automatically equivalent to the named alias.
+
+CVL methods declarations actually included in this example:
+- handleAction(address, uint256, uint256) => NONDET
+- getReserveNormalizedIncome(address u) returns (uint256) => gRNI()
+- balanceOf(address) returns (uint256) envfree
+- finalizeTransfer(address, address, address, uint256, uint256, uint256) => NONDET
+
+CVL using aliases included: SimpleERC20 as _underlyingAsset.
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.

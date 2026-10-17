@@ -184,3 +184,40 @@ The original 31 reported VERIFIED matches were individually checked against the 
 - Example **72** — The source unconditionally asserts an unchanged delegating-user balance; the report conditions it on user != onBehalfOf, a materially different assertion.
 
 Current Project-7 outcomes: **22 VERIFIED/NO_FINDING**, **52 NOT_STATED/NOT_STATED**, **zero rule-specific findings inferred from aggregate Pool or ReserveConfiguration statements**. Original source text, target snapshot and report PDF remain unchanged. No historic prover run was performed.
+
+## Individually reviewed incomplete dependencies (2026-10-17)
+
+The following 28 reasons supersede older generic or potentially misleading `.txt` descriptions; each example now lists exact symbols, context, source methods and missing ABI/harness requirements. The source `contracts/7/` snapshot remains untouched.
+
+| Example | Missing or unavailable dependency |
+| ---: | --- |
+| 1 | scaledBalanceOfToBalanceOf(uint256) |
+| 7 | using SimpleERC20 as _underlyingAsset |
+| 9 | using SimpleERC20 as _underlyingAsset |
+| 11 | additionalData(address) |
+| 12 | additionalData(address) |
+| 17 | setActive(bool); getActive() |
+| 19 | setPaused(bool); getPaused() |
+| 20 | setBorrowableInIsolation(bool); getBorrowableInIsolation() |
+| 21 | setSiloedBorrowing(bool); getSiloedBorrowing() |
+| 27 | setDebtCeiling(uint256); getDebtCeiling() |
+| 31 | getIntSetterLowerBound(uint256); getIntSetterUpperBound(uint256); executeIntSetterById(uint256,uint256); executeIntGetterById(uint256) |
+| 32 | getBoolSetterCompare(uint256); executeBoolSetterById(uint256,bool); executeBoolGetterById(uint256) |
+| 45 | additionalData(address) |
+| 46 | additionalData(address) |
+| 48 | setBorrowing(uint256, bool) envfree; isBorrowing(uint256) returns bool envfree |
+| 49 | setBorrowing(uint256, bool) envfree; isBorrowing(uint256) returns bool envfree; isUsingAsCollateral(uint256) returns bool envfree |
+| 50 | setUsingAsCollateral(uint256, bool) envfree; isUsingAsCollateral(uint256) returns bool envfree |
+| 51 | setUsingAsCollateral(uint256, bool) envfree; isBorrowing(uint256) returns bool envfree; isUsingAsCollateral(uint256) returns bool envfree |
+| 52 | isUsingAsCollateralOrBorrowing(uint256) returns bool envfree; isBorrowing(uint256) returns bool envfree; isUsingAsCollateral(uint256) returns bool envfree |
+| 53 | isUsingAsCollateral(uint256) returns bool envfree; isUsingAsCollateralOne() returns bool envfree |
+| 54 | isUsingAsCollateral(uint256) returns bool envfree; isUsingAsCollateralAny() returns bool envfree |
+| 55 | isBorrowing(uint256) returns bool envfree; isBorrowingOne() returns (bool) envfree |
+| 56 | isBorrowing(uint256) returns bool envfree; isBorrowingAny() returns bool envfree |
+| 57 | isUsingAsCollateralOrBorrowing(uint256) returns bool envfree; isBorrowingAny() returns bool envfree; isEmpty() returns bool envfree |
+| 58 | isUsingAsCollateralOne() returns bool envfree; getIsolationModeState() returns (bool, address, uint256) envfree |
+| 59 | isBorrowingOne() returns (bool) envfree; getSiloedBorrowingState() returns (bool, address) envfree |
+| 60 | scaledBalanceOfToBalanceOf(uint256) |
+| 74 | ATokenHarness as _aToken; getCurrScaledVariableDebt(address) |
+
+**Classification scope:** 46 examples still meet the available-source static dependency-closure criterion, and 28 remain incomplete for the reasons above. This is a CVL/Solidity source-level classification only. Compiler compatibility, linked harness availability and the historical solver are separate, unexecuted verification obligations.

@@ -1,9 +1,21 @@
-INCOMPLETE DEPENDENCY
+INCOMPLETE DEPENDENCY — audited 2026-10-17
 
-Property: mintNoChangeToOther
-Original spec: contracts/7/specs/AToken.spec:292-306
-Target: AToken
+Project 7 / source `contracts/7/specs/AToken.spec` / property `mintNoChangeToOther` / target `AToken`.
+Original source property and dependency ranges: `9;12-15;21;23;37-39;292-306`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
 
-- additionalData(address): method declaration exists in CVL, but no callable Solidity getter/harness for _userState[account].additionalData
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- additionalData(address)
 
-Search evidence: checked all 128 Solidity files in PropertyGPT/certora_projects/aave_v3/contracts/, six supplied specs under specs/, public interfaces and mock/underlying implementations in the same snapshot. The expected ABI wrappers or named helper implementations are not present; methods declarations are not concrete implementations. No helper from another project has been substituted. CVL version migration alone is not the reason for incompleteness.
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The rule observes an account's additional data. Although the underlying storage field exists in the tokenization implementation and the CVL has a methods declaration, the supplied target ABI does not expose a standalone additionalData(address) getter or preserved harness shim. A methods declaration is not an implementation.
+
+CVL methods declarations actually included in this example:
+- handleAction(address, uint256, uint256) => NONDET
+- getReserveNormalizedIncome(address u) returns (uint256) => gRNI()
+- balanceOf(address) returns (uint256) envfree
+- additionalData(address) returns uint128 envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.

@@ -127,6 +127,16 @@ This follow-up inspects the **existing Project 11 branch**, retaining historical
 
 A further wording correction was committed to `results/spec/incomplete/11/11.md`: a revert in `noFrontRunningOnWithdraw` does **not** in itself establish *any* cross-operator sequence interference, let alone exploitable front-running. Its unguarded second success assertion is not a causal oracle.
 
+### Structural validator algorithm cross-check (independent, not official script execution)
+
+Using the GitHub API recursive tree of review commit `dcd94ab5321216c19e3b2acc11359641a7f9cec9`, the reviewer verified that the returned tree was **not truncated** (20,346 entries), parsed the actual branch CSV indexes and taxonomy, and independently reproduced the structural checks used by the three checked-in Python validators. The read-only JavaScript implementation checked the same categories of conditions rather than executing Python:
+
+- Catalog (`check_specs.py` equivalent): 180 unique examples, 185 Bug Label relationships; all status/result/outcome/label values, required columns, expected paths, required `.txt` files, grouped metadata and orphan artifacts checked; **0 errors**.
+- Contest index (`check_contests_csv.py` equivalent): 7 indexed contests, 7 numbered reports; **0 errors**.
+- Contract directory (`check_contracts.py` equivalent): 7 numbered contract folders containing Solidity, and all required report associations; **0 errors**.
+
+This evidence increases confidence in catalog structure but is **not** the output or exit code of `python scripts/check_specs.py .`, `python scripts/check_contests_csv.py .`, or `python scripts/check_contracts.py .`. The authoritative commands remain blocked as recorded below.
+
 ### Official validator execution / environment blockers — actual observations
 
 **No official PASS claim is made** for any of the four requested commands. The available local container has no cloned `Web3Bugs-certora/` working tree; `git ls-remote https://github.com/matheus-junio-da-silva/Web3Bugs.git refs/heads/catalog/p11-helix-keep-fully` returned:

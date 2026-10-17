@@ -6,15 +6,15 @@ Exactly 74 active rule/invariant instances in six supplied specs, each with one 
 
 | Source spec | Active rules | Active invariants | Complete | Incomplete | VERIFIED | NOT_STATED |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| AToken.spec | 11 | 1 | 7 | 5 | 7 | 5 |
+| AToken.spec | 11 | 1 | 7 | 5 | 5 | 7 |
 | ReserveConfiguration.spec | 20 | 0 | 13 | 7 | 0 | 20 |
-| StableDebtToken.spec | 14 | 1 | 13 | 2 | 6 | 9 |
+| StableDebtToken.spec | 14 | 1 | 13 | 2 | 5 | 10 |
 | UserConfiguration.spec | 6 | 6 | 0 | 12 | 3 | 9 |
-| VariableDebtToken.spec | 13 | 1 | 13 | 1 | 6 | 8 |
+| VariableDebtToken.spec | 13 | 1 | 13 | 1 | 5 | 9 |
 | pool.spec | 1 | 0 | 0 | 1 | 0 | 1 |
-| **Total** | **65** | **9** | **46** | **28** | **22** | **52** |
+| **Total** | **65** | **9** | **46** | **28** | **18** | **56** |
 
-All 74 examples have exactly one semantic Bug Label row; **74 CSV relationship rows**. After conservative rule-by-rule report matching, 22 instances remain VERIFIED/NO_FINDING and 52 instances are NOT_STATED/NOT_STATED; nine prior VERIFIED attributions have been downgraded due to materially different source assertions or missing historical proof preconditions. No property is attributed VIOLATED/FINDING by name. The report's separately described Pool findings are not silently mapped to these source rules. `UNMAPPED`: 0; the active rules/invariants here state normative expected behavior.
+All 74 examples have exactly one semantic Bug Label row; **74 CSV relationship rows**. After conservative rule-by-rule report matching, 18 instances remain VERIFIED/NO_FINDING and 56 instances are NOT_STATED/NOT_STATED; thirteen prior VERIFIED attributions have been downgraded due to materially different source assertions or missing historical proof preconditions. No property is attributed VIOLATED/FINDING by name. The report's separately described Pool findings are not silently mapped to these source rules. `UNMAPPED`: 0; the active rules/invariants here state normative expected behavior.
 
 ## Original evidence and textual snapshot integrity
 
@@ -64,11 +64,11 @@ Columns explicitly record (a) false assertion/counterexample, (b) label, (c) nor
 | 3 | AToken / `mintArgsPositive` | A successful mint of zero would violate the mandatory rejection of an invalid amount | SE-4 | Normative | VERIFIED/NO_FINDING; AToken |
 | 4 | AToken / `balanceOfChange` | An arbitrary non-view operation changes the balances of too many distinct users | S3-2 | Normative | VERIFIED/NO_FINDING; AToken |
 | 5 | AToken / `integrityMint` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; AToken |
-| 6 | AToken / `additiveMint` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | VERIFIED/NO_FINDING; AToken |
+| 6 | AToken / `additiveMint` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | NOT_STATED/NOT_STATED; AToken |
 | 7 | AToken / `integrityTransfer` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; AToken |
 | 8 | AToken / `additiveTransfer` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | VERIFIED/NO_FINDING; AToken |
 | 9 | AToken / `integrityBurn` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; AToken |
-| 10 | AToken / `additiveBurn` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | VERIFIED/NO_FINDING; AToken |
+| 10 | AToken / `additiveBurn` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | NOT_STATED/NOT_STATED; AToken |
 | 11 | AToken / `burnNoChangeToOther` | A burn/mint changes an unrelated account's balance or tracked additional data | S3-2 | Normative | VERIFIED/NO_FINDING; AToken |
 | 12 | AToken / `mintNoChangeToOther` | A burn/mint changes an unrelated account's balance or tracked additional data | S3-2 | Normative | VERIFIED/NO_FINDING; AToken |
 | 13 | ReserveConfiguration / `setLtvIntegrity` | The reserve setter's paired getter returns a different value than the value just supplied | S3-2 | Normative | NOT_STATED/NOT_STATED; MockReserveConfiguration |
@@ -94,7 +94,7 @@ Columns explicitly record (a) false assertion/counterexample, (b) label, (c) nor
 | 33 | StableDebtToken / `principalLessThanBalance` | A debt account's principal balance is greater than its compounded balance | S6-4 | Normative | NOT_STATED/NOT_STATED; StableDebtToken |
 | 34 | StableDebtToken / `integrityBurn` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | VERIFIED/NO_FINDING; StableDebtToken |
 | 35 | StableDebtToken / `integrityMint` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | VERIFIED/NO_FINDING; StableDebtToken |
-| 36 | StableDebtToken / `integrityTimeStamp` | A state-changing call leaves getUserLastUpdated(user) after the transaction block timestamp | S3-2 | Normative | VERIFIED/NO_FINDING; StableDebtToken |
+| 36 | StableDebtToken / `integrityTimeStamp` | A state-changing call leaves getUserLastUpdated(user) after the transaction block timestamp | S3-2 | Normative | NOT_STATED/NOT_STATED; StableDebtToken |
 | 37 | StableDebtToken / `integrityDelegationWithSig` | A successful signature authorization fails to set the intended allowance or increment the nonce exactly once | S3-2 | Normative | NOT_STATED/NOT_STATED; StableDebtToken |
 | 38 | StableDebtToken / `additiveBurn` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | VERIFIED/NO_FINDING; StableDebtToken |
 | 39 | StableDebtToken / `inverseMintBurn` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | VERIFIED/NO_FINDING; StableDebtToken |
@@ -125,7 +125,7 @@ Columns explicitly record (a) false assertion/counterexample, (b) label, (c) nor
 | 64 | VariableDebtToken / `inverseMintBurn` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | VERIFIED/NO_FINDING; VariableDebtToken |
 | 65 | VariableDebtToken / `integrityDelegationWithSig` | A successful signature authorization fails to set the intended allowance or increment the nonce exactly once | S3-2 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
 | 66 | VariableDebtToken / `integrityOfBurn` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
-| 67 | VariableDebtToken / `additiveBurn` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | VERIFIED/NO_FINDING; VariableDebtToken |
+| 67 | VariableDebtToken / `additiveBurn` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
 | 68 | VariableDebtToken / `additiveMint` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
 | 69 | VariableDebtToken / `integrityMint` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
 | 70 | VariableDebtToken / `burnZeroDoesntChangeBalance` | Burning zero changes a user's balance | S3-2 | Normative | VERIFIED/NO_FINDING; VariableDebtToken |
@@ -183,7 +183,7 @@ The original 31 reported VERIFIED matches were individually checked against the 
 - Example **69** — The source checks scaled supply change, positive supply growth and additional accounting as well as mint balance; the report states only the beneficiary balance increase.
 - Example **72** — The source unconditionally asserts an unchanged delegating-user balance; the report conditions it on user != onBehalfOf, a materially different assertion.
 
-Current Project-7 outcomes: **22 VERIFIED/NO_FINDING**, **52 NOT_STATED/NOT_STATED**, **zero rule-specific findings inferred from aggregate Pool or ReserveConfiguration statements**. Original source text, target snapshot and report PDF remain unchanged. No historic prover run was performed.
+Current Project-7 outcomes: **18 VERIFIED/NO_FINDING**, **56 NOT_STATED/NOT_STATED**, **zero rule-specific findings inferred from aggregate Pool or ReserveConfiguration statements**. Original source text, target snapshot and report PDF remain unchanged. No historic prover run was performed.
 
 ## Individually reviewed incomplete dependencies (2026-10-17)
 
@@ -276,3 +276,28 @@ The table is an explicit symbol-level static audit of the *available snapshot*, 
 | 73 | `disallowedFunctionalities` | implicit Solidity ABI | disAllowedFunctions | 6 | VariableDebtToken target and inherited scaled-balance/delegation support present; no missing named helper identified. |
 
 The status remains **complete only for in-snapshot static non-built-in symbol resolution**. An original report success and the future viability of `certoraRun` against a historically faithful harness are independent propositions. The three official validators and `git diff --check` have **not** been executed in this runtime because no clone-capable authorized terminal is available; their success is not asserted here.
+
+
+## Final PDF formula and executable validation audit — 2026-10-17
+
+The PDF is 8 pages; all source conditions were checked against text-layer extraction of the original PDF. Additional conservative `VERIFIED` withdrawals follow exact predicate comparisons:
+
+- Example 6: The January 2022 report describes two mint operations versus one on the same beneficiary (up to an unspecified epsilon); the source checks two distinct beneficiaries from equal initial balances, with an explicit 3-scaled bound and a ghost normalized index.
+- Example 10: The report states same-timestamp additivity of burn; this source performs two burns on one user and a separate single burn on another and asserts only bounded_error_eq(...,3) under extra distinctness guards. Equivalence of the complete conditions is not established.
+- Example 36: The original PDF lists getUserLastUpdated(user) <= block.timestamp as an unconditional invariant. The source rule first requires this predicate in the pre-state and asserts its preservation only after allowed state-changing methods; it does not by itself establish unconditional reachability.
+- Example 67: The report states exact burn additivity at one timestamp. The source asserts only bounded_error_eq(...,3); its exact equality assertion is explicitly commented out, so the historical exact result cannot be assigned to this literal rule.
+
+**Project 7 final historical reporting:** 18 `VERIFIED` and 56 `NOT_STATED`, versus 31 initially attributed and 13 subsequently withdrawn. No extra `VIOLATED` or `FINDING` label is asserted for the 74 active source rules solely from a report-level issue.
+
+### Official validator command evidence (real shell execution, before this documentation-only correction)
+
+- Host checkout SHA: `53e44755d77cd877e8235aa1aa7e80abe2a0392c`; matching `origin/main`: `4a1bea89d88aa3b6aa165e8d81b8dd523c7afb82`.
+- `python3 scripts/check_specs.py .`: **exit 0**, "Check passed! 238 spec examples and 243 Bug Label relationships are structurally consistent."
+- `python3 scripts/check_contests_csv.py .`: **exit 0**, "Check passed!".
+- `python3 scripts/check_contracts.py .`: **exit 0**, "Check passed!".
+- `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD`: **exit 2**, 220 trailing-whitespace diagnostics in historical original CVL files and literal per-example CVL excerpts (diagnostic log has 452 lines). Original byte identity and literal property text were not sacrificed to conceal this conflict.
+- The same four commands must be rerun on the final updated HEAD to record post-correction results. The Python scripts check structural integrity, **not** theorem satisfiability or original Certora harness feasibility.
+
+### Strict classification limitation
+
+The 46 `complete` and 28 `incomplete` classifications are based on static dependency closure within the PropertyGPT snapshot, not on a compilation or run of the 2022 Certora harness. No external harness was silently created. The 28 missing-symbol reasons remain in the per-example `.txt` files. The difference between source commit `a87d546` and the PropertyGPT snapshot is material and unresolved at formal-equivalence level.

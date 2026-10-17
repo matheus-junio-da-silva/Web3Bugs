@@ -13,7 +13,7 @@ This document records the catalog state for Project 4. The user prompt did not r
 - Bug Label relationship rows added to results/spec/spec_buglabel.csv: **28**
 - Multi-label properties: **1** — integrityOfSlashing has S6-4 for its value-accounting assertions and S3-2 for the required inPostSlashingPeriod state update.
 
-previewRedeemEquivalentRedeem and collectedRewardsMonotonicallyIncrease appear in the report but are not active declarations in the supplied source snapshot, so they are not invented as catalog examples. Conversely, lowerBoundNotZero is active in the source but is not individually reported.
+previewRedeemEquivalentRedeem and collectedRewardsMonotonicallyIncrease appear in the report but are not active declarations in the supplied source snapshot, so they are not invented as catalog examples. The supplemental certora/properties.md checklist also mentions whoDecreasedDeservedRewards and allStakedAaveBacked, but neither is an active rule/invariant declaration in any supplied .spec; governance-property ideas marked not implemented in that checklist are likewise not source properties. Conversely, lowerBoundNotZero is active in the source but is not individually reported.
 
 ## Dependency status
 
@@ -105,6 +105,8 @@ The report lists six issues; they are recorded separately in results/bugs.csv so
 
 The active detector properties remain technically classified by what their assertions test. For example, returnFundsDecreaseExchangeRate is S6-4 even though one report finding it exposed is classified L2 from the finding's explicit rounding root cause.
 
+**Finding classification uncertainty to preserve (STK-05):** The supplied `_getExchangeRate` computes a ceiling division (StakedTokenV3.sol:545-552). A zero-amount `returnFunds` exchange-rate change could therefore have a rounding/precision root cause, which would favor **L2** under the standard's simple-oracle precedence rather than the currently recorded S6-4. Unlike STK-03 (explicitly attributed to rounding by the report) or STK-06 (explicitly attributed to rounding up), the STK-05 narrative does **not** explicitly state the arithmetic root cause, and the preserved Solidity snapshot includes a post-fix nonzero amount guard. Without the original failing trace/commit, this review keeps the existing STK-05 finding label S6-4 and flags L2 as a **plausible alternative requiring corroboration**, not a demonstrated correction. This uncertainty does not change the active rule's S6-4 detection-intent mapping.
+
 ## Bug Label mapping and UNMAPPED
 
 There are **28** relationships for 27 properties:
@@ -117,7 +119,7 @@ There are **28** relationships for 27 properties:
 
 lowerBoundNotZero is intentionally UNMAPPED. It is a narrow configuration/sanity invariant asserting only LOWER_BOUND() > 0; forcing it into an S-category would overstate the counterexample semantics.
 
-All 27 active source properties are treated as normative requirements, not reachability probes. lowerBoundNotZero is a normative configuration sanity condition without a defensible taxonomy mapping.
+Twenty-six source properties encode substantive state, accounting, return-value, or access-time requirements rather than exploratory reachability probes. The remaining lowerBoundNotZero is a configuration sanity invariant (`LOWER_BOUND() > 0`), not an exploit detector by itself; it is UNMAPPED rather than being forced into a security category.
 
 ## Assumptions and important qualifiers
 

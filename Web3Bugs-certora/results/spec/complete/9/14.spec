@@ -4,13 +4,12 @@ pragma specify 0.1
 
 methods {
 	isCompletedSignerAuthorization(address,bytes32,address) returns bool envfree
+	_getAuthorizedBy(address) returns address envfree
 }
 
 invariant mustHaveAuthorizedByIfCompletedSignerAuthorization(address account, bytes32 role, address signer) 
 	account != 0 => (isCompletedSignerAuthorization(account, role, signer) => _getAuthorizedBy(signer) == account)
 
-invariant mustHaveAuthorizedByIfCompletedSignerAuthorization(address account, bytes32 role, address signer) 
-	account != 0 => (isCompletedSignerAuthorization(account, role, signer) => _getAuthorizedBy(signer) == account)
 
 invariant noMultipleAccountsPerSignerInARole(address account, address account2, bytes32 role, bytes32 role2, address signer)
 	account != 0 && account2 != 0

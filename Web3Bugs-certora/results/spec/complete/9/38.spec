@@ -5,6 +5,7 @@ using Accounts as accounts
 methods {
 	vote(uint256,uint256,uint8) returns bool
 	proposalCount() returns uint256 envfree
+	getFromDequeued(uint256) returns uint256 envfree
 }
 
 ghost votedFor(address,uint256) returns bool { // voter to proposal id voted for

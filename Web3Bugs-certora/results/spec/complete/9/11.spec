@@ -20,11 +20,7 @@ methods {
 invariant authorizedByIsNeverReflexive(address a)
 	a != 0 => _getAuthorizedBy(a) != a
 
-invariant authorizedByIsNeverReflexive(address a)
-	a != 0 => _getAuthorizedBy(a) != a
 
-invariant authorizedByIsNeverReflexive(address a)
-	a != 0 => _getAuthorizedBy(a) != a
 
 rule viewFunctionsDoNotRevert(method f) filtered { f -> 
 	f.isView 

@@ -1,25 +1,13 @@
-// Historical extract: contracts/7/specs/UserConfiguration.spec:54-71
-// Source preamble: contracts/7/specs/UserConfiguration.spec:1-19
-// Dependency status: incomplete; CVL2 migration intentionally not attempted.
+// Source: contracts/7/specs/UserConfiguration.spec
+// Literal property: rule setCollateralNoChangeToOther, lines 54-71
+// Literal dependency source lines: 1;3;5-6;16;54-71
+// Historical syntax retained; no reconstruction or CVL2 migration.
+
 methods {
-    setBorrowing(uint256, bool) envfree
     setUsingAsCollateral(uint256, bool) envfree
-    isUsingAsCollateralOrBorrowing(uint256) returns bool envfree
     isBorrowing(uint256) returns bool envfree
     isUsingAsCollateral(uint256) returns bool envfree
-	isUsingAsCollateralOne() returns bool envfree
-    isUsingAsCollateralAny() returns bool envfree
-    isBorrowingOne() returns (bool) envfree
-    isBorrowingAny() returns bool envfree
-    isEmpty() returns bool envfree    
-    getIsolationModeState() returns (bool, address, uint256) envfree
-    getSiloedBorrowingState() returns (bool, address) envfree
-	isIsolated() returns bool envfree
-
 }
-
-
-// checks the integrity of set Borrowing function and correct retrieval of the corresponding getter
 
 rule setCollateralNoChangeToOther(uint256 reserveIndex, uint256 reserveIndexOther, bool usingAsCollateral)
 {

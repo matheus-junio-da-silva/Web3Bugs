@@ -1,28 +1,19 @@
-// Historical extract: contracts/7/specs/StableDebtToken.spec:281-287
-// Source preamble: contracts/7/specs/StableDebtToken.spec:1-129
-// Dependency status: complete; CVL2 migration intentionally not attempted.
+// Source: contracts/7/specs/StableDebtToken.spec
+// Literal property: rule burnZeroDoesntChangeBalance, lines 281-287
+// Literal dependency source lines: 1-2;5;8-10;12;22-42;44-83;85-103;281-287
+// Historical syntax retained; no reconstruction or CVL2 migration.
+
 methods {
     calculateCompoundedInterest(uint256 r, uint40 t0, uint256 t1) returns (uint256) => calculateCompoundedInterestSummary(r, t0, t1)
-	additionalData(address) returns uint128 envfree
-	getAverageStableRate() returns uint256 envfree
 	handleAction(address, uint256, uint256) => NONDET
-    // scaledBalanceOfToBalanceOf(uint256) returns (uint256) envfree
-
 	rayMul(uint256 x, uint256 y) returns (uint256) => rayMulSummariztion(x, y)
 	rayDiv(uint256 x, uint256 y) returns (uint256) => rayDivSummariztion(x, y)
 }
 
 definition RAY() returns uint = 1000000000000000000000000000;
 
-definition disAllowedFunctions(method f) returns bool = 
-            f.selector == transfer(address, uint256).selector ||
-            f.selector == allowance(address, address).selector ||
-            f.selector == approve(address, uint256).selector ||
-            f.selector == transferFrom(address, address, uint256).selector ||
-            f.selector == increaseAllowance(address, uint256).selector ||
-            f.selector == decreaseAllowance(address, uint256).selector;
-
 ghost mapping(uint256 => mapping(uint256 => uint256)) calculateCompoundedInterestSummaryValues;
+
 function calculateCompoundedInterestSummary(uint256 rate, uint40 t0, uint256 t1) returns uint256
 {
 	uint256 deltaT = t1 - t0;
@@ -45,6 +36,7 @@ function calculateCompoundedInterestSummary(uint256 rate, uint40 t0, uint256 t1)
 }
 
 ghost mapping(uint256 => mapping(uint256 => uint256)) rayMulSummariztionValues;
+
 function rayMulSummariztion(uint256 x, uint256 y) returns uint256
 {
 	if (x == 0) || (y == 0)
@@ -86,6 +78,7 @@ function rayMulSummariztion(uint256 x, uint256 y) returns uint256
 }
 
 ghost mapping(uint256 => mapping(uint256 => uint256)) rayDivSummariztionValues;
+
 function rayDivSummariztion(uint256 x, uint256 y) returns uint256
 {
 	if (x == 0)
@@ -104,30 +97,6 @@ function rayDivSummariztion(uint256 x, uint256 y) returns uint256
 	// require y < RAY() => rayDivSummariztionValues[x][y] =< x;
 	return rayDivSummariztionValues[x][y];
 }
-
-
-ghost symbolicCompundInterest(uint256, uint40) returns uint256 {
-    axiom forall uint256 x. forall uint40 t. symbolicCompundInterest(x, t) >= 1;
-}
-
-// ghost symbolic_compund_interest(uint256, uint40, uint256) returns uint256 {
-//     axiom forall uint256 x. forall uint40 t1. forall uint256 t2. symbolic_compund_interest(x, t1, t2) >= 10;
-// }
-
-ghost sumAllBalance() returns uint256 {
-    init_state axiom sumAllBalance() == 0;
-}
-
-hook Sstore _userState[KEY address a].balance uint128 balance (uint128 old_balance) STORAGE {
-  havoc sumAllBalance assuming sumAllBalance@new() == sumAllBalance@old() + balance - old_balance;
-}
-hook Sload uint128 balance _userState[KEY address a].balance  STORAGE {
-  require sumAllBalance() >= balance;
-}
-
-// invariant totalSupplyEqualsSumAllBalance(env e)
-//     totalSupply(e) <= scaledBalanceOfToBalanceOf(sumAllBalance())
-//     filtered { f -> !f.isView && !disAllowedFunctions(f) }
 
 rule burnZeroDoesntChangeBalance(address u) {
 	env e;

@@ -2,7 +2,7 @@
 // Property: dynamicToStaticInversible3
 // Dependency status: incomplete
 // CVL2 migration is intentionally out of scope.
-// Included original CVL ranges: specs/setup.spec:16;22;33;52-53;78;114;136;143;265-268 | specs/bridge.spec:162-171
+// Included original CVL ranges: specs/setup.spec:16;22;33;52-53;77-78;114;136;143;265-268 | specs/bridge.spec:162-171
 
     using SymbolicLendingPoolL1 as LENDINGPOOL_L1
     using BridgeL2Harness as BRIDGE_L2
@@ -11,6 +11,7 @@ methods {
     _dynamicToStaticAmount_Wrapper(uint256, address, address) envfree //(ILendingPool)
     LENDINGPOOL_L1.liquidityIndexByAsset(address) returns (uint256) envfree
     BRIDGE_L2.l2RewardsIndex() returns (uint256) envfree
+    getReserveNormalizedIncome(address) returns (uint256) => DISPATCHER(true)
 }
 definition RAY() returns uint256 = 10^27;
 function requireRayIndex(address asset) {

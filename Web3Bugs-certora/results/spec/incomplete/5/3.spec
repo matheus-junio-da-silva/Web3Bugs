@@ -2,7 +2,7 @@
 // Property: depositWithdrawReversed
 // Dependency status: incomplete
 // CVL2 migration is intentionally out of scope.
-// Included original CVL ranges: specs/setup.spec:4;11-17;22-24;27;33;39-41;43;50-51;56;58;78;115-116;123-124;136;143;156-158;167-170;210-216;232-244;248-251;254-261;278-287;289-293;296-305;319-332 | specs/bridge.spec:96-132
+// Included original CVL ranges: specs/setup.spec:4;11-17;22-24;27;33;39-41;43;50-51;56;58;75-78;100;104;115-117;123-124;136;143;156-158;167-170;210-216;232-244;248-251;254-261;278-287;289-293;296-305;319-332 | specs/bridge.spec:96-132
 
 import "./erc20.spec"
     using DummyERC20UnderlyingA_L1 as UNDERLYING_ASSET_A 
@@ -30,6 +30,12 @@ methods {
     BRIDGE_L2.address2uint256(address) returns (uint256) envfree
     ATOKEN_A.UNDERLYING_ASSET_ADDRESS() returns (address) envfree
     ATOKEN_B.UNDERLYING_ASSET_ADDRESS() returns (address) envfree  
+    deposit(address, uint256, address, uint16) => DISPATCHER(true)
+    withdraw(address, uint256, address) returns (uint256) => DISPATCHER(true)
+    getReserveNormalizedIncome(address) returns (uint256) => DISPATCHER(true)
+    getAssetData(address) returns (uint256, uint256, uint256) => DISPATCHER(true)
+    getRewardsBalance(address[], address) returns (uint256) => DISPATCHER(true)
+    l1ToL2MessageNonce() returns (uint256) => NONDET
 }
 definition RAY() returns uint256 = 10^27;
 definition excludeInitialize(method f) returns bool =

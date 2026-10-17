@@ -1,4 +1,4 @@
-// Original: contracts/9/specs/lockedGold.spec:151-169 — literal property body, preserved historical syntax.
+// Original: contracts/9/specs/lockedGold.spec:155-169 — literal property body, preserved historical syntax.
 // Dependency status: complete.
 pragma specify 0.1
 

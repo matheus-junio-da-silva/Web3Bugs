@@ -1,0 +1,17 @@
+2026-10-17T02:34:40Z — Real attempted commands, container without checked-out repository
+$ git ls-remote https://github.com/matheus-junio-da-silva/Web3Bugs.git HEAD
+fatal: unable to access 'https://github.com/matheus-junio-da-silva/Web3Bugs.git/': Could not resolve host: github.com
+exit=128
+$ python scripts/check_specs.py .
+python: can't open file '//scripts/check_specs.py': [Errno 2] No such file or directory
+exit=2 — NOT RUN against complete repository
+$ python scripts/check_contests_csv.py .
+python: can't open file '//scripts/check_contests_csv.py': [Errno 2] No such file or directory
+exit=2 — NOT RUN against complete repository
+$ python scripts/check_contracts.py .
+python: can't open file '//scripts/check_contracts.py': [Errno 2] No such file or directory
+exit=2 — NOT RUN against complete repository
+$ git diff --check
+warning: Not a git repository. Use --no-index to compare two paths outside a working tree
+exit=129 — NOT RUN against complete repository
+NO PASS CLAIMED. Local Desktop Commander device DESKTOP-5E26TVU reported Offline; cannot execute in user's clone.

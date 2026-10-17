@@ -84,9 +84,9 @@ Each row audits **(a)** what state/call falsifies the literal assertion, **(b)**
 |---:|---|---|---|---|---|
 | 1 | Accrual lowers getAccumulatedFees() compared with the prior state. | S3-2 — Detect incorrect accumulated-fee state decrement during accrual. | normative | The report explicitly names this property in additional verification checks #16/#17 and marks it verified. | accrueYieldCheck.spec:39-45; historical V2 target linkage not supplied |
 | 2 | A nonexempt method changes token balances but does not set accrueYieldCalled ghost. | S3-1 — Detect missing yield accrual when Vault token balances change. | normative | The report explicitly names this property in additional verification checks #16/#17 and marks it verified. | changeInContractBalanceShouldCauseAccrual.spec:33-53; historical V2 target linkage not supplied |
-| 3 | A specified ERC4626 query reverts despite msg.value=0. | L7 — Detect arithmetic reverts in nonreverting ERC4626 view methods. | normative | The report names the aggregate must_not_revert check (#9) as violated and treats the arithmetic-dependent reverts as acceptable. | erc4626.spec:73-84; historical V2 target linkage not supplied |
-| 4 | Bounded convertToShares or convertToAssets reverts. | L7 — Detect unexpected arithmetic revert for bounded asset/share conversion. | normative | The report's #10 is an aggregate named must_not_revert_unless_large_input, not either separate converter-specific source rule. | erc4626.spec:94-104; historical V2 target linkage not supplied |
-| 5 | Bounded convertToShares or convertToAssets reverts. | L7 — Detect unexpected arithmetic revert for bounded asset/share conversion. | normative | The report's #10 is an aggregate named must_not_revert_unless_large_input, not either separate converter-specific source rule. | erc4626.spec:114-124; historical V2 target linkage not supplied |
+| 3 | A specified ERC4626 query reverts despite msg.value=0. | UNMAPPED — Generic unexpected-revert predicate, not exclusively integer overflow/underflow. | normative | The report names the aggregate must_not_revert check (#9) as violated and treats the arithmetic-dependent reverts as acceptable. | erc4626.spec:73-84; historical V2 target linkage not supplied |
+| 4 | Bounded convertToShares or convertToAssets reverts. | UNMAPPED — Generic unexpected-revert predicate, not exclusively integer overflow/underflow. | normative | The report's #10 is an aggregate named must_not_revert_unless_large_input, not either separate converter-specific source rule. | erc4626.spec:94-104; historical V2 target linkage not supplied |
+| 5 | Bounded convertToShares or convertToAssets reverts. | UNMAPPED — Generic unexpected-revert predicate, not exclusively integer overflow/underflow. | normative | The report's #10 is an aggregate named must_not_revert_unless_large_input, not either separate converter-specific source rule. | erc4626.spec:114-124; historical V2 target linkage not supplied |
 | 6 | previewDeposit disagrees with actual deposit by more than the exact assertion's tolerance. | S6-2 — Detect ERC4626 previewDeposit returning a value inconsistent with the matching operation. | normative | The report explicitly names this amount-check property (#1/#3/#5/#7) and marks it verified. | erc4626.spec:142-165; historical V2 target linkage not supplied |
 | 7 | Two states with the same totalSupply, totalAssets and argument return different previewDeposit amounts after havoc. | S6-2 — Detect previewDeposit dependent on caps or limits not captured by supply/assets. | normative | The report names this exact preview independence test (#2/#4/#6/#8) as violated and accepts Aave-specific caps/liquidity dependence. | erc4626.spec:179-195; historical V2 target linkage not supplied |
 | 8 | previewMint disagrees with actual mint by more than the exact assertion's tolerance. | S6-2 — Detect ERC4626 previewMint returning a value inconsistent with the matching operation. | normative | The report explicitly names this amount-check property (#1/#3/#5/#7) and marks it verified. | erc4626.spec:211-233; historical V2 target linkage not supplied |
@@ -222,3 +222,19 @@ Before merging, the independent reviewer must run these checks from the **inner*
 | 42 | `inv_sumAllBalance_eq_totalSupply__atoken` | `_AToken.scaledTotalSupply()/_userState` | none identified | incomplete / UNMAPPED |
 
 This table is the individual audit ledger, not an attribution of a distinct Certora run to every extracted property. The full five-part semantic audit is in each `results/spec/incomplete/8/N.md`.
+
+### Executed local sanity (NOT Certora Prover)
+
+The local shell executed a concrete mathematical satisfiability check using **SymPy 1.14** and ordinary integer arithmetic. Actual captured output:
+
+```text
+RUN: sympy arithmetic sanity; source axioms evaluated at x=1,y=0
+Conditions: ['Eq(rayMul_g(1,0), 0)', 'rayMul_g(1,0) >= 1']
+Satisfiability: False
+RUN: accrueYieldCheck strict inequality denominator=0, rounding=0, x=y=0
+Evaluate: 0 < 0 -> False
+RESULT: UNSAT witnesses confirmed under standard mathematical integers
+LIMITATION: Not a Certora Prover run and not a reconstruction of CVL bitvector/solver semantics
+```
+
+The actual logs are preserved as `docs/spec_catalog_project_8_sanity.log`. A GitHub-tree/index consistency scan corresponding to the Python scripts' basic file/CSV predicates checked **16,934 repository blobs, 211 catalog rows, 42 Project 8 rows, 206 unique examples, zero unreferenced artifacts, and zero structural errors**, but was a JavaScript port, not the requested Python execution. Likewise, a raw PR unified-diff scan found **268 new lines with trailing whitespace in 85 files**; these include exact historical original CVL snapshots and verbatim extracted bodies. We do **not** rewrite historical evidence just to satisfy `git diff --check`. The official Git command was attempted locally without a clone and exited 129; it must be re-run on a full clone and its genuine failures assessed.

@@ -8,9 +8,9 @@
 3. SymbolicLendingPoolL1.getLiquidityIndex(): symbolic Aave index model referenced in helper absent
 
 ## Included original source ranges
-- contracts/8/specs/methods_base.spec:3;4;5 (using declarations)
-- contracts/8/specs/methods_base.spec:20;21;28 (selected method declarations)
-- contracts/8/specs/positiveSupply_imply_positiveAssets.spec:1-58
+- contracts/8/specs/methods_base.spec:3;4;5
+- contracts/8/specs/methods_base.spec:20;21;28
+- contracts/8/specs/positiveSupply_imply_positiveAssets.spec:2-58
 - contracts/8/specs/positiveSupply_imply_positiveAssets.spec:82-85
 
 ## Resolution policy and negative findings

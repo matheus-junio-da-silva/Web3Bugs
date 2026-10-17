@@ -6,9 +6,9 @@
 1. Underlying.totalSupply()/Underlying.b: symbolic DummyERC20_aTokenUnderlying implementation and storage layout for hooks missing
 
 ## Included original source ranges
-- contracts/8/specs/methods_base.spec:4 (using declarations)
+- contracts/8/specs/methods_base.spec:4
 - contracts/8/specs/methods_base.spec:167-177
-- contracts/8/specs/totalSupply_EQ_sumAllBal.spec:1-28
+- contracts/8/specs/totalSupply_EQ_sumAllBal.spec:2-28
 - contracts/8/specs/totalSupply_EQ_sumAllBal.spec:52-56
 
 ## Resolution policy and negative findings

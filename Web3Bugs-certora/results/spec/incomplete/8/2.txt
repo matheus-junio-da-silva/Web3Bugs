@@ -8,12 +8,12 @@
 3. _accrueYield() ghost instrumentation: the CVL summary toggles accrueYieldCalled, but original verifier instrumentation/contract mapping is unavailable
 
 ## Included original source ranges
-- contracts/8/specs/methods_base.spec:3;4 (using declarations)
-- contracts/8/specs/methods_base.spec:20;28;33 (selected method declarations)
-- contracts/8/specs/methods_base.spec:65 (shared constants)
+- contracts/8/specs/methods_base.spec:3;4
+- contracts/8/specs/methods_base.spec:20;28;33
+- contracts/8/specs/methods_base.spec:65
 - contracts/8/specs/methods_base.spec:70-81
 - contracts/8/specs/methods_base.spec:214-216
-- contracts/8/specs/changeInContractBalanceShouldCauseAccrual.spec:1-32
+- contracts/8/specs/changeInContractBalanceShouldCauseAccrual.spec:2-32
 - contracts/8/specs/changeInContractBalanceShouldCauseAccrual.spec:33-53
 
 ## Resolution policy and negative findings

@@ -7,9 +7,9 @@
 2. getAccumulatedFees(): harness getter for _s.accumulatedFees is absent
 
 ## Included original source ranges
-- contracts/8/specs/methods_base.spec:21 (selected method declarations)
-- contracts/8/specs/methods_base.spec:65 (shared constants)
-- contracts/8/specs/accrueYieldCheck.spec:1-38
+- contracts/8/specs/methods_base.spec:21
+- contracts/8/specs/methods_base.spec:65
+- contracts/8/specs/accrueYieldCheck.spec:2-38
 - contracts/8/specs/accrueYieldCheck.spec:39-45
 
 ## Resolution policy and negative findings

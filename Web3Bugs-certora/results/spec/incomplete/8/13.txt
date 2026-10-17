@@ -8,8 +8,8 @@
 3. havoc_all(): symbolic mutation entrypoint directly invoked by this threshold check is missing
 
 ## Included original source ranges
-- contracts/8/specs/methods_base.spec:13;14;18;25 (selected method declarations)
-- contracts/8/specs/erc4626.spec:1-72
+- contracts/8/specs/methods_base.spec:13;14;18;25
+- contracts/8/specs/erc4626.spec:2-72
 - contracts/8/specs/erc4626.spec:394-410
 
 ## Resolution policy and negative findings

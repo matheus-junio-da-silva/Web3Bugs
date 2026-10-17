@@ -8,17 +8,30 @@
 3. SymbolicLendingPoolL1.getLiquidityIndex(): symbolic Aave index model referenced in helper absent
 
 ## Included original source ranges
-- contracts/8/specs/methods_base.spec:3;4;5;6 (using declarations)
-- contracts/8/specs/methods_base.spec:11;16;18;20;21;28;29;30 (selected method declarations)
-- contracts/8/specs/methods_base.spec:68 (shared constants)
+- contracts/8/specs/methods_base.spec:3;4;5;6
+- contracts/8/specs/methods_base.spec:11;16;18;20;21;28;29;30
+- contracts/8/specs/methods_base.spec:68
 - contracts/8/specs/methods_base.spec:70-81
 - contracts/8/specs/methods_base.spec:207-207
-- contracts/8/specs/fees_LEQ_ATokenBal.spec:1-55
+- contracts/8/specs/fees_LEQ_ATokenBal.spec:2-55
 - contracts/8/specs/fees_LEQ_ATokenBal.spec:91-148
 - contracts/8/specs/fees_LEQ_ATokenBal.spec:56-57
 - contracts/8/specs/fees_LEQ_ATokenBal.spec:59-60
 - contracts/8/specs/fees_LEQ_ATokenBal.spec:62-63
 - contracts/8/specs/fees_LEQ_ATokenBal.spec:69-70
+- contracts/8/specs/methods_base.spec:128-133
+- contracts/8/specs/methods_base.spec:134-139
+- contracts/8/specs/methods_base.spec:151-153
+- contracts/8/specs/methods_base.spec:155-157
+- contracts/8/specs/methods_base.spec:159-161
+- contracts/8/specs/methods_base.spec:183-185
+- contracts/8/specs/methods_base.spec:187-189
+- contracts/8/specs/methods_base.spec:191-193
+- contracts/8/specs/methods_base.spec:167-169
+- contracts/8/specs/methods_base.spec:171-173
+- contracts/8/specs/methods_base.spec:175-177
+- contracts/8/specs/methods_base.spec:97-103
+- contracts/8/specs/methods_base.spec:104-110
 - contracts/8/specs/fees_LEQ_ATokenBal.spec:150-159
 
 ## Resolution policy and negative findings

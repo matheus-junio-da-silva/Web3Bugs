@@ -6,10 +6,10 @@
 1. _balances / ERC20Upgradeable: vault ghost balance hook targets inherited OpenZeppelin ERC20 storage, absent from snapshot
 
 ## Included original source ranges
-- contracts/8/specs/methods_base.spec:4;5 (using declarations)
-- contracts/8/specs/methods_base.spec:18 (selected method declarations)
+- contracts/8/specs/methods_base.spec:4;5
+- contracts/8/specs/methods_base.spec:18
 - contracts/8/specs/methods_base.spec:151-161
-- contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:1-39
+- contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:2-39
 - contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:46-47
 
 ## Resolution policy and negative findings

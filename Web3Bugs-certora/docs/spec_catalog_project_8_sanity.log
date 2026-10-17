@@ -1,0 +1,7 @@
+RUN: sympy arithmetic sanity; source axioms evaluated at x=1,y=0
+Conditions: ['Eq(rayMul_g(1,0), 0)', 'rayMul_g(1,0) >= 1']
+Satisfiability: False
+RUN: accrueYieldCheck strict inequality denominator=0, rounding=0, x=y=0
+Evaluate: 0 < 0 -> False
+RESULT: UNSAT witnesses confirmed under standard mathematical integers
+LIMITATION: Not a Certora Prover run and not a reconstruction of CVL bitvector/solver semantics

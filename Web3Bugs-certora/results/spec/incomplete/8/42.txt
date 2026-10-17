@@ -6,10 +6,10 @@
 1. _AToken.scaledTotalSupply()/_userState: external scaled aToken implementation and storage layout for hook missing
 
 ## Included original source ranges
-- contracts/8/specs/methods_base.spec:3;4 (using declarations)
-- contracts/8/specs/methods_base.spec:29 (selected method declarations)
+- contracts/8/specs/methods_base.spec:3;4
+- contracts/8/specs/methods_base.spec:29
 - contracts/8/specs/methods_base.spec:183-193
-- contracts/8/specs/totalSupply_EQ_sumAllBal.spec:1-28
+- contracts/8/specs/totalSupply_EQ_sumAllBal.spec:2-28
 - contracts/8/specs/totalSupply_EQ_sumAllBal.spec:69-73
 
 ## Resolution policy and negative findings

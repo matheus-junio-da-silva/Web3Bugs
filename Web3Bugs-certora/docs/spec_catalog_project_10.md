@@ -1,6 +1,6 @@
 # Project 10 — Furucombo: source-preserving Certora property catalog and closure audit
 
-> **Review status: DRAFT / NOT VALIDATED.** This ledger contains 36 target-aware examples for 34 active declarations. It is not a reproduced 2021 verification result or a completed handler-by-handler execution matrix. Do not merge until the below blockers and validation have been reviewed.
+> **Review status: DRAFT / STRUCTURAL CHECKS PASSED; HISTORICAL TARGET COVERAGE BLOCKED.** This ledger contains 36 target-aware examples for 34 active declarations. It is not a reproduced 2021 verification result or a completed handler-by-handler execution matrix. Do not merge until the below blockers and validation have been reviewed.
 
 ## 1. Identity, preservation and provenance
 
@@ -126,7 +126,7 @@ Bug Labels in the bug inventory classify the *documented concrete issue*. Bug La
 
 ## 7. Unresolved verification and release gates
 
-**Command results: NOT RUN (no evidence of execution).** GitHub Git-object reading/writing was available, but the execution container could not clone GitHub owing to DNS/network failure and the authorized remote desktop was offline. These exact commands must still run on a checkout of this branch from the `Web3Bugs-certora` working directory:
+**Historical command status in the original connector-only revision: NOT RUN; superseded by the checkout-based execution recorded in section 10.** GitHub Git-object reading/writing was available, but the execution container could not clone GitHub owing to DNS/network failure and the authorized remote desktop was offline. These exact commands must still run on a checkout of this branch from the `Web3Bugs-certora` working directory:
 
 ```bash
 python scripts/check_specs.py .
@@ -190,9 +190,9 @@ This matrix records **each of the 23 historically reported targets** independent
 
 The source ranges in the extracted `.sol` files with `// Source: ... original lines n-m` headers were mechanically compared with the corresponding source files in this branch for examples 1–29. The code excerpts examined matched the literal preserved source ranges; the validation is source-text correspondence, not a compilation or a semantic proof. Two excerpts required further **relevance** improvements despite being byte-faithful: example **26** now quotes `HandlerBase._tokenApprove/_tokenApproveZero` at lines **109–126** instead of the unrelated `HandlerBase.sol:1–108`; example **27** quotes only `Summary.sol:1109–1112` instead of `1090–1112`. The `N.md` provenance and CSV original contract ranges were synchronized. For examples 30–36, excerpts have a different `// Exact source excerpt` annotation style; the check above is not claimed to cover those header formats.
 
-### Local execution evidence remains absent
+### Previous execution attempt (superseded by section 10)
 
-The **real** checkout-based command `python scripts/check_specs.py .`, `python scripts/check_contests_csv.py .`, `python scripts/check_contracts.py .`, and `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD` were **not run** in this connector-only revision. The container's `git ls-remote` failed with `Could not resolve host: github.com`, the authorized Desktop Commander device is offline, and PR #8 has no GitHub Actions runs/checks to substitute. There are **no exit codes to report**. GitHub blob/content comparison and CVL bracket checks are review aids, not substitutes for a real checkout or Certora run.
+Before the later checkout validation (section 10), the commands `python scripts/check_specs.py .`, `python scripts/check_contests_csv.py .`, `python scripts/check_contracts.py .`, and `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD` had **not run** in the connector-only revision. The container's `git ls-remote` failed with `Could not resolve host: github.com`, the authorized Desktop Commander device is offline, and PR #8 has no GitHub Actions runs/checks to substitute. There are **no exit codes to report**. GitHub blob/content comparison and CVL bracket checks are review aids, not substitutes for a real checkout or Certora run.
 
 ### Independent static preflight after source-excerpt fixes
 
@@ -233,3 +233,36 @@ A seção 8 traz as **23 linhas históricas** separadas para as propriedades #22
 **Incongruência adicional do PDF:** a propriedade #6 do Registry, p.11, está sob título de *caller* mas imprime `unregisterHandler` e `handlers` no pseudocódigo. A regra ativa `unregisterCallerIsPermanent` usa `callers`; preservar o equívoco narrativo, sem reivindicar correspondência textual.
 
 **Veredito:** os casos handler-específicos não inventariados permanecem bloqueadores; o PR #8 deve continuar draft. Os resultados de um target jamais são propagados para outro, e observações `None`, `🔎`, `✔` e `❌` não substituem execuções nem fechamentos das dependências atuais.
+
+
+## 10. Verificação real em checkout e preservação de whitespace
+
+**Ambiente de execução autorizado:** VM principal não conseguiu resolver `github.com` (`git ls-remote` retornou 128). Por isso, excepcionalmente, um checkout **temporário, separado do trabalho pessoal**, foi obtido pelo Desktop Commander no WSL do dispositivo autorizado. O dispositivo estava online nesta execução; sua ausência em tentativas anteriores não deve ser interpretada como estado atual.
+
+**Primeira execução**, checkout de `e9ff9ad750bd263ad3ac71b88a484b7d6c74c69d` vs `main` `4a1bea89d88aa3b6aa165e8d81b8dd523c7afb82`:
+
+| Comando no checkout real | Exit | Observação |
+| --- | ---: | --- |
+| `python3 scripts/check_specs.py .` | **0** | 200 exemplos / 205 relações no dataset inteiro, estruturalmente consistentes |
+| `python3 scripts/check_contests_csv.py .` | **0** | índices e relatórios consistentes |
+| `python3 scripts/check_contracts.py .` | **0** | diretórios de contratos e relatórios consistentes |
+| `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD` | **2** | whitespace preexistente nos blobs históricos, transcrições e alguns artefatos derivados |
+
+A correção **não** normalizou as 202 fontes originais nem os corpos CVL literais. O commit `b66f8450abdbe3727a94b4909f377ae60a2e2131` adicionou `.gitattributes` no Git root com desativação **somente** de `blank-at-eol`, `blank-at-eof` e `space-before-tab` em caminhos `contracts/10/**` e excertos `results/spec/{complete,incomplete}/10/*.spec,*.sol`. Esses espaços são preservados como evidência de fidelidade; a exceção **não** abrange arquivos de outros projetos. Espaços finais e linhas em branco excedentes da transcrição `reports/10.md` e de seis `N.md` derivados foram normalizados sem tocar no PDF nem nas assertions.
+
+**Segunda execução independente** em checkout atualizado do commit `b66f8450abdbe3727a94b4909f377ae60a2e2131`, novamente comparado à `main` `4a1bea89d88aa3b6aa165e8d81b8dd523c7afb82`:
+
+| Comando exato ou equivalente de Python 3 no WSL | Código de retorno |
+| --- | ---: |
+| `cd Web3Bugs-certora && python3 scripts/check_specs.py .` | **0 — PASS** |
+| `cd Web3Bugs-certora && python3 scripts/check_contests_csv.py .` | **0 — PASS** |
+| `cd Web3Bugs-certora && python3 scripts/check_contracts.py .` | **0 — PASS** |
+| `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD` (raiz Git) | **0 — PASS** |
+
+O status passou de **não executado** a **validado estruturalmente**. Estes quatro checks **não** compilam os targets nem recuperam o Prover/CVL de 2021. Eles não eliminam a diferença de ABI do ProxyHarness, `stack_slot`/`_getCubeCounter`/`CUBE_COUNTER_KEY`, seletor `batchExec` ou as instâncias historicamente distintas de `proxy.spec` para handlers.
+
+**Revalidação da origem:** após o ajuste, os Git trees de PropertyGPT e branch confirmaram **203/203 blobs** idênticos (202 arquivos de `contracts/10/` e o PDF histórico), zero divergências, SHA do PDF `fa3483cd8b7c7bce2e472b217c2531a0f0965515`.
+
+**Reconciliando índices com a `main` observada:** `spec_buglabel.csv` contém as 170 linhas de `main` + 36 linhas exclusivas do Project 10 (206 linhas com cabeçalho); `contests.csv` contém 7 linhas de `main` + 1; `bugs.csv` contém 22 linhas de `main` + 14. Não há remoções ou mudanças em linhas de outros projetos.
+
+**Portão de liberação:** manter **DRAFT**. Os validadores comprovam integridade estrutural, mas não demonstram equivalência semântica por handler nem resolvem dependências/ABI. O grupo de pares handler × rule materialmente distintos da seção 9 continua exigindo artefatos e revisão individual antes que a catalogação possa ser chamada de exaustiva.

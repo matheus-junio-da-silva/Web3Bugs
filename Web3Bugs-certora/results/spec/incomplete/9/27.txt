@@ -1,0 +1,4 @@
+Missing historical requirement for goverance_with_dequeue.spec:2-17 (may_dequeue).
+The rule calls callArbitrary(f) at source line 12, but this spec has no definition/import or historical runner; a similarly named helper appears in governance.spec:386-390 without an import/linkage establishing that this variant used it.
+Searched: contracts/9/specs/goverance_with_dequeue.spec, governance.spec and other sibling specs, specs/harnesses, specs/scripts and contracts/9/contracts/governance/*.
+Not repaired; no helper has been borrowed across specs without source linkage.

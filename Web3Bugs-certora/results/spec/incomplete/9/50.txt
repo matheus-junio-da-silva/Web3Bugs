@@ -1,0 +1,4 @@
+Missing historical requirement for governance_old_rules.spec:84-111 (constitution_change_legal).
+callArbitrary(f) at source line 94 has no declaration/import or runner in this legacy spec; additionally, constitution validation is commented out and its only active assertion is assert true.
+Searched: contracts/9/specs/governance_old_rules.spec, governance.spec and other sibling specs, specs/harnesses, specs/scripts and contracts/9/contracts/governance/*.
+Not repaired; no helper has been borrowed across specs without source linkage.

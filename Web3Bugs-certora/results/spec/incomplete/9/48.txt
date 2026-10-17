@@ -1,0 +1,4 @@
+Missing historical requirement for governance_old_rules.spec:4-55 (no_double_vote_referendum_vote).
+The body invokes accounts.voteSignerToAccount(...) at source line 28, but this standalone file has no using Accounts as accounts or import. That alias is present only in governance.spec:1, without historical linkage; this legacy rule is also marked Requires correction.
+Searched: contracts/9/specs/governance_old_rules.spec, governance.spec and other sibling specs, specs/harnesses, specs/scripts and contracts/9/contracts/governance/*.
+Not repaired; no helper has been borrowed across specs without source linkage.

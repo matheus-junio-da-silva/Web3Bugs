@@ -94,3 +94,59 @@
 - runNoBankruptcy.sh selects ControllerHarnessExtra, while runController.sh and runValidBalances.sh select ControllerHarness. Privileged.spec targets production Whitelist. The run scripts and applyHarnesses.sh are included in the immutable source snapshot.
 - Example 27 onlyValidOtoken: PDF item 25 ✔, Result VERIFIED, Detection Outcome NO_FINDING; changes in pool balance or supply must imply whitelist approval under the rule preconditions.
 - Example 28 OtokenInVaultIsWhitelisted: PDF item 26 ✔, Result VERIFIED, Detection Outcome NO_FINDING, technical label S3-2. Whitelist state is constrained before a modeled call and checked afterward. This is not a tautology.
+
+## Formal validator execution record
+
+The following commands were executed against the real checked-out and pushed Git head
+fba323c1d70da86c670b9d4a4cdbac9b43e8a568 (base main 4a1bea89d88aa3b6aa165e8d81b8dd523c7afb82).
+The host supplies Python 3 as python3; a private work-directory symlink named python points to that interpreter.
+All commands were actually run, not simulated by an API structural check.
+
+At Web3Bugs-certora/:
+
+    python scripts/check_specs.py .
+    Exit code: 0
+    Check passed! 198 spec examples and 203 Bug Label relationships are structurally consistent.
+
+    python scripts/check_contests_csv.py .
+    Exit code: 0
+    Check passed!
+        ./results/contests.csv is consistant with ./reports
+
+    python scripts/check_contracts.py .
+    Exit code: 0
+    Check passed!
+        ./contracts is consistant with ./reports
+
+At repository root:
+
+    git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+    Exit code: 2
+    624 whitespace warnings on 64 files. All identified warning categories are source-derived:
+    129 in byte-identical historical contract/spec snapshot files, 495 in
+    source-preserving extracted CVL/Solidity examples. No warnings were
+    attributed to the generated Markdown report, catalog docs or CSV prose.
+
+Representative actual git output:
+
+    Web3Bugs-certora/contracts/14/specs/ControllerOrderOfOperations.spec:5: trailing whitespace.
+    Web3Bugs-certora/contracts/14/specs/ControllerOrderOfOperations.spec:6: trailing whitespace.
+    Web3Bugs-certora/contracts/14/specs/ControllerOrderOfOperations.spec:11: trailing whitespace.
+
+The original source cannot be stripped of trailing whitespace while also keeping the
+required byte-identical historical snapshot. The N.spec / N.sol excerpts likewise preserve
+literal source lines, so whitespace from those excerpts remains. Do not present this
+diff check as PASS. This is an outstanding review blocker and the PR must remain draft.
+The orchestrator can either explicitly accept the original-source fidelity exception or
+define a narrowly scoped policy for generated/source-derived files. No source CVL
+expression was rewritten to suppress validation errors.
+
+Independent source-level provenance audit after the commit:
+- 34 catalog examples reconstructed from cited CVL source ranges byte-for-byte.
+- 34 Solidity excerpts checked against original-file line ranges.
+- 133 non-PDF files matched the PropertyGPT source byte-for-byte.
+- OpynGammaDec2020.pdf Git blob SHA 4953e29b51fc4d3982aeac6e043898b12884fde1; 19 extracted report pages.
+- Zero independent provenance discrepancies.
+
+The three Python validators and the diff command will be repeated on the final PR head,
+and the final tested SHA and exit codes will be recorded in the PR body.

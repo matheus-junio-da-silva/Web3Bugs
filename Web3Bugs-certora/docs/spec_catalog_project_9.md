@@ -9,7 +9,7 @@
 - Source subtree Git hashes: `contracts/` = `7a4ccd3a239eb864cc1ab5c9af1d3b1916556f12`; `specs/` = `7eb91380b9da9b7a34bd0c64b9fc5a38edb2a9f6`.
 - `contracts/9/contracts/` and `contracts/9/specs/`: **195 source blobs** (170 contract-tree files, 25 spec-tree files) copied without editing. All 195 destination blob hashes were compared against the corresponding source blobs and matched. Historical source SPDX notices/comments and odd spellings were not modified.
 - `resources/9/CeloMay2020.pdf` is a byte-identical copy of the source PDF (Git blob SHA-1 `9801e32b8a0e59fe7dc7a0a11d736d1750c282e0`, 240,844 bytes).
-- `reports/9.md` is currently a **faithful topical index, not a full-page verbatim transcript**. The authoritative original report, including its formulae and tables, is preserved in `resources/9/CeloMay2020.pdf`. A complete Markdown transcription is an **open quality task**, not silently claimed as done.
+- `reports/9.md` has been expanded from a topical index into a **detailed 14-page, section-by-section report companion**, cross-checking the main bug table, source qualifiers, mathematical conditions, LockedGold/Election/ReleaseGold formulas, linked-list conditions, the election rounding example and the conclusion. The wording is a faithful paraphrase rather than a purported verbatim transcript; the authoritative PDF is preserved unchanged at `resources/9/CeloMay2020.pdf`.
 - Original Certora PDF: https://github.com/matheus-junio-da-silva/PropertyGPT/blob/main/certora_projects/celo_governance/CeloMay2020.pdf. The report cites two monitored code revisions, `9d2ec0d9399a6959565062f57efa037d03fd4fbc` (phase 1) and `a46ce55ebd3867fa69290bf3be040846d433525d` (phase 2). Those hashes are **not** automatically assigned to the supplied source snapshot.
 
 ## Inventory / counts
@@ -154,11 +154,11 @@ git diff --check
 
 The connected Desktop Commander machine is offline, and the local execution container cannot resolve github.com or raw.githubusercontent.com; it cannot clone/check the full remote branch. Therefore the **three Python checks and `git diff --check` have no genuine PASS/FAIL logs yet** and must be run by the independent reviewer or CI. The source snapshot contains legacy trailing whitespace and historical line endings; do not normalize them merely to make diff checks quiet.
 
-**Other open review items:** complete a full faithful Markdown transcription of the original 14-page PDF (only an indexed report Markdown is present, with byte-identical authoritative PDF); independently spot-check each `.sol` excerpt and CVL method signature against compiled historical target ABI; obtain missing configurations/harnesses for the nine incomplete examples; and run native scripts in a checked-out repository. This PR must remain **Draft** until such work is resolved or explicitly accepted by the orchestrator.
+**Other open review items:** independently verify all 52 complete dependency closures and every `.sol` excerpt against the historical target ABI and transformed harness behavior; obtain missing configurations/harnesses for the nine incomplete examples; run the three official Python validators and exact whitespace command with captured exit codes in a checked-out repository. The newly expanded `reports/9.md` is paraphrased, not a page-by-page verbatim transcription; the original PDF remains the definitive source. The PR must remain **Draft** until the relevant verification evidence is recorded.
 
 ## Catalog locations
 
 - Indexed relationships: `results/spec/spec_buglabel.csv`.
 - Complete and incomplete Project 9 examples: `results/spec/complete/9/` and `results/spec/incomplete/9/`.
-- Original immutable snapshot: `contracts/9/`; preserved PDF: `resources/9/CeloMay2020.pdf`; topical report index: `reports/9.md`.
+- Original immutable snapshot: `contracts/9/`; preserved PDF: `resources/9/CeloMay2020.pdf`; detailed source-aligned report companion: `reports/9.md`.
 - Contest metadata and original findings: `results/contests.csv`, `results/bugs.csv`.

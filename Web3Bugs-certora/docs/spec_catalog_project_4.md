@@ -62,14 +62,14 @@ exchangeRateNeverZero is the one VIOLATED active source instance because the rep
 
 | Ex. | Property | Label(s) | Result | Detection Outcome | Report ref. | Review note |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | integrityOfStaking | S6-4 | VERIFIED | NO_FINDING | #1 | Exact-name report status and active source semantics are consistent. |
+| 1 | integrityOfStaking | S6-4 | VERIFIED | NO_FINDING | #1 | Share delta is checked against the **post-call** exchange rate; current `_stake` does not update it, but no pre-call rate snapshot is asserted. |
 | 2 | noStakingPostSlashingPeriod | S5-2 | VERIFIED | NO_FINDING | #16 | Pre-call slashing flag is required; `lastReverted` accepts any revert cause, not necessarily the slashing guard. |
 | 3 | noSlashingMoreThanMax | S6-4 | VERIFIED | NO_FINDING | #6 | Exact-name report status and active source semantics are consistent. |
-| 4 | integrityOfSlashing | S6-4; S3-2 | VERIFIED | NO_FINDING | #5 | Separate accounting and post-slashing-state assertions justify two technical relationships. |
+| 4 | integrityOfSlashing | S6-4; S3-2 | VERIFIED | NO_FINDING | #5 | Accounting and flag assertions justify two labels; the clamping percentage is read **after** slash, not snapshotted as a stable pre-call parameter. |
 | 5 | integrityOfReturnFunds | S6-4 | VERIFIED | NO_FINDING | #9 | The **post-call** `require(balanceStakeTokenVaultAfter > 0)` filters out a zero-vault outcome before accounting assertions. |
 | 6 | noEntryUntilSlashingSettled | S5-2 | VERIFIED | NOT_STATED | #4 | ❌✔ with no issue-table linkage; the slashing flag is read **after** stake, so this tests a conditional post-state implication, not all pre-state entry violations. |
 | 7 | airdropNotMutualized | S3-2 | VERIFIED | NO_FINDING | #15 | Direct transfer must not update the internal exchange rate. |
-| 8 | noRedeemOutOfUnstakeWindow | S5-2 | VERIFIED | NO_FINDING | #12 | Counterexample is successful redemption at a forbidden time. |
+| 8 | noRedeemOutOfUnstakeWindow | S5-2 | VERIFIED | NO_FINDING | #12 | Successful redeem outside the permitted window is detected using pre-call cooldown timestamp, but the slashing flag and cooldown duration are read **after** the call. |
 | 9 | totalSupplyDoesNotDropToZero | S3-2 | VERIFIED | NO_FINDING | #25 | Counterexample is an unexpected zeroing state transition by a non-redeem method. |
 | 10 | cooldownCorrectness | S6-4 | NOT_STATED | NOT_STATED | #17 historical name only | Active source checks redeemed-share cap; report #17 describes a materially different cooldown-window formula. |
 | 11 | rewardsGetterEquivalentClaim | S6-2 | VERIFIED | NO_FINDING | #18 | Getter/claim observational equivalence. |
@@ -141,13 +141,16 @@ For allSharesAreBacked, the editable DOCX places footnote [1] on that invariant 
 
 These concrete interpretation limits are independent of historical formal result, finding linkage, and dependency status. They were found by reading the executable `require`, `@withrevert`, and `assert` placement:
 
+- **Example 1 — integrityOfStaking:** the expected shares are calculated using the rate fetched **after** `stake`; current `_stake` does not change that rate, but the original assertion does not directly compare against a saved pre-call rate.
 - **Example 2 — noStakingPostSlashingPeriod:** `require(inPostSlashingPeriod())` is evaluated before staking, but `assert lastReverted` does **not** establish the reason for a revert or reachability of a valid stake call.
+- **Example 4 — integrityOfSlashing:** the formula multiplies the pre-call vault balance by the **post-call** `getMaxSlashablePercentage()`. Current `slash` does not change this configuration, but mutation of that value is not independently excluded by the formula.
 - **Example 5 — integrityOfReturnFunds:** the body calls `returnFunds`, reads the balances, then imposes `require(balanceStakeTokenVaultAfter > 0)`. Consequently, zero-vault post-states never reach either balance-delta assertion.
 - **Example 6 — noEntryUntilSlashingSettled:** `inPostSlashingPeriod()` is read **after** `stake@withrevert`. A successful hypothetical stake that cleared the flag would not violate the implication; any revert cause also satisfies it. The concrete supplied `_stake` checks the flag and does not clear it, but that does not change what the CVL formula literally asserts.
+- **Example 8 — noRedeemOutOfUnstakeWindow:** the cooldown timestamp is pre-call, but the flag and duration are read post-call; current `_redeem` does not modify them.
 - **Example 18 — slashAndReturnFundsOfZeroDoesntChangeExchangeRate:** latest-version zero-value call reverts mean `VERIFIED` must not be overstated as confirming successful no-op behavior; see the documented historical `❌✔` limitation.
 - **Example 19 — integrityOfRedeem:** `cooldownAmount(sender)` is read **after** the redemption has reduced/deleted cooldown state, so the consequent is checked only under the remaining post-call cap.
 
-All five rules retain their literal historical bodies and their independently sourced report results. The technical Bug Labels still describe the kinds of failures that can falsify these **restricted** assertions, not full protocol guarantees.
+All eight rules retain their literal historical bodies and their independently sourced report results. The technical Bug Labels still describe the kinds of failures that can falsify these **restricted** assertions, not full protocol guarantees.
 
 ## Source/report drift and result attribution
 

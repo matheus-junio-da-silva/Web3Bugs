@@ -1,6 +1,6 @@
 # P7 historical CVL is preserved byte-for-byte, including its source trailing spaces.
 # Ignore only trailing-space diagnostics for original and literal-extracted CVL.
 # Other projects and all other whitespace checks retain Git defaults.
-contracts/7/specs/*.spec whitespace=-blank-at-eol
-results/spec/complete/7/*.spec whitespace=-blank-at-eol
-results/spec/incomplete/7/*.spec whitespace=-blank-at-eol
+contracts/7/specs/*.spec whitespace=-blank-at-eol,-space-before-tab
+results/spec/complete/7/*.spec whitespace=-blank-at-eol,-space-before-tab
+results/spec/incomplete/7/*.spec whitespace=-blank-at-eol,-space-before-tab

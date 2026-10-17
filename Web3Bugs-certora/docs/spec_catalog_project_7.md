@@ -301,3 +301,7 @@ The PDF is 8 pages; all source conditions were checked against text-layer extrac
 ### Strict classification limitation
 
 The 46 `complete` and 28 `incomplete` classifications are based on static dependency closure within the PropertyGPT snapshot, not on a compilation or run of the 2022 Certora harness. No external harness was silently created. The 28 missing-symbol reasons remain in the per-example `.txt` files. The difference between source commit `a87d546` and the PropertyGPT snapshot is material and unresolved at formal-equivalence level.
+
+## Project-scoped historical CVL whitespace policy
+
+The six original Project-7 CVL specs contain historical trailing spaces and mixed space/tab indentation. Their original bytes, and the literal CVL declarations and property bodies in the extracted examples, must be preserved rather than reformatted. The file `Web3Bugs-certora/.gitattributes` therefore uses `whitespace=-blank-at-eol,-space-before-tab` **only** for `contracts/7/specs/*.spec`, `results/spec/complete/7/*.spec` and `results/spec/incomplete/7/*.spec`. No other Project ID is covered and the rest of Git's whitespace checks stay enabled. This is an explicit validation exception for unmodified historical whitespace, not an assertion that the original CVL followed modern style conventions.

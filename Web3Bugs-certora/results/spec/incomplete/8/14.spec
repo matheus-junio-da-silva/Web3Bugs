@@ -3,17 +3,9 @@
 // Shared imports are inlined selectively without duplicated import statements.
 // Historical CVL syntax not migrated. No Certora Prover run has been reproduced.
 
-// Original CVL: contracts/8/specs/methods_base.spec:3;4;5 (using declarations)
-using AToken as _AToken
+// Original CVL: contracts/8/specs/methods_base.spec:4;5 (using declarations)
 using DummyERC20_aTokenUnderlying as Underlying
 using SymbolicLendingPoolL1 as _SymbolicLendingPoolL1
-
-// Original CVL: contracts/8/specs/methods_base.spec:20;21;28 (selected method declarations)
-methods {
-    getLastVaultBalance() returns (uint256) envfree;
-    getAccumulatedFees() returns (uint128) envfree;
-    _AToken.balanceOf(address) returns (uint256) envfree;
-}
 
 // Original CVL: contracts/8/specs/methods_base.spec:167-177
 ghost sumAllBalance_underline() returns mathint {
@@ -29,7 +21,7 @@ hook Sload uint256 balance Underlying.b[KEY address a] STORAGE {
 }
 
 
-// Original CVL: contracts/8/specs/fees_LEQ_ATokenBal.spec:2-55
+// Original CVL: contracts/8/specs/fees_LEQ_ATokenBal.spec:2-39
 
 
 methods {
@@ -68,23 +60,6 @@ ghost rayDiv_g(uint256 , uint256) returns uint256 {
          x/2 <= rayDiv_g(x,y) && rayDiv_g(x,y) <= x
         );
 }
-
-
-function max_possible_fees() returns uint256 {
-    return to_uint256(getAccumulatedFees()
-                      +
-                      (_AToken.balanceOf(currentContract)-getLastVaultBalance())
-                     );
-}
-
-
-
-
-
-// ******************************************************************************
-// The following 3 invariants are proved in totalSupply_EQ_sumAllBal.spec
-// ******************************************************************************
-
 
 // Original CVL: contracts/8/specs/fees_LEQ_ATokenBal.spec:56-57
 invariant inv_sumAllBalance_eq_totalSupply__underline()

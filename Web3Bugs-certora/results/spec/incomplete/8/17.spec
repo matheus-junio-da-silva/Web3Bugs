@@ -8,15 +8,14 @@ using AToken as _AToken
 using DummyERC20_aTokenUnderlying as Underlying
 using SymbolicLendingPoolL1 as _SymbolicLendingPoolL1
 
-// Original CVL: contracts/8/specs/methods_base.spec:20;21;28 (selected method declarations)
+// Original CVL: contracts/8/specs/methods_base.spec:20;28 (selected method declarations)
 methods {
     getLastVaultBalance() returns (uint256) envfree;
-    getAccumulatedFees() returns (uint128) envfree;
     _AToken.balanceOf(address) returns (uint256) envfree;
 }
 
 
-// Original CVL: contracts/8/specs/fees_LEQ_ATokenBal.spec:2-55
+// Original CVL: contracts/8/specs/fees_LEQ_ATokenBal.spec:2-39
 
 
 methods {
@@ -55,23 +54,6 @@ ghost rayDiv_g(uint256 , uint256) returns uint256 {
          x/2 <= rayDiv_g(x,y) && rayDiv_g(x,y) <= x
         );
 }
-
-
-function max_possible_fees() returns uint256 {
-    return to_uint256(getAccumulatedFees()
-                      +
-                      (_AToken.balanceOf(currentContract)-getLastVaultBalance())
-                     );
-}
-
-
-
-
-
-// ******************************************************************************
-// The following 3 invariants are proved in totalSupply_EQ_sumAllBal.spec
-// ******************************************************************************
-
 
 // Original CVL: contracts/8/specs/fees_LEQ_ATokenBal.spec:69-70
 invariant lastVaultBalance_OK()

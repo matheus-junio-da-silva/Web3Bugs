@@ -7,9 +7,9 @@
 
 ## Included original source ranges
 - contracts/8/specs/methods_base.spec:3;4;5
-- contracts/8/specs/methods_base.spec:20;21;28;29
+- contracts/8/specs/methods_base.spec:29
 - contracts/8/specs/methods_base.spec:183-193
-- contracts/8/specs/fees_LEQ_ATokenBal.spec:2-55
+- contracts/8/specs/fees_LEQ_ATokenBal.spec:2-39
 - contracts/8/specs/fees_LEQ_ATokenBal.spec:59-60
 
 ## Resolution policy and negative findings

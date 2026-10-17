@@ -87,12 +87,12 @@ Report checkmarks are historical results only. The source rule settlementRatesAr
 | 54 | enablingBitmapCannotLeaveBehindAssets | S5-2 | NOT_STATED | NOT_STATED | AccountPortfolioHarness |
 | 55 | bitmapPortfoliosCannotHaveAssetArray | S3-2 | NOT_STATED | NOT_STATED | AccountPortfolioHarness |
 | 56 | activeCurrenciesAreNotDuplicatedAndSorted | S2-3 | NOT_STATED | NOT_STATED | AccountPortfolioHarness |
-| 57 | bitmapCurrencyIsNotDuplicatedInActiveCurrencies | S2-3 | NOT_STATED | NOT_STATED | AccountPortfolioHarness |
+| 57 | bitmapCurrencyIsNotDuplicatedInActiveCurrencies | UNMAPPED | NOT_STATED | NOT_STATED | AccountPortfolioHarness |
 | 58 | r | UNMAPPED | NOT_STATED | NOT_STATED | FreeCollateralExternal |
 
 ## Label distribution
 
-S2-3: 3; S3-2: 18; S5-2: 2; S5-3: 1; S6-2: 7; S6-4: 13; UNMAPPED: 14
+S2-3: 2; S3-2: 18; S5-2: 2; S5-3: 1; S6-2: 7; S6-4: 13; UNMAPPED: 15
 
 ## Dependency and validation limitations
 
@@ -105,3 +105,7 @@ Native required tests and the Git diff whitespace check must be run against the 
 - Example 7: The published bitmap-uniqueness proposition has a checkmark, but the executable source implication is a tautology and cannot detect a duplicate; neither the exact historical proof run nor this body-to-report identity is established. Original result for this source is NOT_STATED.
 
 - Example 39: The PDF marks the general settlement-rates-never-reset proposition verified; the active CVL asserts a different, contradictory zero-prestate implication, so the original checkmark cannot be propagated as the result of this exact formula. Original result for this source is NOT_STATED.
+
+## Additional variant-semantic correction
+
+Example 57 (oldAccountContext.spec) is also tautological. The label is UNMAPPED, consistent with the source-level weakness in Example 7, but no formal result or target context is propagated between the two instances.

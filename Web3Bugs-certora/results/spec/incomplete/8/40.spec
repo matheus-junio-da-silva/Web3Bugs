@@ -49,6 +49,21 @@ invariant inv_sumAllBalance_eq_totalSupply()
     filtered {f -> f.selector != havoc_all().selector}
 
 
+// Original CVL: contracts/8/specs/methods_base.spec:151-153
+ghost sumAllBalance() returns mathint {
+    init_state axiom sumAllBalance() == 0;
+}
+
+// Original CVL: contracts/8/specs/methods_base.spec:155-157
+hook Sstore _balances[KEY address a] uint256 balance (uint256 old_balance) STORAGE {
+  havoc sumAllBalance assuming sumAllBalance@new() == sumAllBalance@old() + balance - old_balance;
+}
+
+// Original CVL: contracts/8/specs/methods_base.spec:159-161
+hook Sload uint256 balance _balances[KEY address a] STORAGE {
+    require balance <= sumAllBalance();
+}
+
 // Original CVL: contracts/8/specs/totalSupply_EQ_sumAllBal.spec:33-39
 invariant inv_balanceOf_leq_totalSupply(address user)
     balanceOf(user) <= totalSupply()

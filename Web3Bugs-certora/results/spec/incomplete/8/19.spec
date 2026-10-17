@@ -158,6 +158,85 @@ invariant lastVaultBalance_OK()
     getLastVaultBalance() <= _AToken.balanceOf(currentContract)
 
 
+// Original CVL: contracts/8/specs/methods_base.spec:128-133
+definition is_withdraw_method(method f) returns bool =
+    (
+     f.selector == withdraw(uint256,address,address).selector ||
+     f.selector == withdrawATokens(uint256,address,address).selector ||
+     is_withdrawSig_method(f)
+    );
+
+// Original CVL: contracts/8/specs/methods_base.spec:134-139
+definition is_redeem_method(method f) returns bool =
+    (
+     f.selector == redeem(uint256,address,address).selector ||
+     f.selector == redeemAsATokens(uint256,address,address).selector ||
+     is_redeemSig_method(f)
+    );
+
+// Original CVL: contracts/8/specs/methods_base.spec:151-153
+ghost sumAllBalance() returns mathint {
+    init_state axiom sumAllBalance() == 0;
+}
+
+// Original CVL: contracts/8/specs/methods_base.spec:155-157
+hook Sstore _balances[KEY address a] uint256 balance (uint256 old_balance) STORAGE {
+  havoc sumAllBalance assuming sumAllBalance@new() == sumAllBalance@old() + balance - old_balance;
+}
+
+// Original CVL: contracts/8/specs/methods_base.spec:159-161
+hook Sload uint256 balance _balances[KEY address a] STORAGE {
+    require balance <= sumAllBalance();
+}
+
+// Original CVL: contracts/8/specs/methods_base.spec:183-185
+ghost sumAllBalance_atoken() returns mathint {
+    init_state axiom sumAllBalance_atoken() == 0;
+}
+
+// Original CVL: contracts/8/specs/methods_base.spec:187-189
+hook Sstore _AToken._userState[KEY address a] .(offset 0) uint128 balance (uint128 old_balance) STORAGE {
+  havoc sumAllBalance_atoken assuming sumAllBalance_atoken@new() == sumAllBalance_atoken@old() + balance - old_balance;
+}
+
+// Original CVL: contracts/8/specs/methods_base.spec:191-193
+hook Sload uint128 balance _AToken._userState[KEY address a] .(offset 0) STORAGE {
+    require balance <= sumAllBalance_atoken();
+}
+
+// Original CVL: contracts/8/specs/methods_base.spec:167-169
+ghost sumAllBalance_underline() returns mathint {
+    init_state axiom sumAllBalance_underline() == 0;
+}
+
+// Original CVL: contracts/8/specs/methods_base.spec:171-173
+hook Sstore Underlying.b[KEY address a] uint256 balance (uint256 old_balance) STORAGE {
+  havoc sumAllBalance_underline assuming sumAllBalance_underline@new() == sumAllBalance_underline@old() + balance - old_balance;
+}
+
+// Original CVL: contracts/8/specs/methods_base.spec:175-177
+hook Sload uint256 balance Underlying.b[KEY address a] STORAGE {
+    require balance <= sumAllBalance_underline();
+}
+
+// Original CVL: contracts/8/specs/methods_base.spec:97-103
+definition is_withdrawSig_method(method f) returns bool =
+    (
+     f.selector == withdrawWithSig(uint256,address,address,
+                                   (uint8,bytes32,bytes32,uint256)).selector ||
+     f.selector == withdrawATokensWithSig(uint256,address,address,
+                                          (uint8,bytes32,bytes32,uint256)).selector
+    );
+
+// Original CVL: contracts/8/specs/methods_base.spec:104-110
+definition is_redeemSig_method(method f) returns bool =
+    (
+     f.selector == redeemWithSig(uint256,address,address,
+                                 (uint8,bytes32,bytes32,uint256)).selector ||
+     f.selector == redeemWithATokensWithSig(uint256,address,address,
+                                            (uint8,bytes32,bytes32,uint256)).selector
+    );
+
 // Original CVL: contracts/8/specs/fees_LEQ_ATokenBal.spec:201-210
 rule getCLMFees_LEQ_ATokenBAL_RW(method f) filtered {f ->
         !harnessOnlyMethods(f) &&

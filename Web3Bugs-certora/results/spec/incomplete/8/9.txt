@@ -1,14 +1,19 @@
-# Missing dependency — previewMint_has_NO_threshold (example 9)
+# Dependency audit, second pass — AAVE Vault / Project 8 / example 9
 
-Original: contracts/8/specs/erc4626.spec:248-264
+**Classification: incomplete.** The exact selected property depends on missing implementation/model artifacts below; missing compiler flags alone are NOT counted as a dependency.
 
-1. AToken as _AToken: missing AToken.sol / _userState implementation and scaled balance model
-2. DummyERC20_aTokenUnderlying: missing dummy ERC20 contract and Underlying.b storage
-3. SymbolicLendingPoolL1: missing symbolic lending-pool harness and getLiquidityIndex()
-4. ATokenVaultHarness: missing typed EIP712Signature and handle* wrappers
-5. getAccumulatedFees(): no external getter, only _s.accumulatedFees internal state
-6. havoc_all(): symbolic harness entrypoint declared only in CVL
-7. maxAssetsWithdrawableFromAave(): external mock getter absent; only internal _maxAssetsWithdrawableFromAave exists
-8. OpenZeppelin ERC4626Upgradeable/ERC20Upgradeable inherited implementation absent from local snapshot
+## Effective transitive dependency gaps
+1. ERC4626Upgradeable / ERC20Upgradeable: inherited implementation (external OpenZeppelin dependencies) missing from source snapshot
+2. Aave pool / AToken: imported Aave execution and linking model missing
+3. havoc_all(): symbolic mutation entrypoint directly invoked by this threshold check is missing
 
-Search scope: ALL Project 8 source snapshot files, including ten specs, ATokenVault.sol, ATokenVaultStorage.sol, ATokenVaultV2.sol, interfaces/IATokenVault.sol, libraries/Constants.sol, libraries/MetaTxHelpers.sol. Methods declarations/using aliases/ghosts are not original Solidity implementations. No historical linked mocks, verifier run scripts, package maps or .conf files exist in the provided source subtree. No helper is synthesized or borrowed from another project. Historical CVL syntax migration is separate and not the reason for incomplete.
+## Included original source ranges
+- contracts/8/specs/methods_base.spec:13;14;18 (selected method declarations)
+- contracts/8/specs/erc4626.spec:1-72
+- contracts/8/specs/erc4626.spec:248-264
+
+## Resolution policy and negative findings
+- `methods_base.spec` and `erc20.spec` are original source snapshot files, but no unresolved import is left in this extracted unit. Needed available `using`, `methods`, constants, ghosts, hooks and helper snippets are copied with provenance; no fabricated harness is introduced.
+- Generic missing mocks, `getAccumulatedFees()`, `Underlying.b`, unused selectors and generic `havoc_all()` are **not** declared dependencies unless identified above for this example. The earlier v1 list was a global superset and is superseded by this rule-specific assessment.
+- Source-local global ghost/axiom models may constrain an entire verification instance even if not syntactically called. Where preserved, distinguish such ambient assumptions from transitive *symbol resolution*; potential contradictions are documented in the semantic audit, not silently removed from the historical snapshot.
+- Verified external missing checks apply to this Project 8 snapshot's six Solidity files. No source from another project's mocks is borrowed. Missing pinned package/harness and run configs prevent proving historical reproducibility, not necessarily logical correctness.

@@ -7,5 +7,11 @@ Required upstream Solidity sources are absent from the 47-file `contracts/11/` s
 
 Search locations: original PropertyGPT certora_projects/keep_fully/contracts/ (all contracts/api, fully-backed, test, integration), specs/ and specs/harness/, 47 source files, including inherited base contracts. Relevant harness helper declarations exist, but external @keep-network/keep-core, @keep-network/sortition-pools, and openzeppelin-solidity dependency implementations do not.
 
-The supplied source hooks also mismatch production bond IDs: harness registerBondID mapping writes are commented out, while production getBondID hashes operator/holder/reference. This is a modeling caveat, not fabricated missing Solidity code.
+This property uses CVL hook state from `fullyBackedBonding.spec:70-95`; however `FullyBackedBondingHarness.sol:48-58` comments out the `registerBondID` mapping write while production `AbstractBonding.getBondID` (`AbstractBonding.sol:345-353`) hashes the bond ID. This limits ghost-total interpretation independently from missing package imports.
 No CVL2 migration is attempted or cited as a reason for incomplete.
+
+EXACT MISSING-IMPORT SITES AND SYMBOL RESOLUTION
+- `contracts/11/specs/harness/FullyBackedBondingHarness.sol:3-5` imports and inherits `FullyBackedBonding`.
+- `contracts/11/contracts/fully-backed/FullyBackedBonding.sol:19-23` imports absent `Authorizations`, `StakeDelegatable`, `KeepRegistry`, `IFullyBackedBonding` from third-party packages (inherited at lines 29-33).
+- `contracts/11/contracts/AbstractBonding.sol:19-21` imports absent `KeepRegistry` and `SafeMath` (used at line 26).
+- Property's exact reference range appears above. Missing inherited Solidity symbols make the complete target unresolvable in the snapshot; no inferred implementation or CVL2 conversion was substituted.

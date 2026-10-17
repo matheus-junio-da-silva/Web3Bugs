@@ -43,7 +43,7 @@ definition harnessOnlyMethods(method f) returns bool =
 function maxUint128() returns uint128 {return 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF;}
 
 
-// Original CVL: contracts/8/specs/fees_LEQ_ATokenBal.spec:1-55
+// Original CVL: contracts/8/specs/fees_LEQ_ATokenBal.spec:2-55
 
 
 methods {

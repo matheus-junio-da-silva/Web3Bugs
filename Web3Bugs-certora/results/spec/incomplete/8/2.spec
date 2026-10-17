@@ -38,7 +38,7 @@ function accrueYieldSummary(){
 }
 
 
-// Original CVL: contracts/8/specs/changeInContractBalanceShouldCauseAccrual.spec:1-32
+// Original CVL: contracts/8/specs/changeInContractBalanceShouldCauseAccrual.spec:2-32
 
 
 methods{

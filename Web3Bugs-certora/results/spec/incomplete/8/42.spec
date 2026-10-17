@@ -26,7 +26,7 @@ hook Sload uint128 balance _AToken._userState[KEY address a] .(offset 0) STORAGE
 }
 
 
-// Original CVL: contracts/8/specs/totalSupply_EQ_sumAllBal.spec:1-28
+// Original CVL: contracts/8/specs/totalSupply_EQ_sumAllBal.spec:2-28
 
 methods {
     Underlying.totalSupply() envfree;

@@ -26,7 +26,7 @@ hook Sload uint256 balance _balances[KEY address a] STORAGE {
 }
 
 
-// Original CVL: contracts/8/specs/positiveSupply_imply_positiveAssets.spec:1-58
+// Original CVL: contracts/8/specs/positiveSupply_imply_positiveAssets.spec:2-58
 
 methods {
     totalAssets() returns uint256 envfree;

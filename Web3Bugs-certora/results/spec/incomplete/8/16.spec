@@ -30,7 +30,7 @@ hook Sload uint256 balance _balances[KEY address a] STORAGE {
 }
 
 
-// Original CVL: contracts/8/specs/fees_LEQ_ATokenBal.spec:1-55
+// Original CVL: contracts/8/specs/fees_LEQ_ATokenBal.spec:2-55
 
 
 methods {

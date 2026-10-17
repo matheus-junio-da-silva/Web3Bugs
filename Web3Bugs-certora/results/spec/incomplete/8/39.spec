@@ -25,7 +25,7 @@ hook Sload uint256 balance _balances[KEY address a] STORAGE {
 }
 
 
-// Original CVL: contracts/8/specs/totalSupply_EQ_sumAllBal.spec:1-28
+// Original CVL: contracts/8/specs/totalSupply_EQ_sumAllBal.spec:2-28
 
 methods {
     Underlying.totalSupply() envfree;

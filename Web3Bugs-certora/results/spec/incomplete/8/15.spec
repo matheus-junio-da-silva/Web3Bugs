@@ -30,7 +30,7 @@ hook Sload uint128 balance _AToken._userState[KEY address a] .(offset 0) STORAGE
 }
 
 
-// Original CVL: contracts/8/specs/fees_LEQ_ATokenBal.spec:1-55
+// Original CVL: contracts/8/specs/fees_LEQ_ATokenBal.spec:2-55
 
 
 methods {

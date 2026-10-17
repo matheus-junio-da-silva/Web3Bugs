@@ -12,7 +12,7 @@ methods {
 definition RAY() returns uint256 = 10^27;
 
 
-// Original CVL: contracts/8/specs/accrueYieldCheck.spec:1-38
+// Original CVL: contracts/8/specs/accrueYieldCheck.spec:2-38
 
 
 methods{

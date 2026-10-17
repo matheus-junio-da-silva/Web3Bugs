@@ -27,7 +27,7 @@ hook Sload uint128 balance _AToken._userState[KEY address a] .(offset 0) STORAGE
 }
 
 
-// Original CVL: contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:1-39
+// Original CVL: contracts/8/specs/lastVaultBal_LEQ_ATokenBalThis.spec:2-39
 
 methods {
     Underlying.totalSupply() envfree;

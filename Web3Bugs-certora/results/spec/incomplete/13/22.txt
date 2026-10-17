@@ -1,0 +1,7 @@
+INCOMPLETE DEPENDENCY — Project 13 Example 22
+Property: allBitmapBitsAreValid
+Original spec: certora/accountContext/Portfolio.spec:220-226
+Original target: AccountPortfolioHarness
+The source tree was searched recursively: certora/, contracts/mocks/certora/, internal/, external/, math/, global/ and historic .conf/.sh run parameters.
+The scripts reference Brownie-installed @openzeppelin/openzeppelin-contracts@3.4.0-solc-0.7, compound-finance, external Solidity interface maps, solc version and Prover settings not preserved as local source. These are not reconstructed with newer versions.
+Proof/result reconstruction from the PDF and prover run is not available in the current environment. Migration of CVL syntax is not the reason for incomplete status.

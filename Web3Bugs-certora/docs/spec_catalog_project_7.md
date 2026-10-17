@@ -6,15 +6,15 @@ Exactly 74 active rule/invariant instances in six supplied specs, each with one 
 
 | Source spec | Active rules | Active invariants | Complete | Incomplete | VERIFIED | NOT_STATED |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| AToken.spec | 11 | 1 | 7 | 5 | 10 | 2 |
+| AToken.spec | 11 | 1 | 7 | 5 | 7 | 5 |
 | ReserveConfiguration.spec | 20 | 0 | 13 | 7 | 0 | 20 |
 | StableDebtToken.spec | 14 | 1 | 13 | 2 | 6 | 9 |
-| UserConfiguration.spec | 6 | 6 | 0 | 12 | 7 | 5 |
-| VariableDebtToken.spec | 13 | 1 | 13 | 1 | 8 | 6 |
+| UserConfiguration.spec | 6 | 6 | 0 | 12 | 3 | 9 |
+| VariableDebtToken.spec | 13 | 1 | 13 | 1 | 6 | 8 |
 | pool.spec | 1 | 0 | 0 | 1 | 0 | 1 |
-| **Total** | **65** | **9** | **46** | **28** | **31** | **43** |
+| **Total** | **65** | **9** | **46** | **28** | **22** | **52** |
 
-All 74 examples have exactly one semantic Bug Label row; **74 CSV relationship rows**. All 31 individually report-matched rules have Detection Outcome NO_FINDING; all 43 unmatched have NOT_STATED. No property is attributed VIOLATED/FINDING by name. The report's separately described Pool findings are not silently mapped to these source rules. `UNMAPPED`: 0; the active rules/invariants here state normative expected behavior.
+All 74 examples have exactly one semantic Bug Label row; **74 CSV relationship rows**. After conservative rule-by-rule report matching, 22 instances remain VERIFIED/NO_FINDING and 52 instances are NOT_STATED/NOT_STATED; nine prior VERIFIED attributions have been downgraded due to materially different source assertions or missing historical proof preconditions. No property is attributed VIOLATED/FINDING by name. The report's separately described Pool findings are not silently mapped to these source rules. `UNMAPPED`: 0; the active rules/invariants here state normative expected behavior.
 
 ## Original evidence and textual snapshot integrity
 
@@ -63,11 +63,11 @@ Columns explicitly record (a) false assertion/counterexample, (b) label, (c) nor
 | 2 | AToken / `permitIntegrity` | A successful signature authorization fails to set the intended allowance or increment the nonce exactly once | S3-2 | Normative | NOT_STATED/NOT_STATED; AToken |
 | 3 | AToken / `mintArgsPositive` | A successful mint of zero would violate the mandatory rejection of an invalid amount | SE-4 | Normative | VERIFIED/NO_FINDING; AToken |
 | 4 | AToken / `balanceOfChange` | An arbitrary non-view operation changes the balances of too many distinct users | S3-2 | Normative | VERIFIED/NO_FINDING; AToken |
-| 5 | AToken / `integrityMint` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | VERIFIED/NO_FINDING; AToken |
+| 5 | AToken / `integrityMint` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; AToken |
 | 6 | AToken / `additiveMint` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | VERIFIED/NO_FINDING; AToken |
-| 7 | AToken / `integrityTransfer` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | VERIFIED/NO_FINDING; AToken |
+| 7 | AToken / `integrityTransfer` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; AToken |
 | 8 | AToken / `additiveTransfer` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | VERIFIED/NO_FINDING; AToken |
-| 9 | AToken / `integrityBurn` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | VERIFIED/NO_FINDING; AToken |
+| 9 | AToken / `integrityBurn` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; AToken |
 | 10 | AToken / `additiveBurn` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | VERIFIED/NO_FINDING; AToken |
 | 11 | AToken / `burnNoChangeToOther` | A burn/mint changes an unrelated account's balance or tracked additional data | S3-2 | Normative | VERIFIED/NO_FINDING; AToken |
 | 12 | AToken / `mintNoChangeToOther` | A burn/mint changes an unrelated account's balance or tracked additional data | S3-2 | Normative | VERIFIED/NO_FINDING; AToken |
@@ -106,10 +106,10 @@ Columns explicitly record (a) false assertion/counterexample, (b) label, (c) nor
 | 45 | StableDebtToken / `burnNoChangeToOther` | A burn/mint changes an unrelated account's balance or tracked additional data | S3-2 | Normative | NOT_STATED/NOT_STATED; StableDebtToken |
 | 46 | StableDebtToken / `mintNoChangeToOther` | A burn/mint changes an unrelated account's balance or tracked additional data | S3-2 | Normative | NOT_STATED/NOT_STATED; StableDebtToken |
 | 47 | StableDebtToken / `disallowedFunctionalities` | A debt-token transfer/approval method selected by disAllowedFunctions completes rather than reverting | SC | Normative | NOT_STATED/NOT_STATED; StableDebtToken |
-| 48 | UserConfiguration / `setBorrowing` | A borrowing/collateral setter fails to make the corresponding bit getter equal to the supplied boolean | S3-2 | Normative | VERIFIED/NO_FINDING; UserConfiguration (library; historical harness unresolved) |
-| 49 | UserConfiguration / `setBorrowingNoChangeToOther` | Changing a reserve's borrowing/collateral bit changes an unrelated reserve's borrowing or collateral bit | S3-2 | Normative | VERIFIED/NO_FINDING; UserConfiguration (library; historical harness unresolved) |
-| 50 | UserConfiguration / `setUsingAsCollateral` | A borrowing/collateral setter fails to make the corresponding bit getter equal to the supplied boolean | S3-2 | Normative | VERIFIED/NO_FINDING; UserConfiguration (library; historical harness unresolved) |
-| 51 | UserConfiguration / `setCollateralNoChangeToOther` | Changing a reserve's borrowing/collateral bit changes an unrelated reserve's borrowing or collateral bit | S3-2 | Normative | VERIFIED/NO_FINDING; UserConfiguration (library; historical harness unresolved) |
+| 48 | UserConfiguration / `setBorrowing` | A borrowing/collateral setter fails to make the corresponding bit getter equal to the supplied boolean | S3-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
+| 49 | UserConfiguration / `setBorrowingNoChangeToOther` | Changing a reserve's borrowing/collateral bit changes an unrelated reserve's borrowing or collateral bit | S3-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
+| 50 | UserConfiguration / `setUsingAsCollateral` | A borrowing/collateral setter fails to make the corresponding bit getter equal to the supplied boolean | S3-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
+| 51 | UserConfiguration / `setCollateralNoChangeToOther` | Changing a reserve's borrowing/collateral bit changes an unrelated reserve's borrowing or collateral bit | S3-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
 | 52 | UserConfiguration / `isUsingAsCollateralOrBorrowing` | The combined flag disagrees with the logical OR of borrowing and collateral bits | S6-2 | Normative | VERIFIED/NO_FINDING; UserConfiguration (library; historical harness unresolved) |
 | 53 | UserConfiguration / `integrityOfisUsingAsCollateralOne` | The one-reserve flag is true although two distinct reserve positions satisfy the underlying bit predicate | S6-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
 | 54 | UserConfiguration / `integrityOfisUsingAsCollateralAny` | A particular reserve bit is true although the aggregate any-reserve flag is false | S6-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
@@ -127,10 +127,10 @@ Columns explicitly record (a) false assertion/counterexample, (b) label, (c) nor
 | 66 | VariableDebtToken / `integrityOfBurn` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
 | 67 | VariableDebtToken / `additiveBurn` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | VERIFIED/NO_FINDING; VariableDebtToken |
 | 68 | VariableDebtToken / `additiveMint` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
-| 69 | VariableDebtToken / `integrityMint` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | VERIFIED/NO_FINDING; VariableDebtToken |
+| 69 | VariableDebtToken / `integrityMint` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
 | 70 | VariableDebtToken / `burnZeroDoesntChangeBalance` | Burning zero changes a user's balance | S3-2 | Normative | VERIFIED/NO_FINDING; VariableDebtToken |
 | 71 | VariableDebtToken / `burnNoChangeToOther` | A burn/mint changes an unrelated account's balance or tracked additional data | S3-2 | Normative | VERIFIED/NO_FINDING; VariableDebtToken |
-| 72 | VariableDebtToken / `mintNoChangeToOther` | A burn/mint changes an unrelated account's balance or tracked additional data | S3-2 | Normative | VERIFIED/NO_FINDING; VariableDebtToken |
+| 72 | VariableDebtToken / `mintNoChangeToOther` | A burn/mint changes an unrelated account's balance or tracked additional data | S3-2 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
 | 73 | VariableDebtToken / `disallowedFunctionalities` | A debt-token transfer/approval method selected by disAllowedFunctions completes rather than reverting | SC | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
 | 74 | pool / `getReserveNormalizedVariableDebtCheck` | When pre-existing scaled variable debt is nonzero, supply lowers the normalized variable-debt index | S3-2 | Normative | NOT_STATED/NOT_STATED; Pool |
 
@@ -168,3 +168,19 @@ The PR must remain draft until the orquestrator has reviewed actual script logs 
 - **PASS (remote permitted-path check only):** All 390 currently changed PR file paths fall under the Project-7 source/spec/resource/report/documentation paths or the three explicitly permitted shared CSV indexes.
 - **WARNING (not an executed `git diff --check`):** GitHub's diff adds lines containing trailing whitespace in **49 files**, of which 6 are original historical source specs and 43 are literal extracted CVL specs. The user-required historical byte-preservation forbids silently stripping those original whitespaces. Standard `git diff --check` may fail; its actual return code is not known because no shell execution environment is available.
 - **NOT RUN:** All three official Python scripts and `git diff --check`, for reasons detailed above. Do not present the remote checks as a validator PASS.
+
+## Historical results re-attribution (2026-10-17)
+
+The original 31 reported VERIFIED matches were individually checked against the actual CVL assertion and the January 2022 report's verification-condition statement. Nine source properties were **downgraded** because their assertion is stronger, differently guarded or not identical to the reported condition:
+
+- Example **5** — The source checks scaled supply deltas, positivity, and underlying-balance change under a 7×ray ghost. The report's AToken mint condition checks approximate beneficiary balance increase; it is not an exact one-to-one result.
+- Example **7** — The source adds a from==to branch and stronger constraints on underlying balances; the historical AToken transfer condition does not state the entire same rule.
+- Example **9** — The source has extra total-supply and system-underlying assertions and conditional branches beyond the report's burn condition.
+- Example **48** — The report's setter proof explicitly requires reserveIndex < 128; this source rule omits that restriction.
+- Example **49** — The report requires BOTH distinct indices to be <128; the source only checks inequality inside its implication.
+- Example **50** — The report's setter proof explicitly requires reserveIndex < 128; this source rule omits that restriction.
+- Example **51** — The report requires BOTH distinct indices to be <128; the source only checks inequality inside its implication.
+- Example **69** — The source checks scaled supply change, positive supply growth and additional accounting as well as mint balance; the report states only the beneficiary balance increase.
+- Example **72** — The source unconditionally asserts an unchanged delegating-user balance; the report conditions it on user != onBehalfOf, a materially different assertion.
+
+Current Project-7 outcomes: **22 VERIFIED/NO_FINDING**, **52 NOT_STATED/NOT_STATED**, **zero rule-specific findings inferred from aggregate Pool or ReserveConfiguration statements**. Original source text, target snapshot and report PDF remain unchanged. No historic prover run was performed.

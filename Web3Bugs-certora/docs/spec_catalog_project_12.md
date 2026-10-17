@@ -8,12 +8,12 @@ Project ID 6 is already occupied by the unrelated **Aave Static aToken** and has
 
 | Original spec | Active rules | Active invariants | Complete | Incomplete |
 |---|---:|---:|---:|---:|
-| `StableDebtToken.spec` | 9 | 0 | 9 | 0 |
+| `StableDebtToken.spec` | 9 | 0 | 0 | 9 |
 | `VariableDebtToken.spec` | 9 | 0 | 9 | 0 |
 | `UserConfiguration.spec` | 4 | 4 | 8 | 0 |
-| **Total** | **22** | **4** | **26** | **0** |
+| **Total** | **22** | **4** | **17** | **9** |
 
-All 26 active property instances have dedicated `.spec`, `.sol`, `.md` under `results/spec/complete/12/` (78 artifact files). The CSV contains **26 rows for 26 unique examples**, with no multi-label duplications. This is a **source snapshot dependency closure**, not proof that historical CVL will compile under CVL2 or that historical verification settings are available. There are zero `incomplete/12/` examples and consequently no `N.txt` files: missing run configurations alone do not justify `incomplete`.
+All 26 active property instances have dedicated `.spec`, `.sol`, `.md` under `results/spec/{complete,incomplete}/12/` (78 primary artifacts), and the nine incomplete StableDebtToken examples each have an `.txt` reason (9 additional files). The CSV contains **26 rows for 26 unique examples**, with no multi-label duplications. This is a **source snapshot dependency closure**, not proof that historical CVL will compile under CVL2 or that historical verification settings are available. There are **9 incomplete** examples for a concrete incompatible Solidity target dependency (not for missing run flags or CVL1/CVL2 syntax). The other 17 examples remain complete for source-snapshot dependency closure.
 
 Formal Result, **per source instance**, from `reports/12.md` and the preserved original PDF:
 - VERIFIED: 21 (7 StableDebtToken; 6 VariableDebtToken; 8 UserConfiguration).
@@ -32,7 +32,7 @@ Detection Outcome: FINDING **0**, NO_FINDING **20**, ACCEPTED_BEHAVIOR **0**, IN
 
 ## Dependency closure and target resolution
 
-- **StableDebtToken (examples 1–9)** targets `StableDebtTokenHarness` inheriting `StableDebtToken`, not `VariableDebtToken`. The harness implements `getIncentivesController` and `rayWadMul` and overrides `balanceOf` and `_calcTotalSupply` to use principal, non-interest-accruing totals (harness lines 15–32). `getUserLastUpdated` uses an original `methods` declaration from `StableDebtToken.spec` lines 1–3 and an actual Solidity getter in `StableDebtToken.sol` lines 89–91. Other calls are implemented in the target/base source. No missing CVL definition/import/ghost/hook was identified. However, the historical harness's getter may conflict with some modern Solidity inherited API/override expectations; its present source does not imply historical rebuild success.
+- **StableDebtToken (examples 1–9): INCOMPLETE**. The nine rules expect the historical `StableDebtTokenHarness`. The current preserved harness invokes `StableDebtToken(pool, underlyingAsset, name, symbol, incentivesController)` as a base constructor at harness lines 7–13, but the only `StableDebtToken.sol` under the snapshot has **no matching constructor** and instead uses `initialize(ILendingPool,address,IAaveIncentivesController,uint8,string,string,bytes)` at lines 41–49. In addition, the harness declares `getIncentivesController() returns (address)` at lines 26–28 while the superclass at lines 355–357 implements a non-`virtual` `getIncentivesController() returns (IAaveIncentivesController)`. The correct original compatible parent/override environment is **absent**, not merely using an old CVL syntax. All nine rules therefore belong in `incomplete/12/` with explicit `N.txt` evidence, even though individual getters/mint/burn operations exist in the preserved parent source. The historical interest-suppression overrides are retained verbatim. Source-level formal Results from the report are **not** changed by this dependency-status correction.
 - **VariableDebtToken (examples 10–18)** targets `VariableDebtToken` and uses the original `using LendingPoolHarnessForVariableDebtToken as POOL` where the rule calls POOL (source line 1). The harness's `getReserveNormalizedVariableDebt` reads a timestamp-keyed private mapping, requires the entry to equal `1e27`, and returns it (lines 157–167). The target's `mint`, `burn`, `balanceOf`, and `totalSupply` are implemented in `VariableDebtToken.sol` (lines 75–152), with scaled storage in `IncentivizedERC20.sol`. No historical link configuration is supplied; possible unreachable paths/vacuity are **not** disproved by structural closure.
 - **UserConfiguration (examples 19–26)** targets `UserConfigurationHarness`, which wraps `UserConfiguration` library methods and owns one `DataTypes.UserConfigurationMap`. Required original `methods` declarations were copied selectively into each extracted spec; a declaration was not mistaken for a Solidity implementation. The bitmap library implementation and struct appear in the complete source snapshot.
 
@@ -97,7 +97,7 @@ All original `contracts/` and `specs/` source files from the PropertyGPT AAVE V2
 
 ## Structural audit and validation limitations
 
-The GitHub repository APIs confirm 26 Project 12 CSV rows, 26 individual `.spec` files, 26 `.sol` files, 26 `.md` files, and no missing artifact paths within `complete/12/`. Source block extraction was scripted and every active source block was checked against its known starting declaration before writing.
+The GitHub repository APIs confirmed 26 Project 12 CSV rows and 26 each `.spec`, `.sol`, `.md`; 17 complete examples and 9 incomplete examples additionally require nine `.txt` reasons. No example is promoted to complete solely because a function name appears in `methods {}`. Source block extraction was scripted and every active source block was checked against its known starting declaration before writing.
 
 **Required CLI validators were NOT executed** on a complete local repository. Attempting to clone both public repositories in the available Python/container environment failed with `fatal: unable to access https://github.com/...: Could not resolve host: github.com`. An alternate authorized Desktop Commander device was reported offline, so the full project working tree was unavailable for local execution. Consequently **no PASS is claimed** for:
 ```sh
@@ -111,7 +111,16 @@ Nor has CVL parsing, compilation, satisfiability or prover verification been rer
 ## Catalog locations
 
 - Index: `results/spec/spec_buglabel.csv`
-- 26 complete examples: `results/spec/complete/12/1.*` through `26.*`
+- 9 incomplete examples: `results/spec/incomplete/12/1.*` through `9.*`, each with `.txt`
+- 17 complete examples: `results/spec/complete/12/10.*` through `26.*`
 - Original source snapshot: `contracts/12/contracts/` and `contracts/12/specs/`
 - Historical PDF: `resources/12/AaveV2Dec2020.pdf`
 - Relevant report summary: `reports/12.md`
+
+## 2026-10-17 status correction — incompatible historical StableDebtToken parent
+
+The exhaustive current snapshot supplies all symbol names required by the nine stable rules, but its Solidity class versions are not mutually compatible: `StableDebtTokenHarness.sol:7-13` invokes a nonexistent base constructor and `:26-28` conflicts with the current inherited getter at `StableDebtToken.sol:355-357`. This is a **missing historical compatible target implementation**, not absence of CVL1-to-CVL2 migration. No invented replacement is permitted; all nine stable properties are now `incomplete`. The original CVL text, Solidity excerpts, source snapshot, report Result and per-instance Bug Labels are preserved. Each `N.txt` records concrete missing signatures and searched paths.
+
+## Current execution blockade
+
+At this workspace on 2026-10-17, `test -d /mnt/data/Web3Bugs-certora` returned exit **1**, and `git ls-remote https://github.com/matheus-junio-da-silva/Web3Bugs.git HEAD` returned exit **128** with `Could not resolve host: github.com`. The registered Desktop Commander machine remained offline. **The four mandatory project validators cannot be executed against a checked-out repository here.** Their actual test exit codes are unavailable; do not report PASS. This Draft PR remains blocked. Merge SHA and GitHub API-level integrity checks are reported separately, not substituted for CLI validations.

@@ -20,3 +20,10 @@ Contest ID, Bug ID, Bug Label, Severity, Bug Description, Reference, Comment
 6,SAT-03,L2,Low,deposit() can violate EIP-4626 by accepting a rounded-to-zero deposit without reverting,reports/6.md#issue-3,"Report issue #3, broken Properties #11/#12 depositCheck variants; those properties are absent from the selected source."
 6,SAT-04,S6-2,Informational,getUnclaimedRewards() returned a value in inconsistent units,reports/6.md#issue-4,Report issue #4. rewardsConsistencyWhenInsufficientRewards has S6-4 accounting-conservation and S6-2 getter-semantic relationships; the finding label is S6-2 because the concrete bug is a return-value unit mismatch.
 6,SAT-05,L7,Informational,totalAssets() and maxWithdraw() can theoretically revert on multiplication overflow for extreme inputs,reports/6.md#issue-5,"Report issue #5, tied to Properties #21/#26 not present in selected source; report treats the case as purely theoretical for current tokens."
+9,CEL-01,S2-1,High,SortedLinkedList sortedness broken by invalid insert adjacency arguments,reports/9.md,"Report Table 1 and §3.1; finding is on list library, not assigned to an active Celo Governance rule."
+9,CEL-02,L2,High,Election asset loss and front-running from low-precision conversion of votes to units,reports/9.md,Report Table 1 and §3.2; finding on Election.
+9,CEL-03,S6-4,High,"ReleaseGold balance excludes pending LockedGold withdrawals, potentially terminating grant prematurely",reports/9.md,"Report Table 1 and §3.3; this is a ReleaseGold finding, not a violation of a cataloged LockedGold property."
+9,CEL-04,S3-2,Low,Election reward distribution permits group voting state without votes,reports/9.md,Report Table 1; trigger impossible in the Go client at report date.
+9,CEL-05,O7,Low,Redundant subtraction of an always-zero value in Election,reports/9.md,Report Table 1; non-critical removed code.
+9,CEL-06,O7,Low,Unused nested data structures in LockedGold,reports/9.md,"Report Table 1; dead code removed, no individual active invariant violated in evidence."
+9,CEL-07,L2,Low,Potential precision loss during FixidityLib fractional multiplication,reports/9.md,Report Table 1; low-severity precision issue.

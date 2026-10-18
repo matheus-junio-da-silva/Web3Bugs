@@ -1,0 +1,25 @@
+Project 18 — OpenZeppelin (Farol) / 2026-10-18
+PropertyGPT source SHA: 687f654c679ed45ab127b7949e2a29c8f5e491b9
+Web3Bugs base (origin/main): 46670617ee77649217b9dbf64fd6955344cedcf7
+Working branch: catalog/p18-farol-openzeppelin
+
+Byte fidelity and provenance audit (independent parser; source project at the SHA above):
+  307 / 307 historical source files SHA-256 identical.
+  Original report: 4a35df36c47e6e7e2b4333cb3890bc2a8cbca569e32b2fc6f24820b8a56cbc37.
+  168 / 168 original active CVL declaration bodies preserved.
+  181 target-context examples verified for literal source suffix and line ranges.
+  601 Solidity excerpts checked against file and line provenance.
+  All mapped source-family local Solidity imports recursively present.
+  Exact historical verification harness / Prover command NOT available: no soundness replay claim.
+
+Initial local validation, from Web3Bugs-certora directory:
+  python3 scripts/check_specs.py .           exit 0
+    Check passed! 656 spec examples and 661 Bug Label relationships are structurally consistent.
+  python3 scripts/check_contests_csv.py .    exit 0
+    Check passed! ./results/contests.csv is consistent with ./reports.
+  python3 scripts/check_contracts.py .       exit 0
+    Check passed! ./contracts is consistent with ./reports.
+  git -c core.whitespace=cr-at-eol diff --cached --check   exit 0 (empty output)
+
+NOTE: The official committed-range check origin/main...HEAD and its final Git SHA are
+retested after commit; final HEAD/result are documented in the independent PR body.

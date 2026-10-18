@@ -1,0 +1,7 @@
+Project 18 / example 160 / getTimestampOnlyChange
+Status: incomplete
+Target: Governor (RulesInProgress; historical ERC20VotesHarness)
+Missing historical dependency/evidence:
+- Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.
+- Active rule refers to hashIdCorrelation and getTimestamp, but RulesInProgress imports only GovernorBase.spec; those named symbols are defined in another spec (TimelockController.spec) which is not imported. This source cannot be declared dependency-complete.
+No replacement modern contract or guessed harness may be silently inserted.

@@ -23,3 +23,11 @@ results/spec/incomplete/13/*.sol -whitespace
 contracts/14/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
 results/spec/complete/14/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
 results/spec/complete/14/*.sol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+
+# Preserve literal historical Project 18 OpenZeppelin source and CVL/Solidity excerpts.
+# Generated docs, reports and CSVs remain checked for whitespace.
+contracts/18/** -whitespace
+results/spec/complete/18/*.spec -whitespace
+results/spec/incomplete/18/*.spec -whitespace
+results/spec/complete/18/*.sol -whitespace
+results/spec/incomplete/18/*.sol -whitespace

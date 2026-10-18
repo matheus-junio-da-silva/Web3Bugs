@@ -158,3 +158,107 @@ contract MarginPool is Ownable {
         );
 
 // END ORIGINAL EXCERPT
+
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 505-515
+// BEGIN ORIGINAL LINES 505-515
+     * @return amount of collateral to pay out
+     */
+    function getPayout(address _otoken, uint256 _amount) public view returns (uint256) {
+        return calculator.getExpiredPayoutRate(_otoken).mul(_amount).div(10**BASE);
+    }
+
+    /**
+     * @dev return if an expired oToken is ready to be settled, only true when price for underlying,
+     * strike and collateral assets at this specific expiry is available in our Oracle module
+     * @param _otoken oToken
+     */
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 892-923
+// BEGIN ORIGINAL LINES 892-923
+    function _redeem(Actions.RedeemArgs memory _args) internal {
+        OtokenInterface otoken = OtokenInterface(_args.otoken);
+
+        // check that otoken to redeem is whitelisted
+        require(whitelist.isWhitelistedOtoken(_args.otoken), "C27");
+
+        (address collateral, address underlying, address strike, uint256 expiry) = _getOtokenDetails(address(otoken));
+
+        // only allow redeeming expired otoken
+        require(now >= expiry, "C28");
+
+        require(_canSettleAssets(underlying, strike, collateral, expiry), "C29");
+
+        uint256 payout = getPayout(_args.otoken, _args.amount);
+
+        otoken.burnOtoken(msg.sender, _args.amount);
+
+        MarginPoolInterface _pool = (!borrowablePool.isWhitelistedOTokenBuyer(msg.sender) ||
+            ERC20Interface(collateral).balanceOf(address(borrowablePool)) < payout)
+            ? pool
+            : borrowablePool;
+
+        _pool.transferToUser(collateral, _args.receiver, payout);
+
+        emit Redeem(_args.otoken, msg.sender, _args.receiver, collateral, _args.amount, payout);
+    }
+
+    /**
+     * @notice settle a vault after expiry, removing the net proceeds/collateral after both long and short oToken payouts have settled
+     * @dev deletes a vault of vaultId after net proceeds/collateral is removed, cannot be called when system is fullyPaused
+     * @param _args SettleVaultArgs structure
+     */
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/MarginPool.sol
+// Original lines: 74-118
+// BEGIN ORIGINAL LINES 74-118
+    function transferToPool(
+        address _asset,
+        address _user,
+        uint256 _amount
+    ) public onlyController {
+        require(_amount > 0, "MarginPool: transferToPool amount is equal to 0");
+        assetBalance[_asset] = assetBalance[_asset].add(_amount);
+
+        // transfer _asset _amount from _user to pool
+        ERC20Interface(_asset).safeTransferFrom(_user, address(this), _amount);
+        emit TransferToPool(_asset, _user, _amount);
+    }
+
+    /**
+     * @notice transfers an asset from the pool to a user
+     * @param _asset address of the asset to transfer
+     * @param _user address of the user to transfer assets to
+     * @param _amount amount of the token to transfer to _user
+     */
+    function transferToUser(
+        address _asset,
+        address _user,
+        uint256 _amount
+    ) public onlyController {
+        require(_user != address(this), "MarginPool: cannot transfer assets to oneself");
+        assetBalance[_asset] = assetBalance[_asset].sub(_amount);
+
+        // transfer _asset _amount from pool to _user
+        ERC20Interface(_asset).safeTransfer(_user, _amount);
+        emit TransferToUser(_asset, _user, _amount);
+    }
+
+    /**
+     * @notice get the stored balance of an asset
+     * @param _asset asset address
+     * @return asset balance
+     */
+    function getStoredBalance(address _asset) external view returns (uint256) {
+        return assetBalance[_asset];
+    }
+
+    /**
+     * @notice transfers multiple assets from users to the pool
+     * @param _asset addresses of the assets to transfer
+     * @param _user addresses of the users to transfer assets to
+// END ORIGINAL EXCERPT

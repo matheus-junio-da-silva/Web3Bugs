@@ -158,3 +158,122 @@ contract MarginPool is Ownable {
         );
 
 // END ORIGINAL EXCERPT
+
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 97-110
+// BEGIN ORIGINAL LINES 97-110
+    mapping(address => uint256) internal accountVaultCounter;
+    /// @dev mapping between an owner address and a specific vault using a vault id
+    mapping(address => mapping(uint256 => MarginVault.Vault)) internal vaults;
+    /// @dev mapping between an account owner and their approved or unapproved account operators
+    mapping(address => mapping(address => bool)) internal operators;
+
+    /******************************************************************** V2.0.0 storage upgrade ******************************************************/
+
+    /// @dev mapping to map vault by each vault type
+    /// borrowable pool margin vault should be set to 2, naked margin vault should be set to 1, spread/max loss vault should be set to 0
+    mapping(address => mapping(uint256 => uint256)) internal vaultType;
+    /// @dev mapping to store the timestamp at which the vault was last updated, will be updated in every action that changes the vault state or when calling sync()
+    mapping(address => mapping(uint256 => uint256)) internal vaultLatestUpdate;
+
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 611-677
+// BEGIN ORIGINAL LINES 611-677
+    function _runActions(Actions.ActionArgs[] memory _actions)
+        internal
+        returns (
+            bool,
+            address,
+            uint256
+        )
+    {
+        address vaultOwner;
+        uint256 vaultId;
+        bool vaultUpdated;
+
+        for (uint256 i = 0; i < _actions.length; i++) {
+            Actions.ActionArgs memory action = _actions[i];
+            Actions.ActionType actionType = action.actionType;
+
+            // actions except Settle, Redeem, Liquidate and Call are "Vault-updating actinos"
+            // only allow update 1 vault in each operate call
+            if (
+                (actionType != Actions.ActionType.SettleVault) &&
+                (actionType != Actions.ActionType.Redeem) &&
+                (actionType != Actions.ActionType.Liquidate) &&
+                (actionType != Actions.ActionType.Call)
+            ) {
+                // check if this action is manipulating the same vault as all other actions, if a vault has already been updated
+                if (vaultUpdated) {
+                    require(vaultOwner == action.owner, "C12");
+                    require(vaultId == action.vaultId, "C13");
+                }
+                vaultUpdated = true;
+                vaultId = action.vaultId;
+                vaultOwner = action.owner;
+            }
+
+            if (actionType == Actions.ActionType.OpenVault) {
+                _openVault(Actions._parseOpenVaultArgs(action));
+            } else if (actionType == Actions.ActionType.DepositLongOption) {
+                _depositLong(Actions._parseDepositArgs(action));
+            } else if (actionType == Actions.ActionType.WithdrawLongOption) {
+                _withdrawLong(Actions._parseWithdrawArgs(action));
+            } else if (actionType == Actions.ActionType.DepositCollateral) {
+                _depositCollateral(Actions._parseDepositArgs(action));
+            } else if (actionType == Actions.ActionType.WithdrawCollateral) {
+                _withdrawCollateral(Actions._parseWithdrawArgs(action));
+            } else if (actionType == Actions.ActionType.MintShortOption) {
+                _mintOtoken(Actions._parseMintArgs(action));
+            } else if (actionType == Actions.ActionType.BurnShortOption) {
+                _burnOtoken(Actions._parseBurnArgs(action));
+            } else if (actionType == Actions.ActionType.Redeem) {
+                _redeem(Actions._parseRedeemArgs(action));
+            } else if (actionType == Actions.ActionType.SettleVault) {
+                _settleVault(Actions._parseSettleVaultArgs(action));
+            } else if (actionType == Actions.ActionType.Liquidate) {
+                _liquidate(Actions._parseLiquidateArgs(action));
+            } else if (actionType == Actions.ActionType.Call) {
+                _call(Actions._parseCallArgs(action));
+            }
+        }
+
+        return (vaultUpdated, vaultOwner, vaultId);
+    }
+
+    /**
+     * @notice verify the vault final state after executing all actions
+     * @param _owner account owner address
+     * @param _vaultId vault id of the final vault
+     */
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 690-711
+// BEGIN ORIGINAL LINES 690-711
+    function _openVault(Actions.OpenVaultArgs memory _args)
+        internal
+        notPartiallyPaused
+        onlyAuthorized(msg.sender, _args.owner)
+    {
+        uint256 vaultId = accountVaultCounter[_args.owner].add(1);
+
+        require(_args.vaultId == vaultId, "C15");
+
+        // store new vault
+        accountVaultCounter[_args.owner] = vaultId;
+        vaultType[_args.owner][vaultId] = borrowablePool.isWhitelistedOptionsVault(_args.owner) ? 2 : _args.vaultType;
+
+        emit VaultOpened(_args.owner, vaultId, _args.vaultType);
+    }
+
+    /**
+     * @notice deposit a long oToken into a vault
+     * @dev only the account owner or operator can deposit a long oToken, cannot be called when system is partiallyPaused or fullyPaused
+     * @param _args DepositArgs structure
+     */
+    function _depositLong(Actions.DepositArgs memory _args)
+// END ORIGINAL EXCERPT

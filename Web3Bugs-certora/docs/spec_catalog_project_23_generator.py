@@ -102,10 +102,11 @@ def snippet(src,filename,method):
  f=src/"src"/filename
  s=f.read_text(encoding="utf-8")
  l=s.splitlines(keepends=True)
- mat=re.search(r"\bfunction\s+"+re.escape(method)+r"\s*\(",s)
+ matches=list(re.finditer(r"\bfunction\s+"+re.escape(method)+r"\s*\(",s))
+ sm=mask(s)
+ mat=next((mt for mt in matches if (lambda op,semi: op>=0 and (semi<0 or op<semi))(sm.find("{",mt.end()),sm.find(";",mt.end()))),None)
  if mat:
-  sm=mask(s);op=sm.find("{",mat.end());semi=sm.find(";",mat.end())
-  if op<0 or semi>=0 and semi<op:return None
+  op=sm.find("{",mat.end())
   d=0;end=None
   for i in range(op,len(sm)):
    if sm[i]=="{":d+=1

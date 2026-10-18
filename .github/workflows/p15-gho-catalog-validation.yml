@@ -47,6 +47,10 @@ jobs:
         run: |
           mkdir -p /tmp/p15-gho-validation
           python .github/scripts/p15_gho_generate_catalog.py 2>&1 | tee /tmp/p15-gho-validation/generator.log
+      - name: Review each Solidity slice and concrete missing package source
+        run: |
+          mkdir -p /tmp/p15-gho-validation
+          python .github/scripts/p15_gho_refresh_excerpts.py 2>&1 | tee /tmp/p15-gho-validation/semantic_refresh.log
       - name: Commit only Project 15 catalog, no other projects
         run: |
           git config user.name "github-actions[bot]"

@@ -299,7 +299,7 @@ O status passou de **não executado** a **validado estruturalmente**. Estes quat
 | HWeth | MISSING original target; incomplete | ABSENT | 121 — None | 122 — None | 123 — None | 124 — None | Yes, four entries |
 | HYVault | Present nominally, historical identity unverified | runHYVault.sh; -assumeUnwindCond,-b=2,-ciMode=true | 125 — None | 126 — None | 127 — deposit/withdraw may produce zero | 128 — None | Yes, four entries |
 
-These records do not manufacture missing historical implementations. The `N.txt` files for absent targets document the missing symbol/source/script as appropriate. The report's **#24** DSProxy allowlist is not `proxy.spec` example 24: it uses HBalancer, HMaker, HSCompound, HBProtocol-specific rules already indexed as 30, 31, 32, and 36. HBProtocol overrides inherited HMaker `getProxyActions()`. 
+These records do not manufacture missing historical implementations. The `N.txt` files for absent targets document the missing symbol/source/script as appropriate. The report's **#24** DSProxy allowlist is not `proxy.spec` example 24: it uses HBalancer, HMaker, HSCompound, HBProtocol-specific rules already indexed as 30, 31, 32, and 36. HBProtocol overrides inherited HMaker `getProxyActions()`.
 
 For report #27–32, all 23 historical handler cells are `None`. The existing source formula bodies and limitations remain documented; these cells are not verified per-target runs and a universal Cartesian-product coverage claim is **not** made. Getter injection, target ABI, source revisions, simplified assembly, unrolling and external Summary assumptions still block reproduction. Keep the PR draft.
 

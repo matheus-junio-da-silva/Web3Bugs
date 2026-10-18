@@ -70,3 +70,104 @@ contract HUniswapV2 is HandlerBase {
     }
 
     function addLiquidity(
+
+// Verbatim source contracts/10/contracts/handlers/uniswapv2/HUniswapV2.sol:70-122
+    function addLiquidity(
+        address tokenA,
+        address tokenB,
+        uint256 amountADesired,
+        uint256 amountBDesired,
+        uint256 amountAMin,
+        uint256 amountBMin
+    )
+        external
+        payable
+        returns (uint256 amountA, uint256 amountB, uint256 liquidity)
+    {
+        // Get uniswapV2 router
+        IUniswapV2Router02 router = IUniswapV2Router02(UNISWAPV2_ROUTER);
+
+        // Approve token
+        amountADesired = _getBalance(tokenA, amountADesired);
+        amountBDesired = _getBalance(tokenB, amountBDesired);
+        _tokenApprove(tokenA, UNISWAPV2_ROUTER, amountADesired);
+        _tokenApprove(tokenB, UNISWAPV2_ROUTER, amountBDesired);
+
+        // Add liquidity
+        try
+            router.addLiquidity(
+                tokenA,
+                tokenB,
+                amountADesired,
+                amountBDesired,
+                amountAMin,
+                amountBMin,
+                address(this),
+                block.timestamp
+            )
+        returns (uint256 ret1, uint256 ret2, uint256 ret3) {
+            amountA = ret1;
+            amountB = ret2;
+            liquidity = ret3;
+        } catch Error(string memory reason) {
+            _revertMsg("addLiquidity", reason);
+        } catch {
+            _revertMsg("addLiquidity");
+        }
+        _tokenApproveZero(tokenA, UNISWAPV2_ROUTER);
+        _tokenApproveZero(tokenB, UNISWAPV2_ROUTER);
+
+        // Update involved token
+        address pair = UniswapV2Library.pairFor(
+            router.factory(),
+            tokenA,
+            tokenB
+        );
+        _updateToken(pair);
+    }
+
+// Verbatim source contracts/10/contracts/handlers/uniswapv2/HUniswapV2.sol:166-209
+    function removeLiquidity(
+        address tokenA,
+        address tokenB,
+        uint256 liquidity,
+        uint256 amountAMin,
+        uint256 amountBMin
+    ) external payable returns (uint256 amountA, uint256 amountB) {
+        // Get uniswapV2 router
+        IUniswapV2Router02 router = IUniswapV2Router02(UNISWAPV2_ROUTER);
+        address pair = UniswapV2Library.pairFor(
+            router.factory(),
+            tokenA,
+            tokenB
+        );
+
+        // Approve token
+        liquidity = _getBalance(pair, liquidity);
+        _tokenApprove(pair, UNISWAPV2_ROUTER, liquidity);
+
+        // remove liquidity
+        try
+            router.removeLiquidity(
+                tokenA,
+                tokenB,
+                liquidity,
+                amountAMin,
+                amountBMin,
+                address(this),
+                block.timestamp
+            )
+        returns (uint256 ret1, uint256 ret2) {
+            amountA = ret1;
+            amountB = ret2;
+        } catch Error(string memory reason) {
+            _revertMsg("removeLiquidity", reason);
+        } catch {
+            _revertMsg("removeLiquidity");
+        }
+        _tokenApproveZero(pair, UNISWAPV2_ROUTER);
+
+        // Update involved token
+        _updateToken(tokenA);
+        _updateToken(tokenB);
+    }

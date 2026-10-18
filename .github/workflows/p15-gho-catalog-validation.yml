@@ -1,0 +1,96 @@
+name: HELIX P15 GHO Core Historical Catalog
+on:
+  push:
+    branches: [catalog/p15-helix-gho-core]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout destination with full Git history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PDF text utility
+        run: |
+          command -v pdftotext || (sudo apt-get update -qq && sudo apt-get install -y poppler-utils)
+      - name: Checkout pinned PropertyGPT and historical reviewed GHO code
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --quiet --filter=blob:none --no-checkout https://github.com/matheus-junio-da-silva/PropertyGPT.git /tmp/p15-gho-propertygpt
+          git -C /tmp/p15-gho-propertygpt sparse-checkout init --cone
+          git -C /tmp/p15-gho-propertygpt sparse-checkout set certora_projects/gho-core
+          git -C /tmp/p15-gho-propertygpt checkout --quiet 687f654c679ed45ab127b7949e2a29c8f5e491b9
+          git clone --quiet --filter=blob:none --no-checkout https://github.com/aave/gho-core.git /tmp/p15-gho-reviewed
+          git -C /tmp/p15-gho-reviewed sparse-checkout init --cone
+          git -C /tmp/p15-gho-reviewed sparse-checkout set src/contracts certora/specs
+          git -C /tmp/p15-gho-reviewed checkout --quiet ce49fb0c94cfebf0159222ceb288e4f9a55d305f
+          echo "PropertyGPT source checkout $(git -C /tmp/p15-gho-propertygpt rev-parse HEAD)"
+          echo "Official reviewed checkout $(git -C /tmp/p15-gho-reviewed rev-parse HEAD)"
+      - name: Download official Certora PDF and verify type
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 4 --retry-delay 2 -o /tmp/p15-gho-report.pdf https://certora.cdn.prismic.io/certora/a227c693-7aa3-471f-a7b2-7148c06a2110_Aave_Gho_Formal_Verification_Report.pdf
+          file /tmp/p15-gho-report.pdf
+          pdfinfo /tmp/p15-gho-report.pdf | grep Pages
+          sha256sum /tmp/p15-gho-report.pdf
+      - name: Generate independent historical catalog
+        if: hashFiles('Web3Bugs-certora/contracts/15/**') == ''
+        run: |
+          mkdir -p /tmp/p15-gho-validation
+          python .github/scripts/p15_gho_generate_catalog.py 2>&1 | tee /tmp/p15-gho-validation/generator.log
+      - name: Commit only Project 15 catalog, no other projects
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Web3Bugs-certora/.gitattributes Web3Bugs-certora/contracts/15 \
+            Web3Bugs-certora/resources/15 Web3Bugs-certora/reports/15.md \
+            Web3Bugs-certora/docs/spec_catalog_project_15.md \
+            Web3Bugs-certora/results/spec/incomplete/15 \
+            Web3Bugs-certora/results/spec/spec_buglabel.csv \
+            Web3Bugs-certora/results/contests.csv
+          if ! git diff --cached --quiet; then
+            git commit -m "feat(p15): catalog 116 active GHO properties with historical provenance"
+          fi
+      - name: Four official checks with exact exit codes
+        id: checks
+        shell: bash
+        run: |
+          set +e
+          mkdir -p /tmp/p15-gho-validation
+          git fetch origin main
+          cd Web3Bugs-certora
+          python scripts/check_specs.py . > /tmp/p15-gho-validation/check_specs.log 2>&1; a=$?
+          python scripts/check_contests_csv.py . > /tmp/p15-gho-validation/check_contests_csv.log 2>&1; b=$?
+          python scripts/check_contracts.py . > /tmp/p15-gho-validation/check_contracts.log 2>&1; c=$?
+          cd ..
+          git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD > /tmp/p15-gho-validation/git_diff_check.log 2>&1; d=$?
+          echo "HEAD=$(git rev-parse HEAD)" | tee /tmp/p15-gho-validation/summary.log
+          echo "origin/main=$(git rev-parse origin/main)" | tee -a /tmp/p15-gho-validation/summary.log
+          echo "check_specs=$a check_contests_csv=$b check_contracts=$c git_diff_check=$d" | tee -a /tmp/p15-gho-validation/summary.log
+          for f in /tmp/p15-gho-validation/*.log; do echo "--- $f"; cat "$f"; done
+          if [ "$a" -eq 0 ] && [ "$b" -eq 0 ] && [ "$c" -eq 0 ] && [ "$d" -eq 0 ]; then
+            echo "all_passed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "all_passed=false" >> "$GITHUB_OUTPUT"
+          exit 1
+      - name: Push validated commit only to GHO branch
+        if: steps.checks.outputs.all_passed == 'true'
+        run: |
+          git push origin HEAD:refs/heads/catalog/p15-helix-gho-core
+      - name: Archive all validation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: helix-p15-gho-catalog-logs
+          path: /tmp/p15-gho-validation/
+          if-no-files-found: warn

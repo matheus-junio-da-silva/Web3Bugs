@@ -23,3 +23,9 @@ results/spec/incomplete/13/*.sol -whitespace
 contracts/14/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
 results/spec/complete/14/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
 results/spec/complete/14/*.sol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+
+# Preserve Project 16 historical source plus literal CVL and Solidity excerpts
+contracts/16/** -whitespace
+results/spec/incomplete/16/*.spec -whitespace
+results/spec/incomplete/16/*.sol -whitespace
+reports/16.md -whitespace

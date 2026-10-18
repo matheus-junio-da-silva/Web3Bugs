@@ -181,6 +181,10 @@ Local roots: not identified; reachable local Solidity sources: 0.
 - No unresolved Solidity imports found among identified local roots; this is **not** confirmation that a modern Prover replay succeeds.
 - `sanity.spec` standalone probe has no independently attributable script or target; the adjacent Proxy excerpt is **not** a target proof.
 
+## IERC20 symbol-resolution audit (HMaker and inherited HandlerBase)
+
+The transitive check does not stop at source imports. `HMaker.sol:9` imports missing `@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol`; `HMaker.sol:12,340–342` explicitly uses `IERC20`. Inherited `HandlerBase.sol:5,12,106,115–116` also depends on `SafeERC20` and `IERC20`. There is **no declaration `interface IERC20`** in the preserved `contracts/10/contracts` Solidity tree, and no original vendored `@openzeppelin/contracts/token/ERC20/IERC20.sol`. The similarly named local `IERC20Usdt` (correct name `IERC20Usdt`) interface is not equivalent and is not used as a replacement. The driver’s textual rewrite from `SafeERC20.sol` to `ERC20.sol` **does not restore** either dependency; the resulting OpenZeppelin `ERC20.sol` is absent too. All 15 present handler targets inherit or load the same `HandlerBase` path, so each previously complete handler example is now incomplete. This audit does not invent an import graph beyond the first missing vendored file.
+
 ## Per-example disposition of all 89 previously complete records
 
 | Example | Rule | Target | New status | Blocking dependency |

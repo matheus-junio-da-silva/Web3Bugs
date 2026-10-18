@@ -166,3 +166,227 @@ contract MarginPool is Ownable {
         return assetBalance[_asset];
     }
 // END ORIGINAL EXCERPT
+
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 97-110
+// BEGIN ORIGINAL LINES 97-110
+    mapping(address => uint256) internal accountVaultCounter;
+    /// @dev mapping between an owner address and a specific vault using a vault id
+    mapping(address => mapping(uint256 => MarginVault.Vault)) internal vaults;
+    /// @dev mapping between an account owner and their approved or unapproved account operators
+    mapping(address => mapping(address => bool)) internal operators;
+
+    /******************************************************************** V2.0.0 storage upgrade ******************************************************/
+
+    /// @dev mapping to map vault by each vault type
+    /// borrowable pool margin vault should be set to 2, naked margin vault should be set to 1, spread/max loss vault should be set to 0
+    mapping(address => mapping(uint256 => uint256)) internal vaultType;
+    /// @dev mapping to store the timestamp at which the vault was last updated, will be updated in every action that changes the vault state or when calling sync()
+    mapping(address => mapping(uint256 => uint256)) internal vaultLatestUpdate;
+
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 711-743
+// BEGIN ORIGINAL LINES 711-743
+    function _depositLong(Actions.DepositArgs memory _args)
+        internal
+        notPartiallyPaused
+        onlyAuthorized(msg.sender, _args.owner)
+    {
+        require(_checkVaultId(_args.owner, _args.vaultId), "C35");
+        // only allow vault owner or vault operator to deposit long otoken
+        require((_args.from == msg.sender) || (_args.from == _args.owner), "C16");
+
+        require(whitelist.isWhitelistedOtoken(_args.asset), "C17");
+
+        OtokenInterface otoken = OtokenInterface(_args.asset);
+
+        require(now < otoken.expiryTimestamp(), "C18");
+
+        vaults[_args.owner][_args.vaultId].addLong(_args.asset, _args.amount, _args.index);
+
+        MarginPoolInterface(_getPool(vaultType[_args.owner][_args.vaultId])).transferToPool(
+            _args.asset,
+            _args.from,
+            _args.amount
+        );
+
+        emit LongOtokenDeposited(_args.asset, _args.owner, _args.from, _args.vaultId, _args.amount);
+    }
+
+    /**
+     * @notice withdraw a long oToken from a vault
+     * @dev only the account owner or operator can withdraw a long oToken, cannot be called when system is partiallyPaused or fullyPaused
+     * @param _args WithdrawArgs structure
+     */
+    function _withdrawLong(Actions.WithdrawArgs memory _args)
+        internal
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 769-806
+// BEGIN ORIGINAL LINES 769-806
+    function _depositCollateral(Actions.DepositArgs memory _args)
+        internal
+        notPartiallyPaused
+        onlyAuthorized(msg.sender, _args.owner)
+    {
+        require(_checkVaultId(_args.owner, _args.vaultId), "C35");
+        // only allow vault owner or vault operator to deposit collateral
+        require((_args.from == msg.sender) || (_args.from == _args.owner), "C20");
+
+        require(whitelist.isWhitelistedCollateral(_args.asset), "C21");
+
+        (, uint256 typeVault, ) = getVaultWithDetails(_args.owner, _args.vaultId);
+
+        if (typeVault == 1) {
+            nakedPoolBalance[_args.asset] = nakedPoolBalance[_args.asset].add(_args.amount);
+
+            require(nakedPoolBalance[_args.asset] <= nakedCap[_args.asset], "C37");
+        }
+
+        vaults[_args.owner][_args.vaultId].addCollateral(_args.asset, _args.amount, _args.index);
+
+        MarginPoolInterface(_getPool(vaultType[_args.owner][_args.vaultId])).transferToPool(
+            _args.asset,
+            _args.from,
+            _args.amount
+        );
+
+        emit CollateralAssetDeposited(_args.asset, _args.owner, _args.from, _args.vaultId, _args.amount);
+    }
+
+    /**
+     * @notice withdraw a collateral asset from a vault
+     * @dev only the account owner or operator can withdraw collateral, cannot be called when system is partiallyPaused or fullyPaused
+     * @param _args WithdrawArgs structure
+     */
+    function _withdrawCollateral(Actions.WithdrawArgs memory _args)
+        internal
+        notPartiallyPaused
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 839-892
+// BEGIN ORIGINAL LINES 839-892
+    function _mintOtoken(Actions.MintArgs memory _args)
+        internal
+        notPartiallyPaused
+        onlyAuthorized(msg.sender, _args.owner)
+    {
+        require(_checkVaultId(_args.owner, _args.vaultId), "C35");
+        require(whitelist.isWhitelistedOtoken(_args.otoken), "C23");
+
+        OtokenInterface otoken = OtokenInterface(_args.otoken);
+
+        require(now < otoken.expiryTimestamp(), "C24");
+
+        vaults[_args.owner][_args.vaultId].addShort(_args.otoken, _args.amount, _args.index);
+
+        otoken.mintOtoken(_args.to, _args.amount);
+
+        emit ShortOtokenMinted(_args.otoken, _args.owner, _args.to, _args.vaultId, _args.amount);
+    }
+
+    /**
+     * @notice burn oTokens to reduce or remove the minted oToken obligation recorded in a vault
+     * @dev only the account owner or operator can burn an oToken, cannot be called when system is partiallyPaused or fullyPaused
+     * @param _args MintArgs structure
+     */
+    function _burnOtoken(Actions.BurnArgs memory _args)
+        internal
+        notPartiallyPaused
+        onlyAuthorized(msg.sender, _args.owner)
+    {
+        // check that vault id is valid for this vault owner
+        require(_checkVaultId(_args.owner, _args.vaultId), "C35");
+        // only allow vault owner or vault operator to burn otoken
+        require((_args.from == msg.sender) || (_args.from == _args.owner), "C25");
+
+        OtokenInterface otoken = OtokenInterface(_args.otoken);
+
+        // do not allow burning expired otoken
+        require(now < otoken.expiryTimestamp(), "C26");
+
+        // remove otoken from vault
+        vaults[_args.owner][_args.vaultId].removeShort(_args.otoken, _args.amount, _args.index);
+
+        // burn otoken
+        otoken.burnOtoken(_args.from, _args.amount);
+
+        emit ShortOtokenBurned(_args.otoken, _args.owner, _args.from, _args.vaultId, _args.amount);
+    }
+
+    /**
+     * @notice redeem an oToken after expiry, receiving the payout of the oToken in the collateral asset
+     * @dev cannot be called when system is fullyPaused
+     * @param _args RedeemArgs structure
+     */
+    function _redeem(Actions.RedeemArgs memory _args) internal {
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/MarginPool.sol
+// Original lines: 20-28
+// BEGIN ORIGINAL LINES 20-28
+
+    /// @notice AddressBook module
+    address public addressBook;
+    /// @dev the address that has the ability to withdraw excess assets in the pool
+    address public farmer;
+    /// @dev mapping between an asset and the amount of the asset in the pool
+    mapping(address => uint256) internal assetBalance;
+
+    /**
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/MarginPool.sol
+// Original lines: 74-118
+// BEGIN ORIGINAL LINES 74-118
+    function transferToPool(
+        address _asset,
+        address _user,
+        uint256 _amount
+    ) public onlyController {
+        require(_amount > 0, "MarginPool: transferToPool amount is equal to 0");
+        assetBalance[_asset] = assetBalance[_asset].add(_amount);
+
+        // transfer _asset _amount from _user to pool
+        ERC20Interface(_asset).safeTransferFrom(_user, address(this), _amount);
+        emit TransferToPool(_asset, _user, _amount);
+    }
+
+    /**
+     * @notice transfers an asset from the pool to a user
+     * @param _asset address of the asset to transfer
+     * @param _user address of the user to transfer assets to
+     * @param _amount amount of the token to transfer to _user
+     */
+    function transferToUser(
+        address _asset,
+        address _user,
+        uint256 _amount
+    ) public onlyController {
+        require(_user != address(this), "MarginPool: cannot transfer assets to oneself");
+        assetBalance[_asset] = assetBalance[_asset].sub(_amount);
+
+        // transfer _asset _amount from pool to _user
+        ERC20Interface(_asset).safeTransfer(_user, _amount);
+        emit TransferToUser(_asset, _user, _amount);
+    }
+
+    /**
+     * @notice get the stored balance of an asset
+     * @param _asset asset address
+     * @return asset balance
+     */
+    function getStoredBalance(address _asset) external view returns (uint256) {
+        return assetBalance[_asset];
+    }
+
+    /**
+     * @notice transfers multiple assets from users to the pool
+     * @param _asset addresses of the assets to transfer
+     * @param _user addresses of the users to transfer assets to
+// END ORIGINAL EXCERPT

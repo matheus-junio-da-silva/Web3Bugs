@@ -199,3 +199,81 @@ contract MarginPool is Ownable {
         );
 
 // END ORIGINAL EXCERPT
+
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 97-110
+// BEGIN ORIGINAL LINES 97-110
+    mapping(address => uint256) internal accountVaultCounter;
+    /// @dev mapping between an owner address and a specific vault using a vault id
+    mapping(address => mapping(uint256 => MarginVault.Vault)) internal vaults;
+    /// @dev mapping between an account owner and their approved or unapproved account operators
+    mapping(address => mapping(address => bool)) internal operators;
+
+    /******************************************************************** V2.0.0 storage upgrade ******************************************************/
+
+    /// @dev mapping to map vault by each vault type
+    /// borrowable pool margin vault should be set to 2, naked margin vault should be set to 1, spread/max loss vault should be set to 0
+    mapping(address => mapping(uint256 => uint256)) internal vaultType;
+    /// @dev mapping to store the timestamp at which the vault was last updated, will be updated in every action that changes the vault state or when calling sync()
+    mapping(address => mapping(uint256 => uint256)) internal vaultLatestUpdate;
+
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 839-891
+// BEGIN ORIGINAL LINES 839-891
+    function _mintOtoken(Actions.MintArgs memory _args)
+        internal
+        notPartiallyPaused
+        onlyAuthorized(msg.sender, _args.owner)
+    {
+        require(_checkVaultId(_args.owner, _args.vaultId), "C35");
+        require(whitelist.isWhitelistedOtoken(_args.otoken), "C23");
+
+        OtokenInterface otoken = OtokenInterface(_args.otoken);
+
+        require(now < otoken.expiryTimestamp(), "C24");
+
+        vaults[_args.owner][_args.vaultId].addShort(_args.otoken, _args.amount, _args.index);
+
+        otoken.mintOtoken(_args.to, _args.amount);
+
+        emit ShortOtokenMinted(_args.otoken, _args.owner, _args.to, _args.vaultId, _args.amount);
+    }
+
+    /**
+     * @notice burn oTokens to reduce or remove the minted oToken obligation recorded in a vault
+     * @dev only the account owner or operator can burn an oToken, cannot be called when system is partiallyPaused or fullyPaused
+     * @param _args MintArgs structure
+     */
+    function _burnOtoken(Actions.BurnArgs memory _args)
+        internal
+        notPartiallyPaused
+        onlyAuthorized(msg.sender, _args.owner)
+    {
+        // check that vault id is valid for this vault owner
+        require(_checkVaultId(_args.owner, _args.vaultId), "C35");
+        // only allow vault owner or vault operator to burn otoken
+        require((_args.from == msg.sender) || (_args.from == _args.owner), "C25");
+
+        OtokenInterface otoken = OtokenInterface(_args.otoken);
+
+        // do not allow burning expired otoken
+        require(now < otoken.expiryTimestamp(), "C26");
+
+        // remove otoken from vault
+        vaults[_args.owner][_args.vaultId].removeShort(_args.otoken, _args.amount, _args.index);
+
+        // burn otoken
+        otoken.burnOtoken(_args.from, _args.amount);
+
+        emit ShortOtokenBurned(_args.otoken, _args.owner, _args.from, _args.vaultId, _args.amount);
+    }
+
+    /**
+     * @notice redeem an oToken after expiry, receiving the payout of the oToken in the collateral asset
+     * @dev cannot be called when system is fullyPaused
+     * @param _args RedeemArgs structure
+     */
+// END ORIGINAL EXCERPT

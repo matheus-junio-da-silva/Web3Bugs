@@ -190,3 +190,61 @@ contract MarginPool is Ownable {
         );
 
 // END ORIGINAL EXCERPT
+
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 924-975
+// BEGIN ORIGINAL LINES 924-975
+    function _settleVault(Actions.SettleVaultArgs memory _args) internal onlyAuthorized(msg.sender, _args.owner) {
+        require(_checkVaultId(_args.owner, _args.vaultId), "C35");
+
+        (MarginVault.Vault memory vault, uint256 typeVault, ) = getVaultWithDetails(_args.owner, _args.vaultId);
+
+        OtokenInterface otoken;
+
+        // new scope to avoid stack too deep error
+        // check if there is short or long otoken in vault
+        // do not allow settling vault that have no short or long otoken
+        // if there is a long otoken, burn it
+        // store otoken address outside of this scope
+        {
+            bool hasShort = _isNotEmpty(vault.shortOtokens);
+            bool hasLong = _isNotEmpty(vault.longOtokens);
+
+            require(hasShort || hasLong, "C30");
+
+            otoken = hasShort ? OtokenInterface(vault.shortOtokens[0]) : OtokenInterface(vault.longOtokens[0]);
+
+            if (hasLong) {
+                OtokenInterface longOtoken = OtokenInterface(vault.longOtokens[0]);
+
+                longOtoken.burnOtoken(_getPool(vaultType[_args.owner][_args.vaultId]), vault.longAmounts[0]);
+            }
+        }
+
+        (address collateral, address underlying, address strike, uint256 expiry) = _getOtokenDetails(address(otoken));
+
+        // do not allow settling vault with un-expired otoken
+        require(now >= expiry, "C31");
+        require(_canSettleAssets(underlying, strike, collateral, expiry), "C29");
+
+        (uint256 payout, bool isValidVault) = calculator.getExcessCollateral(vault, typeVault);
+
+        // require that vault is valid (has excess collateral) before settling
+        // to avoid allowing settling undercollateralized naked margin vault
+        require(isValidVault, "C32");
+
+        delete vaults[_args.owner][_args.vaultId];
+
+        if (typeVault == 1) {
+            nakedPoolBalance[collateral] = nakedPoolBalance[collateral].sub(payout);
+        }
+
+        MarginPoolInterface(_getPool(vaultType[_args.owner][_args.vaultId])).transferToUser(
+            collateral,
+            _args.to,
+            payout
+        );
+
+        uint256 vaultId = _args.vaultId;
+// END ORIGINAL EXCERPT

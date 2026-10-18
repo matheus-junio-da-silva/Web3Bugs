@@ -171,3 +171,152 @@ contract MarginPool is Ownable {
         );
 
 // END ORIGINAL EXCERPT
+
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Whitelist.sol
+// Original lines: 15-23
+// BEGIN ORIGINAL LINES 15-23
+    /// @dev mapping to track whitelisted products
+    mapping(bytes32 => bool) internal whitelistedProduct;
+    /// @dev mapping to track whitelisted collateral
+    mapping(address => bool) internal whitelistedCollateral;
+    /// @dev mapping to track whitelisted oTokens
+    mapping(address => bool) internal whitelistedOtoken;
+    /// @dev mapping to track whitelisted callee addresses for the call action
+    mapping(address => bool) internal whitelistedCallee;
+
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Whitelist.sol
+// Original lines: 96-113
+// BEGIN ORIGINAL LINES 96-113
+     * @notice check if a collateral asset is whitelisted
+     * @param _collateral asset that is held as collateral against short/written options
+     * @return boolean, True if the collateral is whitelisted
+     */
+    function isWhitelistedCollateral(address _collateral) external view returns (bool) {
+        return whitelistedCollateral[_collateral];
+    }
+
+    /**
+     * @notice check if an oToken is whitelisted
+     * @param _otoken oToken address
+     * @return boolean, True if the oToken is whitelisted
+     */
+    function isWhitelistedOtoken(address _otoken) external view returns (bool) {
+        return whitelistedOtoken[_otoken];
+    }
+
+    /**
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Whitelist.sol
+// Original lines: 195-214
+// BEGIN ORIGINAL LINES 195-214
+     * @notice allows the OtokenFactory module to whitelist a new option
+     * @dev can only be called from the OtokenFactory address
+     * @param _otokenAddress oToken
+     */
+    function whitelistOtoken(address _otokenAddress) external onlyFactory {
+        whitelistedOtoken[_otokenAddress] = true;
+
+        emit OtokenWhitelisted(_otokenAddress);
+    }
+
+    /**
+     * @notice allows the owner to blacklist an option
+     * @dev can only be called from the owner address
+     * @param _otokenAddress oToken
+     */
+    function blacklistOtoken(address _otokenAddress) external onlyOwner {
+        whitelistedOtoken[_otokenAddress] = false;
+
+        emit OtokenBlacklisted(_otokenAddress);
+    }
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 97-110
+// BEGIN ORIGINAL LINES 97-110
+    mapping(address => uint256) internal accountVaultCounter;
+    /// @dev mapping between an owner address and a specific vault using a vault id
+    mapping(address => mapping(uint256 => MarginVault.Vault)) internal vaults;
+    /// @dev mapping between an account owner and their approved or unapproved account operators
+    mapping(address => mapping(address => bool)) internal operators;
+
+    /******************************************************************** V2.0.0 storage upgrade ******************************************************/
+
+    /// @dev mapping to map vault by each vault type
+    /// borrowable pool margin vault should be set to 2, naked margin vault should be set to 1, spread/max loss vault should be set to 0
+    mapping(address => mapping(uint256 => uint256)) internal vaultType;
+    /// @dev mapping to store the timestamp at which the vault was last updated, will be updated in every action that changes the vault state or when calling sync()
+    mapping(address => mapping(uint256 => uint256)) internal vaultLatestUpdate;
+
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 711-743
+// BEGIN ORIGINAL LINES 711-743
+    function _depositLong(Actions.DepositArgs memory _args)
+        internal
+        notPartiallyPaused
+        onlyAuthorized(msg.sender, _args.owner)
+    {
+        require(_checkVaultId(_args.owner, _args.vaultId), "C35");
+        // only allow vault owner or vault operator to deposit long otoken
+        require((_args.from == msg.sender) || (_args.from == _args.owner), "C16");
+
+        require(whitelist.isWhitelistedOtoken(_args.asset), "C17");
+
+        OtokenInterface otoken = OtokenInterface(_args.asset);
+
+        require(now < otoken.expiryTimestamp(), "C18");
+
+        vaults[_args.owner][_args.vaultId].addLong(_args.asset, _args.amount, _args.index);
+
+        MarginPoolInterface(_getPool(vaultType[_args.owner][_args.vaultId])).transferToPool(
+            _args.asset,
+            _args.from,
+            _args.amount
+        );
+
+        emit LongOtokenDeposited(_args.asset, _args.owner, _args.from, _args.vaultId, _args.amount);
+    }
+
+    /**
+     * @notice withdraw a long oToken from a vault
+     * @dev only the account owner or operator can withdraw a long oToken, cannot be called when system is partiallyPaused or fullyPaused
+     * @param _args WithdrawArgs structure
+     */
+    function _withdrawLong(Actions.WithdrawArgs memory _args)
+        internal
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Controller.sol
+// Original lines: 839-862
+// BEGIN ORIGINAL LINES 839-862
+    function _mintOtoken(Actions.MintArgs memory _args)
+        internal
+        notPartiallyPaused
+        onlyAuthorized(msg.sender, _args.owner)
+    {
+        require(_checkVaultId(_args.owner, _args.vaultId), "C35");
+        require(whitelist.isWhitelistedOtoken(_args.otoken), "C23");
+
+        OtokenInterface otoken = OtokenInterface(_args.otoken);
+
+        require(now < otoken.expiryTimestamp(), "C24");
+
+        vaults[_args.owner][_args.vaultId].addShort(_args.otoken, _args.amount, _args.index);
+
+        otoken.mintOtoken(_args.to, _args.amount);
+
+        emit ShortOtokenMinted(_args.otoken, _args.owner, _args.to, _args.vaultId, _args.amount);
+    }
+
+    /**
+     * @notice burn oTokens to reduce or remove the minted oToken obligation recorded in a vault
+     * @dev only the account owner or operator can burn an oToken, cannot be called when system is partiallyPaused or fullyPaused
+     * @param _args MintArgs structure
+     */
+// END ORIGINAL EXCERPT

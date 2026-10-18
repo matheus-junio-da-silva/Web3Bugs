@@ -170,3 +170,95 @@ contract MarginPool is Ownable {
         return assetBalance[_asset];
     }
 // END ORIGINAL EXCERPT
+
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Whitelist.sol
+// Original lines: 15-23
+// BEGIN ORIGINAL LINES 15-23
+    /// @dev mapping to track whitelisted products
+    mapping(bytes32 => bool) internal whitelistedProduct;
+    /// @dev mapping to track whitelisted collateral
+    mapping(address => bool) internal whitelistedCollateral;
+    /// @dev mapping to track whitelisted oTokens
+    mapping(address => bool) internal whitelistedOtoken;
+    /// @dev mapping to track whitelisted callee addresses for the call action
+    mapping(address => bool) internal whitelistedCallee;
+
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Whitelist.sol
+// Original lines: 96-113
+// BEGIN ORIGINAL LINES 96-113
+     * @notice check if a collateral asset is whitelisted
+     * @param _collateral asset that is held as collateral against short/written options
+     * @return boolean, True if the collateral is whitelisted
+     */
+    function isWhitelistedCollateral(address _collateral) external view returns (bool) {
+        return whitelistedCollateral[_collateral];
+    }
+
+    /**
+     * @notice check if an oToken is whitelisted
+     * @param _otoken oToken address
+     * @return boolean, True if the oToken is whitelisted
+     */
+    function isWhitelistedOtoken(address _otoken) external view returns (bool) {
+        return whitelistedOtoken[_otoken];
+    }
+
+    /**
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Whitelist.sol
+// Original lines: 195-214
+// BEGIN ORIGINAL LINES 195-214
+     * @notice allows the OtokenFactory module to whitelist a new option
+     * @dev can only be called from the OtokenFactory address
+     * @param _otokenAddress oToken
+     */
+    function whitelistOtoken(address _otokenAddress) external onlyFactory {
+        whitelistedOtoken[_otokenAddress] = true;
+
+        emit OtokenWhitelisted(_otokenAddress);
+    }
+
+    /**
+     * @notice allows the owner to blacklist an option
+     * @dev can only be called from the owner address
+     * @param _otokenAddress oToken
+     */
+    function blacklistOtoken(address _otokenAddress) external onlyOwner {
+        whitelistedOtoken[_otokenAddress] = false;
+
+        emit OtokenBlacklisted(_otokenAddress);
+    }
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/MarginPool.sol
+// Original lines: 20-28
+// BEGIN ORIGINAL LINES 20-28
+
+    /// @notice AddressBook module
+    address public addressBook;
+    /// @dev the address that has the ability to withdraw excess assets in the pool
+    address public farmer;
+    /// @dev mapping between an asset and the amount of the asset in the pool
+    mapping(address => uint256) internal assetBalance;
+
+    /**
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/MarginPool.sol
+// Original lines: 109-118
+// BEGIN ORIGINAL LINES 109-118
+     * @return asset balance
+     */
+    function getStoredBalance(address _asset) external view returns (uint256) {
+        return assetBalance[_asset];
+    }
+
+    /**
+     * @notice transfers multiple assets from users to the pool
+     * @param _asset addresses of the assets to transfer
+     * @param _user addresses of the users to transfer assets to
+// END ORIGINAL EXCERPT

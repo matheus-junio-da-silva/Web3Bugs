@@ -74,6 +74,16 @@ def extract(path):
  items=[]
  for mt in starts:
   op=m.find("{",mt.end());assert op>=0
+  # A filtered{ f -> ... } method filter precedes the rule body: it is
+  # NOT itself the rule body. Preserve its text, then scan the next brace.
+  if re.search(r"\\bfiltered\\s*$",m[mt.end():op]):
+   dep=1;k=op+1
+   while k<len(m) and dep:
+    if m[k]=="{":dep+=1
+    if m[k]=="}":dep-=1
+    k+=1
+   assert dep==0,(path,mt.group(2),"unclosed filtered")
+   op=m.find("{",k);assert op>=0,(path,mt.group(2),"no body after filtered")
   d=0;end=None
   for i in range(op,len(m)):
    if m[i]=="{":d+=1

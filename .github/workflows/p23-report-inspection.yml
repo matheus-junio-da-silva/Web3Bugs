@@ -1,19 +1,36 @@
-name: P23 Radicle historical report inspect (temporary)
+name: P23 historical Radicle Drips build (temporary)
 on:
   push:
-    branches: [catalog/p23-delta-radicle-drips]
+    branches:
+      - catalog/p23-delta-radicle-drips
 jobs:
-  extract:
+  catalog:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
     steps:
-      - name: Read exact historical report text
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Pin original PropertyGPT and generate historical catalog
         run: |
           git clone --depth=1 https://github.com/matheus-junio-da-silva/PropertyGPT.git source
           test "$(git -C source rev-parse HEAD)" = "687f654c679ed45ab127b7949e2a29c8f5e491b9"
           sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils >/dev/null
-          pdftotext -layout source/certora_projects/radicle_drips/Formal_Verification_Report_of_Radicle_Drips_Contracts.pdf report.txt
-          echo '=== PDF REPORT START ==='
-          cat report.txt
-          echo '=== PDF REPORT END ==='
+          python3 Web3Bugs-certora/docs/spec_catalog_project_23_generator.py source/certora_projects/radicle_drips Web3Bugs-certora
+      - name: Official validators
+        run: |
+          cd Web3Bugs-certora
+          python3 scripts/check_contracts.py .
+          python3 scripts/check_contests_csv.py .
+          python3 scripts/check_specs.py .
+      - name: Commit only P23 catalog artifacts
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add Web3Bugs-certora/contracts/23 Web3Bugs-certora/resources/23 Web3Bugs-certora/reports/23.md Web3Bugs-certora/docs/spec_catalog_project_23.md Web3Bugs-certora/results/contests.csv Web3Bugs-certora/results/spec/spec_buglabel.csv Web3Bugs-certora/results/spec/incomplete/23
+          git diff --cached --quiet || git commit -m "catalog(p23): preserve all six Radicle specs and 46 active CVL properties"
+          git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+          git push origin HEAD:catalog/p23-delta-radicle-drips
+          git rev-parse HEAD

@@ -2,7 +2,7 @@
 
 Original source: `PropertyGPT/certora_projects/rocket_joe` at main SHA `687f654c679ed45ab127b7949e2a29c8f5e491b9`. The complete 8-spec, 15-Solidity-file and original-PDF archive lives in `contracts/24/`. Original report summary is `reports/24.md` and a source Git hash manifest is in `docs/spec_catalog_project_24_sources.md`.
 
-**164 active CVL declarations, 164 target-specific instances; all 164 incomplete owing to historical missing CVL/Solidity harness closure.** Results supported for 56 individually named reported conditions, with other conditions NOT_STATED. No CVL2 migration or formal rerun is claimed.
+**164 active CVL declarations, 164 target-specific instances; all 164 incomplete owing to historical missing CVL/Solidity harness closure.** Results supported for 54 individually named reported conditions, with other conditions NOT_STATED. No CVL2 migration or formal rerun is claimed.
 
 ## Exhaustive source inventory
 
@@ -26,10 +26,10 @@ Original source: `PropertyGPT/certora_projects/rocket_joe` at main SHA `687f654c
 | Example | Spec | Name | Kind | Label | Result |
 |---:|---|---|---|---|---|
 | 1 | `LEHighLevel.spec` | `hl_EqualityOfToken` | invariant | S6-4 | VERIFIED |
-| 2 | `LEHighLevel.spec` | `hl_depositAdditivity` | rule | S6-4 | VERIFIED |
+| 2 | `LEHighLevel.spec` | `hl_depositAdditivity` | rule | S6-4 | NOT_STATED |
 | 3 | `LEHighLevel.spec` | `hl_withdrawAdditivity` | rule | S6-4 | VERIFIED |
 | 4 | `LEHighLevel.spec` | `hl_twoSideInverse` | rule | SE-1 | VERIFIED |
-| 5 | `LEHighLevel.spec` | `hl_noDepositFrontRun` | rule | S6-4 | VERIFIED |
+| 5 | `LEHighLevel.spec` | `hl_noDepositFrontRun` | rule | S6-4 | NOT_STATED |
 | 6 | `LEHighLevel.spec` | `hl_noWithdrawFrontRun` | rule | S6-4 | VERIFIED |
 | 7 | `LEHighLevel.spec` | `hl_noWithdrawLiquidityFrontRun` | rule | S6-4 | NOT_STATED |
 | 8 | `LEHighLevel.spec` | `hl_stoppedOnlySwitch` | rule | S3-2 | VERIFIED |
@@ -174,7 +174,7 @@ Original source: `PropertyGPT/certora_projects/rocket_joe` at main SHA `687f654c
 | 147 | `Staking.spec` | `balanceOf_Joe_eq_totalJoeStaked` | invariant | S6-4 | NOT_STATED |
 | 148 | `Staking.spec` | `user_balances_less_than_totalJoeStaked` | invariant | S6-4 | VERIFIED |
 | 149 | `Staking.spec` | `userInfo_amount_safe_mutate` | rule | S6-4 | VERIFIED |
-| 150 | `Staking.spec` | `RJPS_only_owner_and_function` | rule | S5-3 | VERIFIED |
+| 150 | `Staking.spec` | `RJPS_only_owner_and_function` | rule | S5-3 | NOT_STATED |
 | 151 | `Staking.spec` | `pending_reward_decreased_only_user` | rule | S6-4 | NOT_STATED |
 | 152 | `Staking.spec` | `staking_non_trivial_rJoe` | rule | UNMAPPED | VERIFIED |
 | 153 | `Staking.spec` | `staking_trivial_on_zero_time` | rule | S6-4 | VERIFIED |
@@ -206,3 +206,7 @@ These exceptions supersede any generic language in the original generated exampl
 ## Historic whitespace exception, not a source rewrite
 
 The exact Git validation on `df02d3ac36b4a4b8612e15ef4a97a251479679f2` returned exit 2 with 1,168 original whitespace diagnostics: 113 in archival CVL specs, 943 in repeated historical CVL extracted property/prelude blocks, and 112 in verbatim Solidity excerpts. All three Python validators returned exit 0 on that same remote GitHub Actions checkout (run `39159408480`; HEAD and origin/main SHA are recorded in its attached artifact). Since modifying those whitespace bytes would violate the historical-preservation requirement, per-directory `.gitattributes` entries turn off only blank-at-EOL, blank-at-EOF, and space-before-tab diagnostics **for these historical verbatim text copies**. Whitespace in new Markdown, CSV and other files remains checked by the same official `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD` command. No CVL or Solidity source body was edited. This is an explicit path-scoped archival exception, not a global bypass.
+
+## Additional report-formula reconciliation — source wins over names
+
+PDF pages 13–14 show a **same-sender** hypothesis for `hl_depositAdditivity` where source example 2 requires **different senders**, and a subtraction formula for `hl_noDepositFrontRun` where source example 5 asserts **deposit addition**. Neither source assertion inherits VERIFIED on name alone. Example 3 `hl_withdrawAdditivity` does match the report's arithmetic relational formula and gains historical VERIFIED, subject to all harness assumptions. PDF page 18's displayed formula for `RJPS_only_owner_and_function` compares undefined `userBalance_pre/post` while Staking source example 150 correctly compares `RJPS_pre/post`; attribution remains NOT_STATED until original Prover logs are inspected. These are **report/source mismatches**, not changes to historical CVL.

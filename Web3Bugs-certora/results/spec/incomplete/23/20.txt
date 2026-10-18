@@ -1,0 +1,2 @@
+Missing historical dependency: Reserve.spec::whoChangedUserState
+ReserveHarness, DummyERC20Impl, DummyERC20A, DummyERC20B, getDeposited/getIsUser adapters, token models and plugin callback configuration used in this spec are missing. Production Reserve.sol alone does not implement them. External imports are absent.

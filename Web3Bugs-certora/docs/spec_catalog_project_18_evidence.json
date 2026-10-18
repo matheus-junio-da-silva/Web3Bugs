@@ -1,0 +1,2980 @@
+[
+  {
+    "id": 1,
+    "spec": "AccessControl.spec",
+    "property": "onlyRoleModifierCheckGrant",
+    "target": "AccessControlMock",
+    "lines": [
+      15,
+      25
+    ],
+    "status": "incomplete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "_checkRole(bytes32) is internal in the historical AccessControl; direct CVL ABI dispatch requires unretained exposure/harness."
+    ]
+  },
+  {
+    "id": 2,
+    "spec": "AccessControl.spec",
+    "property": "onlyRoleModifierCheckRevoke",
+    "target": "AccessControlMock",
+    "lines": [
+      30,
+      40
+    ],
+    "status": "incomplete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "_checkRole(bytes32) is internal in the historical AccessControl; direct CVL ABI dispatch requires unretained exposure/harness."
+    ]
+  },
+  {
+    "id": 3,
+    "spec": "AccessControl.spec",
+    "property": "grantRoleEffect",
+    "target": "AccessControlMock",
+    "lines": [
+      45,
+      57
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 4,
+    "spec": "AccessControl.spec",
+    "property": "revokeRoleEffect",
+    "target": "AccessControlMock",
+    "lines": [
+      62,
+      74
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 5,
+    "spec": "ERC1155.spec",
+    "property": "unexpectedAllowanceChange",
+    "target": "ERC1155Mock",
+    "lines": [
+      26,
+      36
+    ],
+    "status": "complete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 6,
+    "spec": "ERC1155.spec",
+    "property": "onlyOwnerCanApprove",
+    "target": "ERC1155Mock",
+    "lines": [
+      41,
+      51
+    ],
+    "status": "complete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 7,
+    "spec": "ERC1155.spec",
+    "property": "approvalRevertCases",
+    "target": "ERC1155Mock",
+    "lines": [
+      56,
+      60
+    ],
+    "status": "complete",
+    "label": "SC",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 8,
+    "spec": "ERC1155.spec",
+    "property": "onlyOneAllowanceChange",
+    "target": "ERC1155Mock",
+    "lines": [
+      65,
+      76
+    ],
+    "status": "complete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 9,
+    "spec": "ERC1155.spec",
+    "property": "unexpectedBalanceChange",
+    "target": "ERC1155Mock",
+    "lines": [
+      87,
+      103
+    ],
+    "status": "complete",
+    "label": "UNMAPPED",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 10,
+    "spec": "ERC1155.spec",
+    "property": "balanceOfRevertCases",
+    "target": "ERC1155Mock",
+    "lines": [
+      108,
+      112
+    ],
+    "status": "complete",
+    "label": "SC",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 11,
+    "spec": "ERC1155.spec",
+    "property": "balanceOfBatchRevertCases",
+    "target": "ERC1155Mock",
+    "lines": [
+      117,
+      129
+    ],
+    "status": "complete",
+    "label": "SC",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 12,
+    "spec": "ERC1155.spec",
+    "property": "transferAdditivity",
+    "target": "ERC1155Mock",
+    "lines": [
+      140,
+      157
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 13,
+    "spec": "ERC1155.spec",
+    "property": "transferCorrectness",
+    "target": "ERC1155Mock",
+    "lines": [
+      162,
+      177
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 14,
+    "spec": "ERC1155.spec",
+    "property": "transferBatchCorrectness",
+    "target": "ERC1155Mock",
+    "lines": [
+      182,
+      221
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 15,
+    "spec": "ERC1155.spec",
+    "property": "cannotTransferMoreSingle",
+    "target": "ERC1155Mock",
+    "lines": [
+      226,
+      233
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 16,
+    "spec": "ERC1155.spec",
+    "property": "cannotTransferMoreBatch",
+    "target": "ERC1155Mock",
+    "lines": [
+      238,
+      257
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 17,
+    "spec": "ERC1155.spec",
+    "property": "transferBalanceReduceEffect",
+    "target": "ERC1155Mock",
+    "lines": [
+      262,
+      276
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 18,
+    "spec": "ERC1155.spec",
+    "property": "transferBalanceIncreaseEffect",
+    "target": "ERC1155Mock",
+    "lines": [
+      281,
+      295
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 19,
+    "spec": "ERC1155.spec",
+    "property": "transferBatchBalanceFromEffect",
+    "target": "ERC1155Mock",
+    "lines": [
+      300,
+      321
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 20,
+    "spec": "ERC1155.spec",
+    "property": "transferBatchBalanceToEffect",
+    "target": "ERC1155Mock",
+    "lines": [
+      326,
+      347
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 21,
+    "spec": "ERC1155.spec",
+    "property": "noTransferForNotApproved",
+    "target": "ERC1155Mock",
+    "lines": [
+      352,
+      363
+    ],
+    "status": "complete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 22,
+    "spec": "ERC1155.spec",
+    "property": "noTransferBatchForNotApproved",
+    "target": "ERC1155Mock",
+    "lines": [
+      368,
+      380
+    ],
+    "status": "complete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 23,
+    "spec": "ERC1155.spec",
+    "property": "noTransferEffectOnApproval",
+    "target": "ERC1155Mock",
+    "lines": [
+      385,
+      398
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 24,
+    "spec": "ERC1155.spec",
+    "property": "noTransferBatchEffectOnApproval",
+    "target": "ERC1155Mock",
+    "lines": [
+      403,
+      416
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 25,
+    "spec": "ERC1155.spec",
+    "property": "mintAdditivity",
+    "target": "ERC1155Mock",
+    "lines": [
+      427,
+      443
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 26,
+    "spec": "ERC1155.spec",
+    "property": "mintRevertCases",
+    "target": "ERC1155Mock",
+    "lines": [
+      448,
+      454
+    ],
+    "status": "complete",
+    "label": "SC",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 27,
+    "spec": "ERC1155.spec",
+    "property": "mintBatchRevertCases",
+    "target": "ERC1155Mock",
+    "lines": [
+      459,
+      468
+    ],
+    "status": "complete",
+    "label": "SC",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 28,
+    "spec": "ERC1155.spec",
+    "property": "mintCorrectWork",
+    "target": "ERC1155Mock",
+    "lines": [
+      473,
+      483
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 29,
+    "spec": "ERC1155.spec",
+    "property": "mintBatchCorrectWork",
+    "target": "ERC1155Mock",
+    "lines": [
+      488,
+      516
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 30,
+    "spec": "ERC1155.spec",
+    "property": "cantMintMoreSingle",
+    "target": "ERC1155Mock",
+    "lines": [
+      521,
+      529
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 31,
+    "spec": "ERC1155.spec",
+    "property": "cantMintMoreBatch",
+    "target": "ERC1155Mock",
+    "lines": [
+      534,
+      553
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 32,
+    "spec": "ERC1155.spec",
+    "property": "cantMintOtherBalances",
+    "target": "ERC1155Mock",
+    "lines": [
+      558,
+      569
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 33,
+    "spec": "ERC1155.spec",
+    "property": "cantMintBatchOtherBalances",
+    "target": "ERC1155Mock",
+    "lines": [
+      574,
+      595
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 34,
+    "spec": "ERC1155.spec",
+    "property": "burnAdditivity",
+    "target": "ERC1155Mock",
+    "lines": [
+      605,
+      621
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 35,
+    "spec": "ERC1155.spec",
+    "property": "burnRevertCases",
+    "target": "ERC1155Mock",
+    "lines": [
+      626,
+      632
+    ],
+    "status": "complete",
+    "label": "SC",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 36,
+    "spec": "ERC1155.spec",
+    "property": "burnBatchRevertCases",
+    "target": "ERC1155Mock",
+    "lines": [
+      637,
+      646
+    ],
+    "status": "complete",
+    "label": "SC",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 37,
+    "spec": "ERC1155.spec",
+    "property": "burnCorrectWork",
+    "target": "ERC1155Mock",
+    "lines": [
+      651,
+      661
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 38,
+    "spec": "ERC1155.spec",
+    "property": "burnBatchCorrectWork",
+    "target": "ERC1155Mock",
+    "lines": [
+      666,
+      692
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 39,
+    "spec": "ERC1155.spec",
+    "property": "cantBurnMoreSingle",
+    "target": "ERC1155Mock",
+    "lines": [
+      697,
+      705
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 40,
+    "spec": "ERC1155.spec",
+    "property": "cantBurnMoreBatch",
+    "target": "ERC1155Mock",
+    "lines": [
+      710,
+      728
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 41,
+    "spec": "ERC1155.spec",
+    "property": "cantBurnOtherBalances",
+    "target": "ERC1155Mock",
+    "lines": [
+      733,
+      744
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 42,
+    "spec": "ERC1155.spec",
+    "property": "cantBurnBatchOtherBalances",
+    "target": "ERC1155Mock",
+    "lines": [
+      749,
+      770
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 43,
+    "spec": "ERC1155.spec",
+    "property": "singleTokenSafeTransferFromSafeBatchTransferFromEquivalence",
+    "target": "ERC1155Mock",
+    "lines": [
+      779,
+      806
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 44,
+    "spec": "ERC1155.spec",
+    "property": "multipleTokenSafeTransferFromSafeBatchTransferFromEquivalence",
+    "target": "ERC1155Mock",
+    "lines": [
+      810,
+      858
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 45,
+    "spec": "ERC1155.spec",
+    "property": "transfersHaveSameLengthInputArrays",
+    "target": "ERC1155Mock",
+    "lines": [
+      861,
+      878
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 46,
+    "spec": "ERC1155Burnable.spec",
+    "property": "onlyHolderOrApprovedCanReduceBalance",
+    "target": "ERC1155BurnableMock",
+    "lines": [
+      8,
+      20
+    ],
+    "status": "complete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 47,
+    "spec": "ERC1155Burnable.spec",
+    "property": "burnAmountProportionalToBalanceReduction",
+    "target": "ERC1155BurnableMock",
+    "lines": [
+      26,
+      45
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 48,
+    "spec": "ERC1155Burnable.spec",
+    "property": "sequentialBurnsEquivalentToSingleBurnOfSum",
+    "target": "ERC1155BurnableMock",
+    "lines": [
+      51,
+      71
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 49,
+    "spec": "ERC1155Burnable.spec",
+    "property": "singleTokenBurnBurnBatchEquivalence",
+    "target": "ERC1155BurnableMock",
+    "lines": [
+      75,
+      98
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 50,
+    "spec": "ERC1155Burnable.spec",
+    "property": "multipleTokenBurnBurnBatchEquivalence",
+    "target": "ERC1155BurnableMock",
+    "lines": [
+      102,
+      138
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 51,
+    "spec": "ERC1155Burnable.spec",
+    "property": "burnBatchOnEmptyArraysChangesNothing",
+    "target": "ERC1155BurnableMock",
+    "lines": [
+      142,
+      160
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 52,
+    "spec": "ERC1155Pausable.spec",
+    "property": "balancesUnchangedWhenPaused",
+    "target": "ERC1155PausableMock",
+    "lines": [
+      8,
+      21
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 53,
+    "spec": "ERC1155Pausable.spec",
+    "property": "transferMethodsRevertWhenPaused",
+    "target": "ERC1155PausableMock",
+    "lines": [
+      24,
+      37
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 54,
+    "spec": "ERC1155Pausable.spec",
+    "property": "pauseMethodPausesContract",
+    "target": "ERC1155PausableMock",
+    "lines": [
+      40,
+      48
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 55,
+    "spec": "ERC1155Pausable.spec",
+    "property": "unpauseMethodUnpausesContract",
+    "target": "ERC1155PausableMock",
+    "lines": [
+      51,
+      59
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 56,
+    "spec": "ERC1155Pausable.spec",
+    "property": "cannotPauseWhilePaused",
+    "target": "ERC1155PausableMock",
+    "lines": [
+      62,
+      70
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 57,
+    "spec": "ERC1155Pausable.spec",
+    "property": "cannotUnpauseWhileUnpaused",
+    "target": "ERC1155PausableMock",
+    "lines": [
+      73,
+      81
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 58,
+    "spec": "ERC1155Pausable.spec",
+    "property": "whenNotPausedModifierCausesRevertIfPaused",
+    "target": "ERC1155PausableMock",
+    "lines": [
+      85,
+      93
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 59,
+    "spec": "ERC1155Pausable.spec",
+    "property": "whenPausedModifierCausesRevertIfUnpaused",
+    "target": "ERC1155PausableMock",
+    "lines": [
+      97,
+      105
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 60,
+    "spec": "ERC1155Supply.spec",
+    "property": "token_totalSupply_independence",
+    "target": "ERC1155Supply (historical verification harness)",
+    "lines": [
+      11,
+      31
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report p. 9 requires exists_wrapper, owner-only mint/burn harness and ghost/hook analysis; the exact original harness with wrapper and owner restriction is unavailable."
+    ]
+  },
+  {
+    "id": 61,
+    "spec": "ERC1155Supply.spec",
+    "property": "total_supply_is_sum_of_balances",
+    "target": "ERC1155Supply (historical verification harness)",
+    "lines": [
+      45,
+      51
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report p. 9 requires exists_wrapper, owner-only mint/burn harness and ghost/hook analysis; the exact original harness with wrapper and owner restriction is unavailable."
+    ]
+  },
+  {
+    "id": 62,
+    "spec": "ERC1155Supply.spec",
+    "property": "balanceOfZeroAddressIsZero",
+    "target": "ERC1155Supply (historical verification harness)",
+    "lines": [
+      56,
+      59
+    ],
+    "status": "incomplete",
+    "label": "UNMAPPED",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report p. 9 requires exists_wrapper, owner-only mint/burn harness and ghost/hook analysis; the exact original harness with wrapper and owner restriction is unavailable."
+    ]
+  },
+  {
+    "id": 63,
+    "spec": "ERC1155Supply.spec",
+    "property": "held_tokens_should_exist",
+    "target": "ERC1155Supply (historical verification harness)",
+    "lines": [
+      60,
+      71
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report p. 9 requires exists_wrapper, owner-only mint/burn harness and ghost/hook analysis; the exact original harness with wrapper and owner restriction is unavailable."
+    ]
+  },
+  {
+    "id": 64,
+    "spec": "ERC20FlashMint.spec",
+    "property": "letsWatchItBurns",
+    "target": "ERC20FlashMintMock",
+    "lines": [
+      18,
+      28
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "FlashLoan callback/receiver assumptions and mocked _burn summary require an original execution configuration not included with the historical snapshot."
+    ]
+  },
+  {
+    "id": 65,
+    "spec": "ERC20Votes.spec",
+    "property": "votes_solvency",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      69,
+      79
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 66,
+    "spec": "ERC20Votes.spec",
+    "property": "blockNum_constrains_fromBlock",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      83,
+      90
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 67,
+    "spec": "ERC20Votes.spec",
+    "property": "fromBlock_constrains_numBlocks",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      98,
+      103
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 68,
+    "spec": "ERC20Votes.spec",
+    "property": "fromBlock_greaterThanEq_pos",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      111,
+      113
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 69,
+    "spec": "ERC20Votes.spec",
+    "property": "fromBlock_increasing",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      117,
+      119
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 70,
+    "spec": "ERC20Votes.spec",
+    "property": "unique_checkpoints_rule",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      126,
+      139
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 71,
+    "spec": "ERC20Votes.spec",
+    "property": "transfer_safe",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      145,
+      164
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 72,
+    "spec": "ERC20Votes.spec",
+    "property": "delegates_safe",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      167,
+      177
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 73,
+    "spec": "ERC20Votes.spec",
+    "property": "delegatee_receives_votes",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      180,
+      198
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 74,
+    "spec": "ERC20Votes.spec",
+    "property": "previous_delegatee_votes_removed",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      201,
+      217
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 75,
+    "spec": "ERC20Votes.spec",
+    "property": "delegate_contained",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      220,
+      234
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 76,
+    "spec": "ERC20Votes.spec",
+    "property": "delegate_no_frontrunning",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      236,
+      271
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 77,
+    "spec": "ERC20Votes.spec",
+    "property": "mint_increases_totalSupply",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      276,
+      291
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 78,
+    "spec": "ERC20Votes.spec",
+    "property": "burn_decreases_totalSupply",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      294,
+      307
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 79,
+    "spec": "ERC20Votes.spec",
+    "property": "mint_doesnt_increase_totalVotes",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      312,
+      321
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 80,
+    "spec": "ERC20Votes.spec",
+    "property": "burn_doesnt_decrease_totalVotes",
+    "target": "ERC20Votes (historical voting harness)",
+    "lines": [
+      323,
+      332
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 81,
+    "spec": "ERC20Wrapper.spec",
+    "property": "whatAboutTotal",
+    "target": "ERC20Wrapper (historical underlying-token harness)",
+    "lines": [
+      16,
+      26
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical underlying-token abstraction includes underlyingTotalSupply/underlyingBalanceOf and _recover methods not established in the retained wrapper/mock ABI."
+    ]
+  },
+  {
+    "id": 82,
+    "spec": "ERC20Wrapper.spec",
+    "property": "underTotalAndContractBalanceOfCorrelation",
+    "target": "ERC20Wrapper (historical underlying-token harness)",
+    "lines": [
+      31,
+      39
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical underlying-token abstraction includes underlyingTotalSupply/underlyingBalanceOf and _recover methods not established in the retained wrapper/mock ABI."
+    ]
+  },
+  {
+    "id": 83,
+    "spec": "ERC20Wrapper.spec",
+    "property": "depositForSpecBasic",
+    "target": "ERC20Wrapper (historical underlying-token harness)",
+    "lines": [
+      44,
+      63
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical underlying-token abstraction includes underlyingTotalSupply/underlyingBalanceOf and _recover methods not established in the retained wrapper/mock ABI."
+    ]
+  },
+  {
+    "id": 84,
+    "spec": "ERC20Wrapper.spec",
+    "property": "depositForSpecWrapper",
+    "target": "ERC20Wrapper (historical underlying-token harness)",
+    "lines": [
+      68,
+      86
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical underlying-token abstraction includes underlyingTotalSupply/underlyingBalanceOf and _recover methods not established in the retained wrapper/mock ABI."
+    ]
+  },
+  {
+    "id": 85,
+    "spec": "ERC20Wrapper.spec",
+    "property": "depositForSpecUnderlying",
+    "target": "ERC20Wrapper (historical underlying-token harness)",
+    "lines": [
+      91,
+      114
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical underlying-token abstraction includes underlyingTotalSupply/underlyingBalanceOf and _recover methods not established in the retained wrapper/mock ABI."
+    ]
+  },
+  {
+    "id": 86,
+    "spec": "ERC20Wrapper.spec",
+    "property": "withdrawToSpecBasic",
+    "target": "ERC20Wrapper (historical underlying-token harness)",
+    "lines": [
+      119,
+      134
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical underlying-token abstraction includes underlyingTotalSupply/underlyingBalanceOf and _recover methods not established in the retained wrapper/mock ABI."
+    ]
+  },
+  {
+    "id": 87,
+    "spec": "ERC20Wrapper.spec",
+    "property": "withdrawToSpecWrapper",
+    "target": "ERC20Wrapper (historical underlying-token harness)",
+    "lines": [
+      139,
+      157
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical underlying-token abstraction includes underlyingTotalSupply/underlyingBalanceOf and _recover methods not established in the retained wrapper/mock ABI."
+    ]
+  },
+  {
+    "id": 88,
+    "spec": "ERC20Wrapper.spec",
+    "property": "withdrawToSpecUnderlying",
+    "target": "ERC20Wrapper (historical underlying-token harness)",
+    "lines": [
+      162,
+      187
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical underlying-token abstraction includes underlyingTotalSupply/underlyingBalanceOf and _recover methods not established in the retained wrapper/mock ABI."
+    ]
+  },
+  {
+    "id": 89,
+    "spec": "ERC20Wrapper.spec",
+    "property": "recoverSpec",
+    "target": "ERC20Wrapper (historical underlying-token harness)",
+    "lines": [
+      192,
+      214
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical underlying-token abstraction includes underlyingTotalSupply/underlyingBalanceOf and _recover methods not established in the retained wrapper/mock ABI."
+    ]
+  },
+  {
+    "id": 90,
+    "spec": "ERC721Votes.spec",
+    "property": "timestamp_constrains_fromBlock",
+    "target": "ERC721Votes (historical voting harness)",
+    "lines": [
+      72,
+      79
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 91,
+    "spec": "ERC721Votes.spec",
+    "property": "fromBlock_constrains_numBlocks",
+    "target": "ERC721Votes (historical voting harness)",
+    "lines": [
+      88,
+      93
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 92,
+    "spec": "ERC721Votes.spec",
+    "property": "fromBlock_greaterThanEq_pos",
+    "target": "ERC721Votes (historical voting harness)",
+    "lines": [
+      101,
+      103
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 93,
+    "spec": "ERC721Votes.spec",
+    "property": "fromBlock_increasing",
+    "target": "ERC721Votes (historical voting harness)",
+    "lines": [
+      107,
+      109
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 94,
+    "spec": "ERC721Votes.spec",
+    "property": "unique_checkpoints_rule",
+    "target": "ERC721Votes (historical voting harness)",
+    "lines": [
+      116,
+      131
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 95,
+    "spec": "ERC721Votes.spec",
+    "property": "transfer_safe",
+    "target": "ERC721Votes (historical voting harness)",
+    "lines": [
+      137,
+      161
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 96,
+    "spec": "ERC721Votes.spec",
+    "property": "delegates_safe",
+    "target": "ERC721Votes (historical voting harness)",
+    "lines": [
+      165,
+      178
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 97,
+    "spec": "ERC721Votes.spec",
+    "property": "delegatee_receives_votes",
+    "target": "ERC721Votes (historical voting harness)",
+    "lines": [
+      182,
+      198
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 98,
+    "spec": "ERC721Votes.spec",
+    "property": "previous_delegatee_votes_removed",
+    "target": "ERC721Votes (historical voting harness)",
+    "lines": [
+      201,
+      217
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 99,
+    "spec": "ERC721Votes.spec",
+    "property": "delegate_contained",
+    "target": "ERC721Votes (historical voting harness)",
+    "lines": [
+      220,
+      234
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 100,
+    "spec": "ERC721Votes.spec",
+    "property": "delegate_no_frontrunning",
+    "target": "ERC721Votes (historical voting harness)",
+    "lines": [
+      236,
+      271
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks."
+    ]
+  },
+  {
+    "id": 101,
+    "spec": "GovernorBase.spec",
+    "property": "startAndEndDatesNonZero",
+    "target": "Governor (historical ERC20VotesHarness)",
+    "lines": [
+      105,
+      109
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 102,
+    "spec": "GovernorBase.spec",
+    "property": "canceledImplyStartAndEndDateNonZero",
+    "target": "Governor (historical ERC20VotesHarness)",
+    "lines": [
+      116,
+      120
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 103,
+    "spec": "GovernorBase.spec",
+    "property": "executedImplyStartAndEndDateNonZero",
+    "target": "Governor (historical ERC20VotesHarness)",
+    "lines": [
+      127,
+      132
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 104,
+    "spec": "GovernorBase.spec",
+    "property": "voteStartBeforeVoteEnd",
+    "target": "Governor (historical ERC20VotesHarness)",
+    "lines": [
+      138,
+      146
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 105,
+    "spec": "GovernorBase.spec",
+    "property": "noBothExecutedAndCanceled",
+    "target": "Governor (historical ERC20VotesHarness)",
+    "lines": [
+      152,
+      158
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 106,
+    "spec": "GovernorBase.spec",
+    "property": "executionOnlyIfQuoromReachedAndVoteSucceeded",
+    "target": "Governor (historical ERC20VotesHarness)",
+    "lines": [
+      159,
+      169
+    ],
+    "status": "incomplete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 107,
+    "spec": "GovernorBase.spec",
+    "property": "doubleVoting",
+    "target": "Governor (historical ERC20VotesHarness)",
+    "lines": [
+      188,
+      196
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 108,
+    "spec": "GovernorBase.spec",
+    "property": "immutableFieldsAfterProposalCreation",
+    "target": "Governor (historical ERC20VotesHarness)",
+    "lines": [
+      211,
+      224
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 109,
+    "spec": "GovernorBase.spec",
+    "property": "noStartBeforeCreation",
+    "target": "Governor (historical ERC20VotesHarness)",
+    "lines": [
+      230,
+      242
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 110,
+    "spec": "GovernorBase.spec",
+    "property": "noExecuteOrCancelBeforeDeadline",
+    "target": "Governor (historical ERC20VotesHarness)",
+    "lines": [
+      254,
+      261
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 111,
+    "spec": "GovernorBase.spec",
+    "property": "allFunctionsRevertIfExecuted",
+    "target": "Governor (historical ERC20VotesHarness)",
+    "lines": [
+      285,
+      303
+    ],
+    "status": "incomplete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 112,
+    "spec": "GovernorBase.spec",
+    "property": "allFunctionsRevertIfCanceled",
+    "target": "Governor (historical ERC20VotesHarness)",
+    "lines": [
+      308,
+      326
+    ],
+    "status": "incomplete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 113,
+    "spec": "GovernorBase.spec",
+    "property": "executedOnlyAfterExecuteFunc",
+    "target": "Governor (historical ERC20VotesHarness)",
+    "lines": [
+      331,
+      341
+    ],
+    "status": "incomplete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 114,
+    "spec": "GovernorCountingSimple.spec",
+    "property": "SumOfVotesCastEqualSumOfPowerOfVotedPerProposal",
+    "target": "GovernorCountingSimple (historical governor harness)",
+    "lines": [
+      100,
+      106
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 115,
+    "spec": "GovernorCountingSimple.spec",
+    "property": "SumOfVotesCastEqualSumOfPowerOfVoted",
+    "target": "GovernorCountingSimple (historical governor harness)",
+    "lines": [
+      107,
+      113
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 116,
+    "spec": "GovernorCountingSimple.spec",
+    "property": "OneIsNotMoreThanAll",
+    "target": "GovernorCountingSimple (historical governor harness)",
+    "lines": [
+      114,
+      131
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 117,
+    "spec": "GovernorCountingSimple.spec",
+    "property": "noVoteForSomeoneElse",
+    "target": "GovernorCountingSimple (historical governor harness)",
+    "lines": [
+      132,
+      146
+    ],
+    "status": "incomplete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 118,
+    "spec": "GovernorCountingSimple.spec",
+    "property": "votingWeightMonotonicity",
+    "target": "GovernorCountingSimple (historical governor harness)",
+    "lines": [
+      152,
+      162
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 119,
+    "spec": "GovernorCountingSimple.spec",
+    "property": "hasVotedCorrelation",
+    "target": "GovernorCountingSimple (historical governor harness)",
+    "lines": [
+      168,
+      188
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 120,
+    "spec": "GovernorCountingSimple.spec",
+    "property": "privilegedOnlyNumerator",
+    "target": "GovernorCountingSimple (historical governor harness)",
+    "lines": [
+      194,
+      205
+    ],
+    "status": "incomplete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 121,
+    "spec": "GovernorCountingSimple.spec",
+    "property": "privilegedOnlyTimelock",
+    "target": "GovernorCountingSimple (historical governor harness)",
+    "lines": [
+      207,
+      217
+    ],
+    "status": "incomplete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 122,
+    "spec": "GovernorPreventLateQuorum.spec",
+    "property": "quorumReachedEffect",
+    "target": "GovernorPreventLateQuorumHarness",
+    "lines": [
+      87,
+      95
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "VIOLATED",
+    "outcome": "FINDING",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.",
+      "Report pp. 10–11 names GovernorPreventLateQuorumHarness, overridden _castVote, latestCastVoteCall, getter wrappers, and stubbed _execute; these exact historical modifications are absent."
+    ]
+  },
+  {
+    "id": 123,
+    "spec": "GovernorPreventLateQuorum.spec",
+    "property": "proposalNotCreatedEffects",
+    "target": "GovernorPreventLateQuorumHarness",
+    "lines": [
+      96,
+      104
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "VIOLATED",
+    "outcome": "FINDING",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.",
+      "Report pp. 10–11 names GovernorPreventLateQuorumHarness, overridden _castVote, latestCastVoteCall, getter wrappers, and stubbed _execute; these exact historical modifications are absent."
+    ]
+  },
+  {
+    "id": 124,
+    "spec": "GovernorPreventLateQuorum.spec",
+    "property": "proposalInOneState",
+    "target": "GovernorPreventLateQuorumHarness",
+    "lines": [
+      105,
+      108
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "VIOLATED",
+    "outcome": "FINDING",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.",
+      "Report pp. 10–11 names GovernorPreventLateQuorumHarness, overridden _castVote, latestCastVoteCall, getter wrappers, and stubbed _execute; these exact historical modifications are absent."
+    ]
+  },
+  {
+    "id": 125,
+    "spec": "GovernorPreventLateQuorum.spec",
+    "property": "deadlineChangeEffects",
+    "target": "GovernorPreventLateQuorumHarness",
+    "lines": [
+      123,
+      133
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.",
+      "Report pp. 10–11 names GovernorPreventLateQuorumHarness, overridden _castVote, latestCastVoteCall, getter wrappers, and stubbed _execute; these exact historical modifications are absent."
+    ]
+  },
+  {
+    "id": 126,
+    "spec": "GovernorPreventLateQuorum.spec",
+    "property": "deadlineCantBeUnextended",
+    "target": "GovernorPreventLateQuorumHarness",
+    "lines": [
+      141,
+      154
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "VIOLATED",
+    "outcome": "FINDING",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.",
+      "Report pp. 10–11 names GovernorPreventLateQuorumHarness, overridden _castVote, latestCastVoteCall, getter wrappers, and stubbed _execute; these exact historical modifications are absent."
+    ]
+  },
+  {
+    "id": 127,
+    "spec": "GovernorPreventLateQuorum.spec",
+    "property": "canExtendDeadlineOnce",
+    "target": "GovernorPreventLateQuorumHarness",
+    "lines": [
+      162,
+      173
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.",
+      "Report pp. 10–11 names GovernorPreventLateQuorumHarness, overridden _castVote, latestCastVoteCall, getter wrappers, and stubbed _execute; these exact historical modifications are absent."
+    ]
+  },
+  {
+    "id": 128,
+    "spec": "GovernorPreventLateQuorum.spec",
+    "property": "hasVotedCorrelationNonzero",
+    "target": "GovernorPreventLateQuorumHarness",
+    "lines": [
+      186,
+      214
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.",
+      "Report pp. 10–11 names GovernorPreventLateQuorumHarness, overridden _castVote, latestCastVoteCall, getter wrappers, and stubbed _execute; these exact historical modifications are absent."
+    ]
+  },
+  {
+    "id": 129,
+    "spec": "GovernorPreventLateQuorum.spec",
+    "property": "againstVotesDontCount",
+    "target": "GovernorPreventLateQuorumHarness",
+    "lines": [
+      222,
+      235
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.",
+      "Report pp. 10–11 names GovernorPreventLateQuorumHarness, overridden _castVote, latestCastVoteCall, getter wrappers, and stubbed _execute; these exact historical modifications are absent."
+    ]
+  },
+  {
+    "id": 130,
+    "spec": "GovernorPreventLateQuorum.spec",
+    "property": "deadlineExtenededIfQuorumReached",
+    "target": "GovernorPreventLateQuorumHarness",
+    "lines": [
+      242,
+      257
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.",
+      "Report pp. 10–11 names GovernorPreventLateQuorumHarness, overridden _castVote, latestCastVoteCall, getter wrappers, and stubbed _execute; these exact historical modifications are absent."
+    ]
+  },
+  {
+    "id": 131,
+    "spec": "GovernorPreventLateQuorum.spec",
+    "property": "extendedDeadlineValueSetIfQuorumReached",
+    "target": "GovernorPreventLateQuorumHarness",
+    "lines": [
+      264,
+      279
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.",
+      "Report pp. 10–11 names GovernorPreventLateQuorumHarness, overridden _castVote, latestCastVoteCall, getter wrappers, and stubbed _execute; these exact historical modifications are absent."
+    ]
+  },
+  {
+    "id": 132,
+    "spec": "GovernorPreventLateQuorum.spec",
+    "property": "deadlineNeverReduced",
+    "target": "GovernorPreventLateQuorumHarness",
+    "lines": [
+      286,
+      297
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.",
+      "Report pp. 10–11 names GovernorPreventLateQuorumHarness, overridden _castVote, latestCastVoteCall, getter wrappers, and stubbed _execute; these exact historical modifications are absent."
+    ]
+  },
+  {
+    "id": 133,
+    "spec": "Initializable.spec",
+    "property": "notInitializing",
+    "target": "Initializable / flat verification harness (historical name not stated)",
+    "lines": [
+      40,
+      48
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 134,
+    "spec": "Initializable.spec",
+    "property": "notInitializing",
+    "target": "Initializable / multi-inheritance verification harness (historical name not stated)",
+    "lines": [
+      40,
+      48
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 135,
+    "spec": "Initializable.spec",
+    "property": "initOnce",
+    "target": "Initializable / flat verification harness (historical name not stated)",
+    "lines": [
+      49,
+      55
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 136,
+    "spec": "Initializable.spec",
+    "property": "initOnce",
+    "target": "Initializable / multi-inheritance verification harness (historical name not stated)",
+    "lines": [
+      49,
+      55
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 137,
+    "spec": "Initializable.spec",
+    "property": "reinitializeEffects",
+    "target": "Initializable / flat verification harness (historical name not stated)",
+    "lines": [
+      58,
+      64
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 138,
+    "spec": "Initializable.spec",
+    "property": "reinitializeEffects",
+    "target": "Initializable / multi-inheritance verification harness (historical name not stated)",
+    "lines": [
+      58,
+      64
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 139,
+    "spec": "Initializable.spec",
+    "property": "initalizeEffects",
+    "target": "Initializable / flat verification harness (historical name not stated)",
+    "lines": [
+      68,
+      74
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 140,
+    "spec": "Initializable.spec",
+    "property": "initalizeEffects",
+    "target": "Initializable / multi-inheritance verification harness (historical name not stated)",
+    "lines": [
+      68,
+      74
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 141,
+    "spec": "Initializable.spec",
+    "property": "disabledStaysDisabled",
+    "target": "Initializable / flat verification harness (historical name not stated)",
+    "lines": [
+      77,
+      85
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 142,
+    "spec": "Initializable.spec",
+    "property": "disabledStaysDisabled",
+    "target": "Initializable / multi-inheritance verification harness (historical name not stated)",
+    "lines": [
+      77,
+      85
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 143,
+    "spec": "Initializable.spec",
+    "property": "increasingInitialized",
+    "target": "Initializable / flat verification harness (historical name not stated)",
+    "lines": [
+      88,
+      95
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 144,
+    "spec": "Initializable.spec",
+    "property": "increasingInitialized",
+    "target": "Initializable / multi-inheritance verification harness (historical name not stated)",
+    "lines": [
+      88,
+      95
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 145,
+    "spec": "Initializable.spec",
+    "property": "reinitializeIncreasesInit",
+    "target": "Initializable / flat verification harness (historical name not stated)",
+    "lines": [
+      98,
+      106
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 146,
+    "spec": "Initializable.spec",
+    "property": "reinitializeIncreasesInit",
+    "target": "Initializable / multi-inheritance verification harness (historical name not stated)",
+    "lines": [
+      98,
+      106
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 147,
+    "spec": "Initializable.spec",
+    "property": "reinitializeLiveness",
+    "target": "Initializable / flat verification harness (historical name not stated)",
+    "lines": [
+      109,
+      117
+    ],
+    "status": "incomplete",
+    "label": "UNMAPPED",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 148,
+    "spec": "Initializable.spec",
+    "property": "reinitializeLiveness",
+    "target": "Initializable / multi-inheritance verification harness (historical name not stated)",
+    "lines": [
+      109,
+      117
+    ],
+    "status": "incomplete",
+    "label": "UNMAPPED",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 149,
+    "spec": "Initializable.spec",
+    "property": "reinitializeRule",
+    "target": "Initializable / flat verification harness (historical name not stated)",
+    "lines": [
+      120,
+      127
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 150,
+    "spec": "Initializable.spec",
+    "property": "reinitializeRule",
+    "target": "Initializable / multi-inheritance verification harness (historical name not stated)",
+    "lines": [
+      120,
+      127
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 151,
+    "spec": "Initializable.spec",
+    "property": "reinitVersionCheckParent",
+    "target": "Initializable / flat verification harness (historical name not stated)",
+    "lines": [
+      130,
+      135
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 152,
+    "spec": "Initializable.spec",
+    "property": "reinitVersionCheckParent",
+    "target": "Initializable / multi-inheritance verification harness (historical name not stated)",
+    "lines": [
+      130,
+      135
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 153,
+    "spec": "Initializable.spec",
+    "property": "reinitVersionCheckChild",
+    "target": "Initializable / flat verification harness (historical name not stated)",
+    "lines": [
+      138,
+      143
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 154,
+    "spec": "Initializable.spec",
+    "property": "reinitVersionCheckChild",
+    "target": "Initializable / multi-inheritance verification harness (historical name not stated)",
+    "lines": [
+      138,
+      143
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 155,
+    "spec": "Initializable.spec",
+    "property": "reinitVersionCheckGrandchild",
+    "target": "Initializable / flat verification harness (historical name not stated)",
+    "lines": [
+      146,
+      151
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 156,
+    "spec": "Initializable.spec",
+    "property": "reinitVersionCheckGrandchild",
+    "target": "Initializable / multi-inheritance verification harness (historical name not stated)",
+    "lines": [
+      146,
+      151
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 157,
+    "spec": "Initializable.spec",
+    "property": "inheritanceCheck",
+    "target": "Initializable / flat verification harness (historical name not stated)",
+    "lines": [
+      154,
+      159
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 158,
+    "spec": "Initializable.spec",
+    "property": "inheritanceCheck",
+    "target": "Initializable / multi-inheritance verification harness (historical name not stated)",
+    "lines": [
+      154,
+      159
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.",
+      "This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property."
+    ]
+  },
+  {
+    "id": 159,
+    "spec": "RulesInProgress.spec",
+    "property": "possibleTotalVotes",
+    "target": "Governor (RulesInProgress; historical ERC20VotesHarness)",
+    "lines": [
+      116,
+      139
+    ],
+    "status": "incomplete",
+    "label": "S6-4",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration."
+    ]
+  },
+  {
+    "id": 160,
+    "spec": "RulesInProgress.spec",
+    "property": "getTimestampOnlyChange",
+    "target": "Governor (RulesInProgress; historical ERC20VotesHarness)",
+    "lines": [
+      160,
+      175
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.",
+      "Active rule refers to hashIdCorrelation and getTimestamp, but RulesInProgress imports only GovernorBase.spec; those named symbols are defined in another spec (TimelockController.spec) which is not imported. This source cannot be declared dependency-complete."
+    ]
+  },
+  {
+    "id": 161,
+    "spec": "TimelockController.spec",
+    "property": "operationCheck",
+    "target": "TimelockController",
+    "lines": [
+      41,
+      43
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 162,
+    "spec": "TimelockController.spec",
+    "property": "pendingCheck",
+    "target": "TimelockController",
+    "lines": [
+      47,
+      49
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Private/internal TimelockController selector(s) _DONE_TIMESTAMP require original exposure or linking not present as an executable harness."
+    ]
+  },
+  {
+    "id": 163,
+    "spec": "TimelockController.spec",
+    "property": "readyCheck",
+    "target": "TimelockController",
+    "lines": [
+      53,
+      55
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 164,
+    "spec": "TimelockController.spec",
+    "property": "doneCheck",
+    "target": "TimelockController",
+    "lines": [
+      59,
+      61
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Private/internal TimelockController selector(s) _DONE_TIMESTAMP require original exposure or linking not present as an executable harness."
+    ]
+  },
+  {
+    "id": 165,
+    "spec": "TimelockController.spec",
+    "property": "unsetPendingTransitionGeneral",
+    "target": "TimelockController",
+    "lines": [
+      76,
+      86
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 166,
+    "spec": "TimelockController.spec",
+    "property": "unsetPendingTransitionMethods",
+    "target": "TimelockController",
+    "lines": [
+      91,
+      101
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical TimelockController.spec declares schedule(address,uint256,bytes32,bytes32,bytes32,uint256) but Solidity schedule accepts bytes calldata as its third argument (contracts/governance/TimelockController.sol:214–220). This is an ABI/type mismatch, not just a missing compiler."
+    ]
+  },
+  {
+    "id": 167,
+    "spec": "TimelockController.spec",
+    "property": "readyDoneTransition",
+    "target": "TimelockController",
+    "lines": [
+      106,
+      116
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 168,
+    "spec": "TimelockController.spec",
+    "property": "pendingCancelledTransition",
+    "target": "TimelockController",
+    "lines": [
+      121,
+      130
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 169,
+    "spec": "TimelockController.spec",
+    "property": "doneToNothingTransition",
+    "target": "TimelockController",
+    "lines": [
+      135,
+      144
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 170,
+    "spec": "TimelockController.spec",
+    "property": "minDelayOnlyChange",
+    "target": "TimelockController",
+    "lines": [
+      155,
+      164
+    ],
+    "status": "incomplete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Private/internal TimelockController selector(s) _minDelay require original exposure or linking not present as an executable harness."
+    ]
+  },
+  {
+    "id": 171,
+    "spec": "TimelockController.spec",
+    "property": "scheduleCheck",
+    "target": "TimelockController",
+    "lines": [
+      169,
+      179
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical TimelockController.spec declares schedule(address,uint256,bytes32,bytes32,bytes32,uint256) but Solidity schedule accepts bytes calldata as its third argument (contracts/governance/TimelockController.sol:214–220). This is an ABI/type mismatch, not just a missing compiler."
+    ]
+  },
+  {
+    "id": 172,
+    "spec": "TimelockController.spec",
+    "property": "cannotCallExecute",
+    "target": "TimelockController",
+    "lines": [
+      184,
+      194
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 173,
+    "spec": "TimelockController.spec",
+    "property": "executeRevertsFromUnset",
+    "target": "TimelockController",
+    "lines": [
+      199,
+      209
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 174,
+    "spec": "TimelockController.spec",
+    "property": "executeRevertsEffectCheck",
+    "target": "TimelockController",
+    "lines": [
+      214,
+      225
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 175,
+    "spec": "TimelockController.spec",
+    "property": "cancelledNotExecuted",
+    "target": "TimelockController",
+    "lines": [
+      230,
+      240
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 176,
+    "spec": "TimelockController.spec",
+    "property": "onlyProposer",
+    "target": "TimelockController",
+    "lines": [
+      245,
+      261
+    ],
+    "status": "incomplete",
+    "label": "S5-3",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical TimelockController.spec declares schedule(address,uint256,bytes32,bytes32,bytes32,uint256) but Solidity schedule accepts bytes calldata as its third argument (contracts/governance/TimelockController.sol:214–220). This is an ABI/type mismatch, not just a missing compiler.",
+      "Private/internal TimelockController selector(s) _checkRole require original exposure or linking not present as an executable harness."
+    ]
+  },
+  {
+    "id": 177,
+    "spec": "TimelockController.spec",
+    "property": "cooldown",
+    "target": "TimelockController",
+    "lines": [
+      266,
+      279
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical TimelockController.spec declares schedule(address,uint256,bytes32,bytes32,bytes32,uint256) but Solidity schedule accepts bytes calldata as its third argument (contracts/governance/TimelockController.sol:214–220). This is an ABI/type mismatch, not just a missing compiler."
+    ]
+  },
+  {
+    "id": 178,
+    "spec": "TimelockController.spec",
+    "property": "scheduleChange",
+    "target": "TimelockController",
+    "lines": [
+      284,
+      295
+    ],
+    "status": "incomplete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Historical TimelockController.spec declares schedule(address,uint256,bytes32,bytes32,bytes32,uint256) but Solidity schedule accepts bytes calldata as its third argument (contracts/governance/TimelockController.sol:214–220). This is an ABI/type mismatch, not just a missing compiler."
+    ]
+  },
+  {
+    "id": 179,
+    "spec": "TimelockController.spec",
+    "property": "executeChange",
+    "target": "TimelockController",
+    "lines": [
+      300,
+      310
+    ],
+    "status": "complete",
+    "label": "S5-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 180,
+    "spec": "TimelockController.spec",
+    "property": "cancelChange",
+    "target": "TimelockController",
+    "lines": [
+      315,
+      323
+    ],
+    "status": "complete",
+    "label": "S3-2",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": []
+  },
+  {
+    "id": 181,
+    "spec": "sanity.spec",
+    "property": "sanity",
+    "target": "UNRESOLVED (generic method probe)",
+    "lines": [
+      10,
+      15
+    ],
+    "status": "incomplete",
+    "label": "UNMAPPED",
+    "result": "NOT_STATED",
+    "outcome": "NOT_STATED",
+    "missing": [
+      "Generic method f is not bound to an identified historical target or Certora configuration; reachability outcomes cannot be meaningfully attributed."
+    ]
+  }
+]

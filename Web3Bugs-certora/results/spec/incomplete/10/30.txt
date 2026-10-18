@@ -1,0 +1,1 @@
+The historical run script specs/scripts/runHBalancerSpecific.sh points to contracts/handlers/balancer/HBalancer.sol via _runHandler.sh, but that Solidity target is absent from the preserved PropertyGPT snapshot. No modern Balancer handler is a valid historical substitute.

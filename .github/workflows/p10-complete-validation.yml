@@ -1,0 +1,33 @@
+name: P10 complete validation
+
+on:
+  push:
+    branches:
+      - catalog/p10-gaia-furucombo
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  p10_four_required_checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact pushed commit with main history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Fetch main tracking ref
+        run: git fetch origin main:refs/remotes/origin/main
+      - name: Run spec catalog structural validator
+        working-directory: Web3Bugs-certora
+        run: python3 scripts/check_specs.py .
+      - name: Check contest CSV consistency
+        working-directory: Web3Bugs-certora
+        run: python3 scripts/check_contests_csv.py .
+      - name: Check contract directory consistency
+        working-directory: Web3Bugs-certora
+        run: python3 scripts/check_contracts.py .
+      - name: Diff whitespace from main
+        run: git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD

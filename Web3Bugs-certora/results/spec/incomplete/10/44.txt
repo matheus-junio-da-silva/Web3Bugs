@@ -1,0 +1,1 @@
+Incomplete: noOtherPartyModified / HAaveProtocol. Historical HAaveProtocol.sol implementation is absent in the preserved snapshot; script runHAave.sh references missing source. No modern handler substitution is valid.

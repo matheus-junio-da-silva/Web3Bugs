@@ -1,0 +1,2 @@
+Missing historical dependency: Splits.spec::assetsDoNotInterfereEachOther
+The abstract Splits.sol exposes internal _split, _splitResults, _splittable, _collectable, _give and _hashSplits, but the spec invokes missing CVT generated callable wrappers and receiver-array harness getters (getCurrSplitsReceiverLocalArr, getCurrSplitsReceiverLocaLength). No wrapper target or verification configuration is in src/. DripsHub public ABI differs.

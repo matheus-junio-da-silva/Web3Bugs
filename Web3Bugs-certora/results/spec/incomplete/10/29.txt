@@ -1,0 +1,12 @@
+INCOMPLETE DEPENDENCY
+
+Property: cubeCounterGreaterThan0IffSenderInitialized
+Original CVL: contracts/10/specs/proxy.spec:552-556
+Run target: ProxyHarness (specs/scripts/proxy.sh)
+
+Missing required symbol:
+`_getCubeCounter()` is referenced by `ProxyHarness.getCubeCounter()` at `contracts/10/specs/harnesses/ProxyHarness.sol:29-35`, but the inherited Solidity implementation in `contracts/10/contracts/Storage.sol` and `contracts/10/contracts/Proxy.sol` lacks the helper.
+
+Searched: contracts/10/contracts/Proxy.sol; contracts/10/contracts/Storage.sol; contracts/10/specs/harnesses/ProxyHarness.sol; contracts/10/specs/scripts/proxy.sh; contracts/10/specs/scripts/applyHarnesses.sh.
+The historical rule and available dependencies have not been rewritten or filled using another project.
+This is a missing snapshot dependency, not a CVL1/CVL2 compatibility assessment.

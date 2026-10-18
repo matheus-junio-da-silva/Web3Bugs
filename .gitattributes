@@ -1,0 +1,8 @@
+# Project 10 Furucombo: do not normalize literal source or CVL/Solidity excerpts.
+# Whitespace from the historical snapshot is an auditable property of its blob SHA.
+# Restrict exceptions to this project's exact source and copied code/spec excerpts.
+Web3Bugs-certora/contracts/10/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+Web3Bugs-certora/results/spec/complete/10/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+Web3Bugs-certora/results/spec/incomplete/10/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+Web3Bugs-certora/results/spec/complete/10/*.sol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+Web3Bugs-certora/results/spec/incomplete/10/*.sol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab

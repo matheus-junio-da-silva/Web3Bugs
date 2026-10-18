@@ -1,0 +1,6 @@
+Project 18 / example 171 / scheduleCheck
+Status: incomplete
+Target: TimelockController
+Missing historical dependency/evidence:
+- Historical TimelockController.spec declares schedule(address,uint256,bytes32,bytes32,bytes32,uint256) but Solidity schedule accepts bytes calldata as its third argument (contracts/governance/TimelockController.sol:214–220). This is an ABI/type mismatch, not just a missing compiler.
+No replacement modern contract or guessed harness may be silently inserted.

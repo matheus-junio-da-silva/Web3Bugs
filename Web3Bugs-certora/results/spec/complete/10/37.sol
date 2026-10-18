@@ -70,3 +70,65 @@ contract HMaker is HandlerBase {
         try
             proxy.execute{value: value}(
                 getProxyActions(),
+
+// Exact original Solidity: contracts/10/contracts/handlers/maker/HMaker.sol lines 170-201
+    function safeLockGem(
+        address gemJoin,
+        uint256 cdp,
+        uint256 wad
+    ) external payable {
+        IDSProxy proxy = IDSProxy(_getProxy(address(this)));
+        address owner = _getProxy(_getSender());
+        address token = IMakerGemJoin(gemJoin).gem();
+        // if amount == type(uint256).max return balance of Proxy
+        wad = _getBalance(token, wad);
+        _tokenApprove(token, address(proxy), wad);
+        try
+            proxy.execute(
+                getProxyActions(),
+                abi.encodeWithSelector(
+                    // selector of "safeLockGem(address,address,uint256,uint256,bool,address)"
+                    0xead64729,
+                    getCdpManager(),
+                    gemJoin,
+                    cdp,
+                    wad,
+                    true,
+                    owner
+                )
+            )
+        {} catch Error(string memory reason) {
+            _revertMsg("safeLockGem", reason);
+        } catch {
+            _revertMsg("safeLockGem");
+        }
+        _tokenApproveZero(token, address(proxy));
+    }
+
+
+// Exact original Solidity: contracts/10/contracts/handlers/maker/HMaker.sol lines 203-227
+    function freeETH(
+        address ethJoin,
+        uint256 cdp,
+        uint256 wad
+    ) external payable cdpAllowed(cdp) {
+        // Check msg.sender authority
+        IDSProxy proxy = IDSProxy(_getProxy(address(this)));
+        try
+            proxy.execute(
+                getProxyActions(),
+                abi.encodeWithSelector(
+                    // selector of "freeETH(address,address,uint256,uint256)"
+                    0x7b5a3b43,
+                    getCdpManager(),
+                    ethJoin,
+                    cdp,
+                    wad
+                )
+            )
+        {} catch Error(string memory reason) {
+            _revertMsg("freeETH", reason);
+        } catch {
+            _revertMsg("freeETH");
+        }
+    }

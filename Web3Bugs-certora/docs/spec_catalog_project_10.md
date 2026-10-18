@@ -310,3 +310,10 @@ For report #27–32, all 23 historical handler cells are `None`. The existing so
 
 - Example **23** remains dependency-**incomplete** (three-argument `batchExec` selector absent) and now explicitly has **Result `NOT_STATED` / Detection Outcome `NOT_STATED`**, not a report-wide `VIOLATED / ACCEPTED_BEHAVIOR` inference from p.15 `🔎`/`receive`.
 - Additional handler-source excerpts for **HComptroller** and **HFurucomboStaking** contain respectively **49** and **54** original lines, not 70. Their `Original Contract Lines` CSV fields were corrected on their four target-specific entries each. CVL original source remains untouched.
+
+
+### 12.2 Solidity method-level citations (first batch)
+
+Added literal target-specific function ranges for examples 37 safeLockGem=170-201,freeETH=203-227; 82 addLiquidity=246-344. These methods are relevant to the historical #22/#23 handler observations; they do not constitute current Certora proofs. The per-example `.sol` and shared CSV reference the exact original later-snapshot lines.
+
+CI run 39142595421 at commit 2a162f3 passed `check_contests_csv` and `check_contracts`; it did **not** run `check_specs`. The separately generated 92 target-context entries passed `check_specs` on a local worktree, but not yet on an exact checkout of this published tree. Keep the PR draft.

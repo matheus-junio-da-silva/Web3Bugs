@@ -70,3 +70,104 @@ contract HCurve is HandlerBase {
             )
         {} catch Error(string memory reason) {
             _revertMsg("exchangeUint256", reason);
+
+// Exact original Solidity: contracts/10/contracts/handlers/curve/HCurve.sol lines 246-344
+    function addLiquidity(
+        address handler,
+        address pool,
+        address[] calldata tokens,
+        uint256[] calldata amounts,
+        uint256 minPoolAmount
+    ) external payable returns (uint256) {
+        (
+            uint256[] memory _amounts,
+            uint256 balanceBefore,
+            uint256 ethAmount
+        ) = _addLiquidityBefore(handler, pool, tokens, amounts);
+
+        // Execute add_liquidity according to amount array size
+        if (_amounts.length == 2) {
+            uint256[2] memory amts = [_amounts[0], _amounts[1]];
+            try
+                ICurveHandler(handler).add_liquidity{value: ethAmount}(
+                    amts,
+                    minPoolAmount
+                )
+            {} catch Error(string memory reason) {
+                _revertMsg("addLiquidity", reason);
+            } catch {
+                _revertMsg("addLiquidity");
+            }
+        } else if (_amounts.length == 3) {
+            uint256[3] memory amts = [_amounts[0], _amounts[1], _amounts[2]];
+            try
+                ICurveHandler(handler).add_liquidity{value: ethAmount}(
+                    amts,
+                    minPoolAmount
+                )
+            {} catch Error(string memory reason) {
+                _revertMsg("addLiquidity", reason);
+            } catch {
+                _revertMsg("addLiquidity");
+            }
+        } else if (_amounts.length == 4) {
+            uint256[4] memory amts = [
+                _amounts[0],
+                _amounts[1],
+                _amounts[2],
+                _amounts[3]
+            ];
+            try
+                ICurveHandler(handler).add_liquidity{value: ethAmount}(
+                    amts,
+                    minPoolAmount
+                )
+            {} catch Error(string memory reason) {
+                _revertMsg("addLiquidity", reason);
+            } catch {
+                _revertMsg("addLiquidity");
+            }
+        } else if (_amounts.length == 5) {
+            uint256[5] memory amts = [
+                _amounts[0],
+                _amounts[1],
+                _amounts[2],
+                _amounts[3],
+                _amounts[4]
+            ];
+            try
+                ICurveHandler(handler).add_liquidity{value: ethAmount}(
+                    amts,
+                    minPoolAmount
+                )
+            {} catch Error(string memory reason) {
+                _revertMsg("addLiquidity", reason);
+            } catch {
+                _revertMsg("addLiquidity");
+            }
+        } else if (_amounts.length == 6) {
+            uint256[6] memory amts = [
+                _amounts[0],
+                _amounts[1],
+                _amounts[2],
+                _amounts[3],
+                _amounts[4],
+                _amounts[5]
+            ];
+            try
+                ICurveHandler(handler).add_liquidity{value: ethAmount}(
+                    amts,
+                    minPoolAmount
+                )
+            {} catch Error(string memory reason) {
+                _revertMsg("addLiquidity", reason);
+            } catch {
+                _revertMsg("addLiquidity");
+            }
+        } else {
+            _revertMsg("addLiquidity", "invalid amount[] size");
+        }
+
+        return
+            _addLiquidityAfter(handler, pool, tokens, amounts, balanceBefore);
+    }

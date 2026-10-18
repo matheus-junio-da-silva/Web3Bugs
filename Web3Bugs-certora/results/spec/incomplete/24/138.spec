@@ -1,0 +1,215 @@
+// Project 24 source contracts/24/spec/LaunchEvent.spec lines 1149-1188; original CVL syntax, no CVL2 migration.
+// Original prerequisite CVL declarations from sanity.spec
+import "../helpers/erc20.spec"
+
+// using JoeFactory as Factory
+
+methods{
+    mint(address) returns uint256 => DISPATCHER(true)
+    getPair(address, address) returns address envfree => DISPATCHER(true)
+    feeTo() returns address => DISPATCHER(true)
+    getReserves() returns uint112, uint112, uint32 => DISPATCHER(true)
+    createPair(address, address) returns address => DISPATCHER(true)
+    migrator() returns address => DISPATCHER(true)
+    initialize(address, address) => DISPATCHER(true)
+    newPair() returns address => NONDET
+    desiredLiquidity()returns uint256 => NONDET     // in JoePair contract 
+}
+
+// Original prerequisite CVL declarations from LaunchEvent.spec
+import "./sanity.spec"
+
+using JoeFactory as Factory
+using DummyERC20A as SymbERC20A
+using DummyERC20B as SymbERC20B
+using DummyWeth as Weth
+
+////////////////////////////////////////////////////////////////////////////
+//                      Methods                                           //
+////////////////////////////////////////////////////////////////////////////
+
+methods {
+    // functions
+    initialize(address, uint256, address, uint256, uint256, uint256, uint256, uint256, uint256, uint256)
+    currentPhase() returns (uint8)
+    depositAVAX()
+    withdrawAVAX(uint256)
+    createPair()
+    withdrawLiquidity()
+    withdrawIncentives()
+    emergencyWithdraw()
+    allowEmergencyWithdraw()
+    skim()
+    getPenalty() returns (uint256)
+    getReserves() returns (uint256, uint256)
+    getRJoeAmount(uint256) returns (uint256)
+    pairBalance(address) returns (uint256)
+    _atPhase(uint8)
+
+    // generated getters
+    issuer() returns(address) envfree
+    auctionStart() returns(uint256) envfree           
+    PHASE_ONE_DURATION() returns(uint256) envfree
+    PHASE_ONE_NO_FEE_DURATION() returns(uint256) envfree
+    PHASE_TWO_DURATION() returns(uint256) envfree
+    tokenIncentivesPercent() returns(uint256) envfree
+    floorPrice() returns(uint256) envfree
+    userTimelock() returns(uint256) envfree
+    issuerTimelock() returns(uint256) envfree
+    maxWithdrawPenalty() returns(uint256) envfree
+    fixedWithdrawPenalty() returns(uint256) envfree
+    rJoePerAvax() returns(uint256) envfree
+    initialized() returns(bool) envfree
+    stopped() returns(bool) envfree
+    maxAllocation() returns(uint256) envfree
+    WAVAX() returns(address) envfree
+    token() returns(address) envfree
+    avaxAllocated() returns(uint256) envfree
+    pair() returns(address) envfree
+    tokenIncentivesBalance() returns(uint256) envfree
+    tokenIncentivesForUsers() returns(uint256) envfree
+    tokenIncentiveIssuerRefund() returns(uint256) envfree
+    lpSupply() returns(uint256) envfree
+    tokenReserve() returns(uint256) envfree
+    avaxReserve()  returns(uint256) envfree
+
+    // harness functions
+    getUserAllocation(address) returns(uint256) envfree
+    getUserBalance(address) returns(uint256) envfree
+    userHasWithdrawnPair(address) returns(bool) envfree
+    userHasWithdrawnIncentives(address) returns(bool) envfree
+    getNewWAVAX() returns (address) envfree
+    getPenaltyCollector() returns (address) envfree
+    getTokenBalanceOfThis() returns (uint256) envfree
+    getWAVAXbalanceOfThis() returns (uint256) envfree
+    getPairBalanceOfThis() returns (uint256) envfree
+    getOwner() returns (address) envfree
+    getPairBalance(address) returns (uint256) envfree
+    getTokenBalance(address) returns (uint256) envfree
+    getPairTotalSupply() returns (uint256) envfree
+    getPairTotalSupplyOfThis() returns (uint256) envfree
+
+    isRJLaunchEvent(address) returns(bool) envfree => DISPATCHER(true)
+    receiveETH() => DISPATCHER(true)
+    
+}
+
+////////////////////////////////////////////////////////////////////////////
+//                       Definitions                                      //
+////////////////////////////////////////////////////////////////////////////
+
+
+definition NotStarted() returns uint8 = 0;
+definition PhaseOne() returns uint8 = 1;
+definition PhaseTwo() returns uint8 = 2;
+definition PhaseThree() returns uint8 = 3; 
+
+definition oneMinute() returns uint256 = 60;
+definition oneHour()   returns uint256 = 60 * oneMinute();
+definition oneDay()    returns uint256 = 24 * oneHour();
+definition twoDays()    returns uint256 = 2 * oneDay();
+definition sevenDays()    returns uint256 = 7 * oneDay();
+// definition oneWeek()   returns uint256 = 7  * oneDay();
+// definition MAX_DATE()   returns uint256 = 100000000000000000000000000000000000000000000000;
+// definition time_bounded(uint256 t) returns bool = t < MAX_DATE() && t > dateOffset();
+
+
+
+////////////////////////////////////////////////////////////////////////////
+//                         Functions                                      //
+////////////////////////////////////////////////////////////////////////////
+
+
+function helperFunctionsForWithdrawLiquidity(method f, env e) {
+	if (f.selector == withdrawLiquidity().selector) {
+		withdrawLiquidity(e);
+	} else {
+        calldataarg args;
+        f(e, args);
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////
+//                           Ghosts                                       //
+////////////////////////////////////////////////////////////////////////////
+
+
+ghost sum_of_users_balances() returns uint256 {
+    init_state axiom sum_of_users_balances() == 0;
+}
+
+hook Sstore getUserInfo[KEY address user].balance uint256 userBalance (uint256 old_userBalance) STORAGE {
+    havoc sum_of_users_balances assuming sum_of_users_balances@new() == sum_of_users_balances@old() - old_userBalance + userBalance;
+}
+
+
+// ghost unwithdrawn_users_lp_tokens() returns uint256 {
+//     init_state axiom unwithdrawn_users_lp_tokens() == 0;
+// }
+ghost uint256 unwithdrawn_users_lp_tokens{
+    init_state axiom unwithdrawn_users_lp_tokens == 0;
+}
+
+hook Sstore getUserPairBalance[KEY address user] uint256 userPairBalance (uint256 old_userPairBalance) STORAGE {
+	havoc unwithdrawn_users_lp_tokens assuming unwithdrawn_users_lp_tokens@new == unwithdrawn_users_lp_tokens@old - old_userPairBalance + userPairBalance;
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////
+//                       Invariants                                       //
+////////////////////////////////////////////////////////////////////////////
+
+
+
+// HELPERS
+
+
+// STATUS - verified (with harness)
+// --rule_sanity failed instate: https://vaas-stg.certora.com/output/3106/2de5b9f58130ede9258d/?anonymousKey=1395a42b2a103b263f982faa8130a8b892f7a1b6
+// getPair() should return the same results for both permutations (for current values in the contract)
+
+
+
+// Verbatim active rule follows
+rule hl_moreDepositMoreGet(method f, env e, env e2){
+    require e.msg.sender != e2.msg.sender;
+    require e.msg.sender != issuer();
+    require e2.msg.sender != issuer();
+    require e.msg.sender != currentContract;
+    require e2.msg.sender != currentContract;
+    require lpSupply() >= avaxAllocated(); // assumption, need to double check
+    require token() == SymbERC20A || token() == SymbERC20B;
+
+    uint256 balanceOfuser1 = getUserBalance(e.msg.sender);
+    uint256 balanceOfuser2 = getUserBalance(e2.msg.sender);
+    require balanceOfuser2 > balanceOfuser1;
+    require avaxAllocated() >= balanceOfuser2 + balanceOfuser1;
+
+    uint256 pairOfuser1Before = getPairBalance(e.msg.sender);
+    uint256 tokenOfuser1Before = getTokenBalance(e.msg.sender);
+
+    uint256 pairOfuser2Before = getPairBalance(e2.msg.sender);
+    uint256 tokenOfuser2Before = getTokenBalance(e2.msg.sender);
+
+    require pairOfuser1Before == pairOfuser2Before;
+    require tokenOfuser1Before == tokenOfuser2Before;
+
+    withdrawLiquidity(e);
+    withdrawIncentives(e);
+    // check how much can I withdrawLiquidity or how much I withdrawn
+    uint256 pairOfuser1After = getPairBalance(e.msg.sender);
+    // check how much can I withdrawIncentives or how much I withdrawn
+    uint256 tokenOfuser1After = getTokenBalance(e.msg.sender);
+
+    withdrawLiquidity(e2);
+    withdrawIncentives(e2);
+    // check how much can I withdrawLiquidity or how much I withdrawn
+    uint256 pairOfuser2After = getPairBalance(e2.msg.sender);
+    // check how much can I withdrawIncentives or how much I withdrawn
+    uint256 tokenOfuser2After = getTokenBalance(e2.msg.sender);
+
+    //assert
+    assert pairOfuser1After < pairOfuser2After && tokenOfuser1After < tokenOfuser2After, "more deposit doesn't guarantee more rewards";
+}

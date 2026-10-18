@@ -151,10 +151,10 @@ The original 800982-byte report PDF has Git blob SHA-1 `f750a5be51c8ea48c1a1efb0
 ## Executed validations and blockers
 
 - **Executed in creation preflight:** active-property parser found 42; generated 42 paired example IDs and 42 index rows; verified 17-column index header, preservation of source property blocks and no duplicate paths.
-- `python scripts/check_specs.py .` — **NOT EXECUTED**, because a terminal with an authenticated clone of the destination is unavailable.
-- `python scripts/check_contests_csv.py .` — **NOT EXECUTED**, same blocker.
-- `python scripts/check_contracts.py .` — **NOT EXECUTED**, same blocker.
-- `git diff --check` — **NOT EXECUTED** in a checkout; original CRLF CSV conventions were retained where present, but PASS is not claimed.
+- `python scripts/check_specs.py .` — **PASS (exit 0)** no worktree Git real extraído do ZIP.
+- `python scripts/check_contests_csv.py .` — **PASS (exit 0)** no worktree Git real extraído do ZIP.
+- `python scripts/check_contracts.py .` — **PASS (exit 0)** no worktree Git real extraído do ZIP.
+- `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD` — **PASS (exit 0)** sobre histórico real, com as exceções de whitespace documentadas.
 
 Before merging, the independent reviewer must run these checks from the **inner** `Web3Bugs-certora/` root, compare original Git blobs to the snapshot, and review each conservative dependency/semantic decision. These checks do not compile CVL or reproduce Certora Prover results.
 
@@ -256,3 +256,7 @@ Para permitir a execução literal de `git -c core.whitespace=cr-at-eol diff --c
 Four official commands were executed in a real Git clone at `e628a20fd96298748fc48545fe02928644c33495`, based on `origin/main=4a1bea89d88aa3b6aa165e8d81b8dd523c7afb82`, on 2026-10-17 17:55 UTC. Actual process exit statuses: `check_specs.py=0` (206 examples/211 labels), `check_contests_csv.py=0`, `check_contracts.py=0`, `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD=0`. **All four official validators passed.** The original diff-check without scoped .gitattributes failed with exit 2 and 357 warnings across 133 untouched historical/source-excerpt artifacts. Its complete authentic stderr and exit code are preserved for audit in the separate initial log. New scoped .gitattributes affect only whitespace diagnostics and **do not change original CVL, original Solidity or PDF bytes**. Full captured exact command output: `docs/spec_catalog_project_8_validation_20261017_initial.jsonl` and `docs/spec_catalog_project_8_validation_20261017_final.log`. These results validate file consistency and whitespace policy; **they do not show the contradictory historical axioms are satisfiable**. The original Certora model sanity/prover has not been reproduced.
 
 **Lossless original failure log encoding:** `docs/spec_catalog_project_8_validation_20261017_initial.jsonl` stores each original stdout/stderr line as a JSON `{"line": "..."}` object preserving final whitespace and newline bytes. Decode with `python3 -c "import json,sys;sys.stdout.write(''.join(json.loads(l)['line'] for l in open('docs/spec_catalog_project_8_validation_20261017_initial.jsonl')))"`. The JSONL encoding is necessary because committing the raw warning text with trailing whitespace causes the official whitespace diff command to fail on the log itself. The final successful log is unencoded plain UTF-8.
+
+## Matriz individual de soundness baseada no ZIP e PDF
+
+`docs/spec_catalog_project_8_soundness_matrix.md` registra **42/42** propriedades, assumptions efetivas, testemunhas W1–W3, evidência do resultado histórico, modelo/implementação ausente e garantias não inferíveis. O ZIP contém histórico `.git` autêntico; seu working tree em `main` foi mantido intocado, com worktree separado na branch real do PR. Três scripts Python e diff Git passaram nesse worktree; a satisfatibilidade no Certora Prover continua indisponível. Ver os logs históricos autenticados existentes.

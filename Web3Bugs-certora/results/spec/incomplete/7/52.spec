@@ -10,4 +10,4 @@ methods {
 }
 
 invariant isUsingAsCollateralOrBorrowing(uint256 reserveIndex ) 
-	(isUsingAsCollateral(reserveIndex) || isBorrowing(reserveIndex)) <=>  isUsingAsCollateralOrBorrowing(reserveIndex)
+	(isUsingAsCollateral(reserveIndex) || isBorrowing(reserveIndex)) <=>  isUsingAsCollateralOrBorrowing(reserveIndex) 

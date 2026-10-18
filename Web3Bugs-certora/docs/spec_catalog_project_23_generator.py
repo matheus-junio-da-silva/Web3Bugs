@@ -134,6 +134,8 @@ def source_context(p,clips):
  return s+" Contextual excerpt targets: "+", ".join(f+" lines "+str(a)+"-"+str(b) for f,a,b,_ in clips)+"."
 def category(p):
  n=p["name"];f=p["file"]
+ if f=="DripsHubBackup.spec" and n=="whoChangedBalanceOfToken":
+  return "S3-2","Filtered pause() must not change per-token DripsHub.totalBalance storage; unlike the unrestricted mutation probes, this has a specific allowed-method restriction"
  if n.startswith("sanity") or n=="helperTest" or n.startswith("whoChanged"):
   return "UNMAPPED","Unrestricted method-mutation/sanity diagnostic rather than an asserted prohibited security transition"
  if n=="splitReceiverShouldGetMoneyUponSplit":return "L2","Receiver's weighted share can round to zero under integer division"
@@ -153,6 +155,8 @@ def counterexample(p):
  n=p["name"]
  if n.startswith("sanity") or n=="helperTest":
   return "A reachable execution reaches assert false, intentionally failing as a sanity test; not evidence of a vulnerability."
+ if n=="whoChangedBalanceOfToken" and p["file"]=="DripsHubBackup.spec":
+  return "Call the explicitly filtered pause() and observe DripsHub.totalBalance(erc20) change, contradicting its pre/post equality. This would be an unwanted state update, unlike an unrestricted writer-probing rule; the snapshot lacks the backup harness and thus no actual counterexample is claimed."
  if n.startswith("whoChanged"):
   return "Choose any legal method f that updates the monitored field and falsifies the unconditional pre/post equality; without permitted-writer exclusions this is diagnostic, not necessarily a defect."
  if n=="splitReceiverShouldGetMoneyUponSplit":

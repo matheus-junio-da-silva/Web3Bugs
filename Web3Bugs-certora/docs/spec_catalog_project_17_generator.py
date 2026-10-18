@@ -178,11 +178,11 @@ def code_excerpt(source,prop):
   referenced.append((rel,str(start+1)+"-"+str(end+1)))
  if not chunks:
   raise RuntimeError("No relevant Solidity evidence: "+repr(prop))
- return "\n\n".join(chunks)+"\n",referenced
+ return "\n\n".join(chunks).rstrip("\n")+"\n",referenced
 def classify(prop,source):
  fname=prop["source"];n=prop["name"];reason=MISSING.get(fname,"")
  files={x:(source/x).read_text(encoding="utf-8") for x in candidate_files(fname)}
- missing=[f for f in sorted(prop["calls"]) if not abi_present(f,files)]
+ missing=[f for f in sorted(prop["calls"]) if f!="f" and not abi_present(f,files)]
  if missing and not reason:reason="CVL-called methods lack an implementation in the declared target and its included snapshot ABI: "+", ".join(missing)+"."
  if fname=="frame.cvl":
   # Probe asks which arbitrary method can mutate a field; no allowed-method partition.
@@ -248,7 +248,7 @@ def main():
  text+="Historical report reproduced as page-separated extracted text from "+BT+pdf.name+BT+". The source PDF in resources/17 is authoritative for tables, typography, proof scope and page numbers. Extraction is not a new audit.\n\n"
  for i,page in enumerate(pages,1):
   text+="## PDF page "+str(i)+"\n\n"+BT*3+"text\n"+page.rstrip()+"\n"+BT*3+"\n\n"
- (dest/"reports/17.md").write_text(text,encoding="utf-8")
+ (dest/"reports/17.md").write_text(text.rstrip("\n")+"\n",encoding="utf-8")
  # Exact active rule declarations in old Specify syntax, not CVL2's rule/invariant tokens.
  rules=[]
  for fn in FILES:
@@ -257,6 +257,7 @@ def main():
  assert len(set((p["source"],p["start"]) for p in rules))==41
  hdr=dest/"results/spec/spec_buglabel.csv"
  raw=hdr.read_bytes()
+ raw=b"".join(ln for ln in raw.splitlines(keepends=True) if not ln.startswith(b"17,"))
  newline="\r\n" if b"\r\n" in raw else "\n"
  fields=next(csv.reader([raw.decode("utf-8").splitlines()[0]]))
  expected=["Project ID","Status","Example ID","Bug Label","Property","Result","Detection Outcome","Target Contract","Spec","Code","Documentation","Incomplete Reason","Original Spec","Original Spec Lines","Original Contract","Original Contract Lines","Detection Intent"]
@@ -271,6 +272,8 @@ def main():
            "Legacy Specify: exactly 41 executable top-level property blocks; alias .spclnk entries are configurations, not properties.\n",
            "Historical report gives aggregate assurances; source blocks are never treated as newly proved.\n\n",
            "## Per-property reconstruction\n\n"]
+ for sub in ("complete","incomplete"):
+  shutil.rmtree(dest/("results/spec/"+sub+"/17"),ignore_errors=True)
  for idx,p in enumerate(rules,1):
   p["index"]=idx
   status,label,intent,result,outcome,reason,missing=classify(p,source)
@@ -300,6 +303,7 @@ def main():
  hdr.write_bytes(raw+suffix)
  contest=dest/"results/contests.csv"
  craw=contest.read_bytes()
+ craw=b"".join(ln for ln in craw.splitlines(keepends=True) if not ln.startswith(b"17,"))
  cnewline=b"\r\n" if b"\r\n" in craw else b"\n"
  assert not any(row.get("ID","").strip()=="17" for row in csv.DictReader(io.StringIO(craw.decode("utf-8"))))
  contest.write_bytes(craw+(b"" if craw.endswith(b"\n") else cnewline)+b"17,Compound Money Market V2,Money Market,-,-,2019-08,-,-"+cnewline)

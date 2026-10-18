@@ -23,3 +23,8 @@ results/spec/incomplete/13/*.sol -whitespace
 contracts/14/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
 results/spec/complete/14/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
 results/spec/complete/14/*.sol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+
+# Project 17: preserve literal historical CVL, spclnk and scenario whitespace
+contracts/17/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+results/spec/complete/17/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+results/spec/incomplete/17/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol

@@ -3,3 +3,8 @@
 contracts/12/** -whitespace
 results/spec/complete/12/*.spec -whitespace
 results/spec/incomplete/12/*.spec -whitespace
+
+# Contributed Project 7 historical source and literal excerpt settings
+contracts/7/specs/*.spec whitespace=-blank-at-eol,-space-before-tab
+results/spec/complete/7/*.spec whitespace=-blank-at-eol,-space-before-tab
+results/spec/incomplete/7/*.spec whitespace=-blank-at-eol,-space-before-tab

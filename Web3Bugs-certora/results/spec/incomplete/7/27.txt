@@ -1,0 +1,20 @@
+INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/ReserveConfiguration.spec` / property `setDebtCeilingIntegrity` / target `MockReserveConfiguration`.
+Original source property and dependency ranges: `1;30-31;57;145-148`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- setDebtCeiling(uint256)
+- getDebtCeiling()
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The pure/in-memory ReserveConfiguration library methods exist, but the available MockReserveConfiguration contract does not expose the corresponding callable public wrapper pair. The internal library requires a ReserveConfigurationMap parameter, which is not the same ABI as the no-map-argument CVL declaration.
+
+CVL methods declarations actually included in this example:
+- setDebtCeiling(uint256) envfree
+- getDebtCeiling() returns (uint256) envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.

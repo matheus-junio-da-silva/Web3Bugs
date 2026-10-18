@@ -14,6 +14,8 @@ The report contains published checked verification conditions, but **none is dem
 
 The 164-instance [evidence matrix](spec_catalog_project_24_evidence_matrix.csv) includes original CVL, historical PDF page and formula preview (when named), hypothetical counterexamples, Solidity excerpts, technical intent, Bug Label, formal result, and detection-outcome decision.
 
+HELIX's [independent 164-case review](https://github.com/matheus-junio-da-silva/Web3Bugs/pull/32) confirmed 153 cases, required six targeted documentary fixes (12, 152, 154, 159, 160, 163), and left five source/report attribution comparisons inconclusive (2, 5, 7, 147, 150). The single Bug Label correction is example 163, S5-2 to S6-4; Result and Detection Outcome remain unchanged. See [Boreal's point-by-point response](semantic_review_round2/boreal_helix_response.md).
+
 ## Exhaustive source inventory
 
 - `LEHighLevel.spec`: 10 active declarations
@@ -197,7 +199,7 @@ The 164-instance [evidence matrix](spec_catalog_project_24_evidence_matrix.csv) 
 | 160 | `Staking.spec` | `verify_withdraw` | rule | S6-4 | NOT_STATED |
 | 161 | `Staking.spec` | `verify_updateEmissionRate` | rule | UNMAPPED | NOT_STATED |
 | 162 | `Staking.spec` | `updatePool_contained` | rule | S6-4 | NOT_STATED |
-| 163 | `Staking.spec` | `verify_emergencyWithdraw` | rule | S5-2 | NOT_STATED |
+| 163 | `Staking.spec` | `verify_emergencyWithdraw` | rule | S6-4 | NOT_STATED |
 | 164 | `sanity.spec` | `sanity` | rule | UNMAPPED | NOT_STATED |
 
 Each `N.md` independently gives the asserted expression, identified storage, Solidity operations, falsifying counterexample, classification, report attribution, and modeling limitations. The official validators must be run against the exact published HEAD; generation alone does not constitute validation.

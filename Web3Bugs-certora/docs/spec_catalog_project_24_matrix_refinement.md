@@ -29,18 +29,20 @@ potential witnesses derived from syntax, NOT Prover-generated counterexamples.
 - **147:** the preserved CVL requires joe.balanceOf(currentContract) >=
   totalJoeStaked(); a strictly smaller token balance falsifies it, whereas
   the historical report prints equality.
-- **152, 154:** distinguish the direct positive-reward inequalities from
-  existential time implications with possible vacuous witnesses.
-- **163:** lastReverted == false is assumed after emergencyWithdraw@withrevert;
-  the historical report expressly failed to prove nonreversion on its own.
+- **152:** only the existential reward implication is executable; the
+  minimum-interval assertion is commented out and may not be counted.
+- **154:** the direct rJoe2 > rJoe1 assertion is commented out; only the
+  existential time-gap implication executes and can pass vacuously.
+- **163:** lastReverted == false is a require after emergencyWithdraw@withrevert,
+  not an assertion; the two active assertions check principal accounting (S6-4).
 - **164:** assert false is a reachability probe, not a reportable vulnerability.
 
 ## Change categories
 
 | Category | Review decision |
 |---|---|
-| DOCUMENTATION_FIX | 164 matrix rows clarified, including all precondition and getter references. |
-| LABEL_CHANGE | None in Rocket Joe; labels remain independent of formal outcomes. |
+| DOCUMENTATION_FIX | Original 164 matrix rows refined; six HELIX-confirmed CVL assertion summaries and six N.md descriptions corrected. |
+| LABEL_CHANGE | Only example 163: S5-2 to S6-4 for active principal-accounting assertions. |
 | RESULT_OUTCOME_CHANGE | None; 164 NOT_STATED results, 161 NOT_STATED and 3 INCONCLUSIVE detection outcomes. |
 | DEPENDENCY_FIX | None; original CVL imports, symbolic harnesses and libraries remain incomplete. |
 | EVIDENCE_GAP | Audited-source identity, harness reconstruction, Prover replay and independent HELIX review remain unavailable. |

@@ -79,7 +79,7 @@
 ## Structural and semantic review
 
 - Active declarations were scanned with comments removed, and declaration bodies were preserved literally in N.spec files.
-- Every N.spec conservatively includes the source context outside excluded independent properties, including full source methods declarations and available helper functions; this is an over-approximation, not a minimal formally proven call-graph closure.
+- Each N.spec retains the literal selected active property and only the explicitly referenced method signatures, `using` aliases, definitions and recursive named CVL helpers/invariants. The original entire historical spec, Solidity target/import graph, run script, and harness transformations remain preserved and authoritative. This is a source-dependency minimization, not a verified CVL2 or historic prover equivalence proof.
 - Solidity excerpts carry file and exact line ranges; source text is literal. Per-example N.md specifies the target, report correspondence, actual conditional assertion, label rationale, and dependencies.
 - Full historical Certora Prover replay is not claimed. It requires original compiler/verifier availability, harness transformations, symbolic configurations and satisfiability sanity checks.
 
@@ -150,3 +150,67 @@ Independent source-level provenance audit after the commit:
 
 The three Python validators and the diff command will be repeated on the final PR head,
 and the final tested SHA and exit codes will be recorded in the PR body.
+
+## Boreal completion pass — 18 October 2026
+
+The correction set preserves all historical files in `contracts/14`, all seven previously identified `VERIFIED + FINDING` cases, the original CVL declarations, the PDF, and all prior projects. All 34 `Why the Solidity excerpt is relevant` sections now identify concrete storage, indexed getters, functions, transitions and/or conditional branch limits. The 20 targeted additional `N.sol` excerpts use literal source ranges from the preserved source; MarginVault examples already included the complete harness with the pertinent library functions.
+
+**Semantic boundaries:** `orderOfOperations` remains S3-2 solely as a conditional incorrect indexed-collateral-state relationship. Its `assert true` selector branch is vacuous and its other branch observes only `collateralAmounts[0]`, not general commutativity. The NoBankruptcy rules mostly use `havocVault`/pool/supply symbolic transitions rather than production operation flows; case 19 `NoCode` has no concrete operation. The post-state whitelist implication in Example 28 is not tautological; its state label has a narrow meaning.
+
+**Historical findings:** Examples 3, 7, 8, 10, 11, 13 and 14 explicitly distinguish the earlier finding, the report's suggested/verified mitigation, the unknown precise affected SHA, and the final reported ✔ under CVL restrictions. No unverified equality between an older report finding and an exact current rule's counterexample is asserted. In particular, model-only overflow exclusions and nonzero-address `require` do not certify unconditional Solidity input checks.
+
+**Whitespace policy:** `.gitattributes` relaxes only original `contracts/14/**` files and the literal `.spec` and `.sol` excerpts of Project 14. Markdown, CSVs, original sources outside Project 14 and shared indexes retain default checks; no historical source was formatted.
+
+### Static reduced-CVL inventory
+
+| Example | Retained explicit CVL method signatures | Required named helper/invariant |
+| ---: | ---: | --- |
+| 1 | 1 | none |
+| 2 | 6 | none |
+| 3 | 9 | none |
+| 4 | 9 | validVault |
+| 5 | 9 | validVault |
+| 6 | 8 | validVault |
+| 7 | 8 | validVault |
+| 8 | 9 | validVault |
+| 9 | 9 | validVault |
+| 10 | 8 | validVault |
+| 11 | 9 | validVault |
+| 12 | 9 | validVault |
+| 13 | 8 | validVault |
+| 14 | 9 | validVault |
+| 15 | 17 | links |
+| 16 | 17 | links |
+| 17 | 17 | links |
+| 18 | 17 | links |
+| 19 | 3 | links |
+| 20 | 0 | none |
+| 21 | 12 | links; callFunctionWithParameters |
+| 22 | 8 | links; callFunctionWithParameters |
+| 23 | 9 | links; callFunctionWithParameters |
+| 24 | 7 | links; callFunctionWithParameters |
+| 25 | 5 | links |
+| 26 | 13 | links; callFunctionWithParameters |
+| 27 | 18 | links; callFunctionWithParameters |
+| 28 | 6 | links; callFunctionWithParameters |
+| 29 | 2 | none |
+| 30 | 5 | none |
+| 31 | 3 | none |
+| 32 | 1 | none |
+| 33 | 1 | none |
+| 34 | 2 | none |
+
+### Recorded validation evidence and limitations
+
+At a separate offline Git worktree based on PR HEAD `b2de6ff179b076efa09307f3ea210df042d52ae0`, the same 34 original properties were preserved verbatim while their dependency context was reduced. The following independent tests were run on the corrected local working tree (not simulated):
+
+```text
+python3 scripts/check_specs.py .
+exit 0 — Check passed! 198 spec examples and 203 Bug Label relationships are structurally consistent.
+python3 scripts/check_contests_csv.py .
+exit 0 — Check passed! ./results/contests.csv is consistant with ./reports
+python3 scripts/check_contracts.py .
+exit 0 — Check passed! ./contracts is consistant with ./reports
+```
+
+The exact final published GitHub commit must also be validated by Actions; the GitHub `validate` workflow succeeded on prior published commit `472885dac7acbe245295c6f232a0fcff186788b1` (run 39143090585), including CSV, contracts and Git checks. The reporter did not run the historic Certora Prover or establish satisfiability of symbolic preconditions. The host VM cannot resolve `github.com`, so publication uses the GitHub integration and expected-SHA fast-forwards rather than an unsafe local push. `instrucoes-obrigatorias.txt` could not be found in the ZIP or Project file search; available repository workflow, standard and Projects 1–3 were consulted. PR stays draft pending independent approval; no merge.

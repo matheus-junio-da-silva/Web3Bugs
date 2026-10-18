@@ -1,20 +1,36 @@
-name: P17 historical report inspection (temporary)
+name: P17 historical Compound catalog build (temporary)
 on:
   push:
     branches:
       - catalog/p17-delta-compound-moneymarket-v2
 jobs:
-  inspect:
+  catalog:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
     steps:
-      - name: Checkout source snapshot and extract PDF
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Fetch exact historical PropertyGPT source and extract Project 17
         run: |
           git clone --depth=1 https://github.com/matheus-junio-da-silva/PropertyGPT.git source
-          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils > /dev/null
-          pdftotext -layout source/certora_projects/compound_moneymarket/CompoundMoneyMarketV2Aug2019.pdf pdf.txt
-          echo "=== SOURCE_SHA ==="
-          git -C source rev-parse HEAD
-          echo "=== REPORT_EXTRACT ==="
-          cat pdf.txt
+          test "$(git -C source rev-parse HEAD)" = "687f654c679ed45ab127b7949e2a29c8f5e491b9"
+          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils >/dev/null
+          python3 Web3Bugs-certora/docs/spec_catalog_project_17_generator.py source/certora_projects/compound_moneymarket Web3Bugs-certora
+      - name: Run all three official validators
+        run: |
+          cd Web3Bugs-certora
+          python3 scripts/check_contracts.py .
+          python3 scripts/check_contests_csv.py .
+          python3 scripts/check_specs.py .
+      - name: Publish catalog artifacts to dedicated branch
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add Web3Bugs-certora/contracts/17 Web3Bugs-certora/resources/17 Web3Bugs-certora/reports/17.md Web3Bugs-certora/docs/spec_catalog_project_17.md Web3Bugs-certora/results/contests.csv Web3Bugs-certora/results/spec/spec_buglabel.csv Web3Bugs-certora/results/spec/complete/17 Web3Bugs-certora/results/spec/incomplete/17
+          git commit -m "catalog(p17): preserve historical Compound V2 and index all 41 CVL properties"
+          git push origin HEAD:catalog/p17-delta-compound-moneymarket-v2
+          git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+          git rev-parse HEAD

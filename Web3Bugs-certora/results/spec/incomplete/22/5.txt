@@ -1,0 +1,3 @@
+Project 22, property checkBurnExactLiquidity — dependency INCOMPLETE
+PoolActions.spec:35 requires to == e.msg.sender, but to is NOT declared as parameter, env variable, CVL definition or scoped local in the active rule; PoolActionsWrapper.callBurnExactLiquidity has an address to argument that does not introduce a CVL variable to the rule. This is unresolved free-symbol/ill-formed original source, not a missing Solidity function.
+Source files are unchanged. This is NOT a Certora solver status.

@@ -1,0 +1,3 @@
+Project 22, property checkBurnLiquidityShare — dependency INCOMPLETE
+PoolActions.spec:16,17,22 calls totalSupply(), but target PoolActionsWrapper.sol:13 defines a NONPUBLIC uint256 field totalSupply, not an ABI getter; no methods declaration of totalSupply() appears in PoolActions.spec. No valid historical replacement is in the source. The rule also has unconstrained to unused and passes e.msg.sender to wrapper.
+Source files are unchanged. This is NOT a Certora solver status.

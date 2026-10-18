@@ -25,12 +25,26 @@ jobs:
           python3 scripts/check_contracts.py .
           python3 scripts/check_contests_csv.py .
           python3 scripts/check_specs.py .
+          python3 docs/spec_catalog_project_17_audit.py ../source/certora_projects/compound_moneymarket .
       - name: Publish catalog artifacts to dedicated branch
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           git add Web3Bugs-certora/contracts/17 Web3Bugs-certora/resources/17 Web3Bugs-certora/reports/17.md Web3Bugs-certora/docs/spec_catalog_project_17.md Web3Bugs-certora/results/contests.csv Web3Bugs-certora/results/spec/spec_buglabel.csv Web3Bugs-certora/results/spec/complete/17 Web3Bugs-certora/results/spec/incomplete/17
-          git commit -m "catalog(p17): preserve historical Compound V2 and index all 41 CVL properties"
+          git diff --cached --quiet || git commit -m "catalog(p17): preserve historical Compound V2 and index all 41 CVL properties"
           git push origin HEAD:catalog/p17-delta-compound-moneymarket-v2
           git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+          git rev-parse HEAD
+      - name: Remove the temporary build workflow; repeat checks on final HEAD
+        run: |
+          git rm .github/workflows/p17-report-inspection.yml
+          git commit -m "chore(p17): remove temporary build workflow after full validation"
+          git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+          cd Web3Bugs-certora
+          python3 scripts/check_contracts.py .
+          python3 scripts/check_contests_csv.py .
+          python3 scripts/check_specs.py .
+          python3 docs/spec_catalog_project_17_audit.py ../source/certora_projects/compound_moneymarket .
+          cd ..
+          git push origin HEAD:catalog/p17-delta-compound-moneymarket-v2
           git rev-parse HEAD

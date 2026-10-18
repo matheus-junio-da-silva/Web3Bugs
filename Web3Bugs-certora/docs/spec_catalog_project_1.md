@@ -80,3 +80,11 @@ The source bridge specs use historical CVL syntax. CVL2 migration is intentional
 - Incomplete examples: `results/spec/incomplete/1/`
 - Catalog format: `docs/spec_catalog.md`
 - Reproduction workflow: `docs/spec_catalog_workflow.md`
+
+## CERES semantic corrections — 2026-10-18
+
+Exactly 64 generic Solidity descriptions have been rewritten: complete/1 IDs 1–36 and incomplete/1 IDs 1–28. Each now identifies the actual CVL assertion, guards, relevant preserved Solidity implementations, legal changes, a falsifying execution, target-chain differences and missing historical helpers.
+
+The source rule whoChangesActionsSetState at complete/1/15 (Polygon) and complete/1/32 (Optimism/Arbitrum) filters only non-view f and imposes identical getCurrentState before/after. execute deliberately sets _actionsSets[id].executed=true; cancel sets _actionsSets[id].canceled=true. Both can legitimately change that computed state, so the raw unconditional equality is an over-restrictive diagnostic oracle, not a sound S3-2 classification. Both mappings changed to UNMAPPED without altering their CVL, Solidity, Result or Detection Outcome.
+
+The six incomplete/1 IDs 29–34 from complexity.spec retain their missing target/harness evidence. The Project 1 original PDF is not present in the current snapshot; reports/1.md remains its historical transcript. The requested instrucoes-obrigatorias.txt is also absent from this Git tree. These limitations are documented, not fabricated.

@@ -68,7 +68,7 @@ Columns explicitly record (a) false assertion/counterexample, (b) label, (c) nor
 | 3 | AToken / `mintArgsPositive` | A successful mint of zero would violate the mandatory rejection of an invalid amount | SE-4 | Normative | VERIFIED/NO_FINDING; AToken |
 | 4 | AToken / `balanceOfChange` | An arbitrary non-view operation changes the balances of too many distinct users | S3-2 | Normative | VERIFIED/NO_FINDING; AToken |
 | 5 | AToken / `integrityMint` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; AToken |
-| 6 | AToken / `additiveMint` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | NOT_STATED/NOT_STATED; AToken |
+| 6 | AToken / `additiveMint` | In one sequential CVL trace, mint(x); mint(y) for user a and later mint(x+y) for user b differ beyond the bounded error; not independent worlds | S6-4 | Normative | NOT_STATED/NOT_STATED; AToken |
 | 7 | AToken / `integrityTransfer` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; AToken |
 | 8 | AToken / `additiveTransfer` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | VERIFIED/NO_FINDING; AToken |
 | 9 | AToken / `integrityBurn` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; AToken |
@@ -109,7 +109,7 @@ Columns explicitly record (a) false assertion/counterexample, (b) label, (c) nor
 | 44 | StableDebtToken / `burnZeroDoesntChangeBalance` | Burning zero changes a user's balance | S3-2 | Normative | NOT_STATED/NOT_STATED; StableDebtToken |
 | 45 | StableDebtToken / `burnNoChangeToOther` | A burn/mint changes an unrelated account's balance or tracked additional data | S3-2 | Normative | NOT_STATED/NOT_STATED; StableDebtToken |
 | 46 | StableDebtToken / `mintNoChangeToOther` | A burn/mint changes an unrelated account's balance or tracked additional data | S3-2 | Normative | NOT_STATED/NOT_STATED; StableDebtToken |
-| 47 | StableDebtToken / `disallowedFunctionalities` | A debt-token transfer/approval method selected by disAllowedFunctions completes rather than reverting | SC | Normative | NOT_STATED/NOT_STATED; StableDebtToken |
+| 47 | StableDebtToken / `disallowedFunctionalities` | One of six forbidden ERC20 selectors, including allowance, completes instead of reverting; no time/caller condition | SC | Normative | NOT_STATED/NOT_STATED; StableDebtToken |
 | 48 | UserConfiguration / `setBorrowing` | A borrowing/collateral setter fails to make the corresponding bit getter equal to the supplied boolean | S3-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
 | 49 | UserConfiguration / `setBorrowingNoChangeToOther` | Changing a reserve's borrowing/collateral bit changes an unrelated reserve's borrowing or collateral bit | S3-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
 | 50 | UserConfiguration / `setUsingAsCollateral` | A borrowing/collateral setter fails to make the corresponding bit getter equal to the supplied boolean | S3-2 | Normative | NOT_STATED/NOT_STATED; UserConfiguration (library; historical harness unresolved) |
@@ -130,13 +130,13 @@ Columns explicitly record (a) false assertion/counterexample, (b) label, (c) nor
 | 65 | VariableDebtToken / `integrityDelegationWithSig` | A successful signature authorization fails to set the intended allowance or increment the nonce exactly once | S3-2 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
 | 66 | VariableDebtToken / `integrityOfBurn` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
 | 67 | VariableDebtToken / `additiveBurn` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
-| 68 | VariableDebtToken / `additiveMint` | The two operation sequences produce different balances beyond the encoded equality or rounding tolerance | S6-4 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
+| 68 | VariableDebtToken / `additiveMint` | Only mint calls are made; text of assert says burn erroneously; sequential cross-user balances differ outside tolerance | S6-4 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
 | 69 | VariableDebtToken / `integrityMint` | The mint/burn/transfer operation fails the encoded before/after balance, supply or underlying-asset accounting assertions | S6-4 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
 | 70 | VariableDebtToken / `burnZeroDoesntChangeBalance` | Burning zero changes a user's balance | S3-2 | Normative | VERIFIED/NO_FINDING; VariableDebtToken |
 | 71 | VariableDebtToken / `burnNoChangeToOther` | A burn/mint changes an unrelated account's balance or tracked additional data | S3-2 | Normative | VERIFIED/NO_FINDING; VariableDebtToken |
 | 72 | VariableDebtToken / `mintNoChangeToOther` | A burn/mint changes an unrelated account's balance or tracked additional data | S3-2 | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
-| 73 | VariableDebtToken / `disallowedFunctionalities` | A debt-token transfer/approval method selected by disAllowedFunctions completes rather than reverting | SC | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
-| 74 | pool / `getReserveNormalizedVariableDebtCheck` | When pre-existing scaled variable debt is nonzero, supply lowers the normalized variable-debt index | S3-2 | Normative | NOT_STATED/NOT_STATED; Pool |
+| 73 | VariableDebtToken / `disallowedFunctionalities` | One of six forbidden ERC20 selectors, including allowance, completes instead of reverting; no time/caller condition | SC | Normative | NOT_STATED/NOT_STATED; VariableDebtToken |
+| 74 | pool / `getReserveNormalizedVariableDebtCheck` | Under nonzero scaled debt, post-supply getter return decreases; getter calldata is not tied to the supplied asset | S6-2 | Normative | NOT_STATED/NOT_STATED; Pool |
 
 ## Closure re-extraction and semantic re-audit — 2026-10-16
 
@@ -342,3 +342,13 @@ Cada referência abaixo identifica a **condição numerada e identificável no r
 Os IDs 11, 12, 52, 56 e 57 permanecem **incomplete** no snapshot, embora tenham uma condição histórica reconhecível no relatório; isso é coerente porque a correspondência histórica e a disponibilidade do harness local são dimensões independentes. Os outros 13 resultados VERIFIED pertencem a exemplos estaticamente complete. As 13 atribuições iniciais retiradas anteriormente **não foram restauradas**. Nenhum dos 20 setters de ReserveConfiguration nem a única regra ativa de Pool recebeu o resultado agregado do relatório.
 
 **Limites de interpretação:** (1) algumas equivalências requerem aproximações, guards ou summaries da própria CVL, (2) o reportado `✔` depende das simplificações — juros unitários, hash abstrato determinístico, loop unrolling, controle de efeitos externos e ausência de incentives controller —, (3) a documentação em `N.md` conserva os predicados de falsificação exatos, sem ampliar a garantia, e (4) `reports/7.md` é uma transcrição matemática normalizada cujo original byte a byte de oito páginas está preservado em PDF.
+
+
+## DELTA — adjudicação p07/p23 (2026-10-18)
+
+- **#6 AToken additiveMint:** S6-4 permanece; comparações são leituras de saldos de dois usuários em pontos diferentes de uma única execução, não dois estados independentes. `gRNI` é ghost resumido e a referência a `initialStorage` está comentada.
+- **#68 VariableDebtToken additiveMint:** S6-4 permanece; somente mint é invocado. Mensagem CVL `burn is not additive` é um erro textual preservado e não deve converter a interpretação em burn.
+- **#47/#73 disallowedFunctionalities:** SC permanece. Filtro de seis selectors `transfer`, `allowance`, `approve`, `transferFrom`, `increaseAllowance`, `decreaseAllowance`, sem privilégio/fase/tempo; exige sempre `lastReverted`. S5-2 não está sustentado como condição temporal.
+- **#74 Pool getter:** S3-2 → **S6-2**: exige apenas retorno pós-supply `newIndex >= oldIndex` sob `totalDebtBefore != 0`; não atribui storage update incorreta, e o `calldataarg args` não foi ligado a `asset`. Fonte original e incomplete intactos; Result/Outcome NOT_STATED/NOT_STATED.
+
+Somente documentação e labels do índice compartilhado foram alterados; nenhum PDF, CVL ou Solidity foi editado. Não foi executado novo Certora Prover.

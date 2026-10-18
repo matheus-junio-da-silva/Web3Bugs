@@ -550,7 +550,7 @@ The report assumes Aave V3 Pool works as intended, setter-initialized links alre
       "- Structural PASS does not mean Certora Prover was rerun. CI logs supply actual exit codes and checkout SHA.",
       "- Local ZIP inspection could not run because the supplied local Python/container infrastructure failed; a real GitHub Actions checkout is used instead.",
       ""]
-    (DATA/"docs/spec_catalog_project_15.md").write_text("\n".join(metadata)+"\n")
+    (DATA/"docs/spec_catalog_project_15.md").write_text("\n".join(metadata).rstrip("\n")+"\n")
     # External source byte identity and per-property fragment proof.
     for rel,_ in checked:
         assert (snapshot/rel).read_bytes()==(ARCHIVE/rel).read_bytes()

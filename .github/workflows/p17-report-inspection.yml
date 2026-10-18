@@ -1,0 +1,19 @@
+name: P17 historical report inspection (temporary)
+on:
+  push:
+    branches:
+      - catalog/p17-delta-compound-moneymarket-v2
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout source snapshot and extract PDF
+        run: |
+          git clone --depth=1 https://github.com/matheus-junio-da-silva/PropertyGPT.git source
+          pdftotext -layout source/certora_projects/compound_moneymarket/CompoundMoneyMarketV2Aug2019.pdf pdf.txt
+          echo "=== SOURCE_SHA ==="
+          git -C source rev-parse HEAD
+          echo "=== REPORT_EXTRACT ==="
+          cat pdf.txt

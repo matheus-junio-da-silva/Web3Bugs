@@ -113,4 +113,3 @@ source report SHA-256 (documentação de proveniência): 4a35df36c47e6e7e2b4333c
 - PDF original preservado: SHA-256 **4a35df36c47e6e7e2b4333cb3890bc2a8cbca569e32b2fc6f24820b8a56cbc37**; nenhuma modificação em fonte.
 - Validação do snapshot atual: check_specs.py exit 0 (**1222 examples; 1227 relations**), check_contests_csv.py exit 0, check_contracts.py exit 0.
 - Verificação semântica não incluiu Prover/solc original nem inspeção gráfica dos símbolos no PDF; falsos negativos/positivos por assumptions/vacuidade continuam possíveis.
-

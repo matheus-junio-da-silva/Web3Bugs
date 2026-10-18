@@ -304,3 +304,9 @@ These records do not manufacture missing historical implementations. The `N.txt`
 For report #27–32, all 23 historical handler cells are `None`. The existing source formula bodies and limitations remain documented; these cells are not verified per-target runs and a universal Cartesian-product coverage claim is **not** made. Getter injection, target ABI, source revisions, simplified assembly, unrolling and external Summary assumptions still block reproduction. Keep the PR draft.
 
 **Validation status for these new remote artifacts:** The initial checkout was checked at HEAD `16a0eb0b7cf0ede29a312d166dae0bcead512b20`, and the same 92 target/ID/status relationships were independently generated and structurally checked locally, but the newly published Git tree must be validated at its own new HEAD before recording a post-publication PASS. Existing section 10 command exit codes refer to the old commit only.
+
+
+### 12.1 Post-publication attribution and provenance corrections
+
+- Example **23** remains dependency-**incomplete** (three-argument `batchExec` selector absent) and now explicitly has **Result `NOT_STATED` / Detection Outcome `NOT_STATED`**, not a report-wide `VIOLATED / ACCEPTED_BEHAVIOR` inference from p.15 `🔎`/`receive`.
+- Additional handler-source excerpts for **HComptroller** and **HFurucomboStaking** contain respectively **49** and **54** original lines, not 70. Their `Original Contract Lines` CSV fields were corrected on their four target-specific entries each. CVL original source remains untouched.

@@ -185,6 +185,10 @@ def relevant_solidity(spec_name,property_body,name,target):
         wanted=set([x for x in preferred[target] if x.lower() in name.lower()])
     if not wanted:
         wanted=set(preferred[target][:3])
+    if spec_name=="set.spec":
+        wanted|={"_facilitatorsList","addFacilitator","removeFacilitator","getFacilitatorsList"}
+    if spec_name=="VariableDebtToken.spec":
+        wanted|={"_userState","_totalSupply","scaledBalanceOf","scaledTotalSupply"}
     sections=[];pathlist=[];linelist=[];mechanisms=[]
     for rel in SOL_FILES[target]:
         path=ARCHIVE/rel
@@ -195,7 +199,7 @@ def relevant_solidity(spec_name,property_body,name,target):
             if match and match.group(1) in wanted:
                 selected.append((index,solidity_region(lines,index),match.group(1)))
             if any(re.search(r"\b"+re.escape(tok)+r"\b",line) for tok in wanted):
-                if re.search(r"^\s*(?:mapping\s*\(|(?:uint\d*|address|bool|bytes\d*|string)\s+(?:public|private|internal|immutable|constant|\s)*\b)",line):
+                if re.search(r"^\s*(?:mapping\s*\(|(?:uint\d*|address|bool|bytes\d*|string)\s+(?:public|private|internal|immutable|constant)\b|EnumerableSet\.AddressSet\s+(?:internal|public|private)\b)",line):
                     selected.append((index,solidity_region(lines,index),"storage"))
         # For a target whose property refers only to a getter, get its concrete
         # implementation or at least actual storage declaration, never invent it.
@@ -378,7 +382,16 @@ def run():
                 missing.append("Generic VariableDebtToken spec is imported into GhoVariableDebtToken, but its stand-alone run target is undocumented")
             if spec_name=="set.spec":
                 missing.append("Generic set probe spec is imported by ghoToken.spec; no independent set harness/run target is archived")
-            missing.append("Unvendored historical Solidity library imports (Aave V3/OpenZeppelin and other upstream packages) and original solc/link Prover configuration")
+                missing.append("set.spec explicitly requires getFacilitatorsListLen() supplied by a Solidity harness; GhoToken.sol does not implement this method")
+            external_imports=[]
+            for source_rel in SOL_FILES[target]:
+                code_text=(ARCHIVE/source_rel).read_text()
+                external_imports += re.findall(r"import\s+(?:[^;]*?\s+from\s+)?['\"]([^'\"]+)['\"]\s*;",code_text,re.S)
+            external_imports=sorted(set(x for x in external_imports if not x.startswith(".")))
+            missing.append("Unvendored concrete Solidity package imports: "+
+                           ("; ".join(external_imports) if external_imports else
+                            "third-party inherited contract imports")+
+                           ". Original compiler, link mapping and Prover run configuration absent.")
             missing=list(dict.fromkeys(missing))
             label,intent=tech_label(name,body,spec_name)
             same_blob=git_blob(ARCHIVE/spec_name)==git_blob(REVIEW/"certora/specs"/spec_name)

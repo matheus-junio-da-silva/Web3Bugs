@@ -1,0 +1,6 @@
+# Historical CVL evidence — Project 8 only. Do NOT normalize the originals.
+# Only skip git diff --check whitespace diagnostics for verbatim evidence.
+# Original source bytes and CVL assertions are unchanged.
+*.spec whitespace=-blank-at-eol,-blank-at-eof
+*.sol whitespace=-blank-at-eol,-blank-at-eof
+*.md whitespace=-blank-at-eol,-blank-at-eof

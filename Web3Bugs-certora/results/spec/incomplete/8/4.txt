@@ -1,0 +1,19 @@
+# Dependency audit, second pass — AAVE Vault / Project 8 / example 4
+
+**Classification: incomplete.** The exact selected property depends on missing implementation/model artifacts below; missing compiler flags alone are NOT counted as a dependency.
+
+## Effective transitive dependency gaps
+1. ERC4626Upgradeable / ERC20Upgradeable: inherited implementation (external OpenZeppelin dependencies) missing from source snapshot
+2. Aave pool / AToken: imported Aave execution and linking model missing
+
+## Included original source ranges
+- contracts/8/specs/methods_base.spec:13;14
+- contracts/8/specs/methods_base.spec:207-207
+- contracts/8/specs/erc4626.spec:2-72
+- contracts/8/specs/erc4626.spec:94-104
+
+## Resolution policy and negative findings
+- `methods_base.spec` and `erc20.spec` are original source snapshot files, but no unresolved import is left in this extracted unit. Needed available `using`, `methods`, constants, ghosts, hooks and helper snippets are copied with provenance; no fabricated harness is introduced.
+- Generic missing mocks, `getAccumulatedFees()`, `Underlying.b`, unused selectors and generic `havoc_all()` are **not** declared dependencies unless identified above for this example. The earlier v1 list was a global superset and is superseded by this rule-specific assessment.
+- Source-local global ghost/axiom models may constrain an entire verification instance even if not syntactically called. Where preserved, distinguish such ambient assumptions from transitive *symbol resolution*; potential contradictions are documented in the semantic audit, not silently removed from the historical snapshot.
+- Verified external missing checks apply to this Project 8 snapshot's six Solidity files. No source from another project's mocks is borrowed. Missing pinned package/harness and run configs prevent proving historical reproducibility, not necessarily logical correctness.

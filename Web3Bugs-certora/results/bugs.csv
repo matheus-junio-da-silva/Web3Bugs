@@ -59,3 +59,11 @@ Contest ID, Bug ID, Bug Label, Severity, Bug Description, Reference, Comment
 14,OG-06,O7,Low,runActions detects errors late and wastes gas,reports/14.md,"PDF p. 2. Efficiency observation, not automatically a demonstrated breach of EVM gas limit; no property detector attributed."
 14,OG-07,O7,Low,getProceed may misinterpret negative excess-collateral quantity,reports/14.md,PDF p. 2–3. Report labels this path unreachable; no direct source proof/finding attribution.
 14,OG-08,O7,Low,SignedConverter intToUint converts by absolute value,reports/14.md,PDF p. 3. Behavior flagged as confusing semantics rather than a demonstrated exploit; no direct detecting property.
+8,VAULT-01,L2,Medium,Deposit rounding misstates lastVaultBalance and causes later DoS,reports/8.md,Fixed in report PR #70; rounding of aToken minting causes later accrued-fee underflow.
+8,VAULT-02,S6-4,Medium,Unexpected gifted aTokens can make redemptions revert,reports/8.md,Report withdrawal griefing scenario involving gifted aTokens; PR #82.
+8,VAULT-03,S6-4,Medium,Claimable protocol fees can exceed aToken reserves,reports/8.md,"Report older-version insolvency, aggregate #14/#15, fixed PR #82."
+8,VAULT-04,L7,Medium,totalAssets arithmetic underflow can cause full contract DoS,reports/8.md,"Report prior violated aggregate #14, fixed PR #82."
+8,VAULT-05,S6-2,Low,previewRedeem overstates redemption payment after fee accrual,reports/8.md,"Report earlier misleading conversion result, fixed PR #82."
+8,VAULT-06,L2,Low,lastVaultBalance rounding causes fee losses or overcharges,reports/8.md,"Report earlier violated aggregate #13, fixed PR #86."
+8,VAULT-07,SC,Low,Existing aToken deposits unnecessarily blocked at supply cap,reports/8.md,Incorrect reuse of the Aave new-asset supply-cap check for deposits of already-issued aTokens; SC is more defensible than S6-2 (unexpected return value). Fixed PR #80.
+8,VAULT-08,S3-1,Informational,Same-block front-running gift can avoid accrued fees,reports/8.md,Skipped same-block accrual/fee state update caused the informational fee-avoidance behavior; S3-1 models the missing update more directly than S6-4. Fixed PR #82.

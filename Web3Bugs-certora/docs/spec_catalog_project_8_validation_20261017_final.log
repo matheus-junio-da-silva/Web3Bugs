@@ -1,0 +1,21 @@
+REAL COMMAND EXECUTION LOG - CURRENT COMMIT e628a20fd96298748fc48545fe02928644c33495
+UTC_START=2026-10-17T17:55:39+00:00
+GIT_MAIN_SHA=4a1bea89d88aa3b6aa165e8d81b8dd523c7afb82
+GIT_HEAD_SHA=e628a20fd96298748fc48545fe02928644c33495
+$ cd Web3Bugs-certora && python3 scripts/check_specs.py .
+Check passed! 206 spec examples and 211 Bug Label relationships are structurally consistent.
+EXIT_CODE=0
+$ python3 scripts/check_contests_csv.py .
+Check passed!
+
+	`./results/contests.csv` is consistant with `./reports`
+EXIT_CODE=0
+$ python3 scripts/check_contracts.py .
+Check passed!
+
+	`./contracts` is consistant with `./reports`
+EXIT_CODE=0
+$ git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+EXIT_CODE=0
+UTC_END=2026-10-17T17:55:41+00:00
+Note: the two narrowly scoped .gitattributes suppress only original evidence whitespace diagnostics.

@@ -52,10 +52,33 @@ The report limits loops to finite unrolling, missing violations requiring more t
 
 ## Validation, provenance and integration gates
 
-- Branch base at creation: `main` commit `46670617ee77649217b9dbf64fd6955344cedcf7`.
-- Source snapshot and PDF are copied by exact Git object hash from the already integrated Project 3 tree. The 3 historical CVL property bodies and exact Solidity excerpt ranges come from the previously source-checked Project 3 examples, with catalog provenance rebased to 16. Project 3 artifacts, prior indices and source bytes remain unchanged.
-- New CSV rows: +3 property relationships, +1 explicitly flagged Project 16 catalog alias/contest row, +0 duplicate bugs.
-- Source-accurate PDF visual/layout verification and the original official three Python validator processes plus Git-root whitespace diff are **release gates**. Container-backed execution has been blocked by execution/session errors in this environment. Do not record Python exit 0, Git diff exit 0, or a newly inspected PDF image absent an authentic run. The GitHub project validator can be inspected but is not equivalent to executing it.
-- This project is not a formal new security-audit dataset observation; verify whether the orchestrator actually intends to retain both IDs before merging. **No merge is authorized.**
+**Executed on a real isolated Git checkout** of branch head `2b54951b02ea629197d9d5c1ea756fe7da2ca1e3`, with `origin/main` and merge-base both `46670617ee77649217b9dbf64fd6955344cedcf7`. The first attempt using the device's full `/tmp` failed during checkout and its private temporary clone was removed. Repeating inside `/var/tmp` succeeded; the remote Linux device has Git 2.53.0 and Python 3.14.4. Its `python` command was provided as an isolated symlink to system `python3`, so the repository's original scripts were not altered.
 
-Project 3's `docs/spec_catalog_project_3.md` contains the earlier more extensive source, report, dependency, and adversarial review evidence.
+| Exact command and working directory | Exit code and output |
+| --- | --- |
+| `cd Web3Bugs-certora && python scripts/check_specs.py .` | **0**: 478 spec examples and 483 Bug Label relationships consistent |
+| `cd Web3Bugs-certora && python scripts/check_contests_csv.py .` | **0**: reports/contests consistent |
+| `cd Web3Bugs-certora && python scripts/check_contracts.py .` | **0**: contracts/reports consistent |
+| `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD` from actual Git root | **0**: no errors |
+
+This pre-documentation-update validation establishes all four official gates at the stated SHA. A subsequent documentation-only commit should be retested and cited in the PR discussion before integration. Git showed only five untracked testing log/helper files in the *isolated* checkout, no tracked modifications.
+
+### Independent source, excerpt, CSV and PDF audit
+
+A separate independent Python check on the checked-out Project 16 assets returned **exit 0 / 0 errors**: 3/3 catalog instances; all 9 declared CVL source ranges copied literally; all **19** declared Solidity source excerpt ranges present literally in the example snippets (4 + 8 + 7); 15/15 source snapshot files byte-identical to Project 3; Project 16 PDF byte-identical to Project 3; full previous `spec_buglabel.csv` and `contests.csv` preserved as exact byte prefixes. Both `contracts/3` and `contracts/16` resolve to the same Git tree `89ae9f4ed69bd9aab626a86d1f0a27895fba09eb`. The original PDF Git blob remains `074b15f58a63d749569d9d456155153dbc795f38` with SHA-256 `9c2d52ef16b8fae0d7168ad9fcc4e98a352c9c7f4c42eae50f3e329f660ee31b`.
+
+**PDF raster visual review: 5/5 pages**, via PyMuPDF 1.28.2 at 1.5× page scale, compared with the report transcript and per-property files:
+
+- Page 1: three-contract scope, reviewed commit `4c59da8d`, and first stkAAVE rescue finding.
+- Page 2: the three issue entries, including the undercollateralization inequalities and later burnt-LEND issue fixed in `c905eaf`.
+- Page 3: unrolled-loop limitation, no-state-change `onTransfer` assumption, and meanings of ✔ / ✔* / ❌.
+- Page 4: exact named results: `LendIsBackedByAave` ❌, `LendIsBackedByAaveIncInitialize` ✔, `StkAaveIsBackedByAave` ✔; the paired initialize rule includes a `reqs2` reference.
+- Page 5: only `reqs` is defined, excluding token-contract senders; `reqs2` is absent from the original and not invented.
+
+The source/report drift and asynchronous intermediate-state distinction remain visible in all example documentation. This is a semantic and artifact-fidelity review **not** a new Certora Prover run; the original PDF is still authoritative for its mathematical layout.
+
+### Integration caution
+
+Only 33 paths changed in the initial PR commit: Project 16 contracts/specs, document, report, PDF, three examples, the two additive shared CSV indices, and a narrowly scoped `.gitattributes` addition. No Project 3 files or `results/bugs.csv` rows were changed. **Treat ID 16 as an alias, not a second original security audit.** The orchestrator must decide whether to retain an alias in the canonical dataset and must not merge before its review.
+
+See `docs/spec_catalog_project_3.md` for the independently investigated upstream run-script/constructor-version differences and original source evidence.

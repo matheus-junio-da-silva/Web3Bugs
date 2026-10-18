@@ -203,7 +203,9 @@ def main():
  assert [counts[n] for n in NAMES]==EXPECTED,counts
  assert len(properties)==46
  assert set(p["name"] for p in properties if p["file"]=="Splits.spec")==REPORT_NAMES
+ shutil.rmtree(dst/"results/spec/incomplete/23",ignore_errors=True)
  csvfile=dst/"results/spec/spec_buglabel.csv";existing=csvfile.read_bytes()
+ existing=b"".join(line for line in existing.splitlines(keepends=True) if not line.startswith(b"23,"))
  eol="\r\n" if b"\r\n" in existing else "\n"
  records=list(csv.DictReader(io.StringIO(existing.decode("utf-8"))))
  assert list(records[0])==FIELDS
@@ -241,6 +243,7 @@ def main():
  out=io.StringIO(newline="");writer=csv.DictWriter(out,fieldnames=FIELDS,lineterminator=eol);writer.writerows(destrows)
  csvfile.write_bytes(existing+(b"" if existing.endswith(b"\n") else eol.encode())+out.getvalue().encode("utf-8"))
  contests=dst/"results/contests.csv";old=contests.read_bytes()
+ old=b"".join(line for line in old.splitlines(keepends=True) if not line.startswith(b"23,"))
  assert not any(re.match(rb"^23,",ln) for ln in old.splitlines())
  contests.write_bytes(old+(b"" if old.endswith(b"\n") else b"\n")+b"23,Radicle Drips,Streaming Payments,-,-,2023-01,-,-\n")
  docs="# Project 23 — Radicle Drips Historical CVL Catalog\n\n"

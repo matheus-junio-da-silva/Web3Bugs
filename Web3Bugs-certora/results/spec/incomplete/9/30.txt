@@ -1,0 +1,4 @@
+Missing historical requirement for governance-referendumVotes.spec:23-28 (referendumVotesAreConsistent).
+requireInvariant referendumVoteIDIsLessThanOrEqCounter(v) at source line 26 names an invariant absent from this file; governance.spec:211 defines a two-argument invariant instead. No import or configuration establishes a compatible one-argument dependency.
+Searched: contracts/9/specs/governance-referendumVotes.spec, governance.spec and other sibling specs, specs/harnesses, specs/scripts and contracts/9/contracts/governance/*.
+Not repaired; no helper has been borrowed across specs without source linkage.

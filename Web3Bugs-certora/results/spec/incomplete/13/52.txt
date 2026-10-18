@@ -1,0 +1,21 @@
+INCOMPLETE DEPENDENCY — Project 13 / Example 52
+CVL property: updateIncentiveEmissionRateSetsProperly
+Original CVL: certora/governance/GovernanceAction.spec:35-45
+Historically selected target: GovernanceActionHarness
+
+Concrete target source: contracts/13/contracts/mocks/certora/GovernanceActionHarness.sol
+Recursive Solidity import closure in supplied snapshot: 26 source files reachable.
+Absent ORIGINAL imports (chain -> missing artifact; first 8 distinct examples):
+- contracts/13/contracts/mocks/certora/GovernanceActionHarness.sol -> contracts/13/contracts/external/actions/GovernanceAction.sol -> interfaces/notional/AssetRateAdapter.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/GovernanceActionHarness.sol -> contracts/13/contracts/external/actions/GovernanceAction.sol -> interfaces/notional/NotionalGovernance.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/GovernanceActionHarness.sol -> contracts/13/contracts/external/actions/GovernanceAction.sol -> @openzeppelin/contracts/utils/Create2.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/GovernanceActionHarness.sol -> contracts/13/contracts/external/actions/GovernanceAction.sol -> contracts/13/contracts/internal/valuation/ExchangeRate.sol -> interfaces/chainlink/AggregatorV2V3Interface.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/GovernanceActionHarness.sol -> contracts/13/contracts/external/actions/GovernanceAction.sol -> contracts/13/contracts/internal/markets/CashGroup.sol -> @openzeppelin/contracts/math/SafeMath.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/GovernanceActionHarness.sol -> contracts/13/contracts/external/actions/GovernanceAction.sol -> contracts/13/contracts/internal/balances/TokenHandler.sol -> interfaces/compound/CErc20Interface.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/GovernanceActionHarness.sol -> contracts/13/contracts/external/actions/GovernanceAction.sol -> contracts/13/contracts/internal/balances/TokenHandler.sol -> interfaces/compound/CEtherInterface.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/GovernanceActionHarness.sol -> contracts/13/contracts/external/actions/GovernanceAction.sol -> contracts/13/contracts/internal/balances/TokenHandler.sol -> @openzeppelin/contracts/math/SafeMath.sol [NOT PRESENT in 131-file snapshot]
+
+CVL closure: the .spec copies the selected property literally and only available supporting methods/definitions. Solidity declarations are not mistaken for implementations.
+
+Context only, NOT the grounds for dependency-incomplete status: the missing historical compiler, Prover and CLI flags limit reproduction, but these do not by themselves make a complete dependency closure incomplete.
+Search performed across contracts/13, certora scripts/.conf files, and recursively through actual import directives. No modern package substitution made.

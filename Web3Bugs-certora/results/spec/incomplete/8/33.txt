@@ -1,0 +1,38 @@
+# Dependency audit, second pass — AAVE Vault / Project 8 / example 33
+
+**Classification: incomplete.** The exact selected property depends on missing implementation/model artifacts below; missing compiler flags alone are NOT counted as a dependency.
+
+## Effective transitive dependency gaps
+1. ATokenVaultHarness handle*() wrappers: symbolic entrypoint wrappers used transitively by DM/RW helpers absent
+2. _AToken / Underlying: external symbolic asset mock implementations absent
+3. getAccumulatedFees(): harness getter required via fee-bound invariant absent
+4. SymbolicLendingPoolL1.getLiquidityIndex(): external symbolic pool model absent
+
+## Included original source ranges
+- contracts/8/specs/methods_base.spec:3;4;5
+- contracts/8/specs/methods_base.spec:16;18;20;21;28;29;30
+- contracts/8/specs/methods_base.spec:68
+- contracts/8/specs/methods_base.spec:207-207
+- contracts/8/specs/positiveSupply_imply_positiveAssets.spec:2-58
+- contracts/8/specs/positiveSupply_imply_positiveAssets.spec:181-219
+- contracts/8/specs/positiveSupply_imply_positiveAssets.spec:59-60
+- contracts/8/specs/positiveSupply_imply_positiveAssets.spec:62-63
+- contracts/8/specs/positiveSupply_imply_positiveAssets.spec:65-66
+- contracts/8/specs/positiveSupply_imply_positiveAssets.spec:74-75
+- contracts/8/specs/positiveSupply_imply_positiveAssets.spec:82-85
+- contracts/8/specs/methods_base.spec:151-153
+- contracts/8/specs/methods_base.spec:155-157
+- contracts/8/specs/methods_base.spec:159-161
+- contracts/8/specs/methods_base.spec:183-185
+- contracts/8/specs/methods_base.spec:187-189
+- contracts/8/specs/methods_base.spec:191-193
+- contracts/8/specs/methods_base.spec:167-169
+- contracts/8/specs/methods_base.spec:171-173
+- contracts/8/specs/methods_base.spec:175-177
+- contracts/8/specs/positiveSupply_imply_positiveAssets.spec:223-227
+
+## Resolution policy and negative findings
+- `methods_base.spec` and `erc20.spec` are original source snapshot files, but no unresolved import is left in this extracted unit. Needed available `using`, `methods`, constants, ghosts, hooks and helper snippets are copied with provenance; no fabricated harness is introduced.
+- Generic missing mocks, `getAccumulatedFees()`, `Underlying.b`, unused selectors and generic `havoc_all()` are **not** declared dependencies unless identified above for this example. The earlier v1 list was a global superset and is superseded by this rule-specific assessment.
+- Source-local global ghost/axiom models may constrain an entire verification instance even if not syntactically called. Where preserved, distinguish such ambient assumptions from transitive *symbol resolution*; potential contradictions are documented in the semantic audit, not silently removed from the historical snapshot.
+- Verified external missing checks apply to this Project 8 snapshot's six Solidity files. No source from another project's mocks is borrowed. Missing pinned package/harness and run configs prevent proving historical reproducibility, not necessarily logical correctness.

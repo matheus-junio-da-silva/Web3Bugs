@@ -1,5 +1,7 @@
 # Project 10 — applicability and dependency reconciliation for 2021 handler targets
 
+**UPDATED 2026-10-18:** nominally available targets previously called complete were reclassified incomplete for missing transitive OpenZeppelin dependencies. The definitive current count is **2 complete / 126 incomplete**. See `spec_catalog_project_10_solidity_closure.md` and the **individual 138-cell register** `spec_catalog_project_10_handler_27_32_decisions.md`. Earlier “nominal only” wording below records presence of a source filename, **not** completeness.
+
 This file is part of the Furucombo draft catalog on PR #8. Its source of truth is `contracts/10/specs/`, the historical 31-page PDF `resources/10/FurucomboMay2021.pdf`, and the source-preserving index `results/spec/spec_buglabel.csv`. **It is not a Prover replay.** Do not infer that every cell below was executed as an individual historical job.
 
 ## Mapping: active CVL source and report property

@@ -1,0 +1,13 @@
+INCOMPLETE HISTORICAL TARGET DEPENDENCY — AAVE V2 / Project 12 / Example 2
+
+Missing dependency: a historically compatible implementation of StableDebtToken to serve as the superclass of StableDebtTokenHarness, with a five-argument constructor and compatible incentives-controller getter. This is a SOURCE-VERSION / SOLIDITY INTERFACE mismatch, not a CVL1-to-CVL2 syntax problem.
+
+- StableDebtTokenHarness.sol:7-13 calls StableDebtToken(pool, underlyingAsset, name, symbol, incentivesController) as a base constructor.
+- The preserved StableDebtToken.sol:18-19,41-49 supplies no such constructor; the present initialization API is initialize(ILendingPool,address,IAaveIncentivesController,uint8,string,string,bytes).
+- StableDebtTokenHarness.sol:26-28 declares getIncentivesController() public view returns (address).
+- Its preserved StableDebtToken.sol:355-357 has getIncentivesController() external view override returns (IAaveIncentivesController), not marked virtual. These duplicate inherited names cannot be treated as a compatible override without modifying historical code.
+- The source harness additionally uses inherited WadRayMath-style syntax in rayWadMul (lines 30-32), which must be assessed under the original compiler configuration; no replacement implementation is supplied here.
+
+Locations checked: contracts/12/specs/harness/StableDebtTokenHarness.sol, contracts/12/contracts/protocol/tokenization/StableDebtToken.sol, contracts/12/contracts/protocol/tokenization/base/DebtTokenBase.sol, and the full preserved contracts/12/contracts and specs source inventory. The sole StableDebtToken implementation in that inventory is the incompatible initializer-based implementation. This is sufficient to block a valid target reconstruction despite the presence of individual methods. No compatible historic constructor-based base version or run/link configuration is preserved.
+
+The selected original CVL property is preserved verbatim in 2.spec; original code and the incompatible historical harness remain untouched. The report may mark the property VERIFIED or NOT_STATED independently of this snapshot dependency status. Do not conflate complete source inventory with a compilable target.

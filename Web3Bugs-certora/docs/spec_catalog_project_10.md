@@ -1,5 +1,17 @@
 # Project 10 — Furucombo: source-preserving Certora property catalog and closure audit
 
+## 2026-10-18 blocking semantic revision — CURRENT classification
+
+**Canonical current count:** 34 active CVL declarations, 128 target-aware examples, **2 complete and 126 incomplete** under the literal preserved-snapshot dependency criterion; 87 former complete examples have been reclassified. Only LibParamHarness examples 33 and 34 remain complete. All 87 new incomplete examples include a concrete missing-dependency `N.txt`; original CVL and contracts remain unchanged.
+
+Audit records:
+- `docs/spec_catalog_project_10_solidity_closure.md`: recursion through necessary Solidity imports for **all 89 formerly complete** source/target examples, exact dependency sites and per-example decisions.
+- `docs/spec_catalog_project_10_handler_27_32_decisions.md`: **138 separate report-cell decisions**, six source rules × 23 handlers, with PDF pages 26–31, script, source rule, target, dependencies, applicability and separate-example decision. These are *not* 138 new formal results or automatically generated examples.
+- All 13 malformed report #26 citations now identify PDF **p. 25**, and all 13 undefined counterexamples are replaced by a falsifying-behavior condition read from the unchanged CVL assertion, not invented Prover executions.
+
+**Outstanding semantic gate:** report #27–32 target-specific reproduction and historically equivalent exact source/harnesses are unavailable. Structural checks do not waive the gap; **retain draft**. Historical status counts and validation notes later in this ledger describe *earlier commits* only and are superseded by this section for current numbers.
+
+
 > **Review status: DRAFT / STRUCTURAL CHECKS PASSED; HISTORICAL TARGET COVERAGE BLOCKED.** This ledger contains 128 target-aware examples for 34 active declarations (36 baseline plus 92 new handler/target contexts). It is not a reproduced 2021 verification result or a completed handler-by-handler execution matrix. Do not merge until the below blockers and validation have been reviewed.
 
 ## 1. Identity, preservation and provenance
@@ -25,7 +37,7 @@
 | `specs/proxy.spec` — four handler-sensitive rules repeated per target | 0 additional declarations | 37–128 (92 source/target contexts) |
 | **Total** | **34 active declarations** | **128 source/target instantiations** |
 
-Commented blocks `proxy.spec:558–578` containing `holdNoEth` and `onlyValidCaller` are **excluded** as inactive; the latter is nonetheless cited in a 2021 report finding. Do not turn that reference into a current active example. **89 dependency-complete and 39 incomplete examples** are indexed; neither class guarantees historical Prover reproducibility. Complete is a narrow non-built-in symbol-resolution status, not a proof run.
+Commented blocks `proxy.spec:558–578` containing `holdNoEth` and `onlyValidCaller` are **excluded** as inactive; the latter is nonetheless cited in a 2021 report finding. Do not turn that reference into a current active example. **2 dependency-complete and 126 incomplete examples** are indexed; neither class guarantees historical Prover reproducibility. Complete is a narrow non-built-in symbol-resolution status, not a proof run.
 
 The initial 36-example inventory was **not** a full Cartesian product of `proxy.spec` × handler scripts: the original handler-facing driver invokes `proxy.spec` with different target contracts. Each generic per-target invocation still needs per-handler assertion/result interpretation. No `VERIFIED` or `VIOLATED` is borrowed from one handler for another.
 
@@ -271,7 +283,7 @@ O status passou de **não executado** a **validado estruturalmente**. Estes quat
 
 ## 12. Additional target-specific instance matrix (report #22, #23, #25, #26)
 
-**92 additional indexed instances (37–128)**: 60 dependency-complete by nominal handler source presence, 32 incomplete due to eight missing historical handler implementations; total Project 10 **128 instances (89 complete / 39 incomplete)**. These original-CVL reuses have distinct concrete targets, scripts, contract excerpts, and report observations. **Every added Result and Detection Outcome is NOT_STATED**, not inferred from the report's 🔎 cells.
+**92 additional indexed instances (37–128)**: 60 dependency-complete by nominal handler source presence, 32 incomplete due to eight missing historical handler implementations; total Project 10 **128 instances (2 complete / 126 incomplete)**. These original-CVL reuses have distinct concrete targets, scripts, contract excerpts, and report observations. **Every added Result and Detection Outcome is NOT_STATED**, not inferred from the report's 🔎 cells.
 
 | Handler | Named source | Script / assumptions | Report #22 stack | #23 approvals | #25 token movement | #26 nonparty balances | Need separate examples? |
 | --- | --- | --- | --- | --- | --- | --- | --- |

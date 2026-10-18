@@ -1,0 +1,13 @@
+Project 10 — example 108 — noOtherPartyModified / HStakingRewardsAdapter
+
+Status: incomplete (missing necessary historical source dependency).
+Original CVL rule body is preserved byte-for-byte.
+
+- Missing import '@openzeppelin/contracts/access/Ownable.sol' required by the transitive Solidity compilation closure, referenced from contracts/10/contracts/Registry.sol:5.
+- Missing import '@openzeppelin/contracts/token/ERC20/IERC20.sol' required by the transitive Solidity compilation closure, referenced from contracts/10/contracts/staking/IStakingRewardsAdapter.sol:5.
+- Missing import '@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol' required by the transitive Solidity compilation closure, referenced from contracts/10/contracts/Proxy.sol:5, contracts/10/contracts/handlers/HandlerBase.sol:5, contracts/10/contracts/handlers/staking/HStakingRewardsAdapter.sol:5.
+- Missing import '@openzeppelin/contracts/utils/Address.sol' required by the transitive Solidity compilation closure, referenced from contracts/10/contracts/Proxy.sol:6.
+- Missing import '@openzeppelin/contracts/utils/Strings.sol' required by the transitive Solidity compilation closure, referenced from contracts/10/contracts/Proxy.sol:7.
+- The historical specs/scripts/_runHandler.sh performs a textual substitution SafeERC20.sol -> ERC20.sol in the handler file, but the resulting @openzeppelin/contracts/token/ERC20/ERC20.sol is also not vendored; this does not resolve the missing import(s).
+- The driver compiles the handler together with Registry, ProxyHarness, DummyERC20A/B and Summary; a CVL methods summary does not remove Solidity import resolution. HandlerBase and inherited Solidity must also close.
+- No package lock, vendored source, exact historical implementation or executable historical Prover environment was substituted. Installing a modern dependency would alter this original snapshot.

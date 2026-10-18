@@ -1,0 +1,7 @@
+Project 10 — example 2 — deprecatesHandler / Registry
+
+Status: incomplete (missing necessary historical source dependency).
+Original CVL rule body is preserved byte-for-byte.
+
+- Missing import '@openzeppelin/contracts/access/Ownable.sol' required by the transitive Solidity compilation closure, referenced from contracts/10/contracts/Registry.sol:5.
+- No package lock, vendored source, exact historical implementation or executable historical Prover environment was substituted. Installing a modern dependency would alter this original snapshot.

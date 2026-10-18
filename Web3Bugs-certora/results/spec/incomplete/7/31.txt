@@ -1,0 +1,22 @@
+INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/ReserveConfiguration.spec` / property `integrityAndIndependencyOfIntSetters` / target `MockReserveConfiguration`.
+Original source property and dependency ranges: `1;51-52;57;169-183`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- getIntSetterLowerBound(uint256)
+- getIntSetterUpperBound(uint256)
+- executeIntSetterById(uint256,uint256)
+- executeIntGetterById(uint256)
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The spec dispatches setters and getters through ID-indexed helper methods. Their CVL declarations exist but no matching concrete mock/harness implementations are present in the supplied snapshot. Showing a single illustrative setLtv/setActive library body does not close the ID dispatcher.
+
+CVL methods declarations actually included in this example:
+- executeIntSetterById(uint256, uint256) envfree
+- executeIntGetterById(uint256) returns uint256 envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.

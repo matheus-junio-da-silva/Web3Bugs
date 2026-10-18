@@ -18,3 +18,8 @@ results/spec/incomplete/7/*.spec whitespace=-blank-at-eol,-space-before-tab
 contracts/13/** -whitespace
 results/spec/incomplete/13/*.spec -whitespace
 results/spec/incomplete/13/*.sol -whitespace
+
+# Contributed Project 14 historical source and literal excerpt settings
+contracts/14/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+results/spec/complete/14/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+results/spec/complete/14/*.sol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol

@@ -68,3 +68,39 @@
         // return _loadMarket().totalfCash;
         return symbolicMarket.totalfCash;
     }
+
+// Source: contracts/13/contracts/mocks/certora/LiquidityCurveHarness.sol
+// Original lines: 122-154
+    }
+
+    function executeTrade(uint256 timeToMaturity, int256 fCashToAccount)
+        external
+        returns (int256, int256)
+    {
+        // CashGroupParameters memory cashGroup = symbolicCashGroup; //CashGroup.buildCashGroupStateful(CURRENCY_ID);
+        // CashGroupParameters memory cashGroup = CashGroup.buildCashGroupStateful(CURRENCY_ID);
+        symbolicCashGroupStorage._buildCashGroupStateful(CURRENCY_ID);
+        // MarketParameters memory market = symbolicMarket; //_loadMarket();
+        //MarketParameters memory market = _loadMarket();
+        //  uint256 settlementDate = _loadMarket();
+         _loadMarket();
+        //  MarketParameters storage market = symbolicMarkets[CURRENCY_ID][settlementDate][MATURITY];
+        (int256 netAssetCash, int256 netAssetCashToReserve) =
+            Market.calculateTrade(symbolicMarket, symbolicCashGroupStorage, fCashToAccount, timeToMaturity, MARKET_INDEX);
+        // Market.setMarketStorage(market);
+        symbolicMarket.setMarketStorage();
+        // symbolicMarket = market;
+        // symbolicCashGroup = cashGroup;
+        return (netAssetCash, netAssetCashToReserve);
+    }
+
+    function addLiquidity(int256 assetCash) external returns (int256, int256) {
+        // MarketParameters memory market = symbolicMarket; //_loadMarket();
+        // MarketParameters memory market = _loadMarket();
+        //  uint256 settlementDate = _loadMarket();
+         _loadMarket();
+        //  MarketParameters storage market = symbolicMarkets[CURRENCY_ID][settlementDate][MATURITY];
+        // int256 marketfCashBefore = market.totalfCash;
+        (int256 liquidityTokens, int256 fCashToAccount) = symbolicMarket.addLiquidity( assetCash);
+        // Market.setMarketStorage(market);
+        symbolicMarket.setMarketStorage();

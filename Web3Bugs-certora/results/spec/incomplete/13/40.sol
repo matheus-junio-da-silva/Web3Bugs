@@ -69,3 +69,38 @@
         }
 
         return amountToSettle;
+// Source: contracts/13/contracts/mocks/certora/SettlementHarness.sol
+// Original lines: 83-115
+    }
+
+    function getNumAssets(address account) external view returns (uint256) {
+        PortfolioAsset[] memory assets = _getAccountAssets(account);
+        // Value of any asset should never be zero. If it is then it should not exist in the portfolio.
+        for (uint256 i; i < assets.length; i++) assert(assets[i].notional != 0);
+        return assets.length;
+    }
+
+    function settleAccount(address account) external {
+        // This is an approximation of what happens in SettleAssetsExternal._settleAccount
+        SettleAmount[] memory settleAmounts;
+
+        if (symbolicAccountContext.bitmapCurrencyId != 0) {
+            settleAmounts = SettleAssetsExternal._settleBitmappedAccountStateful(
+                account,
+                symbolicAccountContext.bitmapCurrencyId,
+                symbolicAccountContext.nextSettleTime
+            );
+        } else {
+            settleAmounts = SettlePortfolioAssets.settlePortfolio(
+                symbolicPortfolioState,
+                block.timestamp
+            );
+
+            symbolicAccountContext.storeAssetsAndUpdateContext(
+                account,
+                symbolicPortfolioState,
+                false
+            );
+        }
+
+        BalanceHandler.finalizeSettleAmounts(account, symbolicAccountContext, settleAmounts);

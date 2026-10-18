@@ -1,8 +1,11 @@
-INCOMPLETE DEPENDENCY — Project 13 Example 16
-Property: cannotHaveNegativeNTokenBalance
-Original spec: certora/accountContext/Balances.spec:42-44
-Original target: UNRESOLVED
-The source tree was searched recursively: certora/, contracts/mocks/certora/, internal/, external/, math/, global/ and historic .conf/.sh run parameters.
-The scripts reference Brownie-installed @openzeppelin/openzeppelin-contracts@3.4.0-solc-0.7, compound-finance, external Solidity interface maps, solc version and Prover settings not preserved as local source. These are not reconstructed with newer versions.
-No historical run target is specified for this unfinished specification.
-Proof/result reconstruction from the PDF and prover run is not available in the current environment. Migration of CVL syntax is not the reason for incomplete status.
+INCOMPLETE DEPENDENCY — Project 13 / Example 16
+CVL property: cannotHaveNegativeNTokenBalance
+Original CVL: certora/accountContext/Balances.spec:42-44
+Historically selected target: UNRESOLVED
+
+Missing historical verification TARGET: no script/.conf selects certora/accountContext/Balances.spec or identifies a concrete contract ABI implementing this rule. The supplied BalanceHandler.sol is library context, not a substitute target or complete proof harness.
+
+CVL closure: the .spec copies the selected property literally and only available supporting methods/definitions. Solidity declarations are not mistaken for implementations.
+
+Context only, NOT the grounds for dependency-incomplete status: the missing historical compiler, Prover and CLI flags limit reproduction, but these do not by themselves make a complete dependency closure incomplete.
+Search performed across contracts/13, certora scripts/.conf files, and recursively through actual import directives. No modern package substitution made.

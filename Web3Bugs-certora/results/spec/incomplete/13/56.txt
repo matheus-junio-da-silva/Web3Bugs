@@ -1,7 +1,22 @@
-INCOMPLETE DEPENDENCY
-Example 56: activeCurrenciesAreNotDuplicatedAndSorted
-CVL: certora/oldAccountContext.spec:83-94
-Target: AccountPortfolioHarness
-Missing historical dependencies / provenance:
-Historical Brownie OpenZeppelin 3.4.0 and compound-finance package mappings and matching prover/solc 0.7.x environment are not supplied.
-The original oldAccountContext.spec is not selected by any supplied run script; target is inferred. Keep distinct from the newer active spec and never inherit its results.
+INCOMPLETE DEPENDENCY — Project 13 / Example 56
+CVL property: activeCurrenciesAreNotDuplicatedAndSorted
+Original CVL: certora/oldAccountContext.spec:83-94
+Historically selected target: AccountPortfolioHarness
+
+Concrete target source: contracts/13/contracts/mocks/certora/AccountPortfolioHarness.sol
+Recursive Solidity import closure in supplied snapshot: 22 source files reachable.
+Absent ORIGINAL imports (chain -> missing artifact; first 8 distinct examples):
+- contracts/13/contracts/mocks/certora/AccountPortfolioHarness.sol -> contracts/13/contracts/internal/portfolio/BitmapAssetsHandler.sol -> @openzeppelin/contracts/math/SafeMath.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/AccountPortfolioHarness.sol -> contracts/13/contracts/internal/markets/DateTime.sol -> @openzeppelin/contracts/math/SafeMath.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/AccountPortfolioHarness.sol -> contracts/13/contracts/internal/balances/BalanceHandler.sol -> contracts/13/contracts/internal/balances/Incentives.sol -> @openzeppelin/contracts/math/SafeMath.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/AccountPortfolioHarness.sol -> contracts/13/contracts/internal/balances/BalanceHandler.sol -> contracts/13/contracts/internal/balances/TokenHandler.sol -> interfaces/compound/CErc20Interface.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/AccountPortfolioHarness.sol -> contracts/13/contracts/internal/balances/BalanceHandler.sol -> contracts/13/contracts/internal/balances/TokenHandler.sol -> interfaces/compound/CEtherInterface.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/AccountPortfolioHarness.sol -> contracts/13/contracts/internal/balances/BalanceHandler.sol -> contracts/13/contracts/internal/balances/TokenHandler.sol -> @openzeppelin/contracts/math/SafeMath.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/AccountPortfolioHarness.sol -> contracts/13/contracts/internal/balances/BalanceHandler.sol -> contracts/13/contracts/internal/balances/TokenHandler.sol -> @openzeppelin/contracts/token/ERC20/ERC20.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/AccountPortfolioHarness.sol -> contracts/13/contracts/internal/portfolio/BitmapAssetsHandler.sol -> contracts/13/contracts/internal/markets/CashGroup.sol -> @openzeppelin/contracts/math/SafeMath.sol [NOT PRESENT in 131-file snapshot]
+
+CVL closure: the .spec copies the selected property literally and only available supporting methods/definitions. Solidity declarations are not mistaken for implementations.
+Unproven historical run target: no supplied script/.conf selects the older oldAccountContext.spec file; AccountPortfolioHarness is inferred from its ABI similarity.
+
+Context only, NOT the grounds for dependency-incomplete status: the missing historical compiler, Prover and CLI flags limit reproduction, but these do not by themselves make a complete dependency closure incomplete.
+Search performed across contracts/13, certora scripts/.conf files, and recursively through actual import directives. No modern package substitution made.

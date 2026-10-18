@@ -1,0 +1,5 @@
+# Preserve byte-exact 2021 Certora snapshot; historical whitespace is intentional.
+contracts/13/** -whitespace
+# CVL and Solidity excerpts reproduce the historical source verbatim.
+results/spec/incomplete/13/*.spec -whitespace
+results/spec/incomplete/13/*.sol -whitespace

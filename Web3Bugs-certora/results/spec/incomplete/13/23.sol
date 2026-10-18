@@ -35,3 +35,15 @@ contract AccountPortfolioHarness {
 
     function getBitmapCurrency(address account) external view returns (uint16) {
         return symbolicAccountContext.bitmapCurrencyId;
+
+// Source: contracts/13/contracts/mocks/certora/AccountPortfolioHarness.sol
+// Original lines: 36-44
+    }
+
+    function getActiveCurrencies(address account) external view returns (uint144) {
+        return uint144(symbolicAccountContext.activeCurrencies);
+    }
+
+    function getAssetsBitmap(address account) external view returns (uint256) {
+        AccountContext memory accountContext = symbolicAccountContext;
+        return

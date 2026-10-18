@@ -8,7 +8,7 @@ The original PDF describes work undertaken June 28 through September 19, 2021. T
 
 ## Complete active declaration inventory
 
-58 active declarations: 58 unique source-file/target instances; all 58 are currently incomplete due unavailable original external dependency/toolchain snapshots. Each has N.spec, N.sol, N.md, N.txt. Additional declarations in comments, including oldAccountContext commented-out proposals, are excluded. notes.spec has no active rule/invariant. sanity.spec contains one active diagnostic rule. oldAccountContext.spec has four active declarations, preserved independently despite duplicate names.
+58 active declarations: 58 unique source-file/target instances. All remain dependency-incomplete: 48 have a concrete historically selected or inferred target whose recursive Solidity import closure reaches absent source files (for example original OpenZeppelin SafeMath, compound interfaces and notional/chainlink interfaces), and 10 unfinished Balances.spec properties have no evidenced historical verification target or ABI. Lack of solc or Prover alone is NOT a dependency-incomplete reason. Each has N.spec, N.sol, N.md, N.txt. Additional declarations in comments, including oldAccountContext commented-out proposals, are excluded. notes.spec has no active rule/invariant. sanity.spec contains one active diagnostic rule. oldAccountContext.spec has four active declarations, preserved independently despite duplicate names.
 
 The user-provided Notional report has 13 substantive (1 High, 6 Medium, 6 Low) issues and 13 recommendations. All 26 descriptions remain in the report transcript. Only 13 substantive findings are indexed in results/bugs.csv; recommendations without a substantive security issue are not force-mapped to a vulnerability label. These 13 report findings are NOT mechanically linked to any one of the CVL instances.
 
@@ -96,9 +96,18 @@ S2-3: 2; S3-2: 18; S5-2: 2; S5-3: 1; S6-2: 7; S6-4: 13; UNMAPPED: 15
 
 ## Dependency and validation limitations
 
-All samples retain original CVL exactly with original line ranges and available directly/recur­sively required definitions. Incomplete means historical source compilation dependencies remain unavailable, not merely CVL1-to-CVL2 migration. Some historical rules are aspirational or diagnostic and are documented as such.
+All samples retain original CVL exactly with original line ranges and available directly/recursively required definitions. Each N.txt now includes a concrete recursive original-import chain or identifies the historically unresolved target. Absent solc, Prover, and CLI settings affect historical reproducibility only, not dependency completeness by themselves. The N.md files now trace CVL antecedents/assertions to exact Solidity functions, symbolic harness storage and source ranges; additional Solidity excerpts are referenced in the CSV when necessary. Some historical rules are aspirational or diagnostic and are documented as such.
 
 Native required tests and the Git diff whitespace check must be run against the committed HEAD, and their actual stdout/stderr, SHA and exit codes recorded. A native validator PASS is not itself a Prover proof.
+
+## Individually retained VERIFIED evidence (PDF text layer; original PDF authoritative)
+
+- #4 enablingBitmapCannotLeaveBehindAssets and #5 bitmapPortfoliosCannotHaveAssetArray: report page 16, Account Context propositions on forbidding stranded assets and bitmap/array coexistence; corresponding newer ActiveCurrencies.spec and AccountPortfolioHarness context, not the separate oldAccountContext variant.
+- #29 validMarketMaturitesHaveAnIndex: report page 15, DateTime conversion from valid market maturity to market index.
+- #32 executeTradeMovesImpliedRates, #34 impliedRatesDoNotChangeOnAddLiquidity and #35 impliedRatesDoNotChangeOnRemoveLiquidity: report page 13, Market/Liquidity Curve propositions. The root verify.sh excludes #35; the checkmark does not independently establish that the root harness ran that selector and does not prove results for another target.
+- #53 onlyOwnerCanUpdateGovernace: report page 15, GovernanceAction owner authorization. Its source filtered method set is broader than the report statement, and no narrower selector hypothesis is silently added.
+
+For these seven, VERIFIED records only the narrow historical proposition/target match. The report does not directly identify these exact source rules as detectors of one of the 13 substantive findings, so their Detection Outcome remains NO_FINDING. Examples #7/#57 are tautological and UNMAPPED; #39 has an inconsistent zero-prestate implication and remains NOT_STATED regardless of the high-level report checkmark.
 
 ## Two withheld report-result attributions
 

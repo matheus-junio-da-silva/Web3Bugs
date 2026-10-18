@@ -69,3 +69,38 @@
         uint256 oracleRate
     ) external view returns (int256) {
         return AssetHandler.getPresentValue(notional, maturity, blockTime, oracleRate);
+// Source: contracts/13/contracts/internal/valuation/AssetHandler.sol
+// Original lines: 149-181
+
+    /// @notice Returns the asset cash claim and the present value of the fCash asset (if it exists)
+    function getLiquidityTokenValue(
+        uint256 index,
+        CashGroupParameters memory cashGroup,
+        MarketParameters memory market,
+        PortfolioAsset[] memory assets,
+        uint256 blockTime,
+        bool riskAdjusted
+    ) internal view returns (int256, int256) {
+        PortfolioAsset memory liquidityToken = assets[index];
+        require(isLiquidityToken(liquidityToken.assetType) && liquidityToken.notional >= 0); // dev: get liquidity token value, not liquidity token
+
+        {
+            (uint256 marketIndex, bool idiosyncratic) =
+                DateTime.getMarketIndex(
+                    cashGroup.maxMarketIndex,
+                    liquidityToken.maturity,
+                    blockTime
+                );
+            // Liquidity tokens can never be idiosyncratic
+            require(!idiosyncratic); // dev: idiosyncratic liquidity token
+
+            // This market will always be initialized, if a liquidity token exists that means the market has some liquidity in it.
+            cashGroup.loadMarket(market, marketIndex, true, blockTime);
+        }
+
+        int256 assetCashClaim;
+        int256 fCashClaim;
+        if (riskAdjusted) {
+            (assetCashClaim, fCashClaim) = getHaircutCashClaims(liquidityToken, market, cashGroup);
+        } else {
+            (assetCashClaim, fCashClaim) = getCashClaims(liquidityToken, market);

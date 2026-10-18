@@ -69,3 +69,73 @@
     }
 
     function getLastImpliedRate() external returns (uint256) {
+// Source: contracts/13/contracts/mocks/certora/LiquidityCurveHarness.sol
+// Original lines: 90-122
+    }
+
+    function getMarketOracleRate() external returns (uint256) {
+        // uint256 settlementDate = _loadMarket();
+         _loadMarket();
+        // return symbolicMarkets[CURRENCY_ID][settlementDate][MATURITY].oracleRate;
+        // return _loadMarket().oracleRate;
+        return symbolicMarket.oracleRate;
+    }
+
+    function getMarketfCash() external returns (int256) {
+        // uint256 settlementDate = _loadMarket();
+         _loadMarket();
+        // return symbolicMarkets[CURRENCY_ID][settlementDate][MATURITY].totalfCash;
+        // return _loadMarket().totalfCash;
+        return symbolicMarket.totalfCash;
+    }
+
+    function getMarketAssetCash() external returns (int256) {
+        // uint256 settlementDate = _loadMarket();
+         _loadMarket();
+        // return symbolicMarkets[CURRENCY_ID][settlementDate][MATURITY].totalAssetCash;
+        // return _loadMarket().totalAssetCash;
+        return symbolicMarket.totalAssetCash;
+    }
+
+    function getMarketLiquidity() external returns (int256) {
+        // uint256 settlementDate = _loadMarket();
+         _loadMarket();
+        // return symbolicMarkets[CURRENCY_ID][settlementDate][MATURITY].totalLiquidity;
+        // return _loadMarket().totalLiquidity;
+        return symbolicMarket.totalLiquidity;
+    }
+
+// Source: contracts/13/contracts/mocks/certora/LiquidityCurveHarness.sol
+// Original lines: 83-115
+    }
+
+    function getPreviousTradeTime() external returns (uint256) {
+        // uint256 settlementDate = _loadMarket();
+         _loadMarket();
+        // return symbolicMarkets[CURRENCY_ID][settlementDate][MATURITY].previousTradeTime;
+        return symbolicMarket.previousTradeTime;
+    }
+
+    function getMarketOracleRate() external returns (uint256) {
+        // uint256 settlementDate = _loadMarket();
+         _loadMarket();
+        // return symbolicMarkets[CURRENCY_ID][settlementDate][MATURITY].oracleRate;
+        // return _loadMarket().oracleRate;
+        return symbolicMarket.oracleRate;
+    }
+
+    function getMarketfCash() external returns (int256) {
+        // uint256 settlementDate = _loadMarket();
+         _loadMarket();
+        // return symbolicMarkets[CURRENCY_ID][settlementDate][MATURITY].totalfCash;
+        // return _loadMarket().totalfCash;
+        return symbolicMarket.totalfCash;
+    }
+
+    function getMarketAssetCash() external returns (int256) {
+        // uint256 settlementDate = _loadMarket();
+         _loadMarket();
+        // return symbolicMarkets[CURRENCY_ID][settlementDate][MATURITY].totalAssetCash;
+        // return _loadMarket().totalAssetCash;
+        return symbolicMarket.totalAssetCash;
+    }

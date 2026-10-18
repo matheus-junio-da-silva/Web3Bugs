@@ -1,7 +1,21 @@
-INCOMPLETE DEPENDENCY
-Project 13 / Example 44 / riskAdjustedPresentValueIsLessThanPresentValue
-Original source: certora/asset/Valuation.spec:138-149
-Historical target: ValuationHarness
-Search: preserved certora scripts, .conf files, target harness, imported internal libraries and repository tree.
-Missing: Brownie-managed @openzeppelin/contracts (historical release 3.4.0-solc-0.7), compound-finance package mapping where used; historical solc/prover setup and settings. These are not in the PropertyGPT snapshot. No substitute code was created.
-Do not treat this as proof of historical reproducibility. CVL migration is a separate issue.
+INCOMPLETE DEPENDENCY — Project 13 / Example 44
+CVL property: riskAdjustedPresentValueIsLessThanPresentValue
+Original CVL: certora/asset/Valuation.spec:138-149
+Historically selected target: ValuationHarness
+
+Concrete target source: contracts/13/contracts/mocks/certora/ValuationHarness.sol
+Recursive Solidity import closure in supplied snapshot: 22 source files reachable.
+Absent ORIGINAL imports (chain -> missing artifact; first 8 distinct examples):
+- contracts/13/contracts/mocks/certora/ValuationHarness.sol -> @openzeppelin/contracts/math/SafeMath.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/ValuationHarness.sol -> contracts/13/contracts/internal/markets/DateTime.sol -> @openzeppelin/contracts/math/SafeMath.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/ValuationHarness.sol -> contracts/13/contracts/internal/markets/CashGroup.sol -> @openzeppelin/contracts/math/SafeMath.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/ValuationHarness.sol -> contracts/13/contracts/internal/valuation/AssetHandler.sol -> @openzeppelin/contracts/math/SafeMath.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/ValuationHarness.sol -> contracts/13/contracts/internal/portfolio/BitmapAssetsHandler.sol -> @openzeppelin/contracts/math/SafeMath.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/ValuationHarness.sol -> contracts/13/contracts/internal/markets/CashGroup.sol -> contracts/13/contracts/internal/markets/Market.sol -> @openzeppelin/contracts/math/SafeMath.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/mocks/certora/ValuationHarness.sol -> contracts/13/contracts/internal/markets/CashGroup.sol -> contracts/13/contracts/internal/markets/AssetRate.sol -> interfaces/notional/AssetRateAdapter.sol [NOT PRESENT in 131-file snapshot]
+- contracts/13/contracts/internal/AccountContextHandler.sol -> contracts/13/contracts/internal/balances/BalanceHandler.sol -> contracts/13/contracts/internal/balances/Incentives.sol -> @openzeppelin/contracts/math/SafeMath.sol [NOT PRESENT in 131-file snapshot]
+
+CVL closure: the .spec copies the selected property literally and only available supporting methods/definitions. Solidity declarations are not mistaken for implementations.
+
+Context only, NOT the grounds for dependency-incomplete status: the missing historical compiler, Prover and CLI flags limit reproduction, but these do not by themselves make a complete dependency closure incomplete.
+Search performed across contracts/13, certora scripts/.conf files, and recursively through actual import directives. No modern package substitution made.

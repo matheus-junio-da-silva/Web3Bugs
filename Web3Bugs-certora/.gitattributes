@@ -1,7 +1,15 @@
-# Project 9 original historical source blobs are immutable snapshots.
-# Preserve their literal whitespace; this is NOT a global Git exemption.
-# Extracted CVL .spec files must retain source rules and auxiliary declarations verbatim.
-# Generated .md, .sol, .txt, CSV, and other projects retain normal whitespace checks.
+# Preserve literal historical Project 12 source and CVL properties. Do not normalize their whitespace.
+# This is narrowly scoped: new code/docs/CSV remain checked by git diff --check.
+contracts/12/** -whitespace
+results/spec/complete/12/*.spec -whitespace
+results/spec/incomplete/12/*.spec -whitespace
+
+# Contributed Project 7 historical source and literal excerpt settings
+contracts/7/specs/*.spec whitespace=-blank-at-eol,-space-before-tab
+results/spec/complete/7/*.spec whitespace=-blank-at-eol,-space-before-tab
+results/spec/incomplete/7/*.spec whitespace=-blank-at-eol,-space-before-tab
+
+# Contributed Project 9 historical source and literal excerpt settings
 /contracts/9/** -whitespace
 /results/spec/complete/9/*.spec -whitespace
 /results/spec/incomplete/9/*.spec -whitespace

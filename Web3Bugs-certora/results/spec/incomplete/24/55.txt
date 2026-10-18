@@ -1,0 +1,7 @@
+INCOMPLETE DEPENDENCY — Project 24 example 55
+Original declaration: contracts/24/spec/LEVarTran.spec:121-131
+Target: LaunchEvent
+
+The original transitive CVL import ../helpers/erc20.spec is missing from the supplied project snapshot. The 15 Solidity files also lack original JoeFactory/JoePair/DummyWeth/DummyERC20 symbolic harness implementations and external OpenZeppelin/joe-core dependencies. Method declarations alone are not implementations.
+
+Searched: the eight archived CVL specs and fifteen original Solidity files. Original CVL preserved; no surrogate implementation invented.

@@ -2,7 +2,7 @@
 
 Original source: `PropertyGPT/certora_projects/rocket_joe` at main SHA `687f654c679ed45ab127b7949e2a29c8f5e491b9`. The complete 8-spec, 15-Solidity-file and original-PDF archive lives in `contracts/24/`. Original report summary is `reports/24.md` and a source Git hash manifest is in `docs/spec_catalog_project_24_sources.md`.
 
-**164 active CVL declarations, 164 target-specific instances; all 164 incomplete owing to historical missing CVL/Solidity harness closure.** Results supported for 54 individually named reported conditions, with other conditions NOT_STATED. No CVL2 migration or formal rerun is claimed.
+**164 active CVL declarations, 164 target-specific instances; all 164 incomplete owing to historical missing CVL/Solidity harness closure.** Results supported for 53 individually named reported conditions, with other conditions NOT_STATED. No CVL2 migration or formal rerun is claimed.
 
 ## Exhaustive source inventory
 

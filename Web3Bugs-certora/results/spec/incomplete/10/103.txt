@@ -1,0 +1,1 @@
+Incomplete: tokenMovementCorrectness for historical HMooniswap. Historical Solidity implementation HMooniswap.sol is absent; the historical script is also absent. Do not replace with modern contracts.

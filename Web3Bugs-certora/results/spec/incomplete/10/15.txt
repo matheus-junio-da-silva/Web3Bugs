@@ -1,0 +1,12 @@
+INCOMPLETE DEPENDENCY
+
+Property: startStateCleanup
+Original CVL: contracts/10/specs/proxy.spec:357-366
+Run target: ProxyHarness (specs/scripts/proxy.sh)
+
+Missing required symbol:
+`stack_slot` is referenced by `ProxyHarness.getStackLengthSlot()` at `contracts/10/specs/harnesses/ProxyHarness.sol:13-17` but is not declared in `contracts/10/contracts/Storage.sol`, `contracts/10/contracts/Proxy.sol`, or the harness.
+
+Searched: contracts/10/contracts/Proxy.sol; contracts/10/contracts/Storage.sol; contracts/10/specs/harnesses/ProxyHarness.sol; contracts/10/specs/scripts/proxy.sh; contracts/10/specs/scripts/applyHarnesses.sh.
+The historical rule and available dependencies have not been rewritten or filled using another project.
+This is a missing snapshot dependency, not a CVL1/CVL2 compatibility assessment.

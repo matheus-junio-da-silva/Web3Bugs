@@ -1,0 +1,6 @@
+Project 18 / example 164 / doneCheck
+Status: incomplete
+Target: TimelockController
+Missing historical dependency/evidence:
+- Private/internal TimelockController selector(s) _DONE_TIMESTAMP require original exposure or linking not present as an executable harness.
+No replacement modern contract or guessed harness may be silently inserted.

@@ -1,0 +1,6 @@
+Project 18 / example 82 / underTotalAndContractBalanceOfCorrelation
+Status: incomplete
+Target: ERC20Wrapper (historical underlying-token harness)
+Missing historical dependency/evidence:
+- Historical underlying-token abstraction includes underlyingTotalSupply/underlyingBalanceOf and _recover methods not established in the retained wrapper/mock ABI.
+No replacement modern contract or guessed harness may be silently inserted.

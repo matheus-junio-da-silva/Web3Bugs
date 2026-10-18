@@ -1,0 +1,7 @@
+Project 18 / example 132 / deadlineNeverReduced
+Status: incomplete
+Target: GovernorPreventLateQuorumHarness
+Missing historical dependency/evidence:
+- Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.
+- Report pp. 10–11 names GovernorPreventLateQuorumHarness, overridden _castVote, latestCastVoteCall, getter wrappers, and stubbed _execute; these exact historical modifications are absent.
+No replacement modern contract or guessed harness may be silently inserted.

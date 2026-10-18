@@ -1,0 +1,2 @@
+Missing historical dependency: Splits2.spec::cannotFrontRunSplitThreeSameUsers
+Distinct Splits2.spec uses absent generated CVT wrappers and receiver-array getters for internal Splits.sol functions. Its similarly named rules do NOT inherit formal results from Splits.spec, and public DripsHub.split is not the missing target.

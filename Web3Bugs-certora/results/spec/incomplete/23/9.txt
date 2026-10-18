@@ -1,0 +1,2 @@
+Missing historical dependency: DripsHub.spec::receiverCannotLoseMoney
+Original using DripsHubHarness as DH requires missing DripsHubHarness.sol; symbolic getDripsReceiverLocalArr, getRelevantStateVars and helperUpdateReceiverStates require its CVT wrappers. Production DripsHub.sol does not implement DH, and the historical external-library source/run configuration is not present.

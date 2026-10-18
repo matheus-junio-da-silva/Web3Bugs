@@ -49,9 +49,13 @@ The source/report relation is notably non-bijective: ReserveConfiguration's repo
 
 The report describes critical health-factor, high isolation-collateral and EMode price-feed, medium EMode liquidation-bonus and aToken-interest-rate, low reserve-list duplication, and recommendation-level isolation-mode behavior. These describe verification/audit work outside the exact active CVL rule set supplied here. No unsupported individual finding or result is invented for the 74 active rules. Finding labels are not substituted for property labels.
 
-## Reproduction and validation status
+## Situação atual da reprodução e da validação (18 de outubro de 2026)
 
-**BLOCKED:** the GitHub connector's UTF-8-only reader cannot fetch the PDF's binary bytes; the remote Desktop Commander computer is offline, and the local container cannot resolve GitHub. Hence the source PDF and a faithful PDF-to-Markdown report transcription are not available through this session; the real `python scripts/check_specs.py .`, `python scripts/check_contests_csv.py .`, `python scripts/check_contracts.py .`, and `git diff --check` were **not executed**. These must not be reported as PASS; an independent checkout with those utilities is required before merge. The present semantic inventory and source-specific audit do not replace them. This PR, if opened, is subject to remediation of the report/validation blockers.
+**O bloqueio de obtenção do PDF e de execução dos validadores foi resolvido.** O PDF integral está preservado em `resources/7/AaveV3Jan2022-1.pdf`, com Git blob `4e2907f9830c990c08e71a7dbe222696f4f8d150`, e a transcrição em `reports/7.md` declara explicitamente a normalização da notação matemática e suas limitações.
+
+Em checkout Git legítimo da HEAD `40725d90c0e5e7b73992b6cb8414359af6815e84`, com `origin/main = 4a1bea89d88aa3b6aa165e8d81b8dd523c7afb82`, os três validadores Python oficiais e `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD` tiveram **código de saída 0**, sem erros. O CI correspondente, execução GitHub Actions `39142310800`, concluiu `integrity_validation` com sucesso; esse workflow roda `check_contests_csv`, `check_contracts` e `check_git`, **não** `check_specs.py`, que foi executado separadamente no checkout autorizado.
+
+Esses comandos atestam **consistência estrutural e whitespace**, não um novo `certoraRun`. As 46 classificações `complete` refletem dependências estáticas disponíveis no snapshot PropertyGPT; 28 `incomplete` identificam auxiliares ou harnesses indisponíveis. A equivalência do snapshot posterior com o commit historicamente verificado `a87d546` **não foi demonstrada**, e nenhum resultado `VERIFIED` deve ser interpretado como nova prova do código atual.
 
 ## Individual semantic second audit
 
@@ -147,31 +151,26 @@ Columns explicitly record (a) false assertion/counterexample, (b) label, (c) nor
 - Historical source context: `aave/aave-v3-core@a87d546` contains `specs/harness/UserConfigurationHarness.sol`, `StableDebtTokenHarness.sol`, `PoolHarnessForVariableDebtToken.sol` and historical CLI scripts. These are **not** silently copied into the PropertyGPT snapshot or used to declare in-snapshot completeness.
 - Findings in `results/bugs.csv` are report-level findings. **None is spuriously equated to the one active Pool rule or the other source properties.** Detection Outcome remains a separate column.
 
-### Validation not yet evidenced
+### Registro da validação efetivamente executada — 2026-10-18
 
-The GitHub connector permits exact Git blob/tree verification and structural CSV checks but does not provide a live checkout/terminal. The authorized Desktop Commander target is offline, and the local execution environment has no GitHub DNS connectivity. Consequently the following remain **NOT RUN**, not PASS:
+A ausência de terminal relatada na revisão preliminar de 16/out **não é mais um bloqueio vigente**. Logs reais do checkout Git em `40725d90c0e5e7b73992b6cb8414359af6815e84`:
 
-```bash
-python scripts/check_specs.py .
-python scripts/check_contests_csv.py .
-python scripts/check_contracts.py .
-git diff --check
-```
+| Comando | Exit code | Evidência |
+| --- | ---: | --- |
+| `python3 scripts/check_specs.py .` | 0 | 238 exemplos e 243 relações de Bug Label consistentes |
+| `python3 scripts/check_contests_csv.py .` | 0 | Índice de contests consistente com reports |
+| `python3 scripts/check_contracts.py .` | 0 | Árvore contracts consistente com reports |
+| `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD` | 0 | Sem diagnóstico de whitespace |
 
-The PR must remain draft until the orquestrator has reviewed actual script logs and confirmed any remaining semantic/target issues. Git object and CSV checks are not substitutes for CVL2 compilation or historical Certora reproduction.
+A comparação literal com os arquivos PropertyGPT também confirmou 74/74 corpos CVL e 233/233 intervalos Solidity originais. A exceção Git de whitespace é restrita aos arquivos CVL do Project 7, preservando seus bytes históricos.
 
+### Auditorias remotas preliminares de 2026-10-16 (histórico superado)
 
-### Remote checks performed after re-extraction
-
-- **PASS (remote literal-source comparison only):** All **74/74** extracted CVL property bodies match the text of their active source `rule` or `invariant` in the six PropertyGPT spec files. Comparison used GitHub's PR changed-file patches and original spec text, not execution of a prover.
-- **PASS (remote Git-tree consistency only):** 74 Project-7 index rows reference all 250 expected files (46×3 complete files plus 28×4 incomplete files), with zero missing/orphan Project-7 example files. Original contract and spec source trees are byte-identical to PropertyGPT, and the report PDF blob matches its source SHA.
-- **PASS (remote permitted-path check only):** All 390 currently changed PR file paths fall under the Project-7 source/spec/resource/report/documentation paths or the three explicitly permitted shared CSV indexes.
-- **WARNING (not an executed `git diff --check`):** GitHub's diff adds lines containing trailing whitespace in **49 files**, of which 6 are original historical source specs and 43 are literal extracted CVL specs. The user-required historical byte-preservation forbids silently stripping those original whitespaces. Standard `git diff --check` may fail; its actual return code is not known because no shell execution environment is available.
-- **NOT RUN:** All three official Python scripts and `git diff --check`, for reasons detailed above. Do not present the remote checks as a validator PASS.
+A revisão inicial verificou a contagem de 74 propriedades, a integridade das árvores históricas e a presença de 250 arquivos de exemplo, mas não dispunha de um checkout executável naquele momento. **Essa ressalva temporal foi superada** pelos quatro comandos reais descritos acima. A preservação de espaços finais e da indentação histórica foi resolvida por `.gitattributes` restrito aos `.spec` do Project 7; os arquivos-fonte originais não foram alterados.
 
 ## Historical results re-attribution (2026-10-17)
 
-The original 31 reported VERIFIED matches were individually checked against the actual CVL assertion and the January 2022 report's verification-condition statement. Nine source properties were **downgraded** because their assertion is stronger, differently guarded or not identical to the reported condition:
+The original 31 reported VERIFIED matches were individually checked against the actual CVL assertion and the January 2022 report's verification-condition statement. Na primeira etapa, nove source properties foram **downgraded** porque sua assertion is stronger, differently guarded or not identical to the reported condition:
 
 - Example **5** — The source checks scaled supply deltas, positivity, and underlying-balance change under a 7×ray ghost. The report's AToken mint condition checks approximate beneficiary balance increase; it is not an exact one-to-one result.
 - Example **7** — The source adds a from==to branch and stronger constraints on underlying balances; the historical AToken transfer condition does not state the entire same rule.
@@ -313,3 +312,33 @@ O ZIP contém um checkout Git real (diretório `.git`, histórico e refs). Ele a
 As declarações `methods` de cada extrato foram comparadas às originais: **zero declarações de método ausentes das seis specs originais**. Mantêm-se 46 exemplos com fechamento estático das dependências presentes e 28 incompletos, cujos helpers, wrappers, ghosts, imports ou harnesses faltantes são explicados individualmente nos arquivos `.txt`. As **233 regiões** de Solidity foram confrontadas previamente com seus intervalos de origem sem diferenças textuais. Os 74 `.md` agora relacionam explicitamente a operação/leitura Solidity com o predicado CVL e sua condição de falsificação. O status não representa compilação da CVL ou replay do Prover.
 
 Os **18 resultados VERIFIED remanescentes** foram rechecados contra as seções individuais do PDF de oito páginas: AToken (IDs 3, 4, 8, 11, 12), StableDebtToken (34, 35, 38, 39, 43), UserConfiguration (52, 56, 57) e VariableDebtToken (61, 62, 64, 70, 71). São correlações de condições de prova descritas no relatório, não equivalência de targets. As 56 propriedades não individualmente comprovadas continuam NOT_STATED. O PDF refere-se ao commit `a87d546`, diferente do snapshot PropertyGPT, e suas condições agregadas para Pool/ReserveConfiguration não foram propagadas.
+
+
+## Matriz final das 18 correspondências históricas — 2026-10-18
+
+Cada referência abaixo identifica a **condição numerada e identificável no relatório de janeiro de 2022** (não uma simples semelhança no nome da regra). As 56 outras regras continuam `NOT_STATED`. O valor `VERIFIED` é **estritamente histórico**, condicionado ao commit `a87d546`, às assumptions e ao target/harness do relatório; não constitui validação formal adicional do snapshot PropertyGPT.
+
+| ID | Condição formal do relatório | Âmbito da assertion |
+| ---: | --- | --- |
+| 3 | AToken §4 (mint zero) | A chamada com amount zero deve reverter |
+| 4 | AToken §1 | Uma operação altera no máximo dois dos três saldos distintos |
+| 8 | AToken §5 | Aditividade aproximada da transferência sob guarda dos endereços e tolerância 3ε |
+| 11 | AToken §8 | Burn não altera saldo/dados de outro usuário sob as desigualdades do relatório |
+| 12 | AToken §9 | Mint preserva saldo/dados de outro usuário |
+| 34 | StableDebtToken §6 | Integrity of burn |
+| 35 | StableDebtToken §5 | Integrity of mint |
+| 38 | StableDebtToken §4 | Aditividade da queima |
+| 39 | StableDebtToken §7 | Invertibilidade de mint e burn |
+| 43 | StableDebtToken §2 | No máximo um saldo de usuário alterado por uma operação |
+| 52 | UserConfiguration §4 | Equivalência de getters de collateral e borrowing |
+| 56 | UserConfiguration §3 | isBorrowing(index) implica isBorrowingAny |
+| 57 | UserConfiguration §1 | isEmpty implica ausência de borrowing/collateral |
+| 61 | VariableDebtToken §3 | Só Pool por mint/burn pode modificar totalSupply |
+| 62 | VariableDebtToken §1 | No máximo um saldo alterado por uma operação |
+| 64 | VariableDebtToken §4 | Mint e burn inversos |
+| 70 | VariableDebtToken §9 | Burn de zero mantém o saldo |
+| 71 | VariableDebtToken §7 | Burn preserva saldo de outro usuário |
+
+Os IDs 11, 12, 52, 56 e 57 permanecem **incomplete** no snapshot, embora tenham uma condição histórica reconhecível no relatório; isso é coerente porque a correspondência histórica e a disponibilidade do harness local são dimensões independentes. Os outros 13 resultados VERIFIED pertencem a exemplos estaticamente complete. As 13 atribuições iniciais retiradas anteriormente **não foram restauradas**. Nenhum dos 20 setters de ReserveConfiguration nem a única regra ativa de Pool recebeu o resultado agregado do relatório.
+
+**Limites de interpretação:** (1) algumas equivalências requerem aproximações, guards ou summaries da própria CVL, (2) o reportado `✔` depende das simplificações — juros unitários, hash abstrato determinístico, loop unrolling, controle de efeitos externos e ausência de incentives controller —, (3) a documentação em `N.md` conserva os predicados de falsificação exatos, sem ampliar a garantia, e (4) `reports/7.md` é uma transcrição matemática normalizada cujo original byte a byte de oito páginas está preservado em PDF.

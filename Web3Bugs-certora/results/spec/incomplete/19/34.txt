@@ -1,0 +1,8 @@
+Incomplete source dependency closure for privilegedOperation (PrivilegedVault.spec, VaultCore):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.

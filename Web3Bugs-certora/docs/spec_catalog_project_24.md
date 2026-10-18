@@ -1,8 +1,18 @@
 # Rocket Joe — Project 24 CVL catalog
 
-Original source: `PropertyGPT/certora_projects/rocket_joe` at main SHA `687f654c679ed45ab127b7949e2a29c8f5e491b9`. The complete 8-spec, 15-Solidity-file and original-PDF archive lives in `contracts/24/`. Original report summary is `reports/24.md` and a source Git hash manifest is in `docs/spec_catalog_project_24_sources.md`.
+Original source: `PropertyGPT/certora_projects/rocket_joe` at main SHA `687f654c679ed45ab127b7949e2a29c8f5e491b9`. The complete 8-spec, 15-Solidity-file and original-PDF archive lives in `contracts/24/`. Correct report provenance and summary are in `reports/24.md` and a source Git hash manifest is in `docs/spec_catalog_project_24_sources.md`.
 
-**164 active CVL declarations, 164 target-specific instances; all 164 incomplete owing to historical missing CVL/Solidity harness closure.** Results supported for 53 individually named reported conditions, with other conditions NOT_STATED. No CVL2 migration or formal rerun is claimed.
+**164 active CVL declarations, 164 target-specific instances; all 164 incomplete owing to historical missing CVL/Solidity harness closure.** All 164 source-instance results are NOT_STATED until exact audited-version and harness/formula equivalence can be demonstrated; the 53 previous VERIFIED attributions have been conservatively withdrawn. No CVL2 migration or formal rerun is claimed.
+
+## Official report / original archive mismatch
+
+The original archived contracts/24/final-report-3.pdf is a **34-page OpenZeppelin report**, not Rocket Joe. Its SHA-256 is 902081d47617e0b05a6fb1441ec5c6a10ac26f557767ce96cdfef3075fad835b; it remains byte-preserved in contracts/24 as a historically incorrect upstream input. The actual Certora **Formal Verification Report for Rocket Joe** (21 pages; SHA-256 f223d83ad55ec79376126a18219c0f417b732fea7d53cf4a743738840cdd43b4) is now in [resources/24/Certora_Formal_Verification_Report_Rocket_Joe.pdf](../resources/24/Certora_Formal_Verification_Report_Rocket_Joe.pdf) and is available at https://certora.cdn.prismic.io/certora/3b96d4be-611f-488e-92dc-89d44f4c8669_TraderJoe.pdf.
+
+The report audits commit [ef2ef30248661b5509c52ab30af9bd0fc07f6657](https://github.com/lfj-gg/rocket-joe/commit/ef2ef30248661b5509c52ab30af9bd0fc07f6657), not precisely the Solidity present in PropertyGPT snapshot 687f654c679ed45ab127b7949e2a29c8f5e491b9. The LaunchEvent and RocketJoeStaking implementations contain version differences, as shown by source-line diffs in [provenance](spec_catalog_project_24_provenance.md).
+
+The report contains published checked verification conditions, but **none is demonstrated to cover the exact archived source version and original harness/assumption set**. Therefore the 53 previously attributed VERIFIED outcomes were changed to NOT_STATED **for this catalog snapshot**. That does not contradict or replace Certora's historical findings about its audited setup. Individual technical Bug Labels are retained independently of these outcomes.
+
+The 164-instance [evidence matrix](spec_catalog_project_24_evidence_matrix.csv) includes original CVL, historical PDF page and formula preview (when named), hypothetical counterexamples, Solidity excerpts, technical intent, Bug Label, formal result, and detection-outcome decision.
 
 ## Exhaustive source inventory
 
@@ -25,16 +35,16 @@ Original source: `PropertyGPT/certora_projects/rocket_joe` at main SHA `687f654c
 
 | Example | Spec | Name | Kind | Label | Result |
 |---:|---|---|---|---|---|
-| 1 | `LEHighLevel.spec` | `hl_EqualityOfToken` | invariant | S6-4 | VERIFIED |
+| 1 | `LEHighLevel.spec` | `hl_EqualityOfToken` | invariant | S6-4 | NOT_STATED |
 | 2 | `LEHighLevel.spec` | `hl_depositAdditivity` | rule | S6-4 | NOT_STATED |
-| 3 | `LEHighLevel.spec` | `hl_withdrawAdditivity` | rule | S6-4 | VERIFIED |
-| 4 | `LEHighLevel.spec` | `hl_twoSideInverse` | rule | SE-1 | VERIFIED |
+| 3 | `LEHighLevel.spec` | `hl_withdrawAdditivity` | rule | S6-4 | NOT_STATED |
+| 4 | `LEHighLevel.spec` | `hl_twoSideInverse` | rule | SE-1 | NOT_STATED |
 | 5 | `LEHighLevel.spec` | `hl_noDepositFrontRun` | rule | S6-4 | NOT_STATED |
-| 6 | `LEHighLevel.spec` | `hl_noWithdrawFrontRun` | rule | S6-4 | VERIFIED |
+| 6 | `LEHighLevel.spec` | `hl_noWithdrawFrontRun` | rule | S6-4 | NOT_STATED |
 | 7 | `LEHighLevel.spec` | `hl_noWithdrawLiquidityFrontRun` | rule | S6-4 | NOT_STATED |
-| 8 | `LEHighLevel.spec` | `hl_stoppedOnlySwitch` | rule | S3-2 | VERIFIED |
-| 9 | `LEHighLevel.spec` | `hl_onlyOwnerSwitch` | rule | S5-3 | VERIFIED |
-| 10 | `LEHighLevel.spec` | `hl_whatShouldRevert` | rule | S5-2 | VERIFIED |
+| 8 | `LEHighLevel.spec` | `hl_stoppedOnlySwitch` | rule | S3-2 | NOT_STATED |
+| 9 | `LEHighLevel.spec` | `hl_onlyOwnerSwitch` | rule | S5-3 | NOT_STATED |
+| 10 | `LEHighLevel.spec` | `hl_whatShouldRevert` | rule | S5-2 | NOT_STATED |
 | 11 | `LEInProgress.spec` | `transition_balThisZero` | rule | S6-4 | NOT_STATED |
 | 12 | `LEInProgress.spec` | `hl_moreDepositMoreGet` | rule | UNMAPPED | NOT_STATED |
 | 13 | `LEInProgress.spec` | `hl_withdrawLateMorePenalty` | rule | UNMAPPED | NOT_STATED |
@@ -42,38 +52,38 @@ Original source: `PropertyGPT/certora_projects/rocket_joe` at main SHA `687f654c
 | 15 | `LEValidStates.spec` | `alwaysInitialized` | invariant | S3-2 | NOT_STATED |
 | 16 | `LEValidStates.spec` | `factoryGetPairCorrelationCurrentVals` | invariant | S6-4 | NOT_STATED |
 | 17 | `LEValidStates.spec` | `cl_pairAndGetPairCorrelation` | invariant | S6-4 | NOT_STATED |
-| 18 | `LEValidStates.spec` | `al_issuerAllocationZero` | invariant | S6-4 | VERIFIED |
-| 19 | `LEValidStates.spec` | `al_balanceLessThanAllocation` | invariant | S6-4 | VERIFIED |
-| 20 | `LEValidStates.spec` | `al_userAllocationLessThanMaxAllocation` | invariant | S6-4 | VERIFIED |
-| 21 | `LEValidStates.spec` | `al_issuerTimelockNonZero` | invariant | S6-4 | VERIFIED |
-| 22 | `LEValidStates.spec` | `al_userTimelockSeven` | invariant | S6-4 | VERIFIED |
-| 23 | `LEValidStates.spec` | `al_timelocksCorrelation` | invariant | S6-4 | VERIFIED |
-| 24 | `LEValidStates.spec` | `op_incentivesCorrelation` | invariant | S6-4 | VERIFIED |
-| 25 | `LEValidStates.spec` | `op_userNotWithdrawnPair` | invariant | S6-4 | VERIFIED |
-| 26 | `LEValidStates.spec` | `op_userNotWithdrawnIncentives` | invariant | S6-4 | VERIFIED |
-| 27 | `LEValidStates.spec` | `op_wavaxBalanceAndSumBalances` | invariant | S6-4 | VERIFIED |
-| 28 | `LEValidStates.spec` | `op_avaxAllocZero` | invariant | S6-4 | VERIFIED |
-| 29 | `LEValidStates.spec` | `op_lpSupplyZero` | invariant | S6-4 | VERIFIED |
-| 30 | `LEValidStates.spec` | `op_PairBalanceIsZero` | invariant | S6-4 | VERIFIED |
-| 31 | `LEValidStates.spec` | `op_PairAndTotalSupplyCorrelation` | invariant | S6-4 | VERIFIED |
-| 32 | `LEValidStates.spec` | `op_AvaxCorrelation` | invariant | S6-4 | VERIFIED |
-| 33 | `LEValidStates.spec` | `op_tokenCorrelation` | invariant | S6-4 | VERIFIED |
-| 34 | `LEValidStates.spec` | `op_tokenResFixed` | rule | S6-4 | VERIFIED |
-| 35 | `LEValidStates.spec` | `cl_avaxAllocSumUserBalances` | invariant | S6-4 | VERIFIED |
-| 36 | `LEValidStates.spec` | `cl_avaxReservCheck` | invariant | S6-4 | VERIFIED |
-| 37 | `LEValidStates.spec` | `cl_incentivesCorrelation` | invariant | S6-4 | VERIFIED |
-| 38 | `LEValidStates.spec` | `cl_userAllocUnchanging` | rule | S6-4 | VERIFIED |
-| 39 | `LEValidStates.spec` | `cl_avaxAllocUnchanging` | rule | UNMAPPED | VERIFIED |
-| 40 | `LEValidStates.spec` | `cl_userBalanceFixed` | rule | S6-4 | VERIFIED |
-| 41 | `LEValidStates.spec` | `cl_lpSupplyFixed` | rule | S6-4 | VERIFIED |
-| 42 | `LEValidStates.spec` | `cl_AvaxCorrelation` | invariant | S6-4 | VERIFIED |
-| 43 | `LEValidStates.spec` | `os_tokenCorrelation` | invariant | S6-4 | VERIFIED |
-| 44 | `LEValidStates.spec` | `os_avaxAllocSumUserBalances` | invariant | S6-4 | VERIFIED |
-| 45 | `LEValidStates.spec` | `os_avaxReserveDecrease` | rule | S6-4 | VERIFIED |
-| 46 | `LEValidStates.spec` | `os_userBalanceNonIncreasing` | rule | S6-4 | VERIFIED |
-| 47 | `LEValidStates.spec` | `cs_lpSupplyFixed` | rule | S6-4 | VERIFIED |
-| 48 | `LEValidStates.spec` | `cs_userBalanceFixed` | rule | S6-4 | VERIFIED |
-| 49 | `LEValidStates.spec` | `cs_avaxAllocatedFixed` | rule | S3-2 | VERIFIED |
+| 18 | `LEValidStates.spec` | `al_issuerAllocationZero` | invariant | S6-4 | NOT_STATED |
+| 19 | `LEValidStates.spec` | `al_balanceLessThanAllocation` | invariant | S6-4 | NOT_STATED |
+| 20 | `LEValidStates.spec` | `al_userAllocationLessThanMaxAllocation` | invariant | S6-4 | NOT_STATED |
+| 21 | `LEValidStates.spec` | `al_issuerTimelockNonZero` | invariant | S6-4 | NOT_STATED |
+| 22 | `LEValidStates.spec` | `al_userTimelockSeven` | invariant | S6-4 | NOT_STATED |
+| 23 | `LEValidStates.spec` | `al_timelocksCorrelation` | invariant | S6-4 | NOT_STATED |
+| 24 | `LEValidStates.spec` | `op_incentivesCorrelation` | invariant | S6-4 | NOT_STATED |
+| 25 | `LEValidStates.spec` | `op_userNotWithdrawnPair` | invariant | S6-4 | NOT_STATED |
+| 26 | `LEValidStates.spec` | `op_userNotWithdrawnIncentives` | invariant | S6-4 | NOT_STATED |
+| 27 | `LEValidStates.spec` | `op_wavaxBalanceAndSumBalances` | invariant | S6-4 | NOT_STATED |
+| 28 | `LEValidStates.spec` | `op_avaxAllocZero` | invariant | S6-4 | NOT_STATED |
+| 29 | `LEValidStates.spec` | `op_lpSupplyZero` | invariant | S6-4 | NOT_STATED |
+| 30 | `LEValidStates.spec` | `op_PairBalanceIsZero` | invariant | S6-4 | NOT_STATED |
+| 31 | `LEValidStates.spec` | `op_PairAndTotalSupplyCorrelation` | invariant | S6-4 | NOT_STATED |
+| 32 | `LEValidStates.spec` | `op_AvaxCorrelation` | invariant | S6-4 | NOT_STATED |
+| 33 | `LEValidStates.spec` | `op_tokenCorrelation` | invariant | S6-4 | NOT_STATED |
+| 34 | `LEValidStates.spec` | `op_tokenResFixed` | rule | S6-4 | NOT_STATED |
+| 35 | `LEValidStates.spec` | `cl_avaxAllocSumUserBalances` | invariant | S6-4 | NOT_STATED |
+| 36 | `LEValidStates.spec` | `cl_avaxReservCheck` | invariant | S6-4 | NOT_STATED |
+| 37 | `LEValidStates.spec` | `cl_incentivesCorrelation` | invariant | S6-4 | NOT_STATED |
+| 38 | `LEValidStates.spec` | `cl_userAllocUnchanging` | rule | S6-4 | NOT_STATED |
+| 39 | `LEValidStates.spec` | `cl_avaxAllocUnchanging` | rule | UNMAPPED | NOT_STATED |
+| 40 | `LEValidStates.spec` | `cl_userBalanceFixed` | rule | S6-4 | NOT_STATED |
+| 41 | `LEValidStates.spec` | `cl_lpSupplyFixed` | rule | S6-4 | NOT_STATED |
+| 42 | `LEValidStates.spec` | `cl_AvaxCorrelation` | invariant | S6-4 | NOT_STATED |
+| 43 | `LEValidStates.spec` | `os_tokenCorrelation` | invariant | S6-4 | NOT_STATED |
+| 44 | `LEValidStates.spec` | `os_avaxAllocSumUserBalances` | invariant | S6-4 | NOT_STATED |
+| 45 | `LEValidStates.spec` | `os_avaxReserveDecrease` | rule | S6-4 | NOT_STATED |
+| 46 | `LEValidStates.spec` | `os_userBalanceNonIncreasing` | rule | S6-4 | NOT_STATED |
+| 47 | `LEValidStates.spec` | `cs_lpSupplyFixed` | rule | S6-4 | NOT_STATED |
+| 48 | `LEValidStates.spec` | `cs_userBalanceFixed` | rule | S6-4 | NOT_STATED |
+| 49 | `LEValidStates.spec` | `cs_avaxAllocatedFixed` | rule | S3-2 | NOT_STATED |
 | 50 | `LEVarTran.spec` | `al_userAllocationNonDecreasing` | rule | S6-4 | NOT_STATED |
 | 51 | `LEVarTran.spec` | `al_stoppedOnlyByOwner` | rule | S5-3 | NOT_STATED |
 | 52 | `LEVarTran.spec` | `op_balanceChangeByDepositOrWithdraw` | rule | S6-4 | NOT_STATED |
@@ -172,22 +182,22 @@ Original source: `PropertyGPT/certora_projects/rocket_joe` at main SHA `687f654c
 | 145 | `Staking.spec` | `is_initialized` | invariant | S6-4 | NOT_STATED |
 | 146 | `Staking.spec` | `not_initializing` | invariant | UNMAPPED | NOT_STATED |
 | 147 | `Staking.spec` | `balanceOf_Joe_eq_totalJoeStaked` | invariant | S6-4 | NOT_STATED |
-| 148 | `Staking.spec` | `user_balances_less_than_totalJoeStaked` | invariant | S6-4 | VERIFIED |
-| 149 | `Staking.spec` | `userInfo_amount_safe_mutate` | rule | S6-4 | VERIFIED |
+| 148 | `Staking.spec` | `user_balances_less_than_totalJoeStaked` | invariant | S6-4 | NOT_STATED |
+| 149 | `Staking.spec` | `userInfo_amount_safe_mutate` | rule | S6-4 | NOT_STATED |
 | 150 | `Staking.spec` | `RJPS_only_owner_and_function` | rule | S5-3 | NOT_STATED |
 | 151 | `Staking.spec` | `pending_reward_decreased_only_user` | rule | S6-4 | NOT_STATED |
-| 152 | `Staking.spec` | `staking_non_trivial_rJoe` | rule | UNMAPPED | VERIFIED |
-| 153 | `Staking.spec` | `staking_trivial_on_zero_time` | rule | S6-4 | VERIFIED |
-| 154 | `Staking.spec` | `longer_stake_greater_return` | rule | UNMAPPED | VERIFIED |
-| 155 | `Staking.spec` | `deposit_no_frontrunning` | rule | SE-1 | VERIFIED |
-| 156 | `Staking.spec` | `withdraw_no_frontrunning` | rule | SE-1 | VERIFIED |
-| 157 | `Staking.spec` | `additivity_withdraw` | rule | SE-1 | VERIFIED |
-| 158 | `Staking.spec` | `additivity_deposit` | rule | SE-1 | VERIFIED |
-| 159 | `Staking.spec` | `verify_deposit` | rule | S6-4 | VERIFIED |
-| 160 | `Staking.spec` | `verify_withdraw` | rule | S6-4 | VERIFIED |
-| 161 | `Staking.spec` | `verify_updateEmissionRate` | rule | UNMAPPED | VERIFIED |
-| 162 | `Staking.spec` | `updatePool_contained` | rule | S6-4 | VERIFIED |
-| 163 | `Staking.spec` | `verify_emergencyWithdraw` | rule | S5-2 | VERIFIED |
+| 152 | `Staking.spec` | `staking_non_trivial_rJoe` | rule | UNMAPPED | NOT_STATED |
+| 153 | `Staking.spec` | `staking_trivial_on_zero_time` | rule | S6-4 | NOT_STATED |
+| 154 | `Staking.spec` | `longer_stake_greater_return` | rule | UNMAPPED | NOT_STATED |
+| 155 | `Staking.spec` | `deposit_no_frontrunning` | rule | SE-1 | NOT_STATED |
+| 156 | `Staking.spec` | `withdraw_no_frontrunning` | rule | SE-1 | NOT_STATED |
+| 157 | `Staking.spec` | `additivity_withdraw` | rule | SE-1 | NOT_STATED |
+| 158 | `Staking.spec` | `additivity_deposit` | rule | SE-1 | NOT_STATED |
+| 159 | `Staking.spec` | `verify_deposit` | rule | S6-4 | NOT_STATED |
+| 160 | `Staking.spec` | `verify_withdraw` | rule | S6-4 | NOT_STATED |
+| 161 | `Staking.spec` | `verify_updateEmissionRate` | rule | UNMAPPED | NOT_STATED |
+| 162 | `Staking.spec` | `updatePool_contained` | rule | S6-4 | NOT_STATED |
+| 163 | `Staking.spec` | `verify_emergencyWithdraw` | rule | S5-2 | NOT_STATED |
 | 164 | `sanity.spec` | `sanity` | rule | UNMAPPED | NOT_STATED |
 
 Each `N.md` independently gives the asserted expression, identified storage, Solidity operations, falsifying counterexample, classification, report attribution, and modeling limitations. The official validators must be run against the exact published HEAD; generation alone does not constitute validation.

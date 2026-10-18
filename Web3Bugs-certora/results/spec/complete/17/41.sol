@@ -4,4 +4,3 @@
     function repayBehalf(address borrower) public payable {
         return repayBehalfExplicit(borrower, cEther);
     }
-

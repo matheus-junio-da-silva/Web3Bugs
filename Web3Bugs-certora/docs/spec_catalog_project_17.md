@@ -8,7 +8,7 @@ Historical report gives aggregate assurances; source blocks are never treated as
 
 ## Per-property reconstruction
 
-Distribution: {'incomplete': 27, 'complete': 14}. Historical outcomes: {'NOT_STATED': 32, 'VERIFIED': 9}.
+Distribution: {'incomplete': 10, 'complete': 31}. Historical outcomes: {'NOT_STATED': 32, 'VERIFIED': 9}.
 
 
 | # | CVL declaration | Property | Status | Label | Result | Provenance/dependency note |
@@ -34,23 +34,23 @@ Distribution: {'incomplete': 27, 'complete': 14}. Historical outcomes: {'NOT_STA
 | 19 | general.cvl:46-87 | _acceptAdmin | complete | S5-3 | NOT_STATED | All called method selectors located in project snapshot |
 | 20 | general.cvl:90-126 | invariantRequireAdminToChangeAdmin | complete | S5-3 | NOT_STATED | All called method selectors located in project snapshot |
 | 21 | general.cvl:128-167 | _setComptroller | complete | S5-3 | NOT_STATED | All called method selectors located in project snapshot |
-| 22 | frame.cvl:70-85 | frame_balanceOf | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 23 | frame.cvl:87-102 | frame_borrowBalanceStored | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 24 | frame.cvl:104-119 | frame_borrowIndex | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 25 | frame.cvl:121-136 | frame_borrowRatePerBlock | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 26 | frame.cvl:138-153 | frame_comptroller | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 27 | frame.cvl:155-170 | frame_exchangeRateStored | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 28 | frame.cvl:172-189 | frame_getAccountSnapshot | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 29 | frame.cvl:191-206 | frame_getCash | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 30 | frame.cvl:208-223 | frame_initialExchangeRateMantissa | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 31 | frame.cvl:225-240 | frame_interestRateModel | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 32 | frame.cvl:242-257 | frame_isCToken | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 33 | frame.cvl:259-274 | frame_pendingAdmin | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 34 | frame.cvl:276-291 | frame_reserveFactorMantissa | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 35 | frame.cvl:293-308 | frame_supplyRatePerBlock | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 36 | frame.cvl:310-325 | frame_totalBorrows | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 37 | frame.cvl:327-342 | frame_totalReserves | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
-| 38 | frame.cvl:344-359 | frame_totalSupply | incomplete | UNMAPPED | NOT_STATED | CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f. |
+| 22 | frame.cvl:70-85 | frame_balanceOf | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 23 | frame.cvl:87-102 | frame_borrowBalanceStored | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 24 | frame.cvl:104-119 | frame_borrowIndex | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 25 | frame.cvl:121-136 | frame_borrowRatePerBlock | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 26 | frame.cvl:138-153 | frame_comptroller | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 27 | frame.cvl:155-170 | frame_exchangeRateStored | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 28 | frame.cvl:172-189 | frame_getAccountSnapshot | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 29 | frame.cvl:191-206 | frame_getCash | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 30 | frame.cvl:208-223 | frame_initialExchangeRateMantissa | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 31 | frame.cvl:225-240 | frame_interestRateModel | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 32 | frame.cvl:242-257 | frame_isCToken | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 33 | frame.cvl:259-274 | frame_pendingAdmin | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 34 | frame.cvl:276-291 | frame_reserveFactorMantissa | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 35 | frame.cvl:293-308 | frame_supplyRatePerBlock | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 36 | frame.cvl:310-325 | frame_totalBorrows | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 37 | frame.cvl:327-342 | frame_totalReserves | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
+| 38 | frame.cvl:344-359 | frame_totalSupply | complete | UNMAPPED | NOT_STATED | All called method selectors located in project snapshot |
 | 39 | eip20.cvl:18-154 | transferFrom | complete | S6-4 | VERIFIED | All called method selectors located in project snapshot |
 | 40 | _setMarketPolicyHook.cvl:7-72 | _setMarketPolicyHook | incomplete | S5-3 | NOT_STATED | The historical _setMarketPolicyHook(address,address) and policyHook field of the asserted market tuple are missing from  |
 | 41 | maximillion.cvl:8-33 | repayBehalf | complete | S6-4 | VERIFIED | All called method selectors located in project snapshot |

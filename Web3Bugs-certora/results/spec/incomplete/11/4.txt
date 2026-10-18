@@ -1,0 +1,18 @@
+INCOMPLETE DEPENDENCY — PROJECT 11, EXAMPLE 4
+Property: assetsLessThanEverDepositedAsRule
+Original rule/invariant: contracts/11/specs/fullyBackedBonding.spec:183-200
+Target hypothesis: FullyBackedBondingHarness (historical run script missing)
+
+Required upstream Solidity sources are absent from the 47-file `contracts/11/` snapshot: `@keep-network/keep-core/contracts/{Authorizations.sol,StakeDelegatable.sol,KeepRegistry.sol}; @keep-network/sortition-pools/contracts/api/IFullyBackedBonding.sol; openzeppelin-solidity/contracts/math/SafeMath.sol`. The project contains `FullyBackedBondingHarness.sol`, but it imports a target that inherits upstream Authorizations/StakeDelegatable and calls external SafeMath. A `methods {}` declaration does not supply missing implementation. No historical Certora run script/.conf or package resolutions is available to verify the exact compiler, linking and summarization settings.
+
+Search locations: original PropertyGPT certora_projects/keep_fully/contracts/ (all contracts/api, fully-backed, test, integration), specs/ and specs/harness/, 47 source files, including inherited base contracts. Relevant harness helper declarations exist, but external @keep-network/keep-core, @keep-network/sortition-pools, and openzeppelin-solidity dependency implementations do not.
+
+This property's extracted CVL hooks depend on `operatorHolderRefToBondID` (`fullyBackedBonding.spec:70-95`). The local harness `registerBondID` (`FullyBackedBondingHarness.sol:48-58`) comments out the mapping writes; production `AbstractBonding.getBondID` (`AbstractBonding.sol:345-353`) uses a keccak256 hash instead. This is a semantic model fidelity warning distinct from the missing upstream imported implementation.
+No CVL2 migration is attempted or cited as a reason for incomplete.
+
+EXACT MISSING-IMPORT SITES AND SYMBOL RESOLUTION
+- `contracts/11/specs/harness/FullyBackedBondingHarness.sol:3-5` imports and inherits `FullyBackedBonding`.
+- `contracts/11/contracts/fully-backed/FullyBackedBonding.sol:19-23` imports absent `Authorizations`, `StakeDelegatable`, `KeepRegistry`, and `IFullyBackedBonding` from `@keep-network` packages; the inherited target names occur at lines 29-33.
+- `contracts/11/contracts/AbstractBonding.sol:19-21` imports absent `KeepRegistry` and OpenZeppelin `SafeMath` (`using SafeMath` at line 26).
+- The exact source rule's references are at the `Original rule/invariant` line range above. Even when an individual getter is locally implemented, the full executable target inherits these omitted Solidity contracts, so the local snapshot is not sufficient to resolve/link its ABI and arbitrary method set.
+- These are missing **third-party Solidity imports**, not missing CVL1-to-CVL2 syntax migrations. Provenance-only upstream source branch contains matching local files but is not copied into this snapshot.

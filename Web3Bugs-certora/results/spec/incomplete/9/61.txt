@@ -1,0 +1,5 @@
+Missing dependency or historical linkage for nonspenderCantReduceBalance in reserve.spec:9-29
+
+specs/harnesses/ReserveHarness.sol imports contracts/stability/Reserve.sol, but this file is absent in the complete project snapshot. Reserve methods isSpender, isExchangeSpender and getExchange cannot be validated against the historical implementation.
+
+Search: contracts/9/contracts (full original snapshot), contracts/9/specs, specs/harnesses and specs/scripts. No cross-project replacement or imagined implementation has been supplied.

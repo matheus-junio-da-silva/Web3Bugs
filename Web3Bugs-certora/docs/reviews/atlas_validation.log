@@ -1,0 +1,50 @@
+# ATLAS historical catalog validation
+# Baseline main: 80f551f23bbd86d7901c6a28e7f44c68aebae8fd
+# Executed UTC: 2026-10-18T22:10:37Z
+# Branch: fix/semantic-p08-p15-p19-atlas
+--- COMMAND: python scripts/check_specs.py .
+bash: line 1: python: command not found
+EXIT_CODE=127
+--- COMMAND: python scripts/check_contests_csv.py .
+bash: line 1: python: command not found
+EXIT_CODE=127
+--- COMMAND: python scripts/check_contracts.py .
+bash: line 1: python: command not found
+EXIT_CODE=127
+--- RETRY WITH python -> python3 (environment alias; no tracked source change)
+# Retried UTC: 2026-10-18T22:10:54Z
+--- COMMAND: python scripts/check_specs.py .
+Check passed! 1222 spec examples and 1227 Bug Label relationships are structurally consistent.
+EXIT_CODE=0
+--- COMMAND: python scripts/check_contests_csv.py .
+Check passed!
+
+	`./results/contests.csv` is consistant with `./reports`
+EXIT_CODE=0
+--- COMMAND: python scripts/check_contracts.py .
+Missing contract code: 18
+Missing contract code: 21
+Missing contract code: 23
+Missing contract code: 20
+Missing contract code: 6
+Missing contract code: 17
+Missing contract code: 5
+Missing contract code: 9
+Missing contract code: 13
+Missing contract code: 14
+Missing contract code: 10
+Missing contract code: 12
+Missing contract code: 3
+Missing contract code: 2
+Missing contract code: 7
+Missing contract code: 4
+Missing contract code: 22
+Missing contract code: 1
+EXIT_CODE=1
+--- RETRY check_contracts with all historical contest sources in sparse checkout
+# Retried UTC: 2026-10-18T22:11:19Z
+--- COMMAND: python scripts/check_contracts.py .
+Check passed!
+
+	`./contracts` is consistant with `./reports`
+EXIT_CODE=0

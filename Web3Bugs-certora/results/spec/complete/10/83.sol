@@ -70,3 +70,34 @@ contract HCurve is HandlerBase {
             )
         {} catch Error(string memory reason) {
             _revertMsg("exchangeUint256", reason);
+
+// Exact original source contracts/10/contracts/handlers/curve/HCurve.sol:111-139
+    function exchangeUnderlying(
+        address handler,
+        address tokenI,
+        address tokenJ,
+        int128 i,
+        int128 j,
+        uint256 amount,
+        uint256 minAmount
+    ) external payable returns (uint256) {
+        (
+            uint256 _amount,
+            uint256 balanceBefore,
+            uint256 ethAmount
+        ) = _exchangeBefore(handler, tokenI, tokenJ, amount);
+        try
+            ICurveHandler(handler).exchange_underlying{value: ethAmount}(
+                i,
+                j,
+                _amount,
+                minAmount
+            )
+        {} catch Error(string memory reason) {
+            _revertMsg("exchangeUnderlying", reason);
+        } catch {
+            _revertMsg("exchangeUnderlying");
+        }
+
+        return _exchangeAfter(handler, tokenI, tokenJ, balanceBefore);
+    }

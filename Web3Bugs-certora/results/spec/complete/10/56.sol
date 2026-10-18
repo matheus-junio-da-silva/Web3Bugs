@@ -70,3 +70,40 @@ contract HFunds is HandlerBase {
                 }
             }
             unchecked {
+
+// Exact original source contracts/10/contracts/handlers/funds/HFunds.sol:120-129
+    function sendToken(
+        address token,
+        uint256 amount,
+        address receiver
+    ) external payable {
+        amount = _getBalance(token, amount);
+        if (amount > 0) {
+            IERC20(token).safeTransfer(receiver, amount);
+        }
+    }
+
+// Exact original source contracts/10/contracts/handlers/funds/HFunds.sol:52-74
+    function sendTokens(
+        address[] calldata tokens,
+        uint256[] calldata amounts,
+        address payable receiver
+    ) external payable {
+        for (uint256 i = 0; i < tokens.length; ) {
+            uint256 amount = _getBalance(tokens[i], amounts[i]);
+            if (amount > 0) {
+                // ETH case
+                if (
+                    tokens[i] == address(0) || tokens[i] == NATIVE_TOKEN_ADDRESS
+                ) {
+                    (bool success, ) = receiver.call{value: amount}("");
+                    _requireMsg(success, "sendTokens", "failed to send Ether");
+                } else {
+                    IERC20(tokens[i]).safeTransfer(receiver, amount);
+                }
+            }
+            unchecked {
+                ++i;
+            }
+        }
+    }

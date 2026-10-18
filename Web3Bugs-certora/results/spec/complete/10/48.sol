@@ -70,3 +70,49 @@ contract HAaveProtocolV2 is HandlerBase, IFlashLoanReceiver {
         address onBehalfOf
     ) external payable returns (uint256 remainDebt) {
         remainDebt = _repay(asset, amount, rateMode, onBehalfOf);
+
+// Exact original source contracts/10/contracts/handlers/aavev2/HAaveProtocolV2.sol:100-143
+    function flashLoan(
+        address[] calldata assets,
+        uint256[] calldata amounts,
+        uint256[] calldata modes,
+        bytes calldata params
+    ) external payable {
+        _requireMsg(
+            assets.length == amounts.length,
+            "flashLoan",
+            "assets and amounts do not match"
+        );
+
+        _requireMsg(
+            assets.length == modes.length,
+            "flashLoan",
+            "assets and modes do not match"
+        );
+
+        address onBehalfOf = _getSender();
+        address pool = ILendingPoolAddressesProviderV2(provider)
+            .getLendingPool();
+
+        try
+            ILendingPoolV2(pool).flashLoan(
+                address(this),
+                assets,
+                amounts,
+                modes,
+                onBehalfOf,
+                params,
+                REFERRAL_CODE
+            )
+        {} catch Error(string memory reason) {
+            _revertMsg("flashLoan", reason);
+        } catch {
+            _revertMsg("flashLoan");
+        }
+
+        // approve lending pool zero
+        for (uint256 i = 0; i < assets.length; i++) {
+            _tokenApproveZero(assets[i], pool);
+            if (modes[i] != 0) _updateToken(assets[i]);
+        }
+    }

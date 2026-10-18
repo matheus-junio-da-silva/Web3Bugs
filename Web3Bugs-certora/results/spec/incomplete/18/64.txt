@@ -1,0 +1,6 @@
+Project 18 / example 64 / letsWatchItBurns
+Status: incomplete
+Target: ERC20FlashMintMock
+Missing historical dependency/evidence:
+- FlashLoan callback/receiver assumptions and mocked _burn summary require an original execution configuration not included with the historical snapshot.
+No replacement modern contract or guessed harness may be silently inserted.

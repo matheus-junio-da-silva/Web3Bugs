@@ -1,0 +1,2 @@
+Missing historical dependency: SlotTester.spec::whoChangedBalanceOfToken
+The snapshot does not include SlotTester target or getters getPausedSlot and get_storageSlot in the specified test environment. Managed.pausedSlot and DripsHub._storageSlot are contextual implementations, not a replacement for a missing slot harness.

@@ -1,0 +1,6 @@
+Project 18 / example 61 / total_supply_is_sum_of_balances
+Status: incomplete
+Target: ERC1155Supply (historical verification harness)
+Missing historical dependency/evidence:
+- Report p. 9 requires exists_wrapper, owner-only mint/burn harness and ghost/hook analysis; the exact original harness with wrapper and owner restriction is unavailable.
+No replacement modern contract or guessed harness may be silently inserted.

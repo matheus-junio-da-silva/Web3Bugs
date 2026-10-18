@@ -1,0 +1,6 @@
+Project 18 / example 1 / onlyRoleModifierCheckGrant
+Status: incomplete
+Target: AccessControlMock
+Missing historical dependency/evidence:
+- _checkRole(bytes32) is internal in the historical AccessControl; direct CVL ABI dispatch requires unretained exposure/harness.
+No replacement modern contract or guessed harness may be silently inserted.

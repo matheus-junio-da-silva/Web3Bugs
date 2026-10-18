@@ -1,0 +1,7 @@
+Project 18 / example 143 / increasingInitialized
+Status: incomplete
+Target: Initializable / flat verification harness (historical name not stated)
+Missing historical dependency/evidence:
+- Report (pp. 4–6) uses two custom flat/multiple-inheritance harnesses, modified _initialized/_initializing visibility and synthetic versioned entrypoints; neither exact historical harness/source patch is included.
+- This is a separately indexed report-described harness context; the PDF does not identify a specific per-context outcome for this property.
+No replacement modern contract or guessed harness may be silently inserted.

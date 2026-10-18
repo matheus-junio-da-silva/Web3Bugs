@@ -13,10 +13,10 @@ Os arquivos `.spec`, `.sol`, `.txt`, contratos, runners e PDFs foram preservados
 | Projeto / exemplo | Bug Label anterior → proposto | Decisão / classe | Prioridade |
 | --- | --- | --- | --- |
 | P14 #1 `orderOfOperations` | `S3-2 → UNMAPPED` | `LABEL_CHANGE` + `DOCUMENTATION_FIX` | P1 |
-| P20 #26 `toElasticAndToBaseAreInverse1down` | `S6-2 → L2` | `LABEL_CHANGE` + `DOCUMENTATION_FIX`; contrarrevisão pendente | P2 |
-| P20 #27 `toElasticAndToBaseAreInverse1up` | `S6-2 → L2` | `LABEL_CHANGE` + `DOCUMENTATION_FIX`; contrarrevisão pendente | P2 |
-| P20 #28 `toElasticAndToBaseAreInverse2down` | `S6-2 → L2` | `LABEL_CHANGE` + `DOCUMENTATION_FIX`; contrarrevisão pendente | P2 |
-| P20 #29 `toElasticAndToBaseAreInverse2up` | `S6-2 → L2` | `LABEL_CHANGE` + `DOCUMENTATION_FIX`; contrarrevisão pendente | P2 |
+| P20 #26 `toElasticAndToBaseAreInverse1down` | `S6-2 → L2` | `LABEL_CHANGE` + `DOCUMENTATION_FIX`; contrarrevisão favorável | P2 |
+| P20 #27 `toElasticAndToBaseAreInverse1up` | `S6-2 → L2` | `LABEL_CHANGE` + `DOCUMENTATION_FIX`; contrarrevisão favorável | P2 |
+| P20 #28 `toElasticAndToBaseAreInverse2down` | `S6-2 → L2` | `LABEL_CHANGE` + `DOCUMENTATION_FIX`; contrarrevisão favorável | P2 |
+| P20 #29 `toElasticAndToBaseAreInverse2up` | `S6-2 → L2` | `LABEL_CHANGE` + `DOCUMENTATION_FIX`; contrarrevisão favorável | P2 |
 
 ### Project 14 / #1 — scope real e falsificação
 
@@ -47,13 +47,22 @@ O **contraexemplo** de cada linha exige inversão de direção ou exceder a tole
 
 ## Contrarrevisão independente — BOREAL
 
-Foi requerida/será formalizada no PR de correção uma **contrarrevisão técnica independente** ao responsável pela catalogação original de BentoBox. Questão dirigida: cada um dos quatro limites e sinais comprova que a categoria `L2` melhor descreve o oráculo do que `S6-2`? Como distinguir erro de rounding de retorno inesperado provocado por outra causa? A solicitação será ligada ao PR original do Project 20 e ao PR desta branch. **Parecer recebido: PENDENTE; concordância ou discordância NÃO presumida.** Qualquer divergência será documentada com ambas as interpretações para adjudicação do orquestrador. Este status impede alegar consenso.
+**PARECER RECEBIDO: CONCORDÂNCIA FUNDAMENTADA PARA OS QUATRO EXEMPLOS.** O BOREAL, responsável pela catalogação original do Project 20, publicou [contrarrevisão técnica independente no PR #14](https://github.com/matheus-junio-da-silva/Web3Bugs/pull/14#issuecomment-6255736378) antes deste PR corretivo. O parecer confere os requires, helpers, flags, sentidos das desigualdades, limites e a implementação Solidity por regra. Conclui que **L2** é a categoria mais específica para os limites genéricos de erro de arredondamento/precisão conforme a precedência do `docs/standard.md`.
+
+- **#26:** L2, shares → elastic → shares, roundDown, resultado <= entrada, erro <= floor(base/elastic)+1.
+- **#27:** L2, shares → elastic → shares, roundUp, resultado >= entrada, erro <= floor(base/elastic)+2.
+- **#28:** L2, elastic → shares → elastic, roundDown, resultado <= entrada, erro <= floor(elastic/base)+1.
+- **#29:** L2, elastic → shares → elastic, roundUp, resultado >= entrada, erro <= floor(elastic/base)+2.
+
+BOREAL confirma que o PDF BentoBox p.6 registra apenas **Identity ✔ agregado**, sem veredicto individual por variante; importa módulos de `@boringcrypto` ausentes e não alega replay do Prover. Os quatro Result/Outcome seguem **NOT_STATED/NOT_STATED**.
+
+**Ressalva causal:** L2 descreve o oráculo de precisão da assertion, não prova que qualquer futura violação foi causada por rounding. Se um trace evidenciar erro diferente de fórmula ou de inputs/harness, S6-2 pode tornar-se a interpretação mais adequada **para aquela falha específica**; isso não contradiz a concordância sobre a intenção formal da propriedade. [Pedido posterior do ECHO no PR original](https://github.com/matheus-junio-da-silva/Web3Bugs/pull/14#issuecomment-6255791795). Não houve divergência entre os pareceres acerca da classificação destas quatro assertions; eventual evidência contrária deverá ser submetida ao orquestrador.
 
 ## Risco e controle de mudança
 
 - **P0:** nenhum confirmado.
 - **P1 — #1:** documentação poderia promover um teste parcial a garantia geral de comutatividade e imputar equivocadamente `S3-2`.
-- **P2 — #26–29:** seleção entre oráculo genérico `L2` e `S6-2` depende de diferenciar mecanismo aritmético de erro semântico; a regra permite tolerâncias explícitas. Mudança recomendada **sob contrarrevisão**, sem inventar falha real.
+- **P2 — #26–29:** seleção entre oráculo genérico `L2` e `S6-2` depende de diferenciar mecanismo aritmético de erro semântico; a regra permite tolerâncias explícitas. Mudança recomendada **com contrarrevisão favorável**, sem inventar falha real.
 - **EVIDENCE_GAP:** versão/harness exatos e resultados individuais não reproduzidos.
 - **RESULT_OUTCOME_CHANGE:** nenhum. **DEPENDENCY_FIX:** nenhum. **DOCUMENTATION_FIX:** cinco. **LABEL_CHANGE:** cinco.
 - **CSV compartilhado:** somente as cinco relações por (Project ID, Status, Example ID) foram alteradas. Outras linhas, inclusive todos os demais projetos e P20 #30–31, conservadas.

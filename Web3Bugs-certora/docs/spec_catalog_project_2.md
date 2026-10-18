@@ -10,7 +10,7 @@ This document records the completion state of the Certora property catalog for P
 - Total active property instances: **15**
 - Complete examples: **1**
 - Incomplete examples: **14**
-- Bug Label relationship rows added to spec_buglabel.csv: **16**
+- Bug Label relationship rows for Project 2 in spec_buglabel.csv: **15**
 
 The two integrityOfExecuteEmergencyAction rules are commented out in the supplied source specs and are not counted as active, even though the report discusses verified Executor V2/V3 emergency-action properties.
 
@@ -55,7 +55,7 @@ The report states that Certora also performed a manual audit, but the supplied s
 ## Bug Label mapping and UNMAPPED
 
 - S3-2: state/list/membership consistency and idempotent disable/enable-state transitions
-- S2-1: non-zero feed and wrapper address validation in PoRFeedChange
+- S2-1: withdrawn in CERES review; PoRFeedChange does not directly assert asset-ID validation.
 - S2-3: duplicate asset identifier / array uniqueness checks
 - S6-2: consistency of aggregate and per-asset reserve-backed return semantics
 - UNMAPPED: **0**
@@ -147,7 +147,7 @@ Corrections made during review:
 
 - Corrected inaccurate Original Spec Lines for PoRFeedChange and all Executor V2 examples. The earlier ranges incorrectly described omitted source lines as copied.
 - Added the original latestRoundData() => NONDET summary to the PoRFeedChange extraction. Because the rule executes an arbitrary method f, a non-management branch can reach areAllReservesBacked, whose Solidity implementation calls the Chainlink feed.
-- Added S2-1 as a second defensible relationship for PoRFeedChange. Its successful enable assertions require non-zero feed/wrapper address identifiers, while S3-2 still captures the mapping transition requirements.
+- Superseded review note: S2-1 was previously added based on nonzero feed/wrapper postconditions. CERES withdrew it because that does not constitute asset-ID validation; S3-2 remains.
 - Added explicit source/report interpretation notes to affected examples rather than silently reconciling contradictory prose or formulas.
 - Restored reports/2.md from direct PDF text extraction after detecting that an intermediate review edit had truncated it.
 
@@ -173,3 +173,7 @@ Label interpretation review:
 - flagConsistancy/flagConsistancy2: S3-2 remains the conservative mapping because the assertions test disagreement between membership state representations rather than uniqueness itself.
 - notAllReservesBacked_UnbackedArry_Correlation: S6-2 remains defensible from the equality assertion plus the report's stated return semantics, but the missing helper body is explicitly documented as a limitation.
 - Replaced inferred contest metadata (type, high-count, and DefiLlama) with "-" because those fields are not established by the supplied report; only the project name and 2022-11 date are retained as report-supported metadata.
+
+## CERES semantic corrections — 2026-10-18
+
+The PoRFeedChange helper special-cases the three selectors enableProofOfReserveFeed, enableProofOfReserveFeedWithBridgeWrapper and disableProofOfReserveFeed; other f selectors invoke arbitrary calldata. The postconditions read _proofOfReserveList[asset] and _bridgeWrapperList[asset]. They require the enabled mappings to equal supplied nonzero feed/wrapper addresses; disabling clears both; unrelated methods leave both intact. These conditions support S3-2, not a separate asset-ID validation oracle under S2-1. The latter relationship was removed and Project 2 has 15 relationships for 15 source examples. VERIFIED and NO_FINDING for PoRFeedChange remain unchanged, with original PDF and report limitations preserved.

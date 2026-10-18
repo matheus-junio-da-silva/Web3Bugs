@@ -1,0 +1,3 @@
+Historical dependency closure blocker for frame.cvl::frame_getCash:
+CVL-called methods lack an implementation in the declared target and its included snapshot ABI: f.
+CVL methods declared are not implementation evidence; no invented mock or CVL2 migration has been inserted.

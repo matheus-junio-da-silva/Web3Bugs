@@ -55,8 +55,8 @@ The original report (December 2022 to January 2023; reviewed commit 6fe9d38) exp
 | 24 | SlotTester.spec:1-31 | whoChangedBalanceOfToken | UNMAPPED | NOT_STATED | NOT_STATED | The snapshot does not include SlotTester target or getters getPausedSlot… |
 | 25 | Splits.spec:26-32 | correctnessOfSplitResults | S6-4 | VERIFIED | NO_FINDING | The abstract Splits.sol exposes internal _split, _splitResults, _splitta… |
 | 26 | Splits.spec:38-55 | correctnessOfSplit | S6-4 | VERIFIED | NO_FINDING | The abstract Splits.sol exposes internal _split, _splitResults, _splitta… |
-| 27 | Splits.spec:60-68 | integrityOfCollect | S6-4 | VERIFIED | NO_FINDING | The abstract Splits.sol exposes internal _split, _splitResults, _splitta… |
-| 28 | Splits.spec:72-80 | revertCharacteristicsOfCollect | L8 | VERIFIED | NO_FINDING | The abstract Splits.sol exposes internal _split, _splitResults, _splitta… |
+| 27 | Splits.spec:60-68 | integrityOfCollect | S3-1 | VERIFIED | NO_FINDING | The abstract Splits.sol exposes internal _split, _splitResults, _splitta… |
+| 28 | Splits.spec:72-80 | revertCharacteristicsOfCollect | SC | VERIFIED | NO_FINDING | The abstract Splits.sol exposes internal _split, _splitResults, _splitta… |
 | 29 | Splits.spec:86-95 | correctnessOfGive | S6-4 | VERIFIED | NO_FINDING | The abstract Splits.sol exposes internal _split, _splitResults, _splitta… |
 | 30 | Splits.spec:100-111 | splittableOfNonReceiverNotAffectedByGive | S3-2 | VERIFIED | NO_FINDING | The abstract Splits.sol exposes internal _split, _splitResults, _splitta… |
 | 31 | Splits.spec:118-133 | correctnessOfHashSplits | LA | VERIFIED | NO_FINDING | The abstract Splits.sol exposes internal _split, _splitResults, _splitta… |
@@ -74,7 +74,17 @@ The original report (December 2022 to January 2023; reviewed commit 6fe9d38) exp
 | 43 | Splits2.spec:62-112 | cannotFrontRunSplitDifferentUsers | SE-1 | NOT_STATED | NOT_STATED | Distinct Splits2.spec uses absent generated CVT wrappers and receiver-ar… |
 | 44 | Splits2.spec:116-160 | cannotFrontRunSplitTwoSameUsers | SE-1 | NOT_STATED | NOT_STATED | Distinct Splits2.spec uses absent generated CVT wrappers and receiver-ar… |
 | 45 | Splits2.spec:164-206 | cannotFrontRunSplitThreeSameUsers | SE-1 | NOT_STATED | NOT_STATED | Distinct Splits2.spec uses absent generated CVT wrappers and receiver-ar… |
-| 46 | Splits2.spec:211-235 | revertCharacteristicsOfSplit | L8 | NOT_STATED | NOT_STATED | Distinct Splits2.spec uses absent generated CVT wrappers and receiver-ar… |
+| 46 | Splits2.spec:211-235 | revertCharacteristicsOfSplit | SC | NOT_STATED | NOT_STATED | Distinct Splits2.spec uses absent generated CVT wrappers and receiver-ar… |
 
 ## Reproduction
 The generator copies all six src and all six spec files, extracts active declaration blocks using comment-aware brace matching, produces .spec, .sol, .md and .txt for each incomplete example, and performs immediate literal-property/source comparisons. The independent auditor checks source-to-destination blobs, CVL lines, snippets and CSV. Then run the three repository Python validators and git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD. The catalog is documentary, not a new Certora Prover run.
+
+
+## DELTA — adjudicação p07/p23 (2026-10-18)
+
+- **#27 integrityOfCollect:** S6-4 → **S3-1** porque `_collect` deve executar `balance.collectable = 0` no mapping `(userId,assetId)`; assertion é somente `collectableAfter == 0`. VERIFIED/NO_FINDING históricos preservados.
+- **#28 revertCharacteristicsOfCollect:** L8 → **SC**, pois `assert !lastReverted` com `msg.sender != 0` e `msg.value == 0` não atribui revert a chamada low-level/biblioteca externa. VERIFIED/NO_FINDING históricos preservados.
+- **#46 revertCharacteristicsOfSplit (Splits2.spec):** L8 → **SC**. O segundo `split@withrevert` após configuração e uma primeira split não deve reverter; nenhum nexo causal low-level está demonstrado. NOT_STATED/NOT_STATED preservados, sem herdar resultado de Splits.spec.
+- **Resultados separados:** #36 VIOLATED/FINDING por arredondamento; #38 NOT_STATED/INCONCLUSIVE (timeout); #39–41 VERIFIED/NO_FINDING restritos a suas próprias regras Splits.spec.
+
+Somente documentação e labels do índice compartilhado foram alterados; nenhum PDF, CVL ou Solidity foi editado. Não foi executado novo Certora Prover.

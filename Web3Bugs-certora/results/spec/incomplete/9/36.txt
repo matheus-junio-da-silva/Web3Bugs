@@ -1,0 +1,9 @@
+## Missing dependency — historical getter return ABI
+
+The original governance.spec method block declares:
+
+    getVoteRecord(address,uint256) returns uint256, uint256, uint256 envfree
+
+In the preserved contracts/9/contracts/governance/Governance.sol, getVoteRecord(address,uint256) instead returns **six uint256 values**: proposalId, deprecated_value, deprecated_weight, yesVotes, noVotes and abstainVotes. The linked specs/harnesses/GovernanceHarness.sol inherits the six-return method without a three-return override. No runner, adapter or historical compiled ABI preserving the three-return interface is present in the supplied snapshot. The original rule body and CVL declaration are preserved literally, NOT rewritten.
+
+Sources checked: contracts/9/specs/governance.spec; contracts/9/contracts/governance/Governance.sol; contracts/9/specs/harnesses/GovernanceHarness.sol; contracts/9/specs/scripts/governance.sh and applyHarness.sh; the other Project 9 contracts and specs. The actual historical ABI/run has not been reproduced. The snapshot does not close this dependency conservatively.

@@ -1,0 +1,5 @@
+Missing dependency or historical linkage for no_weight_changing_when_voting in locked_gold_linked.spec:40-61
+
+The standalone file calls _weight and isVoting via sinvoke, but no runnable target/link context is established for this cross-contract historical rule; no runner or matching harness for this spec is present.
+
+Search: contracts/9/contracts (full original snapshot), contracts/9/specs, specs/harnesses and specs/scripts. No cross-project replacement or imagined implementation has been supplied.

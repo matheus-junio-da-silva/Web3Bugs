@@ -1,0 +1,20 @@
+INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/AToken.spec` / property `integrityBurn` / target `AToken`.
+Original source property and dependency ranges: `7;9;12-14;21;23;25;30;37-39;207-243`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- using SimpleERC20 as _underlyingAsset
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The source spec requires a linked SimpleERC20 alias for underlying-balance observations. No corresponding historical SimpleERC20 contract and linking configuration is present in the PropertyGPT Aave V3 snapshot. An IERC20 interface or later ERC20 token is not automatically equivalent to the named alias.
+
+CVL methods declarations actually included in this example:
+- handleAction(address, uint256, uint256) => NONDET
+- getReserveNormalizedIncome(address u) returns (uint256) => gRNI()
+- balanceOf(address) returns (uint256) envfree
+
+CVL using aliases included: SimpleERC20 as _underlyingAsset.
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.

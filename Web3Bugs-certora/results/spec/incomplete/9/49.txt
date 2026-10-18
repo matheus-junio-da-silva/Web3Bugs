@@ -1,0 +1,4 @@
+Missing historical requirement for governance_old_rules.spec:60-81 (sum_of_votes_cannot_exceed_total_weight).
+callArbitrary(f) at source line 71 has no declaration/import in this legacy spec, and there is no runner establishing which helper should be used. The project contains another helper in governance.spec:386-390, but no link to this file.
+Searched: contracts/9/specs/governance_old_rules.spec, governance.spec and other sibling specs, specs/harnesses, specs/scripts and contracts/9/contracts/governance/*.
+Not repaired; no helper has been borrowed across specs without source linkage.

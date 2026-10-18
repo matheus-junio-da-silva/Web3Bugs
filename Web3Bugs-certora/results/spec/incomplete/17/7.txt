@@ -1,0 +1,3 @@
+Historical dependency closure blocker for accrueInterest.cvl::accrueInterest:
+The synthetic interestRateModelGetBorrowRate() wrapper declared in CVL is absent from the CToken/CErc20Certora ABI. The external rate-model call is not the same interface.
+CVL methods declared are not implementation evidence; no invented mock or CVL2 migration has been inserted.

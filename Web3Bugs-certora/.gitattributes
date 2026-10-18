@@ -45,3 +45,9 @@ results/spec/complete/18/*.spec -whitespace
 results/spec/incomplete/18/*.spec -whitespace
 results/spec/complete/18/*.sol -whitespace
 results/spec/incomplete/18/*.sol -whitespace
+
+# Contributed Project 15 historical source and literal excerpt settings
+contracts/15/** -whitespace
+results/spec/incomplete/15/*.spec -whitespace
+results/spec/incomplete/15/*.sol -whitespace
+reports/15.md -whitespace

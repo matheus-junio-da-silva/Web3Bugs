@@ -1,0 +1,8 @@
+INCOMPLETE HISTORICAL SOURCE DEPENDENCIES
+Property: balance_after_mint
+Original Spec: contracts/15/ghoToken.spec lines 410-423
+Target: GhoToken
+
+- Concrete unvendored dependency paths: @openzeppelin/contracts/access/AccessControl.sol; @openzeppelin/contracts/token/ERC20/IERC20.sol; @openzeppelin/contracts/utils/structs/EnumerableSet.sol. The original solc/link Prover configuration is absent
+
+A CVL methods declaration is not a missing Solidity method implementation. External package versions, harness behavior, deployment linkages and the historical Prover run cannot be reconstructed soundly from this snapshot. The preserved source era is not modernized to CVL2. Historical report status VERIFIED must not be read as a fresh proof.

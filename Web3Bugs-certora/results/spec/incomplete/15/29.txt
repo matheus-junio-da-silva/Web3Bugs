@@ -1,0 +1,10 @@
+INCOMPLETE HISTORICAL SOURCE DEPENDENCIES
+Property: noMint
+Original Spec: contracts/15/ghoAToken.spec lines 45-54
+Target: GhoAToken
+
+- CVL using alias _ghoTokenHarness target GhoTokenHarness has no implementation in the source snapshot
+- GhoTokenHarness named in using declaration is absent
+- Concrete unvendored dependency paths: @aave/core-v3/contracts/dependencies/gnosis/contracts/GPv2SafeERC20.sol; @aave/core-v3/contracts/dependencies/openzeppelin/contracts/IERC20.sol; @aave/core-v3/contracts/interfaces/IAToken.sol; @aave/core-v3/contracts/interfaces/IAaveIncentivesController.sol; @aave/core-v3/contracts/interfaces/IInitializableAToken.sol; @aave/core-v3/contracts/interfaces/IPool.sol; @aave/core-v3/contracts/protocol/libraries/aave-upgradeability/VersionedInitializable.sol; @aave/core-v3/contracts/protocol/libraries/helpers/Errors.sol; @aave/core-v3/contracts/protocol/libraries/math/WadRayMath.sol; @aave/core-v3/contracts/protocol/tokenization/base/EIP712Base.sol; @aave/core-v3/contracts/protocol/tokenization/base/IncentivizedERC20.sol; @aave/core-v3/contracts/protocol/tokenization/base/ScaledBalanceTokenBase.sol; @openzeppelin/contracts/access/AccessControl.sol; @openzeppelin/contracts/utils/structs/EnumerableSet.sol. The original solc/link Prover configuration is absent
+
+A CVL methods declaration is not a missing Solidity method implementation. External package versions, harness behavior, deployment linkages and the historical Prover run cannot be reconstructed soundly from this snapshot. The preserved source era is not modernized to CVL2. Historical report status VERIFIED must not be read as a fresh proof.

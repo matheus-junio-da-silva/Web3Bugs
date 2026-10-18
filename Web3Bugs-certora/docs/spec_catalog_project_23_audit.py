@@ -43,7 +43,7 @@ def main(src,dst):
   assert fname in sources
   a,b=map(int,row["Original Spec Lines"].split("-"))
   original_lines=sources[fname][1].splitlines(keepends=True)
-  excerpt="".join(original_lines[a-1:b]).rstrip("\n")
+  excerpt="".join(original_lines[a-1:b]).rstrip("\n").rstrip(" \\t")
   # Exact source-bound text, comments, whitespace and line count.
   assert re.match(r"^\s*(?:rule|invariant)\s+"+re.escape(name)+r"\b",excerpt),(idx,name,a,b)
   spec=dst/row["Spec"]

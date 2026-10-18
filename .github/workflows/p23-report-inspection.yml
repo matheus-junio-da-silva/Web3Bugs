@@ -25,6 +25,7 @@ jobs:
           python3 scripts/check_contracts.py .
           python3 scripts/check_contests_csv.py .
           python3 scripts/check_specs.py .
+          python3 docs/spec_catalog_project_23_audit.py ../source/certora_projects/radicle_drips .
       - name: Commit only P23 catalog artifacts
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -32,5 +33,18 @@ jobs:
           git add Web3Bugs-certora/contracts/23 Web3Bugs-certora/resources/23 Web3Bugs-certora/reports/23.md Web3Bugs-certora/docs/spec_catalog_project_23.md Web3Bugs-certora/results/contests.csv Web3Bugs-certora/results/spec/spec_buglabel.csv Web3Bugs-certora/results/spec/incomplete/23
           git diff --cached --quiet || git commit -m "catalog(p23): preserve all six Radicle specs and 46 active CVL properties"
           git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+          git push origin HEAD:catalog/p23-delta-radicle-drips
+          git rev-parse HEAD
+      - name: Remove temporary workflow and rerun every validator on final HEAD
+        run: |
+          git rm .github/workflows/p23-report-inspection.yml
+          git commit -m "chore(p23): remove temporary build workflow"
+          git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+          cd Web3Bugs-certora
+          python3 scripts/check_contracts.py .
+          python3 scripts/check_contests_csv.py .
+          python3 scripts/check_specs.py .
+          python3 docs/spec_catalog_project_23_audit.py ../source/certora_projects/radicle_drips .
+          cd ..
           git push origin HEAD:catalog/p23-delta-radicle-drips
           git rev-parse HEAD

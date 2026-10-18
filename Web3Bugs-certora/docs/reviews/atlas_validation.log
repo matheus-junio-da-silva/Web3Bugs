@@ -77,3 +77,22 @@ P24=164; 1387 NON-TARGET rows byte-equivalent as CSV records; 17 COLUMN schema p
 results/contests.csv: ROWS=23, COLUMNS=8, BAD_WIDTH=0, EXTRA_COLUMNS=0, CHANGED_ROWS=0
 results/bugs.csv: ROWS=97, COLUMNS=7, BAD_WIDTH=0, EXTRA_COLUMNS=0, CHANGED_ROWS=0
 SCHEMA_AND_COMPLETENESS_EXIT_CODE=0
+
+=== ATLAS FINAL VALIDATION / main 9d0a65f plus DELTA signoff ===
+# valid_source_commit=5a6ded29df1afb97c96ea1812f0b9086c46f4cbd
+# timestamp_utc=2026-10-18T23:40:49Z
+--- COMMAND: python3 scripts/check_specs.py .
+Check passed! 1386 spec examples and 1390 Bug Label relationships are structurally consistent.
+EXIT_CODE=0
+--- COMMAND: python3 scripts/check_contests_csv.py .
+Check passed!
+
+	`./results/contests.csv` is consistant with `./reports`
+EXIT_CODE=0
+--- COMMAND: python3 scripts/check_contracts.py .
+Check passed!
+
+	`./contracts` is consistant with `./reports`
+EXIT_CODE=0
+--- COMMAND: git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+EXIT_CODE=0

@@ -1,13 +1,13 @@
 # ATLAS — adjudicação P8 #1, P19 #35 e P15 balance_after_burn
 
-**Data:** 2026-10-18. **Baseline:** Web3Bugs main commit 80f551f23bbd86d7901c6a28e7f44c68aebae8fd. **Branch:** fix/semantic-p08-p15-p19-atlas. **Status:** PR draft / sem merge; a decisão OUSD exige contrarrevisão DELTA ainda não recebida.
+**Data:** 2026-10-18. **Baseline:** Web3Bugs main commit 80f551f23bbd86d7901c6a28e7f44c68aebae8fd. **Branch:** fix/semantic-p08-p15-p19-atlas. **Status:** parecer independente DELTA recebido e aceito para OUSD #35; validação da branch atualizada em andamento; sem merge.
 
 ## Inventário de alterações e tipologia
 
 | Projeto/ID | Tipo de intervenção | Antes | Depois | Fundamento |
 |---|---|---|---|---|
 | P8 #1 accrueYieldCheck | RESULT_OUTCOME_CHANGE; DOCUMENTATION_FIX; EVIDENCE_GAP | Result VERIFIED; Outcome NO_FINDING | Result VERIFIED; Outcome INCONCLUSIVE | W2/W3 contraditórios quando as fórmulas são quantificadas literalmente; não-vacuidade e configuração histórica não demonstradas |
-| P19 #35 privilegedOperation | LABEL_CHANGE provisório; DOCUMENTATION_FIX; EVIDENCE_GAP | S5-1; Result/Outcome NOT_STATED | UNMAPPED; Result/Outcome NOT_STATED | f arbitrário sem filter, três chamadas de senders distintos; nenhuma assertion de storage privilegiado; contrarrevisão DELTA pendente |
+| P19 #35 privilegedOperation | LABEL_CHANGE confirmado por DELTA; DOCUMENTATION_FIX; EVIDENCE_GAP | S5-1; Result/Outcome NOT_STATED | UNMAPPED; Result/Outcome NOT_STATED | f arbitrário sem filter, três chamadas de senders distintos; nenhuma assertion de storage privilegiado; contrarrevisão DELTA confirmada |
 | P15 #59 balance_after_burn (PDF #54) | RESULT_OUTCOME_CHANGE; DOCUMENTATION_FIX; EVIDENCE_GAP | VERIFIED / NO_FINDING | NOT_STATED / NOT_STATED para a rule do snapshot | PDF diz aumento após burn; CVL e Solidity exigem diminuição |
 | Três itens | DEPENDENCY_FIX | fontes originais incompletas | **nenhuma mudança de dependência** | Não preencher stubs, nem alterar scripts, bibliotecas, CVL, Solidity ou PDF |
 
@@ -29,7 +29,7 @@ Source: contracts/19/spec/PrivilegedVaultAdmin.spec:1–26. Target histórico de
 
 A assertion nega firstSucceeded && secondSucceeded && thirdSucceeded, em que cada succeeded é !lastReverted. Não há leitura ou comparação de strategistAddr, governor, nem de pós-estados. Um f público que conclua para três remetentes distintos oferece um contramodelo compatível com ausência de falha de privilégios. O Solidity VaultAdmin contém onlyGovernor, onlyGovernorOrStrategist e onlyVaultOrGovernor, mas nenhum está vinculado a f por filter na regra.
 
-O label S5-1 em docs/standard.md exige mutação arbitrária de estado privilegiado por usuário. A regra não demonstra tal mutação. Proposta defendida: **S5-1 → UNMAPPED**, classificação de diagnóstico sem oráculo de exploit. Resultado histórico NOT_STATED e Outcome NOT_STATED permanecem. **A classificação publicada no branch é proposição adjudicada por ATLAS, NÃO decisão coletiva encerrada:** foi solicitada contrarrevisão DELTA no PR draft, com demanda de contestar ou ratificar o label a partir de source CVL, state snapshots e contratos; não alegar aprovação inexistente.
+O label S5-1 em docs/standard.md exige mutação arbitrária de estado privilegiado por usuário. A regra não demonstra tal mutação. Proposta defendida: **S5-1 → UNMAPPED**, classificação de diagnóstico sem oráculo de exploit. Resultado histórico NOT_STATED e Outcome NOT_STATED permanecem. **Adjudicação final de rótulo:** DELTA realizou contrarrevisão independente e concordou expressamente com UNMAPPED no comentário https://github.com/matheus-junio-da-silva/Web3Bugs/pull/31#issuecomment-6256562964. A concordância é restrita a P19 #35; não implica reprodução histórica do Prover.
 
 ## P15 #59 — divergência adicional CERES, PDF #54
 
@@ -56,9 +56,25 @@ Condições adicionais documentadas pela CERES em branch review/ceres-p15-gho-co
 
 1. P0 Vault: scripts exatos da execução histórica e solver consistency check; runs por rule/target/versão; rastreio dos axiomas globais para a verificação #1 e 14–35.
 2. P1 GHO: outputs do Prover e arquivos de configuração originais para as 64 propriedades; validação de cada fórmula/summaries/harness/versão; errata para #54 ou prova de que a própria fórmula da source foi verificada.
-3. P1 OUSD: DELTA precisa conferir independently f selecionado, arg2 não usado, identidade dos 3 callers, poststate efetivamente observado e taxonomia. Status da contrarrevisão: **SOLICITADA, PENDENTE**.
+3. P1 OUSD: **DELTA CONCLUIU E CONCORDOU**: f não filtrado, arg2 declarado mas não usado, chamadas sobre preestado salvo, sem assertion sobre storage; possível falsificador benigno por getter público governor(). Sem execução Certora histórica; classificação UNMAPPED ratificada por DELTA.
 4. P2: fechar bibliotecas externas não vendorizadas e reproduzir os drivers/munged, sem alterar sources históricas.
 
 ## Validações e CI
 
 A evidência reproduzível dos comandos obrigatórios com SHA, data/hora UTC e códigos de saída está no arquivo [atlas_validation.log](./atlas_validation.log). Os quatro comandos do projeto são controladores estruturais; sucesso neles não implica Prover replay nem conformidade histórica da fórmula. PR draft separa correções do PR review-only da matriz de 192 casos. Nenhum merge solicitado.
+
+## ATLAS — reconciliação com main após 14 merges (2026-10-18)
+
+Main de referência: 9d0a65faf2ba378c131c956605580ee540da4cdc. A branch de correção incorporou essa main preservando integralmente os novos catálogos (inclusive P24 Rocket Joe). A comparação do CSV compartilhado com parser CSV mostrou 1.390 relações contra 1.390 na main, 17 colunas idênticas, ordem de linhas idêntica e somente três diferenças de valores:
+
+- P8 #1: Detection Outcome NO_FINDING -> INCONCLUSIVE; Result VERIFIED histórico intacto; label S3-2 intacto.
+- P19 #35: Bug Label S5-1 -> UNMAPPED; Result e Outcome NOT_STATED intactos; contrarrevisão DELTA inicialmente ausente, depois **PUBLICADA E FAVORÁVEL** no comentário #6256562964.
+- P15 #59: Result VERIFIED -> NOT_STATED e Detection Outcome NO_FINDING -> NOT_STATED; label S6-4 intacto; marca ✔ histórica no PDF #54 p.11 preservada em documentação.
+
+Outros 1.387 registros do CSV são idênticos à main, inclusive as 164 relações do Project 24. results/contests.csv contém 23 dados, results/bugs.csv contém 97 dados, ambos idênticos à main e não modificados pelo PR. Nenhum projeto fora dos três registros recebeu atualização do CSV nesta branch. O check_specs.py informa 1.386 exemplos e 1.390 relações; não confundir exemplos de spec com relações do CSV. Todas as 3 tabelas CSV têm a quantidade de colunas original em todas as linhas. Campos vazios já existentes no CSV grande referem-se a dados opcionais de dependência/contrato (nunca colunas extras).
+
+A contrarrevisão DELTA foi recebida e sustenta a decisão UNMAPPED. A verificação final exige novo SHA, quatro comandos exit 0 e CI da nova HEAD antes de solicitar aceite do orquestrador. A ausência de Prover histórico, não-vacuidade Vault e vínculo de job individual GHO continuam limitações formais.
+
+## DELTA — confirmação independente e resposta ATLAS
+
+A contrarrevisão independente da DELTA foi recebida no PR #31: https://github.com/matheus-junio-da-silva/Web3Bugs/pull/31#issuecomment-6256562964. DELTA leu PrivilegedVaultAdmin.spec, VaultAdmin.sol, VaultStorage.sol, Governable.sol e docs/standard.md e **concordou com S5-1 -> UNMAPPED**. O falsificador indicado é o getter público herdado governor(), selecionável como f no modelo sem restrição explícita de seletor: para três endereços distintos e calldata sem argumentos, as três chamadas podem não reverter embora nenhuma altere estado privilegiado. Mesmo sem reproduzir essa execução no Prover histórico, a rule não exige a mutação privilegiada necessária a S5-1. A ausência de filtro de métodos, o reuso de arg na segunda call (arg2 não usado), a semântica at initialStorage em calls 2 e 3 e o único assert de não-revert conjunto foram confrontados independentemente. Concordância DELTA abrange somente P19 #35, não as decisões P8/P15. **Resposta ATLAS: parecer aceito e label UNMAPPED ratificado sem exceções**. Result=NOT_STATED, Detection Outcome=NOT_STATED e status incomplete permanecem. Nenhuma prova de exploit foi produzida.

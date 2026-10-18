@@ -51,3 +51,29 @@ EXIT_CODE=0
 --- COMMAND: git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
 # Tested branch HEAD: 79dcefd7a4f7340194e2e2150fb2b2983b880fb5
 EXIT_CODE=0
+
+=== ATLAS FINAL RECONCILIATION against 2026-10-18 main ===
+# main_sha=9d0a65faf2ba378c131c956605580ee540da4cdc
+# start_utc=2026-10-18T23:37:09Z
+# branch=fix/semantic-p08-p15-p19-atlas
+# merge=origin/main into existing correction branch; staging tree includes all 14 main merges
+--- COMMAND: python3 scripts/check_specs.py .
+Check passed! 1386 spec examples and 1390 Bug Label relationships are structurally consistent.
+EXIT_CODE=0
+--- COMMAND: python3 scripts/check_contests_csv.py .
+Check passed!
+
+	`./results/contests.csv` is consistant with `./reports`
+EXIT_CODE=0
+--- COMMAND: python3 scripts/check_contracts.py .
+Check passed!
+
+	`./contracts` is consistant with `./reports`
+EXIT_CODE=0
+
+--- CSV PARSER / MAIN EXACT RECONCILIATION ---
+results/spec/spec_buglabel.csv: ROWS=1390, COLUMNS=17, BAD_WIDTH=0, EXTRA_COLUMNS=0, CHANGED_ROWS=3
+P24=164; 1387 NON-TARGET rows byte-equivalent as CSV records; 17 COLUMN schema preserved
+results/contests.csv: ROWS=23, COLUMNS=8, BAD_WIDTH=0, EXTRA_COLUMNS=0, CHANGED_ROWS=0
+results/bugs.csv: ROWS=97, COLUMNS=7, BAD_WIDTH=0, EXTRA_COLUMNS=0, CHANGED_ROWS=0
+SCHEMA_AND_COMPLETENESS_EXIT_CODE=0

@@ -1,0 +1,55 @@
+name: Project 24 full catalog validation
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'Web3Bugs-certora/contracts/24/**'
+      - 'Web3Bugs-certora/results/**'
+      - 'Web3Bugs-certora/reports/24.md'
+      - 'Web3Bugs-certora/docs/spec_catalog_project_24*'
+      - '.github/workflows/p24-validation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  official_validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref || github.ref }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Three official validators and exact Git whitespace command
+        shell: bash
+        run: |
+          set +e
+          mkdir -p /tmp/rocket-joe-validation
+          {
+            echo "HEAD_SHA=$(git rev-parse HEAD)"
+            echo "ORIGIN_MAIN_SHA=$(git rev-parse origin/main)"
+            echo "GIT_STATUS=$(git status --porcelain | wc -l)"
+          } | tee /tmp/rocket-joe-validation/metadata.log
+          overall=0
+          for script in check_specs check_contests_csv check_contracts; do
+            (cd Web3Bugs-certora && python scripts/${script}.py .) > "/tmp/rocket-joe-validation/${script}.log" 2>&1
+            rc=$?
+            echo "${script}: exit_code=${rc}" | tee -a /tmp/rocket-joe-validation/metadata.log
+            cat "/tmp/rocket-joe-validation/${script}.log"
+            if [ "$rc" -ne 0 ]; then overall=1; fi
+          done
+          git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD > /tmp/rocket-joe-validation/git_diff_check.log 2>&1
+          rc=$?
+          echo "git_diff_check: exit_code=${rc}" | tee -a /tmp/rocket-joe-validation/metadata.log
+          cat /tmp/rocket-joe-validation/git_diff_check.log
+          if [ "$rc" -ne 0 ]; then overall=1; fi
+          exit "$overall"
+      - name: Save SHA, exit codes and command logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rocket-joe-official-validation
+          path: /tmp/rocket-joe-validation/
+          if-no-files-found: error

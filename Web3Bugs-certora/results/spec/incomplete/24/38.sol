@@ -1,0 +1,59 @@
+// Historical LaunchEvent Solidity implementation excerpts — contracts/24/contracts/LaunchEvent.sol
+// State line 94
+    mapping(address => UserInfo) public getUserInfo;
+// Function currentPhase lines 319-373
+    function currentPhase() public view returns (Phase) {
+        if (auctionStart == 0 || block.timestamp < auctionStart) {
+            return Phase.NotStarted;
+        } else if (block.timestamp < auctionStart + phaseOneDuration) {
+            return Phase.PhaseOne;
+        } else if (
+            block.timestamp < auctionStart + phaseOneDuration + phaseTwoDuration
+        ) {
+            return Phase.PhaseTwo;
+        }
+        return Phase.PhaseThree;
+    }
+
+    /// @notice Deposits AVAX and burns rJoe
+    function depositAVAX()
+        external
+        payable
+        isStopped(false)
+        atPhase(Phase.PhaseOne)
+    {
+        require(msg.sender != issuer, "LaunchEvent: issuer cannot participate");
+        require(
+            msg.value > 0,
+            "LaunchEvent: expected non-zero AVAX to deposit"
+        );
+
+        UserInfo storage user = getUserInfo[msg.sender];
+        uint256 newAllocation = user.balance + msg.value;
+        require(
+            newAllocation <= maxAllocation,
+            "LaunchEvent: amount exceeds max allocation"
+        );
+
+        uint256 rJoeNeeded;
+        // check if additional allocation is required.
+        if (newAllocation > user.allocation) {
+            // Get amount of rJOE tokens needed to burn and update allocation
+            rJoeNeeded = getRJoeAmount(newAllocation - user.allocation);
+            // Set allocation to the current balance as it's impossible
+            // to buy more allocation without sending AVAX too
+            user.allocation = newAllocation;
+        }
+
+        user.balance = newAllocation;
+        avaxReserve += msg.value;
+
+        if (rJoeNeeded > 0) {
+            rJoe.burnFrom(msg.sender, rJoeNeeded);
+        }
+
+        emit UserParticipated(msg.sender, msg.value, rJoeNeeded);
+    }
+
+    /// @notice Withdraw AVAX, only permitted during phase 1 and 2
+    /// @param _amount The amount of AVAX to withdraw

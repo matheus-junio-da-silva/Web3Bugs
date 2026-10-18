@@ -44,4 +44,4 @@ rule senderCannotDecreaseOthersBalance(address executor, address who, method f) 
 	
 	uint256 current = balanceOf(who);
 	assert current >= previous;
-}
+}	

@@ -84,3 +84,13 @@ The PDF states property 6 (total-supply **equality**) was violated, but active t
 
 - Validation commands and real exit codes are recorded separately after generating the final commit; the source was cataloged without executing historical Certora Prover.
 - Original source fidelity is checked separately from generated documentation and from the CSV structural checks.
+
+## Independent-review corrective pass (2026-10-18)
+
+- Added a distinct **Why the Solidity excerpt is relevant** section to each of the 37 numbered N.md examples, with precise corresponding Solidity functions, mappings, before/after states, feasible falsification conditions, relevant assumptions, and limits. The pair of pure-math rules explicitly uses a symbolic Dummy target instead of pretending Dummy executes OUSD.changeSupply.
+- Replaced the overly broad Solidity excerpts for examples 32–37 with target-specific code ranges and updated their individual source coordinates in the shared spec CSV. The generic Privileged.spec example remains UNSPECIFIED.
+- Restored byte-identical closing whitespace in source-body extracts 7 and 31 (tab after the closing brace), and removed extraneous final newlines from two sanity probes (36 and 37). The 308 upstream historical source files and historical PDF remain unmodified.
+- Reconciled the latest main branch in a merge commit, preserving main's preexisting entries in the shared contest/spec CSVs, and retained the original project's 37 examples and classification values. Formal Result, Detection Outcome and Bug Label retain their independent assignments: **4 VERIFIED, 4 VIOLATED, 29 NOT_STATED**; **2 FINDING, 2 ACCEPTED_BEHAVIOR, 4 NO_FINDING, 29 NOT_STATED**. No Certora Prover rerun is claimed.
+- For privileged-method rules, co-callability does not identify an authorized caller; for the transfer-effect wrappers, the substantive predicates are inside transferCheckEffects, never the terminal assert true. The supply equality report claim differs from active >=, additiveBurnRanges admits tolerance, and sum1Test intentionally combines contradictory conditions.
+
+Validation evidence and actual exit codes from a true Git checkout are recorded in the dedicated P19 validation log and PR #15 review comment.

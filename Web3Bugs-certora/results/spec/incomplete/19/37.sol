@@ -1,19 +1,13 @@
-// Historical Solidity source excerpts, with ORIGINAL source lines; no edits/reconstruction.
+// Focused historical Solidity excerpts for target VaultCore; exact source line numbering.
 
-// Original: contracts/19/contracts/contracts/token/OUSD.sol lines 109-121
- 109 |     function transfer(address _to, uint256 _value) public returns (bool) {
- 110 |         require(_to != address(0), "Transfer to zero address");
- 111 |         require(
- 112 |             _value <= balanceOf(msg.sender),
- 113 |             "Transfer greater than balance"
- 114 |         );
- 115 | 
- 116 |         _executeTransfer(msg.sender, _to, _value);
- 117 | 
- 118 |         emit Transfer(msg.sender, _to, _value);
- 119 | 
- 120 |         return true;
- 121 |     }
+// Original: contracts/19/contracts/contracts/vault/VaultCore.sol lines 28-34
+  28 |     /**
+  29 |      * @dev Verifies that the deposits are not paused.
+  30 |      */
+  31 |     modifier whenNotCapitalPaused() {
+  32 |         require(!capitalPaused, "Capital paused");
+  33 |         _;
+  34 |     }
 
 // Original: contracts/19/contracts/contracts/vault/VaultCore.sol lines 42-87
   42 |     function mint(
@@ -62,3 +56,25 @@
   85 |             _allocate();
   86 |         }
   87 |     }
+
+// Original: contracts/19/contracts/contracts/vault/VaultCore.sol lines 158-167
+ 158 |     function redeem(uint256 _amount, uint256 _minimumUnitAmount)
+ 159 |         public
+ 160 |         whenNotCapitalPaused
+ 161 |         nonReentrant
+ 162 |     {
+ 163 |         if (_amount > rebaseThreshold && !rebasePaused) {
+ 164 |             _rebase();
+ 165 |         }
+ 166 |         _redeem(_amount, _minimumUnitAmount);
+ 167 |     }
+
+// Original: contracts/19/contracts/contracts/vault/VaultCore.sol lines 363-370
+ 363 |     function rebase()
+ 364 |         public
+ 365 |         whenNotRebasePaused
+ 366 |         nonReentrant
+ 367 |         returns (uint256 newTotalSupply)
+ 368 |     {
+ 369 |         return _rebase();
+ 370 |     }

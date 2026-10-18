@@ -36,4 +36,4 @@ rule sum2Test(method f, address Addr1, address Addr2){
 	
 	// after
 	assert _r1Balance + _r2Balance == r1Balance_ + r2Balance_, "Violated: sum of two returns false.";
-}
+}	

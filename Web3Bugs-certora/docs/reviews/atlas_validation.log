@@ -48,3 +48,6 @@ Check passed!
 
 	`./contracts` is consistant with `./reports`
 EXIT_CODE=0
+--- COMMAND: git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+# Tested branch HEAD: 79dcefd7a4f7340194e2e2150fb2b2983b880fb5
+EXIT_CODE=0

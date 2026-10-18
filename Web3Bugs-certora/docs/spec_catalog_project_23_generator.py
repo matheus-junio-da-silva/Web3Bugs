@@ -76,7 +76,7 @@ def extract(path):
   op=m.find("{",mt.end());assert op>=0
   # A filtered{ f -> ... } method filter precedes the rule body: it is
   # NOT itself the rule body. Preserve its text, then scan the next brace.
-  if re.search(r"\\bfiltered\\s*$",m[mt.end():op]):
+  if re.search(r"\bfiltered\s*$",m[mt.end():op]):
    dep=1;k=op+1
    while k<len(m) and dep:
     if m[k]=="{":dep+=1

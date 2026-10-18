@@ -1,0 +1,112 @@
+// Original Solidity: contracts/15/facilitators/aave/tokens/GhoVariableDebtToken.sol lines 121-142; balanceOf
+  function balanceOf(address user) public view virtual override returns (uint256) {
+    uint256 scaledBalance = super.balanceOf(user);
+
+    if (scaledBalance == 0) {
+      return 0;
+    }
+
+    uint256 index = POOL.getReserveNormalizedVariableDebt(_underlyingAsset);
+    uint256 previousIndex = _userState[user].additionalData;
+    uint256 balance = scaledBalance.rayMul(index);
+    if (index == previousIndex) {
+      return balance;
+    }
+
+    uint256 discountPercent = _ghoUserState[user].discountPercent;
+    if (discountPercent != 0) {
+      uint256 balanceIncrease = balance - scaledBalance.rayMul(previousIndex);
+      balance -= balanceIncrease.percentMul(discountPercent);
+    }
+
+    return balance;
+  }
+
+// Original Solidity: contracts/15/facilitators/aave/tokens/GhoVariableDebtToken.sol lines 158-165; burn
+  function burn(
+    address from,
+    uint256 amount,
+    uint256 index
+  ) external virtual override onlyPool returns (uint256) {
+    _burnScaled(from, address(0), amount, index);
+    return scaledTotalSupply();
+  }
+
+// Original Solidity: contracts/15/facilitators/aave/tokens/GhoVariableDebtToken.sol lines 258-314; updateDiscountDistribution
+  function updateDiscountDistribution(
+    address sender,
+    address recipient,
+    uint256 senderDiscountTokenBalance,
+    uint256 recipientDiscountTokenBalance,
+    uint256 amount
+  ) external override onlyDiscountToken {
+    uint256 senderPreviousScaledBalance = super.balanceOf(sender);
+    uint256 recipientPreviousScaledBalance = super.balanceOf(recipient);
+
+    uint256 index = POOL.getReserveNormalizedVariableDebt(_underlyingAsset);
+
+    uint256 balanceIncrease;
+    uint256 discountScaled;
+
+    if (senderPreviousScaledBalance > 0) {
+      (balanceIncrease, discountScaled) = _accrueDebtOnAction(
+        sender,
+        senderPreviousScaledBalance,
+        _ghoUserState[sender].discountPercent,
+        index
+      );
+
+      _burn(sender, discountScaled.toUint128());
+
+      _refreshDiscountPercent(
+        sender,
+        super.balanceOf(sender).rayMul(index),
+        senderDiscountTokenBalance - amount,
+        _ghoUserState[sender].discountPercent
+      );
+
+      emit Transfer(address(0), sender, balanceIncrease);
+      emit Mint(address(0), sender, balanceIncrease, balanceIncrease, index);
+    }
+
+    if (recipientPreviousScaledBalance > 0) {
+      (balanceIncrease, discountScaled) = _accrueDebtOnAction(
+        recipient,
+        recipientPreviousScaledBalance,
+        _ghoUserState[recipient].discountPercent,
+        index
+      );
+
+      _burn(recipient, discountScaled.toUint128());
+
+      _refreshDiscountPercent(
+        recipient,
+        super.balanceOf(recipient).rayMul(index),
+        recipientDiscountTokenBalance + amount,
+        _ghoUserState[recipient].discountPercent
+      );
+
+      emit Transfer(address(0), recipient, balanceIncrease);
+      emit Mint(address(0), recipient, balanceIncrease, balanceIncrease, index);
+    }
+  }
+
+// Original Solidity: contracts/15/facilitators/aave/tokens/GhoVariableDebtToken.sol lines 335-335; storage
+    uint256 previousScaledBalance = super.balanceOf(user);
+
+// Original Solidity: contracts/15/facilitators/aave/tokens/GhoVariableDebtToken.sol lines 375-375; storage
+    uint256 previousScaledBalance = super.balanceOf(onBehalfOf);
+
+// Original Solidity: contracts/15/facilitators/aave/tokens/GhoVariableDebtToken.sol lines 423-423; storage
+    uint256 previousScaledBalance = super.balanceOf(user);
+
+// Original Solidity: contracts/15/facilitators/aave/tokens/base/ScaledBalanceTokenBase.sol lines 37-39; scaledBalanceOf
+  function scaledBalanceOf(address user) external view override returns (uint256) {
+    return super.balanceOf(user);
+  }
+
+// Original Solidity: contracts/15/facilitators/aave/tokens/base/ScaledBalanceTokenBase.sol lines 75-75; storage
+    uint256 scaledBalance = super.balanceOf(onBehalfOf);
+
+// Original Solidity: contracts/15/facilitators/aave/tokens/base/ScaledBalanceTokenBase.sol lines 108-108; storage
+    uint256 scaledBalance = super.balanceOf(user);

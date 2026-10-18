@@ -33,3 +33,9 @@ results/spec/incomplete/17/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-
 contracts/20/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
 results/spec/incomplete/20/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
 results/spec/incomplete/20/*.sol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+
+# HELIX Project 15 historical source: retain original whitespace bytes.
+contracts/15/** -whitespace
+results/spec/incomplete/15/*.spec -whitespace
+results/spec/incomplete/15/*.sol -whitespace
+reports/15.md -whitespace

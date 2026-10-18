@@ -1,0 +1,8 @@
+INCOMPLETE HISTORICAL SOURCE DEPENDENCIES
+Property: facilitator_in_list_after_mint_and_burn
+Original Spec: contracts/15/ghoToken.spec lines 354-371
+Target: GhoToken
+
+- Unvendored historical Solidity library imports (Aave V3/OpenZeppelin and other upstream packages) and original solc/link Prover configuration
+
+A CVL methods declaration is not a missing Solidity method implementation. External package versions, harness behavior, deployment linkages and the historical Prover run cannot be reconstructed soundly from this snapshot. The preserved source era is not modernized to CVL2. Historical report status VERIFIED must not be read as a fresh proof.

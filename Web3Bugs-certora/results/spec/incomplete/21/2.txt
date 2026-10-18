@@ -1,0 +1,6 @@
+INCOMPLETE — getter and target dependency closure for quorumLeGuardian
+- DSM.spec:6 declares getGuardianLength() returns(uint256) envfree; no implementation of this method exists in archived Solidity, including DepositSecurityModule.sol. The getGuardians() return-array method is not a proven replacement.
+- DSM.spec:3 references DepositSecurityModuleHarness as DSMH, absent from archived tree. That missing harness could have contained getGuardianLength; mapping unproven.
+- DepositSecurityModule.sol:7 imports missing ../common/lib/ECDSA.sol.
+- Source semantics deliberately allow quorum>guardians.length (DepositSecurityModule.sol:222-229), making proposed invariant false on reachable authorized state; distinct from syntactic dependency and not formal Prover status.
+No reconstruction of missing symbols or patch to source is permitted.

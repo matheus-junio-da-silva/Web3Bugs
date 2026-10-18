@@ -14,7 +14,7 @@ This is a graph of local Solidity imports in the retained source, NOT a reconstr
 | ERC20FlashMint.spec | ERC20FlashMintMock | 2 | 8 | 0 |
 | ERC20Votes.spec | ERC20Votes (historical voting harness) | 3 | 17 | 0 |
 | ERC20Wrapper.spec | ERC20Wrapper (historical underlying-token harness) | 2 | 9 | 0 |
-| ERC721Votes.spec | ERC721Votes (historical voting harness) | 1 | 19 | 0 |
+| ERC721Votes.spec | ERC721Votes (historical voting harness) | 2 | 19 | 0 |
 | GovernorBase.spec | Governor (historical ERC20VotesHarness) | 2 | 21 | 0 |
 | GovernorCountingSimple.spec | GovernorCountingSimple (historical governor harness) | 2 | 15 | 0 |
 | GovernorPreventLateQuorum.spec | GovernorPreventLateQuorumHarness | 3 | 21 | 0 |

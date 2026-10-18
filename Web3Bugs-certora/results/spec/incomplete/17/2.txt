@@ -1,0 +1,3 @@
+Historical dependency closure blocker for compound.cvl::_setPendingAdmin:
+The historical V1 MoneyMarket contract with supply(address,uint256), withdraw(address,uint256), _setOriginationFee, _setOracle and related ABI is absent; the Compound V2 CToken/Comptroller is not a substitute.
+CVL methods declared are not implementation evidence; no invented mock or CVL2 migration has been inserted.

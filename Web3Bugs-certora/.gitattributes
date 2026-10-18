@@ -24,8 +24,17 @@ contracts/14/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-e
 results/spec/complete/14/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
 results/spec/complete/14/*.sol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
 
-# Preserve literal historical Project 18 OpenZeppelin source and CVL/Solidity excerpts.
-# Generated docs, reports and CSVs remain checked for whitespace.
+# Project 17: preserve literal historical CVL, spclnk and scenario whitespace
+contracts/17/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+results/spec/complete/17/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+results/spec/incomplete/17/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+
+# Contributed Project 20 historical source and literal excerpt settings
+contracts/20/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+results/spec/incomplete/20/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+results/spec/incomplete/20/*.sol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+
+# Project 18: unchanged original CVL and Solidity excerpt whitespace must be preserved.
 contracts/18/** -whitespace
 results/spec/complete/18/*.spec -whitespace
 results/spec/incomplete/18/*.spec -whitespace

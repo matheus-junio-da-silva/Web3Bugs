@@ -6,7 +6,7 @@
   "instances": 181,
   "complete": 69,
   "incomplete": 112,
-  "solidity_evidence_excerpt_count": 601,
+  "solidity_evidence_excerpt_count": 887,
   "unique_source_names": 168,
   "historical_broken_count": 4,
   "contract_graph": {
@@ -179,6 +179,7 @@
     "ERC721Votes.spec": {
       "target": "ERC721Votes (historical voting harness)",
       "entry": [
+        "contracts/token/ERC721/extensions/draft-ERC721Votes.sol",
         "contracts/mocks/ERC721VotesMock.sol"
       ],
       "closure": [

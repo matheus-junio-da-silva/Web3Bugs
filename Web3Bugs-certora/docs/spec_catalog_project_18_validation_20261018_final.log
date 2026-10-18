@@ -1,0 +1,25 @@
+Project 18 — final documentation and integration validation (2026-10-18)
+Branch: catalog/p18-farol-openzeppelin (existing PR #16, remains Draft)
+Merged upstream main: eba10cbb6a37ba5230bda307cdf9105ba72489dc
+Original PropertyGPT source SHA: 687f654c679ed45ab127b7949e2a29c8f5e491b9
+
+Pre-merge semantic audit:
+- Original 307/307 files preserved SHA-256; unchanged report PDF.
+- Original active CVL source: 168 declarations, 181 target contexts; byte-exact source-body fidelity 181/181.
+- Trailing spaces restored: example IDs 5, 8, 9, 21, 22, 43, 49 (3 ASCII spaces each).
+- 181 rows in docs/spec_catalog_project_18_semantic_matrix.csv.
+- 180/181 artifacts have a source-line-backed Solidity snippet. The remaining sanity probe has no known original target, incomplete.
+- 69 complete, 112 incomplete; four historical VIOLATED/FINDING (not current-run failures).
+- Original Timelock schedule(bytes32) CVL vs schedule(bytes) Solidity mismatch intentionally retained as incomplete.
+
+During rebase/merge reconciliation:
+- Current main CSV rows preserved byte-for-byte, with only P18 records appended.
+- P18: 181 spec rows, 3 historical issue rows, 1 contest row.
+- check_specs.py: exit 0, 736 spec examples and 741 relationships (entire merged dataset).
+- check_contests_csv.py: exit 0.
+- check_contracts.py: exit 0.
+- git -c core.whitespace=cr-at-eol diff --cached --check: exit 0.
+
+After final commit, the exact published SHA and HEAD four-command exit codes
+are recorded in the Project 18 PR #16 discussion. The scripts' successful exit
+codes certify catalog structure and diff whitespace, not Certora Prover soundness.

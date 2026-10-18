@@ -61,3 +61,12 @@ Graphical status symbols are not accurately representable through plain text ext
 - `docs/spec_catalog_project_18_evidence.json` records every source declaration and derived target-aware entry with line ranges, label and dependency blocker.
 - Source code excerpts have exact file+line headers and are documentation, not independently compilable contracts.
 - Validation results and HEAD hashes are recorded separately in the final validation log. Structural validators cannot establish formal soundness.
+
+## Final semantic-correlation review
+
+- The 181-row, target-aware evidence matrix is recorded at docs/spec_catalog_project_18_semantic_matrix.csv. Each row provides the exact CVL predicate and call sequence, related Solidity function/modifier names, storage declarations, original file-line positions, historical report scope and known missing harness/configuration.
+- All 181 N.md sections now identify individual functions/getters/storage, not anonymous target context. The 181 N.sol files contain original code snippets (or an explicit missing-target statement for the unbound sanity probe). 180/181 files contain verifiable source line anchors.
+- Original contract families are distinguished: AccessControl/onlyRole; ERC1155 balances and approvals, mint/burn/transfer hooks; ERC20Votes checkpoint and delegation writes; ERC721Votes uses historical draft-ERC721Votes.sol and Votes/Checkpoints History layout; Governor base / vote-counting / late-quorum extension; Initializable flat and multi-inheritance original harness contexts; TimelockController schedule hash, timestamps and access roles.
+- The seven trailing-whitespace discrepancies in source CVL extraction (examples 5, 8, 9, 21, 22, 43 and 49) were fixed by retaining the three original spaces after the final brace on the source line; the original 307 snapshot files remain byte-identical.
+- Historical proof statuses are unchanged: four VIOLATED/FINDING in historical tested revisions, no newly inferred VERIFIED outcome. Complete (69) is purely local source-dependency completeness; incomplete (112) retains N.txt.
+- All original runtime assumptions and non-reconstructible harnesses remain explicit. The TimelockController.schedule CVL selector and effective Solidity ABI are incompatible (third parameter bytes32 versus bytes). No modern replacement or automated signature fix was inserted.

@@ -2,7 +2,7 @@
 
 Original source: `PropertyGPT/certora_projects/rocket_joe` at main SHA `687f654c679ed45ab127b7949e2a29c8f5e491b9`. The complete 8-spec, 15-Solidity-file and original-PDF archive lives in `contracts/24/`. Original report summary is `reports/24.md` and a source Git hash manifest is in `docs/spec_catalog_project_24_sources.md`.
 
-**164 active CVL declarations, 164 target-specific instances; all 164 incomplete owing to historical missing CVL/Solidity harness closure.** Results supported for 58 individually named reported conditions, with other conditions NOT_STATED. No CVL2 migration or formal rerun is claimed.
+**164 active CVL declarations, 164 target-specific instances; all 164 incomplete owing to historical missing CVL/Solidity harness closure.** Results supported for 56 individually named reported conditions, with other conditions NOT_STATED. No CVL2 migration or formal rerun is claimed.
 
 ## Exhaustive source inventory
 
@@ -36,8 +36,8 @@ Original source: `PropertyGPT/certora_projects/rocket_joe` at main SHA `687f654c
 | 9 | `LEHighLevel.spec` | `hl_onlyOwnerSwitch` | rule | S5-3 | VERIFIED |
 | 10 | `LEHighLevel.spec` | `hl_whatShouldRevert` | rule | S5-2 | VERIFIED |
 | 11 | `LEInProgress.spec` | `transition_balThisZero` | rule | S6-4 | NOT_STATED |
-| 12 | `LEInProgress.spec` | `hl_moreDepositMoreGet` | rule | S6-4 | NOT_STATED |
-| 13 | `LEInProgress.spec` | `hl_withdrawLateMorePenalty` | rule | S6-4 | NOT_STATED |
+| 12 | `LEInProgress.spec` | `hl_moreDepositMoreGet` | rule | UNMAPPED | NOT_STATED |
+| 13 | `LEInProgress.spec` | `hl_withdrawLateMorePenalty` | rule | UNMAPPED | NOT_STATED |
 | 14 | `LEPreset.spec` | `oneStateOnly` | invariant | S5-2 | NOT_STATED |
 | 15 | `LEValidStates.spec` | `alwaysInitialized` | invariant | S3-2 | NOT_STATED |
 | 16 | `LEValidStates.spec` | `factoryGetPairCorrelationCurrentVals` | invariant | S6-4 | NOT_STATED |
@@ -171,14 +171,14 @@ Original source: `PropertyGPT/certora_projects/rocket_joe` at main SHA `687f654c
 | 144 | `LaunchEvent.spec` | `hl_createPairAtLeastOnce` | rule | S3-2 | NOT_STATED |
 | 145 | `Staking.spec` | `is_initialized` | invariant | S6-4 | NOT_STATED |
 | 146 | `Staking.spec` | `not_initializing` | invariant | UNMAPPED | NOT_STATED |
-| 147 | `Staking.spec` | `balanceOf_Joe_eq_totalJoeStaked` | invariant | S6-4 | VERIFIED |
+| 147 | `Staking.spec` | `balanceOf_Joe_eq_totalJoeStaked` | invariant | S6-4 | NOT_STATED |
 | 148 | `Staking.spec` | `user_balances_less_than_totalJoeStaked` | invariant | S6-4 | VERIFIED |
 | 149 | `Staking.spec` | `userInfo_amount_safe_mutate` | rule | S6-4 | VERIFIED |
 | 150 | `Staking.spec` | `RJPS_only_owner_and_function` | rule | S5-3 | VERIFIED |
-| 151 | `Staking.spec` | `pending_reward_decreased_only_user` | rule | S6-4 | VERIFIED |
-| 152 | `Staking.spec` | `staking_non_trivial_rJoe` | rule | S6-4 | VERIFIED |
+| 151 | `Staking.spec` | `pending_reward_decreased_only_user` | rule | S6-4 | NOT_STATED |
+| 152 | `Staking.spec` | `staking_non_trivial_rJoe` | rule | UNMAPPED | VERIFIED |
 | 153 | `Staking.spec` | `staking_trivial_on_zero_time` | rule | S6-4 | VERIFIED |
-| 154 | `Staking.spec` | `longer_stake_greater_return` | rule | S6-4 | VERIFIED |
+| 154 | `Staking.spec` | `longer_stake_greater_return` | rule | UNMAPPED | VERIFIED |
 | 155 | `Staking.spec` | `deposit_no_frontrunning` | rule | SE-1 | VERIFIED |
 | 156 | `Staking.spec` | `withdraw_no_frontrunning` | rule | SE-1 | VERIFIED |
 | 157 | `Staking.spec` | `additivity_withdraw` | rule | SE-1 | VERIFIED |
@@ -191,3 +191,14 @@ Original source: `PropertyGPT/certora_projects/rocket_joe` at main SHA `687f654c
 | 164 | `sanity.spec` | `sanity` | rule | UNMAPPED | NOT_STATED |
 
 Each `N.md` independently gives the asserted expression, identified storage, Solidity operations, falsifying counterexample, classification, report attribution, and modeling limitations. The official validators must be run against the exact published HEAD; generation alone does not constitute validation.
+
+## Second-pass counterexample and historical-attribution exceptions
+
+| Example | Correction | Evidence |
+|---:|---|---|
+| 12, 13 | UNMAPPED / NOT_STATED | In-progress LaunchEvent existential implications permit false antecedents. |
+| 147 | NOT_STATED / NOT_STATED | Source `>=` is weaker than PDF page 17 `==` despite matching name. |
+| 151 | NOT_STATED / INCONCLUSIVE | PDF page 18 yellow partial indicator; emergency withdrawal excluded. |
+| 152, 154 | VERIFIED (historical) / INCONCLUSIVE / UNMAPPED | Unconstrained existential witness can make implication vacuous; source 154 itself says vacuous. |
+
+These exceptions supersede any generic language in the original generated examples. Source files remain unchanged. Future reviews must inspect further quantification and method filters before treating historical marks as security evidence.

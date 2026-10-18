@@ -143,3 +143,37 @@ import {MarginPoolInterface} from "../interfaces/MarginPoolInterface.sol";
         emit CallExecuted(msg.sender, _args.callee, _args.data);
     }
 // END ORIGINAL EXCERPT
+
+
+// Additional exact historical implementation context: contracts/14/specs/harness/MarginPoolHarness.sol
+// Original lines: 1-15
+// BEGIN ORIGINAL LINES 1-15
+pragma solidity =0.6.10;
+
+pragma experimental ABIEncoderV2;
+
+import '../../contracts/core/MarginPool.sol';
+
+contract MarginPoolHarness is MarginPool {
+  constructor(address _addressBook) public MarginPool(_addressBook) {}
+
+  mapping(address => uint256) internal assetBalanceHavoc;
+
+  function havocSystemBalance(address _asset) public {
+    assetBalance[_asset] = assetBalanceHavoc[_asset];
+  }
+}
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/specs/harness/OtokenHarnessA.sol
+// Original lines: 1-8
+// BEGIN ORIGINAL LINES 1-8
+pragma solidity ^0.6.0;
+import '../../contracts/core/Otoken.sol';
+
+contract OtokenHarnessA is Otoken {
+  function havocTotalSupply(uint256 newVal) public {
+    _totalSupply = newVal;
+  }
+}
+// END ORIGINAL EXCERPT

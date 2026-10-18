@@ -60,3 +60,106 @@ contract Whitelist is Ownable {
     /// @notice emits an event when an oToken is whitelisted by the OtokenFactory module
     event OtokenWhitelisted(address indexed otoken);
 // END ORIGINAL EXCERPT
+
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Whitelist.sol
+// Original lines: 13-23
+// BEGIN ORIGINAL LINES 13-23
+    /// @notice AddressBook module address
+    address public addressBook;
+    /// @dev mapping to track whitelisted products
+    mapping(bytes32 => bool) internal whitelistedProduct;
+    /// @dev mapping to track whitelisted collateral
+    mapping(address => bool) internal whitelistedCollateral;
+    /// @dev mapping to track whitelisted oTokens
+    mapping(address => bool) internal whitelistedOtoken;
+    /// @dev mapping to track whitelisted callee addresses for the call action
+    mapping(address => bool) internal whitelistedCallee;
+
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Whitelist.sol
+// Original lines: 84-120
+// BEGIN ORIGINAL LINES 84-120
+    function isWhitelistedProduct(
+        address _underlying,
+        address _strike,
+        address _collateral,
+        bool _isPut
+    ) external view returns (bool) {
+        bytes32 productHash = keccak256(abi.encode(_underlying, _strike, _collateral, _isPut));
+
+        return whitelistedProduct[productHash];
+    }
+
+    /**
+     * @notice check if a collateral asset is whitelisted
+     * @param _collateral asset that is held as collateral against short/written options
+     * @return boolean, True if the collateral is whitelisted
+     */
+    function isWhitelistedCollateral(address _collateral) external view returns (bool) {
+        return whitelistedCollateral[_collateral];
+    }
+
+    /**
+     * @notice check if an oToken is whitelisted
+     * @param _otoken oToken address
+     * @return boolean, True if the oToken is whitelisted
+     */
+    function isWhitelistedOtoken(address _otoken) external view returns (bool) {
+        return whitelistedOtoken[_otoken];
+    }
+
+    /**
+     * @notice check if a callee address is whitelisted for the call action
+     * @param _callee callee destination address
+     * @return boolean, True if the address is whitelisted
+     */
+    function isWhitelistedCallee(address _callee) external view returns (bool) {
+        return whitelistedCallee[_callee];
+    }
+// END ORIGINAL EXCERPT
+
+// Additional exact historical implementation context: contracts/14/contracts/core/Whitelist.sol
+// Original lines: 177-215
+// BEGIN ORIGINAL LINES 177-215
+    function whitelistCollateral(address _collateral) external onlyOwner {
+        whitelistedCollateral[_collateral] = true;
+
+        emit CollateralWhitelisted(_collateral);
+    }
+
+    /**
+     * @notice allows the owner to blacklist a collateral address
+     * @dev can only be called from the owner address
+     * @param _collateral collateral asset address
+     */
+    function blacklistCollateral(address _collateral) external onlyOwner {
+        whitelistedCollateral[_collateral] = false;
+
+        emit CollateralBlacklisted(_collateral);
+    }
+
+    /**
+     * @notice allows the OtokenFactory module to whitelist a new option
+     * @dev can only be called from the OtokenFactory address
+     * @param _otokenAddress oToken
+     */
+    function whitelistOtoken(address _otokenAddress) external onlyFactory {
+        whitelistedOtoken[_otokenAddress] = true;
+
+        emit OtokenWhitelisted(_otokenAddress);
+    }
+
+    /**
+     * @notice allows the owner to blacklist an option
+     * @dev can only be called from the owner address
+     * @param _otokenAddress oToken
+     */
+    function blacklistOtoken(address _otokenAddress) external onlyOwner {
+        whitelistedOtoken[_otokenAddress] = false;
+
+        emit OtokenBlacklisted(_otokenAddress);
+    }
+
+// END ORIGINAL EXCERPT

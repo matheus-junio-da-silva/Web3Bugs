@@ -12,6 +12,7 @@ jobs:
       - name: Checkout source snapshot and extract PDF
         run: |
           git clone --depth=1 https://github.com/matheus-junio-da-silva/PropertyGPT.git source
+          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils > /dev/null
           pdftotext -layout source/certora_projects/compound_moneymarket/CompoundMoneyMarketV2Aug2019.pdf pdf.txt
           echo "=== SOURCE_SHA ==="
           git -C source rev-parse HEAD

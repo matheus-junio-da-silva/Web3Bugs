@@ -202,3 +202,7 @@ Each `N.md` independently gives the asserted expression, identified storage, Sol
 | 152, 154 | VERIFIED (historical) / INCONCLUSIVE / UNMAPPED | Unconstrained existential witness can make implication vacuous; source 154 itself says vacuous. |
 
 These exceptions supersede any generic language in the original generated examples. Source files remain unchanged. Future reviews must inspect further quantification and method filters before treating historical marks as security evidence.
+
+## Historic whitespace exception, not a source rewrite
+
+The exact Git validation on `df02d3ac36b4a4b8612e15ef4a97a251479679f2` returned exit 2 with 1,168 original whitespace diagnostics: 113 in archival CVL specs, 943 in repeated historical CVL extracted property/prelude blocks, and 112 in verbatim Solidity excerpts. All three Python validators returned exit 0 on that same remote GitHub Actions checkout (run `39159408480`; HEAD and origin/main SHA are recorded in its attached artifact). Since modifying those whitespace bytes would violate the historical-preservation requirement, per-directory `.gitattributes` entries turn off only blank-at-EOL, blank-at-EOF, and space-before-tab diagnostics **for these historical verbatim text copies**. Whitespace in new Markdown, CSV and other files remains checked by the same official `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD` command. No CVL or Solidity source body was edited. This is an explicit path-scoped archival exception, not a global bypass.

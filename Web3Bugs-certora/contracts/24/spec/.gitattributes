@@ -1,0 +1,2 @@
+# Historical CVL1 source: preserve exact trailing whitespace bytes.
+*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol

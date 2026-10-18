@@ -44,4 +44,11 @@ Comando na raiz da cópia Git real antes do commit: git -c core.whitespace=cr-at
 
 ## Publicação e CI
 
-A verificação de diff origin/main...HEAD, commit SHA e evidência GitHub Actions (se houver) são registrados no PR e na complementação deste arquivo após a publicação. CI não deve ser alegado como PASS antes de observar o run.
+## Verificação após commit e CI observados
+
+- Commit auditado: 106e4dd9af3350e0b1a57c10cdedaf899434282d.
+- Comando literal na raiz real: git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD, **exit 0** após o commit acima; nenhuma falha de whitespace.
+- GitHub Actions: [validate run #123](https://github.com/matheus-junio-da-silva/Web3Bugs/actions/runs/39172649710), run_id 39172649710, job integrity_validation (job 117808756340), status **completed**, conclusão **success** para o commit acima.
+- Steps CI check_contests_csv, check_contracts, check_git: **success**. O workflow de CI **não executa check_specs.py**; essa verificação foi realizada separadamente na VM (exit 0, 1222 exemplos / 1227 relações), como registrado acima.
+- O novo commit que atualiza apenas este relatório de validação terá seu próprio SHA/CI, a conferir após o push e documentar no PR. Nenhum merge foi solicitado.
+

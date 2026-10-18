@@ -4,6 +4,7 @@ Original Spec: contracts/15/set.spec lines 313-313
 Target: GhoToken
 
 - Generic set probe spec is imported by ghoToken.spec; no independent set harness/run target is archived
-- Unvendored historical Solidity library imports (Aave V3/OpenZeppelin and other upstream packages) and original solc/link Prover configuration
+- Concrete unvendored dependency paths: @openzeppelin/contracts/access/AccessControl.sol; @openzeppelin/contracts/token/ERC20/IERC20.sol; @openzeppelin/contracts/utils/structs/EnumerableSet.sol. The original solc/link Prover configuration is absent
 
 A CVL methods declaration is not a missing Solidity method implementation. External package versions, harness behavior, deployment linkages and the historical Prover run cannot be reconstructed soundly from this snapshot. The preserved source era is not modernized to CVL2. Historical report status NOT_STATED must not be read as a fresh proof.
+Historical set-specific dependency: set.spec explicitly documents that getFacilitatorsListLen must be defined in a Solidity harness; the GhoToken implementation does not provide it.

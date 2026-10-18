@@ -22,28 +22,7 @@
     return balance;
   }
 
-// Original Solidity: contracts/15/facilitators/aave/tokens/GhoVariableDebtToken.sol lines 265-265; storage
-    uint256 senderPreviousScaledBalance = super.balanceOf(sender);
-
-// Original Solidity: contracts/15/facilitators/aave/tokens/GhoVariableDebtToken.sol lines 266-266; storage
-    uint256 recipientPreviousScaledBalance = super.balanceOf(recipient);
-
-// Original Solidity: contracts/15/facilitators/aave/tokens/GhoVariableDebtToken.sol lines 335-335; storage
-    uint256 previousScaledBalance = super.balanceOf(user);
-
-// Original Solidity: contracts/15/facilitators/aave/tokens/GhoVariableDebtToken.sol lines 375-375; storage
-    uint256 previousScaledBalance = super.balanceOf(onBehalfOf);
-
-// Original Solidity: contracts/15/facilitators/aave/tokens/GhoVariableDebtToken.sol lines 423-423; storage
-    uint256 previousScaledBalance = super.balanceOf(user);
-
 // Original Solidity: contracts/15/facilitators/aave/tokens/base/ScaledBalanceTokenBase.sol lines 37-39; scaledBalanceOf
   function scaledBalanceOf(address user) external view override returns (uint256) {
     return super.balanceOf(user);
   }
-
-// Original Solidity: contracts/15/facilitators/aave/tokens/base/ScaledBalanceTokenBase.sol lines 75-75; storage
-    uint256 scaledBalance = super.balanceOf(onBehalfOf);
-
-// Original Solidity: contracts/15/facilitators/aave/tokens/base/ScaledBalanceTokenBase.sol lines 108-108; storage
-    uint256 scaledBalance = super.balanceOf(user);

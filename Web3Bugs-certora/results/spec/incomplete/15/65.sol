@@ -129,15 +129,3 @@
     emit Transfer(address(0), user, balanceIncrease);
     emit Mint(address(0), user, balanceIncrease, balanceIncrease, index);
   }
-
-// Original Solidity: contracts/15/facilitators/aave/tokens/GhoVariableDebtToken.sol lines 375-375; storage
-    uint256 previousScaledBalance = super.balanceOf(onBehalfOf);
-
-// Original Solidity: contracts/15/facilitators/aave/tokens/GhoVariableDebtToken.sol lines 423-423; storage
-    uint256 previousScaledBalance = super.balanceOf(user);
-
-// Original Solidity: contracts/15/facilitators/aave/tokens/base/ScaledBalanceTokenBase.sol lines 75-75; storage
-    uint256 scaledBalance = super.balanceOf(onBehalfOf);
-
-// Original Solidity: contracts/15/facilitators/aave/tokens/base/ScaledBalanceTokenBase.sol lines 108-108; storage
-    uint256 scaledBalance = super.balanceOf(user);

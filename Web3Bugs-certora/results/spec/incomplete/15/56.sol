@@ -1,3 +1,6 @@
+// Original Solidity: contracts/15/gho/GhoToken.sol lines 17-17; storage
+  EnumerableSet.AddressSet internal _facilitatorsList;
+
 // Original Solidity: contracts/15/gho/GhoToken.sol lines 37-50; mint
   function mint(address account, uint256 amount) external override {
     Facilitator storage f = _facilitators[msg.sender];

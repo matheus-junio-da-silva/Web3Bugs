@@ -34,7 +34,19 @@ contracts/20/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-e
 results/spec/incomplete/20/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
 results/spec/incomplete/20/*.sol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
 
-# HELIX Project 15 historical source: retain original whitespace bytes.
+# Radicle Drips Project 23: preserve byte-literal historical CVL and Solidity in snapshot
+contracts/23/** whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+results/spec/incomplete/23/*.spec whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+results/spec/incomplete/23/*.sol whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+
+# Contributed Project 18 historical source and literal excerpt settings
+contracts/18/** -whitespace
+results/spec/complete/18/*.spec -whitespace
+results/spec/incomplete/18/*.spec -whitespace
+results/spec/complete/18/*.sol -whitespace
+results/spec/incomplete/18/*.sol -whitespace
+
+# Contributed Project 15 historical source and literal excerpt settings
 contracts/15/** -whitespace
 results/spec/incomplete/15/*.spec -whitespace
 results/spec/incomplete/15/*.sol -whitespace

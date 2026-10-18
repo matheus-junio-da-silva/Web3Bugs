@@ -1,0 +1,7 @@
+Project 10 — example 35 — sanity / UNSPECIFIED
+
+Status: incomplete (missing necessary historical source dependency).
+Original CVL rule body is preserved byte-for-byte.
+
+- No concrete standalone verification target or script for specs/sanity.spec is attributable from the preserved snapshot. The diagnostic CVL assertion is literal, but target-dependent execution cannot be reconstructed.
+- No package lock, vendored source, exact historical implementation or executable historical Prover environment was substituted. Installing a modern dependency would alter this original snapshot.

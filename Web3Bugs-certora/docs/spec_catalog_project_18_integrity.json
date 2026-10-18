@@ -1,0 +1,381 @@
+{
+  "original_source_files": 307,
+  "matching_files": 307,
+  "report_sha256": "4a35df36c47e6e7e2b4333cb3890bc2a8cbca569e32b2fc6f24820b8a56cbc37",
+  "active_declarations": 168,
+  "instances": 181,
+  "complete": 69,
+  "incomplete": 112,
+  "solidity_evidence_excerpt_count": 887,
+  "unique_source_names": 168,
+  "historical_broken_count": 4,
+  "contract_graph": {
+    "AccessControl.spec": {
+      "target": "AccessControlMock",
+      "entry": [
+        "contracts/access/AccessControl.sol",
+        "contracts/mocks/AccessControlMock.sol"
+      ],
+      "closure": [
+        "contracts/access/AccessControl.sol",
+        "contracts/access/IAccessControl.sol",
+        "contracts/mocks/AccessControlMock.sol",
+        "contracts/utils/Context.sol",
+        "contracts/utils/Strings.sol",
+        "contracts/utils/introspection/ERC165.sol",
+        "contracts/utils/introspection/IERC165.sol"
+      ],
+      "missing": []
+    },
+    "ERC1155.spec": {
+      "target": "ERC1155Mock",
+      "entry": [
+        "contracts/token/ERC1155/ERC1155.sol",
+        "contracts/mocks/ERC1155Mock.sol"
+      ],
+      "closure": [
+        "contracts/mocks/ERC1155Mock.sol",
+        "contracts/token/ERC1155/ERC1155.sol",
+        "contracts/token/ERC1155/IERC1155.sol",
+        "contracts/token/ERC1155/IERC1155Receiver.sol",
+        "contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol",
+        "contracts/utils/Address.sol",
+        "contracts/utils/Context.sol",
+        "contracts/utils/introspection/ERC165.sol",
+        "contracts/utils/introspection/IERC165.sol"
+      ],
+      "missing": []
+    },
+    "ERC1155Burnable.spec": {
+      "target": "ERC1155BurnableMock",
+      "entry": [
+        "contracts/token/ERC1155/extensions/ERC1155Burnable.sol",
+        "contracts/mocks/ERC1155BurnableMock.sol",
+        "contracts/token/ERC1155/ERC1155.sol"
+      ],
+      "closure": [
+        "contracts/mocks/ERC1155BurnableMock.sol",
+        "contracts/token/ERC1155/ERC1155.sol",
+        "contracts/token/ERC1155/IERC1155.sol",
+        "contracts/token/ERC1155/IERC1155Receiver.sol",
+        "contracts/token/ERC1155/extensions/ERC1155Burnable.sol",
+        "contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol",
+        "contracts/utils/Address.sol",
+        "contracts/utils/Context.sol",
+        "contracts/utils/introspection/ERC165.sol",
+        "contracts/utils/introspection/IERC165.sol"
+      ],
+      "missing": []
+    },
+    "ERC1155Pausable.spec": {
+      "target": "ERC1155PausableMock",
+      "entry": [
+        "contracts/token/ERC1155/extensions/ERC1155Pausable.sol",
+        "contracts/mocks/ERC1155PausableMock.sol",
+        "contracts/token/ERC1155/ERC1155.sol"
+      ],
+      "closure": [
+        "contracts/mocks/ERC1155Mock.sol",
+        "contracts/mocks/ERC1155PausableMock.sol",
+        "contracts/security/Pausable.sol",
+        "contracts/token/ERC1155/ERC1155.sol",
+        "contracts/token/ERC1155/IERC1155.sol",
+        "contracts/token/ERC1155/IERC1155Receiver.sol",
+        "contracts/token/ERC1155/extensions/ERC1155Pausable.sol",
+        "contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol",
+        "contracts/utils/Address.sol",
+        "contracts/utils/Context.sol",
+        "contracts/utils/introspection/ERC165.sol",
+        "contracts/utils/introspection/IERC165.sol"
+      ],
+      "missing": []
+    },
+    "ERC1155Supply.spec": {
+      "target": "ERC1155Supply (historical verification harness)",
+      "entry": [
+        "contracts/token/ERC1155/extensions/ERC1155Supply.sol",
+        "contracts/mocks/ERC1155SupplyMock.sol"
+      ],
+      "closure": [
+        "contracts/mocks/ERC1155Mock.sol",
+        "contracts/mocks/ERC1155SupplyMock.sol",
+        "contracts/token/ERC1155/ERC1155.sol",
+        "contracts/token/ERC1155/IERC1155.sol",
+        "contracts/token/ERC1155/IERC1155Receiver.sol",
+        "contracts/token/ERC1155/extensions/ERC1155Supply.sol",
+        "contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol",
+        "contracts/utils/Address.sol",
+        "contracts/utils/Context.sol",
+        "contracts/utils/introspection/ERC165.sol",
+        "contracts/utils/introspection/IERC165.sol"
+      ],
+      "missing": []
+    },
+    "ERC20FlashMint.spec": {
+      "target": "ERC20FlashMintMock",
+      "entry": [
+        "contracts/token/ERC20/extensions/ERC20FlashMint.sol",
+        "contracts/mocks/ERC20FlashMintMock.sol"
+      ],
+      "closure": [
+        "contracts/interfaces/IERC3156FlashBorrower.sol",
+        "contracts/interfaces/IERC3156FlashLender.sol",
+        "contracts/mocks/ERC20FlashMintMock.sol",
+        "contracts/token/ERC20/ERC20.sol",
+        "contracts/token/ERC20/IERC20.sol",
+        "contracts/token/ERC20/extensions/ERC20FlashMint.sol",
+        "contracts/token/ERC20/extensions/IERC20Metadata.sol",
+        "contracts/utils/Context.sol"
+      ],
+      "missing": []
+    },
+    "ERC20Votes.spec": {
+      "target": "ERC20Votes (historical voting harness)",
+      "entry": [
+        "contracts/token/ERC20/extensions/ERC20Votes.sol",
+        "contracts/mocks/ERC20VotesMock.sol",
+        "contracts/governance/utils/Votes.sol"
+      ],
+      "closure": [
+        "contracts/governance/utils/IVotes.sol",
+        "contracts/governance/utils/Votes.sol",
+        "contracts/mocks/ERC20VotesMock.sol",
+        "contracts/token/ERC20/ERC20.sol",
+        "contracts/token/ERC20/IERC20.sol",
+        "contracts/token/ERC20/extensions/ERC20Votes.sol",
+        "contracts/token/ERC20/extensions/IERC20Metadata.sol",
+        "contracts/token/ERC20/extensions/draft-ERC20Permit.sol",
+        "contracts/token/ERC20/extensions/draft-IERC20Permit.sol",
+        "contracts/utils/Checkpoints.sol",
+        "contracts/utils/Context.sol",
+        "contracts/utils/Counters.sol",
+        "contracts/utils/Strings.sol",
+        "contracts/utils/cryptography/ECDSA.sol",
+        "contracts/utils/cryptography/draft-EIP712.sol",
+        "contracts/utils/math/Math.sol",
+        "contracts/utils/math/SafeCast.sol"
+      ],
+      "missing": []
+    },
+    "ERC20Wrapper.spec": {
+      "target": "ERC20Wrapper (historical underlying-token harness)",
+      "entry": [
+        "contracts/token/ERC20/extensions/ERC20Wrapper.sol",
+        "contracts/mocks/ERC20WrapperMock.sol"
+      ],
+      "closure": [
+        "contracts/mocks/ERC20WrapperMock.sol",
+        "contracts/token/ERC20/ERC20.sol",
+        "contracts/token/ERC20/IERC20.sol",
+        "contracts/token/ERC20/extensions/ERC20Wrapper.sol",
+        "contracts/token/ERC20/extensions/IERC20Metadata.sol",
+        "contracts/token/ERC20/extensions/draft-IERC20Permit.sol",
+        "contracts/token/ERC20/utils/SafeERC20.sol",
+        "contracts/utils/Address.sol",
+        "contracts/utils/Context.sol"
+      ],
+      "missing": []
+    },
+    "ERC721Votes.spec": {
+      "target": "ERC721Votes (historical voting harness)",
+      "entry": [
+        "contracts/token/ERC721/extensions/draft-ERC721Votes.sol",
+        "contracts/mocks/ERC721VotesMock.sol"
+      ],
+      "closure": [
+        "contracts/governance/utils/IVotes.sol",
+        "contracts/governance/utils/Votes.sol",
+        "contracts/mocks/ERC721VotesMock.sol",
+        "contracts/token/ERC721/ERC721.sol",
+        "contracts/token/ERC721/IERC721.sol",
+        "contracts/token/ERC721/IERC721Receiver.sol",
+        "contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "contracts/token/ERC721/extensions/draft-ERC721Votes.sol",
+        "contracts/utils/Address.sol",
+        "contracts/utils/Checkpoints.sol",
+        "contracts/utils/Context.sol",
+        "contracts/utils/Counters.sol",
+        "contracts/utils/Strings.sol",
+        "contracts/utils/cryptography/ECDSA.sol",
+        "contracts/utils/cryptography/draft-EIP712.sol",
+        "contracts/utils/introspection/ERC165.sol",
+        "contracts/utils/introspection/IERC165.sol",
+        "contracts/utils/math/Math.sol",
+        "contracts/utils/math/SafeCast.sol"
+      ],
+      "missing": []
+    },
+    "GovernorBase.spec": {
+      "target": "Governor (historical ERC20VotesHarness)",
+      "entry": [
+        "contracts/governance/Governor.sol",
+        "contracts/mocks/GovernorMock.sol"
+      ],
+      "closure": [
+        "contracts/governance/Governor.sol",
+        "contracts/governance/IGovernor.sol",
+        "contracts/governance/extensions/GovernorCountingSimple.sol",
+        "contracts/governance/extensions/GovernorProposalThreshold.sol",
+        "contracts/governance/extensions/GovernorSettings.sol",
+        "contracts/governance/extensions/GovernorVotes.sol",
+        "contracts/governance/extensions/GovernorVotesQuorumFraction.sol",
+        "contracts/governance/utils/IVotes.sol",
+        "contracts/mocks/GovernorMock.sol",
+        "contracts/token/ERC1155/IERC1155Receiver.sol",
+        "contracts/token/ERC721/IERC721Receiver.sol",
+        "contracts/utils/Address.sol",
+        "contracts/utils/Context.sol",
+        "contracts/utils/Strings.sol",
+        "contracts/utils/Timers.sol",
+        "contracts/utils/cryptography/ECDSA.sol",
+        "contracts/utils/cryptography/draft-EIP712.sol",
+        "contracts/utils/introspection/ERC165.sol",
+        "contracts/utils/introspection/IERC165.sol",
+        "contracts/utils/math/SafeCast.sol",
+        "contracts/utils/structs/DoubleEndedQueue.sol"
+      ],
+      "missing": []
+    },
+    "GovernorCountingSimple.spec": {
+      "target": "GovernorCountingSimple (historical governor harness)",
+      "entry": [
+        "contracts/governance/extensions/GovernorCountingSimple.sol",
+        "contracts/governance/Governor.sol"
+      ],
+      "closure": [
+        "contracts/governance/Governor.sol",
+        "contracts/governance/IGovernor.sol",
+        "contracts/governance/extensions/GovernorCountingSimple.sol",
+        "contracts/token/ERC1155/IERC1155Receiver.sol",
+        "contracts/token/ERC721/IERC721Receiver.sol",
+        "contracts/utils/Address.sol",
+        "contracts/utils/Context.sol",
+        "contracts/utils/Strings.sol",
+        "contracts/utils/Timers.sol",
+        "contracts/utils/cryptography/ECDSA.sol",
+        "contracts/utils/cryptography/draft-EIP712.sol",
+        "contracts/utils/introspection/ERC165.sol",
+        "contracts/utils/introspection/IERC165.sol",
+        "contracts/utils/math/SafeCast.sol",
+        "contracts/utils/structs/DoubleEndedQueue.sol"
+      ],
+      "missing": []
+    },
+    "GovernorPreventLateQuorum.spec": {
+      "target": "GovernorPreventLateQuorumHarness",
+      "entry": [
+        "contracts/governance/extensions/GovernorPreventLateQuorum.sol",
+        "contracts/governance/Governor.sol",
+        "contracts/mocks/GovernorPreventLateQuorumMock.sol"
+      ],
+      "closure": [
+        "contracts/governance/Governor.sol",
+        "contracts/governance/IGovernor.sol",
+        "contracts/governance/extensions/GovernorCountingSimple.sol",
+        "contracts/governance/extensions/GovernorPreventLateQuorum.sol",
+        "contracts/governance/extensions/GovernorSettings.sol",
+        "contracts/governance/extensions/GovernorVotes.sol",
+        "contracts/governance/utils/IVotes.sol",
+        "contracts/mocks/GovernorPreventLateQuorumMock.sol",
+        "contracts/token/ERC1155/IERC1155Receiver.sol",
+        "contracts/token/ERC721/IERC721Receiver.sol",
+        "contracts/utils/Address.sol",
+        "contracts/utils/Context.sol",
+        "contracts/utils/Strings.sol",
+        "contracts/utils/Timers.sol",
+        "contracts/utils/cryptography/ECDSA.sol",
+        "contracts/utils/cryptography/draft-EIP712.sol",
+        "contracts/utils/introspection/ERC165.sol",
+        "contracts/utils/introspection/IERC165.sol",
+        "contracts/utils/math/Math.sol",
+        "contracts/utils/math/SafeCast.sol",
+        "contracts/utils/structs/DoubleEndedQueue.sol"
+      ],
+      "missing": []
+    },
+    "Initializable.spec": {
+      "target": "Initializable (historical two harness configurations)",
+      "entry": [
+        "contracts/proxy/utils/Initializable.sol",
+        "contracts/mocks/InitializableMock.sol",
+        "contracts/mocks/MultipleInheritanceInitializableMocks.sol",
+        "contracts/mocks/SingleInheritanceInitializableMocks.sol"
+      ],
+      "closure": [
+        "contracts/mocks/InitializableMock.sol",
+        "contracts/mocks/MultipleInheritanceInitializableMocks.sol",
+        "contracts/mocks/SingleInheritanceInitializableMocks.sol",
+        "contracts/proxy/utils/Initializable.sol",
+        "contracts/utils/Address.sol"
+      ],
+      "missing": []
+    },
+    "RulesInProgress.spec": {
+      "target": "Governor (RulesInProgress; historical ERC20VotesHarness)",
+      "entry": [
+        "contracts/governance/Governor.sol",
+        "contracts/governance/extensions/GovernorCountingSimple.sol"
+      ],
+      "closure": [
+        "contracts/governance/Governor.sol",
+        "contracts/governance/IGovernor.sol",
+        "contracts/governance/extensions/GovernorCountingSimple.sol",
+        "contracts/token/ERC1155/IERC1155Receiver.sol",
+        "contracts/token/ERC721/IERC721Receiver.sol",
+        "contracts/utils/Address.sol",
+        "contracts/utils/Context.sol",
+        "contracts/utils/Strings.sol",
+        "contracts/utils/Timers.sol",
+        "contracts/utils/cryptography/ECDSA.sol",
+        "contracts/utils/cryptography/draft-EIP712.sol",
+        "contracts/utils/introspection/ERC165.sol",
+        "contracts/utils/introspection/IERC165.sol",
+        "contracts/utils/math/SafeCast.sol",
+        "contracts/utils/structs/DoubleEndedQueue.sol"
+      ],
+      "missing": []
+    },
+    "TimelockController.spec": {
+      "target": "TimelockController",
+      "entry": [
+        "contracts/governance/TimelockController.sol"
+      ],
+      "closure": [
+        "contracts/access/AccessControl.sol",
+        "contracts/access/IAccessControl.sol",
+        "contracts/governance/TimelockController.sol",
+        "contracts/token/ERC1155/IERC1155Receiver.sol",
+        "contracts/token/ERC721/IERC721Receiver.sol",
+        "contracts/utils/Address.sol",
+        "contracts/utils/Context.sol",
+        "contracts/utils/Strings.sol",
+        "contracts/utils/introspection/ERC165.sol",
+        "contracts/utils/introspection/IERC165.sol"
+      ],
+      "missing": []
+    },
+    "sanity.spec": {
+      "target": "UNRESOLVED (generic method probe)",
+      "entry": [
+        "contracts/governance/Governor.sol"
+      ],
+      "closure": [
+        "contracts/governance/Governor.sol",
+        "contracts/governance/IGovernor.sol",
+        "contracts/token/ERC1155/IERC1155Receiver.sol",
+        "contracts/token/ERC721/IERC721Receiver.sol",
+        "contracts/utils/Address.sol",
+        "contracts/utils/Context.sol",
+        "contracts/utils/Strings.sol",
+        "contracts/utils/Timers.sol",
+        "contracts/utils/cryptography/ECDSA.sol",
+        "contracts/utils/cryptography/draft-EIP712.sol",
+        "contracts/utils/introspection/ERC165.sol",
+        "contracts/utils/introspection/IERC165.sol",
+        "contracts/utils/math/SafeCast.sol",
+        "contracts/utils/structs/DoubleEndedQueue.sol"
+      ],
+      "missing": []
+    }
+  }
+}

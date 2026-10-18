@@ -1,0 +1,6 @@
+Project 18 / example 76 / delegate_no_frontrunning
+Status: incomplete
+Target: ERC20Votes (historical voting harness)
+Missing historical dependency/evidence:
+- Historical checkpoint getters and internal delegate/mint/burn harness ABI (ckptFromBlock, ckptVotes, unsafeNumCheckpoints, and/or _delegate) is absent in the retained mocks.
+No replacement modern contract or guessed harness may be silently inserted.

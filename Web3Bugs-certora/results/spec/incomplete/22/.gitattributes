@@ -1,0 +1,2 @@
+*.spec whitespace=-trailing-space
+*.sol whitespace=-trailing-space

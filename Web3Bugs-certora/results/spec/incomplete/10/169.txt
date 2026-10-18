@@ -1,0 +1,13 @@
+Project 10 example 169; startStateCleanup / HBProtocol; report #31, p. 30.
+
+Status: incomplete. This is an applicable and materially distinct *source/target* specification context, not an individual executed historical Prover result.
+
+Required source and model inputs:
+- Selected `--verify HBProtocol:specs/proxy.spec`; launcher: contracts/10/specs/scripts/runHBProtocol.sh.
+- CVL `arbitrary(method f)` at proxy.spec:580-584, relevant methods declaration, invariant/definitions and original rule; selected dependencies are literal in 169.spec.
+- Handler source: contracts/10/contracts/handlers/bprotocol/HBProtocol.sol. Nominal target source present; not proven equivalent to audited 2021 commit.
+- getSlot(slot) injected via sload; getStackLengthSlot() injected via stack_slot, absent from preserved Storage.sol.
+- Target-reachable Solidity imports: original `@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol` and `@openzeppelin/contracts/access/Ownable.sol` are not vendored in the saved snapshot; `_runHandler.sh` rewrites one import to an equally absent OpenZeppelin `ERC20.sol`, and HandlerBase requires unresolved `IERC20`.
+- For #29/#30/#31/#32, original injected getter or storage symbols need the exact pre-2021 harness; preserved `_getCubeCounter`, `CUBE_COUNTER_KEY` and `stack_slot` do not provide a sound matching implementation.
+- The script selects target-dependent functions after transformations; no execution/trace/prover status was inferred from report `None`.
+- No replacement current libraries or invented handler contract included.

@@ -1,0 +1,6 @@
+Project 18 / example 114 / SumOfVotesCastEqualSumOfPowerOfVotedPerProposal
+Status: incomplete
+Target: GovernorCountingSimple (historical governor harness)
+Missing historical dependency/evidence:
+- Missing ERC20VotesHarness historical using target, custom getter/override/munging, and original linked deployment configuration.
+No replacement modern contract or guessed harness may be silently inserted.

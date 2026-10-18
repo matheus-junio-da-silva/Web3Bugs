@@ -135,6 +135,8 @@ def abi_present(fname, files):
  return any(pat.search(text) for text in files.values())
 def relevant_choice(prop):
  n=prop["name"];src=prop["source"]
+ if n=="mintThenRedeem":return [("contracts/CToken.sol","mintFresh"),("contracts/CToken.sol","redeemFresh")]
+ if n=="liquidateBorrowFresh":return [("contracts/CToken.sol","liquidateBorrowFresh"),("contracts/CToken.sol","seize"),("spec/formal/contracts/CErc20Certora.sol","liquidateBorrowFreshPub")]
  if src=="frame.cvl": return [("contracts/CToken.sol",n.replace("frame_",""))]
  if n in ACTION_MAP:
   fn=ACTION_MAP[n]
@@ -198,34 +200,118 @@ def classify(prop,source):
  result="VERIFIED" if (fname,n) in PRIMARY_VERIFIED else "NOT_STATED"
  outcome="NO_FINDING" if result=="VERIFIED" else "NOT_STATED"
  return ("incomplete" if reason else "complete"),label,intent,result,outcome,reason,missing
+def semantic_details(prop):
+ """Ground each explanation in the executable CVL read-set and actual source storage."""
+ block=prop["block"]; name=prop["name"]
+ observables=[
+  ("balanceOf","CToken.balanceOf(address) reads accountTokens[address] (token-account balance)"),
+  ("totalSupply","CToken.totalSupply (aggregate outstanding cTokens)"),
+  ("borrowBalanceStored","CToken.borrowBalanceStored(address) calculates from accountBorrows[address] and borrowIndex"),
+  ("totalBorrows","CToken.totalBorrows (aggregate borrower principal plus accrued interest)"),
+  ("totalReserves","CToken.totalReserves (protocol reserve accounting)"),
+  ("accrualBlockNumber","CToken.accrualBlockNumber (interest-accrual checkpoint)"),
+  ("borrowIndex","CToken.borrowIndex (global accrual multiplier)"),
+  ("getCash","CToken.getCash / CErc20.getCashPrior (underlying token balance of the market)"),
+  ("getCashOf","CErc20Certora.getCashOf (external underlying balance; harness-only observation)"),
+  ("exchangeRateStored","CToken.exchangeRateStored (cash + borrows - reserves divided by supply)"),
+  ("allowance","CToken.transferAllowances (spender allowance)"),
+  ("reserveFactorMantissa","CToken.reserveFactorMantissa (fraction of accrued interest routed to reserves)"),
+  ("comptroller","CToken.comptroller (risk-policy controller address)"),
+  ("interestRateModel","CToken.interestRateModel (external borrow-rate model address)"),
+  ("admin","CToken.admin / Comptroller administrative storage (privileged caller identity)"),
+  ("pendingAdmin","CToken.pendingAdmin / Unitroller pendingAdmin (pending administrator identity)"),
+  ("markets","Comptroller.markets mapping (listed-market configuration and collateral factor)"),
+  ("collateralFactor","Comptroller.markets[asset].collateralFactorMantissa (per-asset collateral policy)"),
+  ("getAccountSnapshot","CToken.getAccountSnapshot reads balances, debts and exchange-rate data"),
+  ("getCashOfInOther","CErc20Certora linked collateral-market underlying balance"),
+  ("balanceOfInOther","CErc20Certora linked collateral cToken balance"),
+  ("etherBalance","MaximillionCertora.etherBalance reads ETH balance in utility refund scenario"),
+ ]
+ matched=[]
+ for sym,description in observables:
+  if re.search(r"\b"+re.escape(sym)+r"\b",block) and description not in matched:
+   matched.append(description)
+ return matched or ["The CVL reads only the historical method observations named in its declaration; inspect its exact static_assert and the linked Solidity excerpt."]
+def example_witness(prop):
+ n=prop["name"];src=prop["source"]
+ if src=="frame.cvl":
+  field=n[len("frame_"):]
+  return ("Select a legal state-changing method f that updates "+field+" (for example, a relevant account transfer or accrual), "
+          "keep both observations in ordered environments, and old != new falsifies static_assert old == new. "
+          "This **does not by itself establish a vulnerability**, because f has no permitted-method exclusion.")
+ if src=="compound.cvl":
+  return ("Choose a caller/new setting for "+n+" that violates the asserted authorization or expected pre/post administrative value. "
+          "The V1 target needed to execute this witness is absent, so this is an **abstract violation scenario**, not an observed bug in V2.")
+ if src in ("_setMarketPolicyHook.cvl","_setMarketPriceOracle.cvl","admin_setCollateralFactor.cvl"):
+  return ("With the asserted pre-market configuration, a call returns a success/error value inconsistent with its access-control "
+          "predicate, or the expected per-market oracle/policy/collateral state does not follow the return code. "
+          "The historical helper or getter ABI is missing, so no executable witness is claimed.")
+ if n=="accrueInterest":
+  return ("With a successful accrued-interest result, observe a borrowIndex, totalBorrows, totalReserves or accrualBlockNumber "
+          "that differs from the explicit interest equations in static_assert, after satisfying the prescribed interest model response.")
+ if n in ("mintFresh","mintFresh_extended","mintThenRedeem"):
+  return ("The market reports a successful mint/redeem but totalSupply, the user's balance or underlying cash moves by an amount "
+          "that violates the assertion's expected mint/redeem conservation or failure-case unchanged-state obligations.")
+ if n=="redeemFresh":
+  return ("A successful redeem burns the wrong number of account cTokens, changes totalSupply inconsistently, or produces "
+          "an underlying-cash delta inconsistent with the asserted redemption and error-code requirements.")
+ if n=="borrowFresh":
+  return ("On a successful borrow, totalBorrows or accountBorrows rises by a different amount than the borrower receives in "
+          "underlying cash, or a failed borrow mutates accounting contrary to the assert clauses.")
+ if n=="repayBorrowFresh":
+  return ("The borrower debt or totalBorrows changes by an amount that differs from the payer transfer under the asserted "
+          "non-reverting repayment path, or a rejected repayment still mutates balances.")
+ if n=="liquidateBorrowFresh":
+  return ("A successful liquidation debits borrowed-market debt but fails to credit/debit the required collateral cTokens "
+          "for liquidator and borrower, or changes unrelated collateral/account fields forbidden by the source assertions.")
+ if n=="seize":
+  return ("After a permitted seizure, liquidator and borrower collateral balances do not change by matching opposite token "
+          "amounts, the total supply shifts unexpectedly, or failure mutates collateral state.")
+ if n=="transferFrom":
+  return ("A successful transfer changes source/destination token balances by inconsistent amounts or violates allowance; "
+          "alternatively a failed transfer changes balances despite the negative-result postconditions.")
+ if n=="repayBehalf":
+  return ("A non-reverting payment leaves borrower debt above the asserted remainder or fails to refund the excess ETH "
+          "when msg.value exceeds the borrow balance.")
+ if src=="general.cvl":
+  return ("An unauthorized caller changes admin, pendingAdmin or comptroller state, or an authorized call returns the wrong "
+          "success code while the asserted next state differs from the original postconditions.")
+ return ("Choose inputs satisfying the CVL preconditions and a non-reverting result with an incorrect accounting or "
+         "administrative state transition; the explicit static_assert then evaluates to false.")
 def as_md(prop,status,label,intent,result,outcome,reason,missing,refs,sha):
- n=prop["name"];src=prop["source"];calls=", ".join(sorted(prop["calls"]))
- asserted=[x.strip()[:130] for x in prop["block"].splitlines() if "static_assert" in x]
- why=(
-  "A counterexample selects environments and inputs satisfying the CVL prerequisites, executes the invoked entrypoint and obtains a post-state or result that falsifies at least one original static_assert. "
-  "For an unrestricted frame rule, a normal write by an unconstrained method f can falsify old == new without being a security issue."
-  if src=="frame.cvl" else
-  "A counterexample selects valid symbolic inputs/environment constraints, invokes the specified historical entrypoint and demonstrates a return code or observed post-state inconsistent with the asserted authorization, balances, reserves, cash or borrow behavior."
- )
- line_names="; ".join(x[0]+" ("+x[1]+")" for x in refs)
+ n=prop["name"];src=prop["source"]
+ calls=", ".join(sorted(prop["calls"])) or "(none)"
+ observed=semantic_details(prop)
+ code_refs="; ".join(BT+s+BT+" lines "+l for s,l in refs)
  s="# Example "+str(prop["index"])+" — "+BT+n+BT+"\n\n"
- s+="## Status\n"+status+"; historical CVL/Specify retained, no CVL2 conversion. Result="+result+"; Detection Outcome="+outcome+".\n\n"
- s+="## Bug Label relationship\n"+BT+label+BT+": "+intent+"\n\n"
- s+="## Original sources\n- "+BT+"contracts/17/spec/formal/"+src+BT+" lines "+prop["spec_lines"]+"; source SHA-256 "+sha+".\n- Target: "+SOURCE_TARGET[src]+".\n- Solidity: "+line_names+".\n\n"
- s+="## Motivation\n"+intent+" The label refers to the executable assertion and does not automatically classify a historical finding.\n\n"
- s+="## Reconstructed methodology\nThe original block contains "+str(len(asserted))+" statement(s) beginning with static_assert, and invokes/observes: "+(calls or "(none)")+". "+why+"\n\n"
- s+="## Why the Solidity excerpt is relevant\nThe extracted functions or storage entries expose the state transitions read by the CVL (token balances, accountBorrows, totalSupply, totalBorrows, totalReserves, accrualBlockNumber or privileged admin fields as applicable). The cited code is historical context and not a replacement for absent verification wrappers. Inspect the precise source implementation before inferring a proof obligation.\n\n"
- s+="## Dependencies included\nThe extracted .spec includes only original method signatures called by this rule and its literal full property block. Linker .spclnk data, imported Solidity, dynamic method quantification, and environment assumptions remain separate historical configuration concerns.\n\n"
- if status=="incomplete":s+="## Missing dependencies\n"+reason+"\n\nThe issue is a missing target interface/implementation, not merely absent modern compiler or Certora Prover.\n\n"
- s+="## Historical outcome boundaries\n"
+ s+="## Status\n"+status+"; literal legacy Specify/CVL retained. Formal Result: "+result+"; Detection Outcome: "+outcome+".\n\n"
+ s+="## Bug Label relationship\n"+BT+label+BT+" — "+intent+"\n\n"
+ s+="## Original sources\nCVL: "+BT+"contracts/17/spec/formal/"+src+BT+" lines "+prop["spec_lines"]+" (SHA-256 "+sha+").\n\n"
+ s+="Historical target: "+SOURCE_TARGET[src]+".\n\nSolidity: "+code_refs+".\n\n"
+ s+="## Motivation\n"+intent+" The Bug Label categorizes only the encoded assertion, not a finding inferred from a report summary.\n\n"
+ s+="## Reconstructed methodology\nThe rule uses "+str(len(re.findall(r'\bstatic_assert\b',prop["block"])))+" executable static_assert clauses (possibly compound), calling or observing: "+calls+". Ordered pre/action/post environments, return values, arithmetic, error-case antecedents and any assumptions in the literal block remain authoritative.\n\n"
+ s+="## Exact Solidity state/function relationship\n"
+ for item in observed:s+="- "+item+".\n"
+ s+="The Solidity excerpts above retain the exact original source line ranges. Only symbols actually tested or involved in a tracked outcome are explanatory; other methods in a source file are not automatically proof dependencies.\n\n"
+ s+="## Hypothetical counterexample\n"+example_witness(prop)+" This describes the type of contradiction needed, **not** an actual Prover result.\n\n"
+ s+="## Dependency closure\nRequired historical method selectors: "+calls+". Original declarations used by this rule are copied verbatim into the extracted .spec. "
+ if src=="frame.cvl":
+  s+="The parameter "+BT+"method f"+BT+" is a symbolic quantified CVL method, **not** an absent Solidity method called f. The rule has no .spclnk target binding or method exclusion; the V2 CToken target is a snapshot-level interpretation only.\n\n"
+ else:s+="The source .spclnk and auxiliary Solidity links establish context when present; file presence is not confused with proof of satisfiability or soundness.\n\n"
+ if status=="incomplete":
+  s+="## Missing historical dependencies\n"+reason+"\n\nThis is a concrete snapshot blocker. A modern CVL parser or Prover being unavailable is *not* itself the incomplete reason.\n\n"
+ elif missing:
+  s+="## Pending semantic caveat\nUnresolved method-selector observations require independent inspection: "+", ".join(missing)+".\n\n"
+ s+="## Historical result and soundness limits\n"
  if result=="VERIFIED":
-  s+="The PDF executive summary (pages 2–3) explicitly states verification for this primary operation and the appendix includes the matching verification family. This is a reported historical achievement under the modeled harnesses; **it is not a fresh proof** of this extracted file, other targets, or variants.\n"
+  s+="Report pages 2–3 explicitly describe verification of this primary operation; the appendix documents the corresponding verification family. The status is attributed to the **historical modeled audit**, with harnesses and earlier fixes, not this extracted standalone file or alternate linked targets.\n"
  else:
-  s+="The PDF does not identify an individual completed outcome for this exact source-rule/target instance. Aggregate verification, similarly named appendices and bugs fixed before release are not automatically transferred to this rule.\n"
- s+="The PDF reports previous issues related to account roles, rounding/zero-output, ERC20 false-return behavior and Maximillion interest accrual; none is individually attributed as a new exploitable issue to this source block without evidence.\n"
- if src=="frame.cvl":s+="The source quantifies an unrestricted method f: asserting that no method can change this getter would generally be false for normal operations, so this is a mutation probe, not a normative invariant.\n"
- if src=="compound.cvl":s+="This source uses a V1-style MoneyMarket ABI unlike the Compound V2 contracts; do not conflate similarly named admin operations or PDF tables.\n"
+  s+="The historical report does not provide an individualized completed outcome for this exact source declaration/target. Its aggregate conclusions and similarly named appendices cannot be applied mechanically.\n"
+ s+="The historical account describes corrected role, rounding, ERC20 and Maximillion issues but does not independently associate a new exploit with this specific source block. No fresh Prover run or finding is claimed.\n"
+ if src=="compound.cvl":s+="The referenced MoneyMarket V1 operation has no corresponding target implementation in the Compound V2 snapshot. Nearby V2 Solidity excerpts are **context only**, not verification evidence for V1.\n"
+ if src=="general.cvl":s+="The PDF appendix describes Unitroller administrative specs also called general.cvl, while the snapshot's CompoundIgnoreExtCalls.spclnk binds CErc20Certora. Their similar names do not establish identical semantics or report outcomes.\n"
  return s
+
 def main():
  if len(sys.argv)!=3:
   raise SystemExit("Usage: generator.py source_project_dir Web3Bugs-certora")

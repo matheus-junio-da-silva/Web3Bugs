@@ -31,3 +31,10 @@ Contest ID, Bug ID, Bug Label, Severity, Bug Description, Reference, Comment
 7,P7-ME-02,S6-3,Medium,repayWithATokens updates interest rate with nonexistent incoming underlying liquidity,reports/7.md#medium--loss-of-revenue,Report-level incorrect liquidity input to rate update; no individual sampled property link.
 7,P7-LO-01,S3-2,Low,_addReserveToList inserts an asset into multiple empty reserve-list slots,reports/7.md#low--integrity-of-reservelist,Missing early return causes duplicate reserve list state; outside the active single Pool rule.
 7,P7-RC-01,S3-2,Recommendation,Supply or aToken transfer can force isolation mode and temporarily block borrowing,reports/7.md#recommendation--denial-of-service,"Report recommendation documents mitigation by withdrawing isolation collateral; S3-2 is the provisional technical state-effect category; the report does not classify the behavior as accepted or formally VERIFIED."
+9,CEL-01,S2-1,High,SortedLinkedList sortedness broken by invalid insert adjacency arguments,reports/9.md,"Report Table 1 and §3.1; finding is on list library, not assigned to an active Celo Governance rule."
+9,CEL-02,L2,High,Election asset loss and front-running from low-precision conversion of votes to units,reports/9.md,Report Table 1 and §3.2; finding on Election.
+9,CEL-03,S6-4,High,"ReleaseGold balance excludes pending LockedGold withdrawals, potentially terminating grant prematurely",reports/9.md,"Report Table 1 and §3.3; this is a ReleaseGold finding, not a violation of a cataloged LockedGold property."
+9,CEL-04,S3-2,Low,Election reward distribution permits group voting state without votes,reports/9.md,Report Table 1; trigger impossible in the Go client at report date.
+9,CEL-05,O7,Low,Redundant subtraction of an always-zero value in Election,reports/9.md,Report Table 1; non-critical removed code.
+9,CEL-06,O7,Low,Unused nested data structures in LockedGold,reports/9.md,"Report Table 1; dead code removed, no individual active invariant violated in evidence."
+9,CEL-07,L2,Low,Potential precision loss during FixidityLib fractional multiplication,reports/9.md,Report Table 1; low-severity precision issue.

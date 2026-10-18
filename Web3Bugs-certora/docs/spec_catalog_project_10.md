@@ -1,6 +1,6 @@
 # Project 10 — Furucombo: source-preserving Certora property catalog and closure audit
 
-> **Review status: DRAFT / STRUCTURAL CHECKS PASSED; HISTORICAL TARGET COVERAGE BLOCKED.** This ledger contains 36 target-aware examples for 34 active declarations. It is not a reproduced 2021 verification result or a completed handler-by-handler execution matrix. Do not merge until the below blockers and validation have been reviewed.
+> **Review status: DRAFT / STRUCTURAL CHECKS PASSED; HISTORICAL TARGET COVERAGE BLOCKED.** This ledger contains 128 target-aware examples for 34 active declarations (36 baseline plus 92 new handler/target contexts). It is not a reproduced 2021 verification result or a completed handler-by-handler execution matrix. Do not merge until the below blockers and validation have been reviewed.
 
 ## 1. Identity, preservation and provenance
 
@@ -22,11 +22,12 @@
 | `specs/hscompound.spec` | 1 rule | 32 (HSCompound) |
 | `specs/libParam.spec` | 2 rules | 33 and 34 |
 | `specs/sanity.spec` | 1 diagnostic rule | 35 |
-| **Total** | **34 active declarations** | **36 source/target instantiations** |
+| `specs/proxy.spec` — four handler-sensitive rules repeated per target | 0 additional declarations | 37–128 (92 source/target contexts) |
+| **Total** | **34 active declarations** | **128 source/target instantiations** |
 
-Commented blocks `proxy.spec:558–578` containing `holdNoEth` and `onlyValidCaller` are **excluded** as inactive; the latter is nonetheless cited in a 2021 report finding. Do not turn that reference into a current active example. **29 dependency-complete and 7 incomplete examples** are indexed; neither class guarantees historical Prover reproducibility. Complete is a narrow non-built-in symbol-resolution status, not a proof run.
+Commented blocks `proxy.spec:558–578` containing `holdNoEth` and `onlyValidCaller` are **excluded** as inactive; the latter is nonetheless cited in a 2021 report finding. Do not turn that reference into a current active example. **89 dependency-complete and 39 incomplete examples** are indexed; neither class guarantees historical Prover reproducibility. Complete is a narrow non-built-in symbol-resolution status, not a proof run.
 
-The 36-example inventory is **not** a full Cartesian product of `proxy.spec` × handler scripts: the original handler-facing driver invokes `proxy.spec` with different target contracts. Each generic per-target invocation still needs per-handler assertion/result interpretation. No `VERIFIED` or `VIOLATED` is borrowed from one handler for another.
+The initial 36-example inventory was **not** a full Cartesian product of `proxy.spec` × handler scripts: the original handler-facing driver invokes `proxy.spec` with different target contracts. Each generic per-target invocation still needs per-handler assertion/result interpretation. No `VERIFIED` or `VIOLATED` is borrowed from one handler for another.
 
 ### Explicit incomplete examples
 
@@ -121,7 +122,7 @@ Bug Labels in the bug inventory classify the *documented concrete issue*. Bug La
 - `reports/10.md` — page-aligned textual extraction of 31-page original.
 - `results/spec/complete/10/` — examples not missing named declarations as assessed.
 - `results/spec/incomplete/10/` — examples with `N.spec`, `N.sol`, `N.md`, **`N.txt`** explaining a concrete missing symbol or target.
-- `results/spec/spec_buglabel.csv` — **36** new indexed example rows for Project 10; `results/contests.csv` — one Project ID 10 row; `results/bugs.csv` — **14** 2021 finding rows.
+- `results/spec/spec_buglabel.csv` — **128** indexed example rows for Project 10; `results/contests.csv` — one Project ID 10 row; `results/bugs.csv` — **14** 2021 finding rows.
 - Each `N.spec` reproduces its active property and selected *available* CVL dependencies without rewriting the original assertion. Extra methods in the original full-model `methods{}` block may control symbolic dispatcher behavior; a minimal excerpt is **not** a stand-alone verifier job or a guarantee of model equivalence. The original full spec remains available in `contracts/10/specs/`.
 
 ## 7. Unresolved verification and release gates
@@ -175,7 +176,7 @@ This matrix records **each of the 23 historically reported targets** independent
 
 `_runHandler.sh:114–118` calls `certoraRun <individual handler>.sol ... --verify ${handler}:${spec} --settings -assumeUnwindCond,-b=${B},-ciMode=true`; `B` defaults to **2**. Thus `runHMaker.sh` (for example) selects **HMaker as target**, not `ProxyHarness`, even though the same `proxy.spec` is used. Fifteen historical names have a same-named file and a generic `run*.sh` driver. **Three drivers** reference absent historical implementations (`HAaveProtocol`, `HBalancer`, `HGasTokens`); **five additional historical targets** lack both a matching source file and a corresponding run script (`HOneInchExchange`, `HKyberNetwork`, `HMooniswap`, `HUniswap`, `HWeth`). A same-named file is not evidence of identity with the 2021 commit.
 
-**Important scope finding:** The existing 36 indexed examples enumerate all **34 active declarations** and four DSProxy allowlist target contexts, but they do **not** enumerate every **material `proxy.spec` × handler** target instance as an individual `N.spec/N.sol/N.md` record. Since the target contract, execution script, method universe and report observations differ, at minimum each of the 15 same-named generic handler targets must receive an individual applicability/dependency assessment against the 11 report-table checks above; the eight missing sources require explicitly unresolved target contexts. Some of those checks have distinct counterexamples (e.g. `HCurve`/approval reset, `HFunds`/third-party balances, `HYVault`/zero output) and cannot be collapsed into `ProxyHarness` or another handler. An *unreconciled* context is not silently counted `complete`. The 36-example figure is therefore a **baseline**, not a certified exhaustive per-target cardinality. This is a **blocking coverage gap** for declaring the catalog final; keep PR #8 draft.
+**Important scope finding:** The initial 36 indexed examples enumerate all **34 active declarations** and four DSProxy allowlist target contexts, but they do **not** enumerate every **material `proxy.spec` × handler** target instance as an individual `N.spec/N.sol/N.md` record. Since the target contract, execution script, method universe and report observations differ, at minimum each of the 15 same-named generic handler targets must receive an individual applicability/dependency assessment against the 11 report-table checks above; the eight missing sources require explicitly unresolved target contexts. Some of those checks have distinct counterexamples (e.g. `HCurve`/approval reset, `HFunds`/third-party balances, `HYVault`/zero output) and cannot be collapsed into `ProxyHarness` or another handler. An *unreconciled* context is not silently counted `complete`. The original 36-example figure was a **baseline**, not a certified exhaustive per-target cardinality. This is a **blocking coverage gap** for declaring the catalog final; keep PR #8 draft.
 
 ### Scope of these report results vs source formulas
 
@@ -266,3 +267,40 @@ O status passou de **não executado** a **validado estruturalmente**. Estes quat
 **Reconciliando índices com a `main` observada:** `spec_buglabel.csv` contém as 170 linhas de `main` + 36 linhas exclusivas do Project 10 (206 linhas com cabeçalho); `contests.csv` contém 7 linhas de `main` + 1; `bugs.csv` contém 22 linhas de `main` + 14. Não há remoções ou mudanças em linhas de outros projetos.
 
 **Portão de liberação:** manter **DRAFT**. Os validadores comprovam integridade estrutural, mas não demonstram equivalência semântica por handler nem resolvem dependências/ABI. O grupo de pares handler × rule materialmente distintos da seção 9 continua exigindo artefatos e revisão individual antes que a catalogação possa ser chamada de exaustiva.
+
+
+## 12. Additional target-specific instance matrix (report #22, #23, #25, #26)
+
+**92 additional indexed instances (37–128)**: 60 dependency-complete by nominal handler source presence, 32 incomplete due to eight missing historical handler implementations; total Project 10 **128 instances (89 complete / 39 incomplete)**. These original-CVL reuses have distinct concrete targets, scripts, contract excerpts, and report observations. **Every added Result and Detection Outcome is NOT_STATED**, not inferred from the report's 🔎 cells.
+
+| Handler | Named source | Script / assumptions | Report #22 stack | #23 approvals | #25 token movement | #26 nonparty balances | Need separate examples? |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| HMaker | Present nominally, historical identity unverified | runHMaker.sh; -assumeUnwindCond,-b=2,-ciMode=true | 37 — overapprox: DSProxy operations | 38 — None | 39 — N/A DSProxy | 40 — N/A DSProxy | Yes, four entries |
+| HAaveProtocol | MISSING original target; incomplete | runHAave.sh; -assumeUnwindCond,-b=2,-ciMode=true | 41 — redeem overapprox; flashLoan expected | 42 — None | 43 — None | 44 — flashloan potential callback | Yes, four entries |
+| HAaveProtocolV2 | Present nominally, historical identity unverified | runHAave2.sh; -assumeUnwindCond,-b=2,-ciMode=true | 45 — flashloan: nonzero mode | 46 — None | 47 — None | 48 — flashloan potential callback | Yes, four entries |
+| HSCompound | Present nominally, historical identity unverified | runHSCompound.sh; -assumeUnwindCond,-b=2,-ciMode=true | 49 — overapprox: DSProxy, market methods | 50 — None | 51 — N/A DSProxy | 52 — N/A DSProxy | Yes, four entries |
+| HFunds | Present nominally, historical identity unverified | runHFunds.sh; -assumeUnwindCond,-b=2,-ciMode=true | 53 — None | 54 — None | 55 — N/A no intermediate | 56 — inject/sendToken/sendTokens expected | Yes, four entries |
+| HOneInchExchange | MISSING original target; incomplete | ABSENT | 57 — None | 58 — None | 59 — swap | 60 — None | Yes, four entries |
+| HBProtocol | Present nominally, historical identity unverified | runHBProtocol.sh; -assumeUnwindCond,-b=2,-ciMode=true | 61 — overapprox: DSProxy operations | 62 — None | 63 — N/A DSProxy | 64 — N/A DSProxy | Yes, four entries |
+| HBalancer | MISSING original target; incomplete | runHBalancer.sh; -assumeUnwindCond,-b=2,-ciMode=true | 65 — None | 66 — None (join*) | 67 — exitswapPoolAmountIn; join* N/A | 68 — join* N/A | Yes, four entries |
+| HCEther | Present nominally, historical identity unverified | runHCEther.sh; -assumeUnwindCond,-b=2,-ciMode=true | 69 — redeem/redeemUnderlying expected ETH | 70 — None | 71 — None | 72 — None | Yes, four entries |
+| HCToken | Present nominally, historical identity unverified | runHCToken.sh; -assumeUnwindCond,-b=2,-ciMode=true | 73 — None | 74 — None | 75 — None | 76 — None | Yes, four entries |
+| HComptroller | Present nominally, historical identity unverified | runHComptroller.sh; -assumeUnwindCond,-b=2,-ciMode=true | 77 — claimComp expected (proxy itself) | 78 — None | 79 — None | 80 — claimComp expected | Yes, four entries |
+| HCurve | Present nominally, historical identity unverified | runHCurve.sh; -assumeUnwindCond,-b=2,-ciMode=true | 81 — exchange/removeLiquidity* addressed | 82 — exchange*/addLiquidity*; dust expected | 83 — exchange/exchangeUnderlying | 84 — None | Yes, four entries |
+| HCurveDao | Present nominally, historical identity unverified | runHCurveDao.sh; -assumeUnwindCond,-b=2,-ciMode=true | 85 — None | 86 — deposit | 87 — None | 88 — mint/mintMany expected | Yes, four entries |
+| HFurucomboStaking | Present nominally, historical identity unverified | runHFurucomboStaking.sh; -assumeUnwindCond,-b=2,-ciMode=true | 89 — claimAll expected overapprox | 90 — None | 91 — None | 92 — None | Yes, four entries |
+| HGasTokens | MISSING original target; incomplete | runHGasTokens.sh; -assumeUnwindCond,-b=2,-ciMode=true | 93 — None | 94 — None | 95 — None | 96 — None | Yes, four entries |
+| HKyberNetwork | MISSING original target; incomplete | ABSENT | 97 — None | 98 — None | 99 — swapTokenToToken | 100 — None | Yes, four entries |
+| HMooniswap | MISSING original target; incomplete | ABSENT | 101 — None | 102 — None | 103 — deposit/withdraw: min may be zero | 104 — None | Yes, four entries |
+| HStakingRewardsAdapter | Present nominally, historical identity unverified | runHStakingRewardsAdapter.sh; -assumeUnwindCond,-b=2,-ciMode=true | 105 — None | 106 — None | 107 — None | 108 — None | Yes, four entries |
+| HSushiSwap | Present nominally, historical identity unverified | runHSushiSwap.sh; -assumeUnwindCond,-b=2,-ciMode=true | 109 — None | 110 — add/remove liquidity variants | 111 — None | 112 — None | Yes, four entries |
+| HUniswap | MISSING original target; incomplete | ABSENT | 113 — None | 114 — None | 115 — tokenToTokenSwap | 116 — None | Yes, four entries |
+| HUniswapV2 | Present nominally, historical identity unverified | runHUniswapV2.sh; -assumeUnwindCond,-b=2,-ciMode=true | 117 — None | 118 — add/removeLiquidity / ETH caveats | 119 — None | 120 — None | Yes, four entries |
+| HWeth | MISSING original target; incomplete | ABSENT | 121 — None | 122 — None | 123 — None | 124 — None | Yes, four entries |
+| HYVault | Present nominally, historical identity unverified | runHYVault.sh; -assumeUnwindCond,-b=2,-ciMode=true | 125 — None | 126 — None | 127 — deposit/withdraw may produce zero | 128 — None | Yes, four entries |
+
+These records do not manufacture missing historical implementations. The `N.txt` files for absent targets document the missing symbol/source/script as appropriate. The report's **#24** DSProxy allowlist is not `proxy.spec` example 24: it uses HBalancer, HMaker, HSCompound, HBProtocol-specific rules already indexed as 30, 31, 32, and 36. HBProtocol overrides inherited HMaker `getProxyActions()`. 
+
+For report #27–32, all 23 historical handler cells are `None`. The existing source formula bodies and limitations remain documented; these cells are not verified per-target runs and a universal Cartesian-product coverage claim is **not** made. Getter injection, target ABI, source revisions, simplified assembly, unrolling and external Summary assumptions still block reproduction. Keep the PR draft.
+
+**Validation status for these new remote artifacts:** The initial checkout was checked at HEAD `16a0eb0b7cf0ede29a312d166dae0bcead512b20`, and the same 92 target/ID/status relationships were independently generated and structurally checked locally, but the newly published Git tree must be validated at its own new HEAD before recording a post-publication PASS. Existing section 10 command exit codes refer to the old commit only.

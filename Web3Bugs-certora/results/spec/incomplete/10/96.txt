@@ -1,0 +1,1 @@
+Incomplete: noOtherPartyModified for historical HGasTokens. Historical Solidity implementation HGasTokens.sol is absent; script runHGasTokens.sh still targets this missing implementation. Do not replace with modern contracts.

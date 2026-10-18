@@ -1,7 +1,6 @@
-// Project 14 — Opyn Gamma. Historical CVL, no modern migration.
-// Selected active rule: privilegedOperation, original specs/Privileged.spec:12-31
-// Included original CVL ranges: specs/Privileged.spec:1-31
-// Conservative original spec-wide methods/helper context; other properties excluded.
+// Project 14 — Opyn Gamma Protocol; historical CVL (not CVL2)
+// Literal active declaration: specs/Privileged.spec:12-31
+// Minimal explicit CVL declaration closure; model-wide ABI/implicit selector dependencies are in the historical target and scripts.
 definition knownAsNonPrivileged(method f) returns bool  =
 	( 	f.selector == isWhitelistedOtoken(address).selector  ||
 		f.selector == isWhitelistedProduct(address,address,address,bool).selector ||
@@ -9,9 +8,7 @@ definition knownAsNonPrivileged(method f) returns bool  =
     	f.selector == isWhitelistedCallee(address).selector ||
 		f.selector == whitelistOtoken(address).selector ||
 		f.selector == addressBook().selector || 
-		f.selector == isWhitelistedCollateral(address).selector ); 
-
-
+		f.selector == isWhitelistedCollateral(address).selector );
 
 rule privilegedOperation(method f, address privileged)
 description "$f can be called by more than one user without reverting"

@@ -1,12 +1,10 @@
-// Project 14 — Opyn Gamma. Historical CVL, no modern migration.
-// Selected active rule: orderOfOperations, original specs/ControllerOrderOfOperations.spec:6-28
-// Included original CVL ranges: specs/ControllerOrderOfOperations.spec:1-28
-// Conservative original spec-wide methods/helper context; other properties excluded.
+// Project 14 — Opyn Gamma Protocol; historical CVL (not CVL2)
+// Literal active declaration: specs/ControllerOrderOfOperations.spec:6-28
+// Minimal explicit CVL declaration closure; model-wide ABI/implicit selector dependencies are in the historical target and scripts.
 methods {
-	//the amount of collateral in an index in a vault of an owner. i.e.,  vaults[owner][index].collateralAmounts[i]
     getVaultCollateralAmount(address, uint256, uint256)  returns uint256 envfree
 }
-	
+
 rule orderOfOperations (address owner, uint256 vaultId, method f1, method f2) { 
     if ( f1.selector  > f2.selector) {
         assert true;

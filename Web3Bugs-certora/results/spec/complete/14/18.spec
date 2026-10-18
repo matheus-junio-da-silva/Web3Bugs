@@ -1,41 +1,26 @@
-// Project 14 — Opyn Gamma. Historical CVL, no modern migration.
-// Selected active rule: callOptionsPreExpiry, original specs/NoBankruptcy.spec:449-595
-// Included original CVL ranges: specs/NoBankruptcy.spec:1-74;195-196;317;442-599;693-698
-// Conservative original spec-wide methods/helper context; other properties excluded.
+// Project 14 — Opyn Gamma Protocol; historical CVL (not CVL2)
+// Literal active declaration: specs/NoBankruptcy.spec:449-595
+// Minimal explicit CVL declaration closure; model-wide ABI/implicit selector dependencies are in the historical target and scripts.
 using OtokenHarnessA as shortOtoken
+
 using OtokenHarnessB as longOtoken
+
 using DummyERC20C as collateralToken
+
 using MarginPoolHarness as pool
 
 methods {
-    // The tracked asset balance of the system
     pool.getStoredBalance(address) returns uint256 envfree
-    // The asset balance of MarginPool. i.e.,  asset.balanceOf(MarginPool)
-    assetBalanceOfPool(address) returns uint256 envfree
-    // The asset (first param) balance of account (second param)
-    assetBalanceOf(address, address) returns uint256 envfree
-    // The total supply of an asset. i.e., asset.totalSupply()
     assetTotalSupply(address) returns uint256 envfree
-    // The amount of collateral in an index in a vault of an owner. i.e.,  vaults[owner][index].collateralAmounts[i]
     getVaultCollateralAmount(address, uint256, uint256)  returns uint256 envfree
-    // The collateral asset of an index in a vault of an owner. i.e., vaults[owner][index].collateralAssets(i)
     getVaultCollateralAsset(address, uint256, uint256)  returns address envfree
-    // The amount of long in an index in a vault of an owner. i.e.,  vaults[owner][index].longAmounts[i]
     getVaultLongAmount(address, uint256, uint256)  returns uint256 envfree
-    // The long oToken in an index in a vault of an owner. i.e.,  vaults[owner][index].longOtoken[i]
     getVaultLongOtoken(address, uint256, uint256)  returns address envfree
-    // The amount of long in an index in a vault of an owner. i.e.,  vaults[owner][index].shortAmounts[i]
     getVaultShortAmount(address, uint256, uint256)  returns uint256 envfree
-    // The long oToken in an index in a vault of an owner. i.e.,  vaults[owner][index].shortOtoken[i]
     getVaultShortOtoken(address, uint256, uint256)  returns address envfree
-    // Checks if the vault is expired (true when there is an otoken which we can check expiry for)
     isVaultExpired(address, uint256) returns bool
-    // The strike price of OtokenHarnessA 
     shortOtoken.strikePrice() returns uint256 envfree
-    // The strick price of OtokenHarnessB
     longOtoken.strikePrice() returns uint256 envfree
-    // Arbitrary change a vault, total supply of otoken, system balance  
-    longOtoken.havocTotalSupply(uint256) envfree
     shortOtoken.havocTotalSupply(uint256) envfree
     pool.havocSystemBalance(address) envfree
     havocVault(address, uint256, uint256, uint256, uint256, uint256 ) envfree
@@ -44,48 +29,12 @@ methods {
     dummyERC20C() returns address envfree
 }
 
+function links() {
+    require anOtokenA() == shortOtoken;
+    require anOtokenB() == longOtoken;
+    require dummyERC20C() == collateralToken;
+}
 
-
-
-/**
-@title No bankruptcy
-@notice 
-The asset balance of the system is more than the obligations in this asset.
-For every oToken, the obligation is for the balance held by users as the system holds the oToken that is used as long. This is computed as the total supply minus the balance of the system (representing that have not transferred to the system as long.
-
-For put options before expiry (strong bound): 
-obligation(o) ≡ 
-	(o.totalSupply() - storedBalance(o)) * o.strikePriceIn(asset) 
-
-storedBalance(asset) ≥ ∑o ∈ O_asset. obligation(o)
-where O_asset  is the set of oTokens with asset as ColleteralAsset
-Oasset ≡ { o ∈ oTokens.  o.CollateralAsset = asset }
-
-This rule is proven relaying on:
-1. a proof with Mathemtic minValue to compute the debt a vault
-2. a rule that shows that one vault is changed at a time
-3. rules that show valid balances of the system with respect to vault changes
-
-
-Due to complexity for the SMT solver the rules is split to three cases of a valid vault:
-    if( longAmount <= shortAmount && longAmount * longPrice <=  shortAmount * shortPrice )  //case 1
-         debt =  shortAmount * shortPrice  -  longAmount *  longPrice ; 
-    else if ( longAmount > shortAmount_ && longPrice < shortPrice)  //case 2
-          debt =   shortAmount * (shortPrice - longPrice) ;
-    else //case 3
-        debt = 0;
-*/
-
-
-
-
-
-
-/** For put options before expiry (strong bound): 
-  obligation(o) ≡  (o.totalSupply() - storedBalance(o)) 
-
-  The debt computation is also different 
-*/
 rule callOptionsPreExpiry(
     address owner,
     uint256 vaultId,
@@ -232,14 +181,4 @@ rule callOptionsPreExpiry(
  
     //verify no bankruptchy 
     assert poolAssetBalance_ >= obligation_ ;
-}
-
-
-
-// trying the complicated put option all symbolic 
-
-function links() {
-    require anOtokenA() == shortOtoken;
-    require anOtokenB() == longOtoken;
-    require dummyERC20C() == collateralToken;
 }

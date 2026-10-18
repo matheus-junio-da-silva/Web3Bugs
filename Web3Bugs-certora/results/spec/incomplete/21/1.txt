@@ -1,0 +1,7 @@
+INCOMPLETE — CVL/contract dependency closure for depositBufferEtherRevertCheck
+- DSM.spec:3 declares DepositSecurityModuleHarness as DSMH, but no such harness is present among archived source files.
+- DSM.spec:17-19 requires DSMH.Signature, not automatically the same type as the archived DepositSecurityModule.Signature.
+- DSM.spec:26-32 invokes depositBufferedEtherHarness@withrevert, but no function implementation or compatible ABI occurs in the snapshot. Real depositBufferedEther (Solidity:410-418) has different parameters.
+- DepositSecurityModule.sol:7 imports ../common/lib/ECDSA.sol, which lies outside this archived tree; _verifySignatures (453) uses it.
+- External LIDO/STAKING_ROUTER/DEPOSIT_CONTRACT calls are represented by interfaces/mocks but no demonstrated historical linkage to actual compiled target.
+Not merely lack of local Certora executable; do not fabricate harness or change source.

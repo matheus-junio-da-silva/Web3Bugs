@@ -1,14 +1,13 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/token/ERC1155/extensions/ERC1155Pausable.sol lines 17-32 (target context (no matched entrypoint))
- */
-abstract contract ERC1155Pausable is ERC1155, Pausable {
-    /**
-     * @dev See {ERC1155-_beforeTokenTransfer}.
-     *
-     * Requirements:
-     *
-     * - the contract must not be paused.
-     */
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: ERC1155Pausable.spec:8-21 balancesUnchangedWhenPaused
+
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 70-73 function/modifier balanceOf
+    function balanceOf(address account, uint256 id) public view virtual override returns (uint256) {
+        require(account != address(0), "ERC1155: address zero is not a valid owner");
+        return _balances[id][account];
+    }
+
+// Original: contracts/18/contracts/token/ERC1155/extensions/ERC1155Pausable.sol lines 26-37 function/modifier _beforeTokenTransfer
     function _beforeTokenTransfer(
         address operator,
         address from,
@@ -16,47 +15,33 @@ abstract contract ERC1155Pausable is ERC1155, Pausable {
         uint256[] memory ids,
         uint256[] memory amounts,
         bytes memory data
+    ) internal virtual override {
+        super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
 
-// Original: contracts/18/contracts/mocks/ERC1155PausableMock.sol lines 7-22 (target context (no matched entrypoint))
-
-contract ERC1155PausableMock is ERC1155Mock, ERC1155Pausable {
-    constructor(string memory uri) ERC1155Mock(uri) {}
-
-    function pause() external {
-        _pause();
+        require(!paused(), "ERC1155Pausable: token transfer while paused");
     }
 
-    function unpause() external {
-        _unpause();
-    }
-
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 429-436 function/modifier _beforeTokenTransfer
     function _beforeTokenTransfer(
         address operator,
         address from,
         address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal virtual {}
 
-// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 70-93 (callable)
-    function balanceOf(address account, uint256 id) public view virtual override returns (uint256) {
-        require(account != address(0), "ERC1155: address zero is not a valid owner");
-        return _balances[id][account];
+// Original: contracts/18/contracts/mocks/ERC1155PausableMock.sol lines 19-28 function/modifier _beforeTokenTransfer
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal virtual override(ERC1155, ERC1155Pausable) {
+        super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
     }
 
-    /**
-     * @dev See {IERC1155-balanceOfBatch}.
-     *
-     * Requirements:
-     *
-     * - `accounts` and `ids` must have the same length.
-     */
-    function balanceOfBatch(address[] memory accounts, uint256[] memory ids)
-        public
-        view
-        virtual
-        override
-        returns (uint256[] memory)
-    {
-        require(accounts.length == ids.length, "ERC1155: accounts and ids length mismatch");
-
-        uint256[] memory batchBalances = new uint256[](accounts.length);
-
-        for (uint256 i = 0; i < accounts.length; ++i) {
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 24-24 state declaration
+    mapping(uint256 => mapping(address => uint256)) private _balances;

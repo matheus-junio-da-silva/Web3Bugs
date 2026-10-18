@@ -1,31 +1,12 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/governance/Governor.sol lines 182-205 (callable)
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: GovernorBase.spec:230-242 noStartBeforeCreation
+
+// Original: contracts/18/contracts/governance/Governor.sol lines 182-184 function/modifier proposalSnapshot
     function proposalSnapshot(uint256 proposalId) public view virtual override returns (uint256) {
         return _proposals[proposalId].voteStart.getDeadline();
     }
 
-    /**
-     * @dev See {IGovernor-proposalDeadline}.
-     */
-    function proposalDeadline(uint256 proposalId) public view virtual override returns (uint256) {
-        return _proposals[proposalId].voteEnd.getDeadline();
-    }
-
-    /**
-     * @dev Part of the Governor Bravo's interface: _"The number of votes required in order for a voter to become a proposer"_.
-     */
-    function proposalThreshold() public view virtual returns (uint256) {
-        return 0;
-    }
-
-    /**
-     * @dev Amount of votes already cast passes the threshold limit.
-     */
-    function _quorumReached(uint256 proposalId) internal view virtual returns (bool);
-
-    /**
-
-// Original: contracts/18/contracts/governance/Governor.sol lines 245-268 (callable)
+// Original: contracts/18/contracts/governance/Governor.sol lines 245-284 function/modifier propose
     function propose(
         address[] memory targets,
         uint256[] memory values,
@@ -50,12 +31,24 @@
         uint64 deadline = snapshot + votingPeriod().toUint64();
 
         proposal.voteStart.setDeadline(snapshot);
+        proposal.voteEnd.setDeadline(deadline);
 
-// Original: contracts/18/contracts/mocks/GovernorMock.sol lines 38-50 (callable)
-    function proposalThreshold() public view override(Governor, GovernorSettings) returns (uint256) {
-        return super.proposalThreshold();
+        emit ProposalCreated(
+            proposalId,
+            _msgSender(),
+            targets,
+            values,
+            new string[](targets.length),
+            calldatas,
+            snapshot,
+            deadline,
+            description
+        );
+
+        return proposalId;
     }
 
+// Original: contracts/18/contracts/mocks/GovernorMock.sol lines 42-49 function/modifier propose
     function propose(
         address[] memory targets,
         uint256[] memory values,
@@ -64,15 +57,6 @@
     ) public virtual override(Governor, GovernorProposalThreshold) returns (uint256) {
         return super.propose(targets, values, calldatas, description);
     }
-}
 
-// Original: contracts/18/contracts/mocks/GovernorMock.sol lines 42-50 (callable)
-    function propose(
-        address[] memory targets,
-        uint256[] memory values,
-        bytes[] memory calldatas,
-        string memory description
-    ) public virtual override(Governor, GovernorProposalThreshold) returns (uint256) {
-        return super.propose(targets, values, calldatas, description);
-    }
-}
+// Original: contracts/18/contracts/governance/Governor.sol lines 47-47 state declaration
+    mapping(uint256 => ProposalCore) private _proposals;

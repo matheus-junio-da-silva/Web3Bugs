@@ -1,36 +1,24 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 19-34 (target context (no matched entrypoint))
- */
-contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
-    using Address for address;
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: ERC1155.spec:117-129 balanceOfBatchRevertCases
 
-    // Mapping from token ID to account balances
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 82-98 function/modifier balanceOfBatch
+    function balanceOfBatch(address[] memory accounts, uint256[] memory ids)
+        public
+        view
+        virtual
+        override
+        returns (uint256[] memory)
+    {
+        require(accounts.length == ids.length, "ERC1155: accounts and ids length mismatch");
+
+        uint256[] memory batchBalances = new uint256[](accounts.length);
+
+        for (uint256 i = 0; i < accounts.length; ++i) {
+            batchBalances[i] = balanceOf(accounts[i], ids[i]);
+        }
+
+        return batchBalances;
+    }
+
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 24-24 state declaration
     mapping(uint256 => mapping(address => uint256)) private _balances;
-
-    // Mapping from account to operator approvals
-    mapping(address => mapping(address => bool)) private _operatorApprovals;
-
-    // Used as the URI for all token types by relying on ID substitution, e.g. https://token-cdn-domain/{id}.json
-    string private _uri;
-
-    /**
-     * @dev See {_setURI}.
-     */
-
-// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 10-25 (target context (no matched entrypoint))
- */
-contract ERC1155Mock is ERC1155 {
-    constructor(string memory uri) ERC1155(uri) {}
-
-    function setURI(string memory newuri) public {
-        _setURI(newuri);
-    }
-
-    function mint(
-        address to,
-        uint256 id,
-        uint256 value,
-        bytes memory data
-    ) public {
-        _mint(to, id, value, data);
-    }

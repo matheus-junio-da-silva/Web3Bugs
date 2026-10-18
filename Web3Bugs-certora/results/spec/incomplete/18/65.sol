@@ -1,126 +1,98 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 35-39 (state)
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: ERC20Votes.spec:69-79 votes_solvency
 
-    mapping(address => address) private _delegates;
-    mapping(address => Checkpoint[]) private _checkpoints;
-    Checkpoint[] private _totalSupplyCheckpoints;
-
-// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 50-73 (callable)
+// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 50-52 function/modifier numCheckpoints
     function numCheckpoints(address account) public view virtual returns (uint32) {
         return SafeCast.toUint32(_checkpoints[account].length);
     }
 
-    /**
-     * @dev Get the address `account` is currently delegating to.
-     */
-    function delegates(address account) public view virtual override returns (address) {
-        return _delegates[account];
-    }
-
-    /**
-     * @dev Gets the current votes balance for `account`
-     */
-    function getVotes(address account) public view virtual override returns (uint256) {
-        uint256 pos = _checkpoints[account].length;
-        return pos == 0 ? 0 : _checkpoints[account][pos - 1].votes;
-    }
-
-    /**
-     * @dev Retrieve the number of votes for `account` at the end of `blockNumber`.
-     *
-     * Requirements:
-     *
-
-// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 162-185 (callable)
-    function _mint(address account, uint256 amount) internal virtual override {
-        super._mint(account, amount);
-        require(totalSupply() <= _maxSupply(), "ERC20Votes: total supply risks overflowing votes");
-
-        _writeCheckpoint(_totalSupplyCheckpoints, _add, amount);
-    }
-
-    /**
-     * @dev Snapshots the totalSupply after it has been decreased.
-     */
+// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 172-176 function/modifier _burn
     function _burn(address account, uint256 amount) internal virtual override {
         super._burn(account, amount);
 
         _writeCheckpoint(_totalSupplyCheckpoints, _subtract, amount);
     }
 
-    /**
-     * @dev Move voting power when tokens are transferred.
-     *
-     * Emits a {DelegateVotesChanged} event.
-     */
-    function _afterTokenTransfer(
-        address from,
-        address to,
-
-// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 172-195 (callable)
-    function _burn(address account, uint256 amount) internal virtual override {
-        super._burn(account, amount);
-
-        _writeCheckpoint(_totalSupplyCheckpoints, _subtract, amount);
+// Original: contracts/18/contracts/token/ERC20/ERC20.sol lines 94-96 function/modifier totalSupply
+    function totalSupply() public view virtual override returns (uint256) {
+        return _totalSupply;
     }
 
-    /**
-     * @dev Move voting power when tokens are transferred.
-     *
-     * Emits a {DelegateVotesChanged} event.
-     */
-    function _afterTokenTransfer(
-        address from,
-        address to,
+// Original: contracts/18/contracts/token/ERC20/ERC20.sol lines 101-103 function/modifier balanceOf
+    function balanceOf(address account) public view virtual override returns (uint256) {
+        return _balances[account];
+    }
+
+// Original: contracts/18/contracts/token/ERC20/ERC20.sol lines 280-295 function/modifier _burn
+    function _burn(address account, uint256 amount) internal virtual {
+        require(account != address(0), "ERC20: burn from the zero address");
+
+        _beforeTokenTransfer(account, address(0), amount);
+
+        uint256 accountBalance = _balances[account];
+        require(accountBalance >= amount, "ERC20: burn amount exceeds balance");
+        unchecked {
+            _balances[account] = accountBalance - amount;
+        }
+        _totalSupply -= amount;
+
+        emit Transfer(account, address(0), amount);
+
+        _afterTokenTransfer(account, address(0), amount);
+    }
+
+// Original: contracts/18/contracts/mocks/ERC20VotesMock.sol lines 14-16 function/modifier burn
+    function burn(address account, uint256 amount) public {
+        _burn(account, amount);
+    }
+
+// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 208-224 function/modifier _moveVotingPower
+    function _moveVotingPower(
+        address src,
+        address dst,
         uint256 amount
-    ) internal virtual override {
-        super._afterTokenTransfer(from, to, amount);
+    ) private {
+        if (src != dst && amount > 0) {
+            if (src != address(0)) {
+                (uint256 oldWeight, uint256 newWeight) = _writeCheckpoint(_checkpoints[src], _subtract, amount);
+                emit DelegateVotesChanged(src, oldWeight, newWeight);
+            }
 
-        _moveVotingPower(delegates(from), delegates(to), amount);
+            if (dst != address(0)) {
+                (uint256 oldWeight, uint256 newWeight) = _writeCheckpoint(_checkpoints[dst], _add, amount);
+                emit DelegateVotesChanged(dst, oldWeight, newWeight);
+            }
+        }
     }
 
-    /**
-     * @dev Change delegation for `delegator` to `delegatee`.
-     *
+// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 226-240 function/modifier _writeCheckpoint
+    function _writeCheckpoint(
+        Checkpoint[] storage ckpts,
+        function(uint256, uint256) view returns (uint256) op,
+        uint256 delta
+    ) private returns (uint256 oldWeight, uint256 newWeight) {
+        uint256 pos = ckpts.length;
+        oldWeight = pos == 0 ? 0 : ckpts[pos - 1].votes;
+        newWeight = op(oldWeight, delta);
 
-// Original: contracts/18/contracts/mocks/ERC20VotesMock.sol lines 10-21 (callable)
-    function mint(address account, uint256 amount) public {
-        _mint(account, amount);
+        if (pos > 0 && ckpts[pos - 1].fromBlock == block.number) {
+            ckpts[pos - 1].votes = SafeCast.toUint224(newWeight);
+        } else {
+            ckpts.push(Checkpoint({fromBlock: SafeCast.toUint32(block.number), votes: SafeCast.toUint224(newWeight)}));
+        }
     }
 
-    function burn(address account, uint256 amount) public {
-        _burn(account, amount);
-    }
+// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 36-36 state declaration
+    mapping(address => address) private _delegates;
 
-    function getChainId() external view returns (uint256) {
-        return block.chainid;
-    }
-}
+// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 37-37 state declaration
+    mapping(address => Checkpoint[]) private _checkpoints;
 
-// Original: contracts/18/contracts/mocks/ERC20VotesMock.sol lines 14-21 (callable)
-    function burn(address account, uint256 amount) public {
-        _burn(account, amount);
-    }
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 38-38 state declaration
+    mapping(address => address) private _delegation;
 
-    function getChainId() external view returns (uint256) {
-        return block.chainid;
-    }
-}
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 39-39 state declaration
+    mapping(address => Checkpoints.History) private _delegateCheckpoints;
 
-// Original: contracts/18/contracts/governance/utils/Votes.sol lines 11-26 (target context (no matched entrypoint))
-/**
- * @dev This is a base abstract contract that tracks voting units, which are a measure of voting power that can be
- * transferred, and provides a system of vote delegation, where an account can delegate its voting units to a sort of
- * "representative" that will pool delegated voting units from different accounts and can then use it to vote in
- * decisions. In fact, voting units _must_ be delegated in order to count as actual votes, and an account has to
- * delegate those votes to itself if it wishes to participate in decisions and does not have a trusted representative.
- *
- * This contract is often combined with a token contract such that voting units correspond to token units. For an
- * example, see {ERC721Votes}.
- *
- * The full history of delegate votes is tracked on-chain so that governance protocols can consider votes as distributed
- * at a particular block number to protect against flash loans and double voting. The opt-in delegate system makes the
- * cost of this history tracking optional.
- *
- * When using this module the derived contract must implement {_getVotingUnits} (for example, make it return
- * {ERC721-balanceOf}), and can use {_transferVotingUnits} to track a change in the distribution of those units (in the
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 40-40 state declaration
+    Checkpoints.History private _totalCheckpoints;

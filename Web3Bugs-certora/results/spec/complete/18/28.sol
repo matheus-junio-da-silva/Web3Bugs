@@ -1,35 +1,13 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 70-93 (callable)
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: ERC1155.spec:473-483 mintCorrectWork
+
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 70-73 function/modifier balanceOf
     function balanceOf(address account, uint256 id) public view virtual override returns (uint256) {
         require(account != address(0), "ERC1155: address zero is not a valid owner");
         return _balances[id][account];
     }
 
-    /**
-     * @dev See {IERC1155-balanceOfBatch}.
-     *
-     * Requirements:
-     *
-     * - `accounts` and `ids` must have the same length.
-     */
-    function balanceOfBatch(address[] memory accounts, uint256[] memory ids)
-        public
-        view
-        virtual
-        override
-        returns (uint256[] memory)
-    {
-        require(accounts.length == ids.length, "ERC1155: accounts and ids length mismatch");
-
-        uint256[] memory batchBalances = new uint256[](accounts.length);
-
-        for (uint256 i = 0; i < accounts.length; ++i) {
-
-// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 14-37 (callable)
-    function setURI(string memory newuri) public {
-        _setURI(newuri);
-    }
-
+// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 18-25 function/modifier mint
     function mint(
         address to,
         uint256 id,
@@ -39,40 +17,28 @@
         _mint(to, id, value, data);
     }
 
-    function mintBatch(
-        address to,
-        uint256[] memory ids,
-        uint256[] memory values,
-        bytes memory data
-    ) public {
-        _mintBatch(to, ids, values, data);
-    }
-
-    function burn(
-        address owner,
-
-// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 18-41 (callable)
-    function mint(
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 266-286 function/modifier _mint
+    function _mint(
         address to,
         uint256 id,
-        uint256 value,
+        uint256 amount,
         bytes memory data
-    ) public {
-        _mint(to, id, value, data);
+    ) internal virtual {
+        require(to != address(0), "ERC1155: mint to the zero address");
+
+        address operator = _msgSender();
+        uint256[] memory ids = _asSingletonArray(id);
+        uint256[] memory amounts = _asSingletonArray(amount);
+
+        _beforeTokenTransfer(operator, address(0), to, ids, amounts, data);
+
+        _balances[id][to] += amount;
+        emit TransferSingle(operator, address(0), to, id, amount);
+
+        _afterTokenTransfer(operator, address(0), to, ids, amounts, data);
+
+        _doSafeTransferAcceptanceCheck(operator, address(0), to, id, amount, data);
     }
 
-    function mintBatch(
-        address to,
-        uint256[] memory ids,
-        uint256[] memory values,
-        bytes memory data
-    ) public {
-        _mintBatch(to, ids, values, data);
-    }
-
-    function burn(
-        address owner,
-        uint256 id,
-        uint256 value
-    ) public {
-        _burn(owner, id, value);
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 24-24 state declaration
+    mapping(uint256 => mapping(address => uint256)) private _balances;

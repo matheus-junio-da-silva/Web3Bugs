@@ -1,7 +1,5 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/governance/TimelockController.sol lines 33-37 (state)
-    mapping(bytes32 => uint256) private _timestamps;
-    uint256 private _minDelay;
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: TimelockController.spec:155-164 minDelayOnlyChange
 
-    /**
-     * @dev Emitted when a call is scheduled as part of operation `id`.
+// Original: contracts/18/contracts/governance/TimelockController.sol lines 34-34 state declaration
+    uint256 private _minDelay;

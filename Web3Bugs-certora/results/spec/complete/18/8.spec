@@ -20,4 +20,4 @@ rule onlyOneAllowanceChange(method f, env e) {
     bool userApproveAfter = isApprovedForAll(owner, user);
 
     assert userApproveBefore != userApproveAfter => (e.msg.sender == owner && operator == user), "Imposter!";
-}
+}   

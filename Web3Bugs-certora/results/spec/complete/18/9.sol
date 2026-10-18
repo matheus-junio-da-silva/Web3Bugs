@@ -1,31 +1,13 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 70-93 (callable)
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: ERC1155.spec:87-103 unexpectedBalanceChange
+
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 70-73 function/modifier balanceOf
     function balanceOf(address account, uint256 id) public view virtual override returns (uint256) {
         require(account != address(0), "ERC1155: address zero is not a valid owner");
         return _balances[id][account];
     }
 
-    /**
-     * @dev See {IERC1155-balanceOfBatch}.
-     *
-     * Requirements:
-     *
-     * - `accounts` and `ids` must have the same length.
-     */
-    function balanceOfBatch(address[] memory accounts, uint256[] memory ids)
-        public
-        view
-        virtual
-        override
-        returns (uint256[] memory)
-    {
-        require(accounts.length == ids.length, "ERC1155: accounts and ids length mismatch");
-
-        uint256[] memory batchBalances = new uint256[](accounts.length);
-
-        for (uint256 i = 0; i < accounts.length; ++i) {
-
-// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 117-140 (callable)
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 117-129 function/modifier safeTransferFrom
     function safeTransferFrom(
         address from,
         address to,
@@ -40,18 +22,7 @@
         _safeTransferFrom(from, to, id, amount, data);
     }
 
-    /**
-     * @dev See {IERC1155-safeBatchTransferFrom}.
-     */
-    function safeBatchTransferFrom(
-        address from,
-        address to,
-        uint256[] memory ids,
-        uint256[] memory amounts,
-        bytes memory data
-    ) public virtual override {
-
-// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 134-157 (callable)
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 134-146 function/modifier safeBatchTransferFrom
     function safeBatchTransferFrom(
         address from,
         address to,
@@ -66,22 +37,7 @@
         _safeBatchTransferFrom(from, to, ids, amounts, data);
     }
 
-    /**
-     * @dev Transfers `amount` tokens of token type `id` from `from` to `to`.
-     *
-     * Emits a {TransferSingle} event.
-     *
-     * Requirements:
-     *
-     * - `to` cannot be the zero address.
-     * - `from` must have a balance of tokens of type `id` of at least `amount`.
-     * - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the
-
-// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 14-37 (callable)
-    function setURI(string memory newuri) public {
-        _setURI(newuri);
-    }
-
+// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 18-25 function/modifier mint
     function mint(
         address to,
         uint256 id,
@@ -91,6 +47,7 @@
         _mint(to, id, value, data);
     }
 
+// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 27-34 function/modifier mintBatch
     function mintBatch(
         address to,
         uint256[] memory ids,
@@ -100,45 +57,7 @@
         _mintBatch(to, ids, values, data);
     }
 
-    function burn(
-        address owner,
-
-// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 18-41 (callable)
-    function mint(
-        address to,
-        uint256 id,
-        uint256 value,
-        bytes memory data
-    ) public {
-        _mint(to, id, value, data);
-    }
-
-    function mintBatch(
-        address to,
-        uint256[] memory ids,
-        uint256[] memory values,
-        bytes memory data
-    ) public {
-        _mintBatch(to, ids, values, data);
-    }
-
-    function burn(
-        address owner,
-        uint256 id,
-        uint256 value
-    ) public {
-        _burn(owner, id, value);
-
-// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 27-50 (callable)
-    function mintBatch(
-        address to,
-        uint256[] memory ids,
-        uint256[] memory values,
-        bytes memory data
-    ) public {
-        _mintBatch(to, ids, values, data);
-    }
-
+// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 36-42 function/modifier burn
     function burn(
         address owner,
         uint256 id,
@@ -147,6 +66,7 @@
         _burn(owner, id, value);
     }
 
+// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 44-50 function/modifier burnBatch
     function burnBatch(
         address owner,
         uint256[] memory ids,
@@ -155,20 +75,35 @@
         _burnBatch(owner, ids, values);
     }
 
-// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 36-51 (callable)
-    function burn(
-        address owner,
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 160-187 function/modifier _safeTransferFrom
+    function _safeTransferFrom(
+        address from,
+        address to,
         uint256 id,
-        uint256 value
-    ) public {
-        _burn(owner, id, value);
+        uint256 amount,
+        bytes memory data
+    ) internal virtual {
+        require(to != address(0), "ERC1155: transfer to the zero address");
+
+        address operator = _msgSender();
+        uint256[] memory ids = _asSingletonArray(id);
+        uint256[] memory amounts = _asSingletonArray(amount);
+
+        _beforeTokenTransfer(operator, from, to, ids, amounts, data);
+
+        uint256 fromBalance = _balances[id][from];
+        require(fromBalance >= amount, "ERC1155: insufficient balance for transfer");
+        unchecked {
+            _balances[id][from] = fromBalance - amount;
+        }
+        _balances[id][to] += amount;
+
+        emit TransferSingle(operator, from, to, id, amount);
+
+        _afterTokenTransfer(operator, from, to, ids, amounts, data);
+
+        _doSafeTransferAcceptanceCheck(operator, from, to, id, amount, data);
     }
 
-    function burnBatch(
-        address owner,
-        uint256[] memory ids,
-        uint256[] memory values
-    ) public {
-        _burnBatch(owner, ids, values);
-    }
-}
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 24-24 state declaration
+    mapping(uint256 => mapping(address => uint256)) private _balances;

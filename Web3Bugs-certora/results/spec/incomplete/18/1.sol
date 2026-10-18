@@ -1,79 +1,52 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/access/AccessControl.sol lines 95-99 (state)
-     */
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: AccessControl.spec:15-25 onlyRoleModifierCheckGrant
+
+// Original: contracts/18/contracts/access/AccessControl.sol lines 96-98 function/modifier _checkRole
     function _checkRole(bytes32 role) internal view virtual {
         _checkRole(role, _msgSender());
     }
 
-// Original: contracts/18/contracts/access/AccessControl.sol lines 106-110 (state)
-     */
+// Original: contracts/18/contracts/access/AccessControl.sol lines 107-120 function/modifier _checkRole
     function _checkRole(bytes32 role, address account) internal view virtual {
         if (!hasRole(role, account)) {
             revert(
                 string(
+                    abi.encodePacked(
+                        "AccessControl: account ",
+                        Strings.toHexString(uint160(account), 20),
+                        " is missing role ",
+                        Strings.toHexString(uint256(role), 32)
+                    )
+                )
+            );
+        }
+    }
 
-// Original: contracts/18/contracts/access/AccessControl.sol lines 128-151 (callable)
+// Original: contracts/18/contracts/access/AccessControl.sol lines 128-130 function/modifier getRoleAdmin
     function getRoleAdmin(bytes32 role) public view virtual override returns (bytes32) {
         return _roles[role].adminRole;
     }
 
-    /**
-     * @dev Grants `role` to `account`.
-     *
-     * If `account` had not been already granted `role`, emits a {RoleGranted}
-     * event.
-     *
-     * Requirements:
-     *
-     * - the caller must have ``role``'s admin role.
-     *
-     * May emit a {RoleGranted} event.
-     */
+// Original: contracts/18/contracts/access/AccessControl.sol lines 144-146 function/modifier grantRole
     function grantRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) {
         _grantRole(role, account);
     }
 
-    /**
-     * @dev Revokes `role` from `account`.
-     *
-     * If `account` had been granted `role`, emits a {RoleRevoked} event.
-
-// Original: contracts/18/contracts/access/AccessControl.sol lines 144-167 (callable)
-    function grantRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) {
-        _grantRole(role, account);
+// Original: contracts/18/contracts/access/AccessControl.sol lines 69-72 function/modifier onlyRole
+    modifier onlyRole(bytes32 role) {
+        _checkRole(role);
+        _;
     }
 
-    /**
-     * @dev Revokes `role` from `account`.
-     *
-     * If `account` had been granted `role`, emits a {RoleRevoked} event.
-     *
-     * Requirements:
-     *
-     * - the caller must have ``role``'s admin role.
-     *
-     * May emit a {RoleRevoked} event.
-     */
+// Original: contracts/18/contracts/access/AccessControl.sol lines 84-86 function/modifier hasRole
+    function hasRole(bytes32 role, address account) public view virtual override returns (bool) {
+        return _roles[role].members[account];
+    }
+
+// Original: contracts/18/contracts/access/AccessControl.sol lines 159-161 function/modifier revokeRole
     function revokeRole(bytes32 role, address account) public virtual override onlyRole(getRoleAdmin(role)) {
         _revokeRole(role, account);
     }
 
-    /**
-     * @dev Revokes `role` from the calling account.
-     *
-     * Roles are often managed via {grantRole} and {revokeRole}: this function's
-     * purpose is to provide a mechanism for accounts to lose their privileges
-
-// Original: contracts/18/contracts/mocks/AccessControlMock.sol lines 6-17 (target context (no matched entrypoint))
-
-contract AccessControlMock is AccessControl {
-    constructor() {
-        _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
-    }
-
-    function setRoleAdmin(bytes32 roleId, bytes32 adminRoleId) public {
-        _setRoleAdmin(roleId, adminRoleId);
-    }
-
-    function senderProtected(bytes32 roleId) public onlyRole(roleId) {}
-}
+// Original: contracts/18/contracts/access/AccessControl.sol lines 55-55 state declaration
+    mapping(bytes32 => RoleData) private _roles;

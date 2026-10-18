@@ -37,4 +37,4 @@ rule singleTokenSafeTransferFromSafeBatchTransferFromEquivalence {
     assert holderSafeTransferFromBalanceChange == holderSafeBatchTransferFromBalanceChange
         && recipientSafeTransferFromBalanceChange == recipientSafeBatchTransferFromBalanceChange, 
         "Transferring a single token via safeTransferFrom or safeBatchTransferFrom must be equivalent";
-}
+}   

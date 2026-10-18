@@ -19,4 +19,4 @@ rule unexpectedAllowanceChange(method f, env e) filtered { f -> f.selector != se
     bool approveAfter = isApprovedForAll(account, operator);
 
     assert approveBefore == approveAfter, "You couldn't get king's approval this way!";
-}
+}   

@@ -1,17 +1,25 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/mocks/ERC721VotesMock.sol lines 6-21 (target context (no matched entrypoint))
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: ERC721Votes.spec:107-109 fromBlock_increasing
 
-contract ERC721VotesMock is ERC721Votes {
-    constructor(string memory name, string memory symbol) ERC721(name, symbol) EIP712(name, "1") {}
+// Original: contracts/18/contracts/utils/Checkpoints.sol lines 39-53 function/modifier getAtBlock
+    function getAtBlock(History storage self, uint256 blockNumber) internal view returns (uint256) {
+        require(blockNumber < block.number, "Checkpoints: block not yet mined");
 
-    function getTotalSupply() public view returns (uint256) {
-        return _getTotalSupply();
+        uint256 high = self._checkpoints.length;
+        uint256 low = 0;
+        while (low < high) {
+            uint256 mid = Math.average(low, high);
+            if (self._checkpoints[mid]._blockNumber > blockNumber) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return high == 0 ? 0 : self._checkpoints[high - 1]._value;
     }
 
-    function mint(address account, uint256 tokenId) public {
-        _mint(account, tokenId);
-    }
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 39-39 state declaration
+    mapping(address => Checkpoints.History) private _delegateCheckpoints;
 
-    function burn(uint256 tokenId) public {
-        _burn(tokenId);
-    }
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 40-40 state declaration
+    Checkpoints.History private _totalCheckpoints;

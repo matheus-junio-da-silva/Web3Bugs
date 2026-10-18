@@ -1,56 +1,17 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 57-80 (callable)
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: ERC20Votes.spec:167-177 delegates_safe
+
+// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 57-59 function/modifier delegates
     function delegates(address account) public view virtual override returns (address) {
         return _delegates[account];
     }
 
-    /**
-     * @dev Gets the current votes balance for `account`
-     */
-    function getVotes(address account) public view virtual override returns (uint256) {
-        uint256 pos = _checkpoints[account].length;
-        return pos == 0 ? 0 : _checkpoints[account][pos - 1].votes;
-    }
-
-    /**
-     * @dev Retrieve the number of votes for `account` at the end of `blockNumber`.
-     *
-     * Requirements:
-     *
-     * - `blockNumber` must have been already mined
-     */
-    function getPastVotes(address account, uint256 blockNumber) public view virtual override returns (uint256) {
-        require(blockNumber < block.number, "ERC20Votes: block not yet mined");
-        return _checkpointsLookup(_checkpoints[account], blockNumber);
-    }
-
-// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 126-149 (callable)
+// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 126-128 function/modifier delegate
     function delegate(address delegatee) public virtual override {
         _delegate(_msgSender(), delegatee);
     }
 
-    /**
-     * @dev Delegates votes from signer to `delegatee`
-     */
-    function delegateBySig(
-        address delegatee,
-        uint256 nonce,
-        uint256 expiry,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) public virtual override {
-        require(block.timestamp <= expiry, "ERC20Votes: signature expired");
-        address signer = ECDSA.recover(
-            _hashTypedDataV4(keccak256(abi.encode(_DELEGATION_TYPEHASH, delegatee, nonce, expiry))),
-            v,
-            r,
-            s
-        );
-        require(nonce == _useNonce(signer), "ERC20Votes: invalid nonce");
-        _delegate(signer, delegatee);
-
-// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 133-156 (callable)
+// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 133-150 function/modifier delegateBySig
     function delegateBySig(
         address delegatee,
         uint256 nonce,
@@ -70,13 +31,7 @@
         _delegate(signer, delegatee);
     }
 
-    /**
-     * @dev Maximum token supply. Defaults to `type(uint224).max` (2^224^ - 1).
-     */
-    function _maxSupply() internal view virtual returns (uint224) {
-        return type(uint224).max;
-
-// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 198-221 (callable)
+// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 198-206 function/modifier _delegate
     function _delegate(address delegator, address delegatee) internal virtual {
         address currentDelegate = delegates(delegator);
         uint256 delegatorBalance = balanceOf(delegator);
@@ -87,92 +42,18 @@
         _moveVotingPower(currentDelegate, delegatee, delegatorBalance);
     }
 
-    function _moveVotingPower(
-        address src,
-        address dst,
-        uint256 amount
-    ) private {
-        if (src != dst && amount > 0) {
-            if (src != address(0)) {
-                (uint256 oldWeight, uint256 newWeight) = _writeCheckpoint(_checkpoints[src], _subtract, amount);
-                emit DelegateVotesChanged(src, oldWeight, newWeight);
-            }
-
-            if (dst != address(0)) {
-                (uint256 oldWeight, uint256 newWeight) = _writeCheckpoint(_checkpoints[dst], _add, amount);
-                emit DelegateVotesChanged(dst, oldWeight, newWeight);
-
-// Original: contracts/18/contracts/mocks/ERC20VotesMock.sol lines 6-21 (target context (no matched entrypoint))
-
-contract ERC20VotesMock is ERC20Votes {
-    constructor(string memory name, string memory symbol) ERC20(name, symbol) ERC20Permit(name) {}
-
-    function mint(address account, uint256 amount) public {
-        _mint(account, amount);
-    }
-
-    function burn(address account, uint256 amount) public {
-        _burn(account, amount);
-    }
-
-    function getChainId() external view returns (uint256) {
-        return block.chainid;
-    }
-}
-
-// Original: contracts/18/contracts/governance/utils/Votes.sol lines 88-111 (callable)
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 88-90 function/modifier delegates
     function delegates(address account) public view virtual override returns (address) {
         return _delegation[account];
     }
 
-    /**
-     * @dev Delegates votes from the sender to `delegatee`.
-     */
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 95-98 function/modifier delegate
     function delegate(address delegatee) public virtual override {
         address account = _msgSender();
         _delegate(account, delegatee);
     }
 
-    /**
-     * @dev Delegates votes from signer to `delegatee`.
-     */
-    function delegateBySig(
-        address delegatee,
-        uint256 nonce,
-        uint256 expiry,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) public virtual override {
-        require(block.timestamp <= expiry, "Votes: signature expired");
-
-// Original: contracts/18/contracts/governance/utils/Votes.sol lines 95-118 (callable)
-    function delegate(address delegatee) public virtual override {
-        address account = _msgSender();
-        _delegate(account, delegatee);
-    }
-
-    /**
-     * @dev Delegates votes from signer to `delegatee`.
-     */
-    function delegateBySig(
-        address delegatee,
-        uint256 nonce,
-        uint256 expiry,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) public virtual override {
-        require(block.timestamp <= expiry, "Votes: signature expired");
-        address signer = ECDSA.recover(
-            _hashTypedDataV4(keccak256(abi.encode(_DELEGATION_TYPEHASH, delegatee, nonce, expiry))),
-            v,
-            r,
-            s
-        );
-        require(nonce == _useNonce(signer), "Votes: invalid nonce");
-
-// Original: contracts/18/contracts/governance/utils/Votes.sol lines 103-126 (callable)
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 103-120 function/modifier delegateBySig
     function delegateBySig(
         address delegatee,
         uint256 nonce,
@@ -192,13 +73,7 @@ contract ERC20VotesMock is ERC20Votes {
         _delegate(signer, delegatee);
     }
 
-    /**
-     * @dev Delegate all of `account`'s voting units to `delegatee`.
-     *
-     * Emits events {DelegateChanged} and {DelegateVotesChanged}.
-     */
-
-// Original: contracts/18/contracts/governance/utils/Votes.sol lines 127-150 (callable)
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 127-133 function/modifier _delegate
     function _delegate(address account, address delegatee) internal virtual {
         address oldDelegate = delegates(account);
         _delegation[account] = delegatee;
@@ -207,19 +82,17 @@ contract ERC20VotesMock is ERC20Votes {
         _moveDelegateVotes(oldDelegate, delegatee, _getVotingUnits(account));
     }
 
-    /**
-     * @dev Transfers, mints, or burns voting units. To register a mint, `from` should be zero. To register a burn, `to`
-     * should be zero. Total supply of voting units will be adjusted with mints and burns.
-     */
-    function _transferVotingUnits(
-        address from,
-        address to,
-        uint256 amount
-    ) internal virtual {
-        if (from == address(0)) {
-            _totalCheckpoints.push(_add, amount);
-        }
-        if (to == address(0)) {
-            _totalCheckpoints.push(_subtract, amount);
-        }
-        _moveDelegateVotes(delegates(from), delegates(to), amount);
+// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 36-36 state declaration
+    mapping(address => address) private _delegates;
+
+// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Votes.sol lines 37-37 state declaration
+    mapping(address => Checkpoint[]) private _checkpoints;
+
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 38-38 state declaration
+    mapping(address => address) private _delegation;
+
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 39-39 state declaration
+    mapping(address => Checkpoints.History) private _delegateCheckpoints;
+
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 40-40 state declaration
+    Checkpoints.History private _totalCheckpoints;

@@ -1,12 +1,12 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 110-133 (callable)
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: ERC1155.spec:385-398 noTransferEffectOnApproval
+
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 110-112 function/modifier isApprovedForAll
     function isApprovedForAll(address account, address operator) public view virtual override returns (bool) {
         return _operatorApprovals[account][operator];
     }
 
-    /**
-     * @dev See {IERC1155-safeTransferFrom}.
-     */
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 117-129 function/modifier safeTransferFrom
     function safeTransferFrom(
         address from,
         address to,
@@ -21,50 +21,38 @@
         _safeTransferFrom(from, to, id, amount, data);
     }
 
-    /**
-     * @dev See {IERC1155-safeBatchTransferFrom}.
-     */
-
-// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 117-140 (callable)
-    function safeTransferFrom(
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 160-187 function/modifier _safeTransferFrom
+    function _safeTransferFrom(
         address from,
         address to,
         uint256 id,
         uint256 amount,
         bytes memory data
-    ) public virtual override {
-        require(
-            from == _msgSender() || isApprovedForAll(from, _msgSender()),
-            "ERC1155: caller is not token owner nor approved"
-        );
-        _safeTransferFrom(from, to, id, amount, data);
+    ) internal virtual {
+        require(to != address(0), "ERC1155: transfer to the zero address");
+
+        address operator = _msgSender();
+        uint256[] memory ids = _asSingletonArray(id);
+        uint256[] memory amounts = _asSingletonArray(amount);
+
+        _beforeTokenTransfer(operator, from, to, ids, amounts, data);
+
+        uint256 fromBalance = _balances[id][from];
+        require(fromBalance >= amount, "ERC1155: insufficient balance for transfer");
+        unchecked {
+            _balances[id][from] = fromBalance - amount;
+        }
+        _balances[id][to] += amount;
+
+        emit TransferSingle(operator, from, to, id, amount);
+
+        _afterTokenTransfer(operator, from, to, ids, amounts, data);
+
+        _doSafeTransferAcceptanceCheck(operator, from, to, id, amount, data);
     }
 
-    /**
-     * @dev See {IERC1155-safeBatchTransferFrom}.
-     */
-    function safeBatchTransferFrom(
-        address from,
-        address to,
-        uint256[] memory ids,
-        uint256[] memory amounts,
-        bytes memory data
-    ) public virtual override {
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 24-24 state declaration
+    mapping(uint256 => mapping(address => uint256)) private _balances;
 
-// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 10-25 (target context (no matched entrypoint))
- */
-contract ERC1155Mock is ERC1155 {
-    constructor(string memory uri) ERC1155(uri) {}
-
-    function setURI(string memory newuri) public {
-        _setURI(newuri);
-    }
-
-    function mint(
-        address to,
-        uint256 id,
-        uint256 value,
-        bytes memory data
-    ) public {
-        _mint(to, id, value, data);
-    }
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 27-27 state declaration
+    mapping(address => mapping(address => bool)) private _operatorApprovals;

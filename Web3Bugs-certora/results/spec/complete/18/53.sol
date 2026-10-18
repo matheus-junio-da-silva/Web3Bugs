@@ -1,41 +1,7 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/token/ERC1155/extensions/ERC1155Pausable.sol lines 17-32 (target context (no matched entrypoint))
- */
-abstract contract ERC1155Pausable is ERC1155, Pausable {
-    /**
-     * @dev See {ERC1155-_beforeTokenTransfer}.
-     *
-     * Requirements:
-     *
-     * - the contract must not be paused.
-     */
-    function _beforeTokenTransfer(
-        address operator,
-        address from,
-        address to,
-        uint256[] memory ids,
-        uint256[] memory amounts,
-        bytes memory data
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: ERC1155Pausable.spec:24-37 transferMethodsRevertWhenPaused
 
-// Original: contracts/18/contracts/mocks/ERC1155PausableMock.sol lines 7-22 (target context (no matched entrypoint))
-
-contract ERC1155PausableMock is ERC1155Mock, ERC1155Pausable {
-    constructor(string memory uri) ERC1155Mock(uri) {}
-
-    function pause() external {
-        _pause();
-    }
-
-    function unpause() external {
-        _unpause();
-    }
-
-    function _beforeTokenTransfer(
-        address operator,
-        address from,
-        address to,
-
-// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 117-140 (callable)
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 117-129 function/modifier safeTransferFrom
     function safeTransferFrom(
         address from,
         address to,
@@ -50,18 +16,7 @@ contract ERC1155PausableMock is ERC1155Mock, ERC1155Pausable {
         _safeTransferFrom(from, to, id, amount, data);
     }
 
-    /**
-     * @dev See {IERC1155-safeBatchTransferFrom}.
-     */
-    function safeBatchTransferFrom(
-        address from,
-        address to,
-        uint256[] memory ids,
-        uint256[] memory amounts,
-        bytes memory data
-    ) public virtual override {
-
-// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 134-157 (callable)
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 134-146 function/modifier safeBatchTransferFrom
     function safeBatchTransferFrom(
         address from,
         address to,
@@ -76,13 +31,41 @@ contract ERC1155PausableMock is ERC1155Mock, ERC1155Pausable {
         _safeBatchTransferFrom(from, to, ids, amounts, data);
     }
 
-    /**
-     * @dev Transfers `amount` tokens of token type `id` from `from` to `to`.
-     *
-     * Emits a {TransferSingle} event.
-     *
-     * Requirements:
-     *
-     * - `to` cannot be the zero address.
-     * - `from` must have a balance of tokens of type `id` of at least `amount`.
-     * - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the
+// Original: contracts/18/contracts/token/ERC1155/extensions/ERC1155Pausable.sol lines 26-37 function/modifier _beforeTokenTransfer
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal virtual override {
+        super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
+
+        require(!paused(), "ERC1155Pausable: token transfer while paused");
+    }
+
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 429-436 function/modifier _beforeTokenTransfer
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal virtual {}
+
+// Original: contracts/18/contracts/mocks/ERC1155PausableMock.sol lines 19-28 function/modifier _beforeTokenTransfer
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal virtual override(ERC1155, ERC1155Pausable) {
+        super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
+    }
+
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 24-24 state declaration
+    mapping(uint256 => mapping(address => uint256)) private _balances;

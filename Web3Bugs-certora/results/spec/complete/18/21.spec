@@ -20,4 +20,4 @@ rule noTransferForNotApproved(env e) {
     safeTransferFrom@withrevert(e, from, to, id, amount, data);
 
     assert !approve => lastReverted, "You don't have king's approval!";
-}
+}   

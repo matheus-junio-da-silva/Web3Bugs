@@ -21,4 +21,4 @@ rule noTransferBatchForNotApproved(env e) {
     safeBatchTransferFrom@withrevert(e, from, to, ids, amounts, data);
 
     assert !approve => lastReverted, "You don't have king's approval!";
-}
+}   

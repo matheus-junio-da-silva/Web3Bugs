@@ -1,60 +1,18 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/governance/TimelockController.sol lines 148-171 (callable)
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: TimelockController.spec:106-116 readyDoneTransition
+
+// Original: contracts/18/contracts/governance/TimelockController.sol lines 148-151 function/modifier isOperationReady
     function isOperationReady(bytes32 id) public view virtual returns (bool ready) {
         uint256 timestamp = getTimestamp(id);
         return timestamp > _DONE_TIMESTAMP && timestamp <= block.timestamp;
     }
 
-    /**
-     * @dev Returns whether an operation is done or not.
-     */
+// Original: contracts/18/contracts/governance/TimelockController.sol lines 156-158 function/modifier isOperationDone
     function isOperationDone(bytes32 id) public view virtual returns (bool done) {
         return getTimestamp(id) == _DONE_TIMESTAMP;
     }
 
-    /**
-     * @dev Returns the timestamp at with an operation becomes ready (0 for
-     * unset operations, 1 for done operations).
-     */
-    function getTimestamp(bytes32 id) public view virtual returns (uint256 timestamp) {
-        return _timestamps[id];
-    }
-
-    /**
-     * @dev Returns the minimum delay for an operation to become valid.
-     *
-     * This value can be changed by executing an operation that calls `updateDelay`.
-
-// Original: contracts/18/contracts/governance/TimelockController.sol lines 156-179 (callable)
-    function isOperationDone(bytes32 id) public view virtual returns (bool done) {
-        return getTimestamp(id) == _DONE_TIMESTAMP;
-    }
-
-    /**
-     * @dev Returns the timestamp at with an operation becomes ready (0 for
-     * unset operations, 1 for done operations).
-     */
-    function getTimestamp(bytes32 id) public view virtual returns (uint256 timestamp) {
-        return _timestamps[id];
-    }
-
-    /**
-     * @dev Returns the minimum delay for an operation to become valid.
-     *
-     * This value can be changed by executing an operation that calls `updateDelay`.
-     */
-    function getMinDelay() public view virtual returns (uint256 duration) {
-        return _minDelay;
-    }
-
-    /**
-     * @dev Returns the identifier of an operation containing a single
-     * transaction.
-
-// Original: contracts/18/contracts/governance/TimelockController.sol lines 286-309 (callable)
-    // This function can reenter, but it doesn't pose a risk because _afterCall checks that the proposal is pending,
-    // thus any modifications to the operation during reentrancy should be caught.
-    // slither-disable-next-line reentrancy-eth
+// Original: contracts/18/contracts/governance/TimelockController.sol lines 289-302 function/modifier execute
     function execute(
         address target,
         uint256 value,
@@ -70,35 +28,32 @@
         _afterCall(id);
     }
 
-    /**
-     * @dev Execute an (ready) operation containing a batch of transactions.
-     *
-     * Emits one {CallExecuted} event per transaction in the batch.
-     *
-     * Requirements:
-
-// Original: contracts/18/contracts/governance/TimelockController.sol lines 289-312 (callable)
-    function execute(
-        address target,
-        uint256 value,
-        bytes calldata payload,
+// Original: contracts/18/contracts/governance/TimelockController.sol lines 313-334 function/modifier executeBatch
+    function executeBatch(
+        address[] calldata targets,
+        uint256[] calldata values,
+        bytes[] calldata payloads,
         bytes32 predecessor,
         bytes32 salt
     ) public payable virtual onlyRoleOrOpenRole(EXECUTOR_ROLE) {
-        bytes32 id = hashOperation(target, value, payload, predecessor, salt);
+        require(targets.length == values.length, "TimelockController: length mismatch");
+        require(targets.length == payloads.length, "TimelockController: length mismatch");
+
+        bytes32 id = hashOperationBatch(targets, values, payloads, predecessor, salt);
 
         _beforeCall(id, predecessor);
-        _execute(target, value, payload);
-        emit CallExecuted(id, 0, target, value, payload);
+        for (uint256 i = 0; i < targets.length; ++i) {
+            address target = targets[i];
+            uint256 value = values[i];
+            bytes calldata payload = payloads[i];
+            _execute(target, value, payload);
+            emit CallExecuted(id, i, target, value, payload);
+        }
         _afterCall(id);
     }
 
-    /**
-     * @dev Execute an (ready) operation containing a batch of transactions.
-     *
-     * Emits one {CallExecuted} event per transaction in the batch.
-     *
-     * Requirements:
-     *
-     * - the caller must have the 'executor' role.
-     */
+// Original: contracts/18/contracts/governance/TimelockController.sol lines 31-31 state declaration
+    uint256 internal constant _DONE_TIMESTAMP = uint256(1);
+
+// Original: contracts/18/contracts/governance/TimelockController.sol lines 33-33 state declaration
+    mapping(bytes32 => uint256) private _timestamps;

@@ -1,36 +1,39 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 19-34 (target context (no matched entrypoint))
- */
-contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
-    using Address for address;
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: ERC1155.spec:626-632 burnRevertCases
 
-    // Mapping from token ID to account balances
-    mapping(uint256 => mapping(address => uint256)) private _balances;
-
-    // Mapping from account to operator approvals
-    mapping(address => mapping(address => bool)) private _operatorApprovals;
-
-    // Used as the URI for all token types by relying on ID substitution, e.g. https://token-cdn-domain/{id}.json
-    string private _uri;
-
-    /**
-     * @dev See {_setURI}.
-     */
-
-// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 10-25 (target context (no matched entrypoint))
- */
-contract ERC1155Mock is ERC1155 {
-    constructor(string memory uri) ERC1155(uri) {}
-
-    function setURI(string memory newuri) public {
-        _setURI(newuri);
-    }
-
-    function mint(
-        address to,
+// Original: contracts/18/contracts/mocks/ERC1155Mock.sol lines 36-42 function/modifier burn
+    function burn(
+        address owner,
         uint256 id,
-        uint256 value,
-        bytes memory data
+        uint256 value
     ) public {
-        _mint(to, id, value, data);
+        _burn(owner, id, value);
     }
+
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 333-355 function/modifier _burn
+    function _burn(
+        address from,
+        uint256 id,
+        uint256 amount
+    ) internal virtual {
+        require(from != address(0), "ERC1155: burn from the zero address");
+
+        address operator = _msgSender();
+        uint256[] memory ids = _asSingletonArray(id);
+        uint256[] memory amounts = _asSingletonArray(amount);
+
+        _beforeTokenTransfer(operator, from, address(0), ids, amounts, "");
+
+        uint256 fromBalance = _balances[id][from];
+        require(fromBalance >= amount, "ERC1155: burn amount exceeds balance");
+        unchecked {
+            _balances[id][from] = fromBalance - amount;
+        }
+
+        emit TransferSingle(operator, from, address(0), id, amount);
+
+        _afterTokenTransfer(operator, from, address(0), ids, amounts, "");
+    }
+
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 24-24 state declaration
+    mapping(uint256 => mapping(address => uint256)) private _balances;

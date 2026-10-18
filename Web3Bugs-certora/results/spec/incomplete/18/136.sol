@@ -1,53 +1,51 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/proxy/utils/Initializable.sol lines 8-23 (target context (no matched entrypoint))
-/**
- * @dev This is a base contract to aid in writing upgradeable contracts, or any kind of contract that will be deployed
- * behind a proxy. Since proxied contracts do not make use of a constructor, it's common to move constructor logic to an
- * external initializer function, usually called `initialize`. It then becomes necessary to protect this initializer
- * function so it can only be called once. The {initializer} modifier provided by this contract will have this effect.
- *
- * The initialization functions use a version number. Once a version number is used, it is consumed and cannot be
- * reused. This mechanism prevents re-execution of each "step" but allows the creation of new initialization steps in
- * case an upgrade adds a module that needs to be initialized.
- *
- * For example:
- *
- * [.hljs-theme-light.nopadding]
- * ```
- * contract MyToken is ERC20Upgradeable {
- *     function initialize() initializer public {
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: Initializable.spec:49-55 initOnce
 
-// Original: contracts/18/contracts/mocks/InitializableMock.sol lines 8-23 (target context (no matched entrypoint))
- * @title InitializableMock
- * @dev This contract is a mock to test initializable functionality
- */
-contract InitializableMock is Initializable {
-    bool public initializerRan;
-    bool public onlyInitializingRan;
-    uint256 public x;
-
+// Original: contracts/18/contracts/mocks/InitializableMock.sol lines 16-18 function/modifier initialize
     function initialize() public initializer {
         initializerRan = true;
     }
 
-    function initializeOnlyInitializing() public onlyInitializing {
-        onlyInitializingRan = true;
+// Original: contracts/18/contracts/mocks/InitializableMock.sol lines 54-56 function/modifier initialize
+    function initialize() public initializer {
+        initializerRan = true;
     }
 
-// Original: contracts/18/contracts/mocks/MultipleInheritanceInitializableMocks.sol lines 7-22 (target context (no matched entrypoint))
-// Sample contracts showing upgradeability with multiple inheritance.
-// Child contract inherits from Father and Mother contracts, and Father extends from Gramps.
-//
-//         Human
-//       /       \
-//      |       Gramps
-//      |         |
-//    Mother    Father
-//      |         |
-//      -- Child --
+// Original: contracts/18/contracts/mocks/InitializableMock.sol lines 78-80 function/modifier initialize
+    function initialize() public initializer {
+        doStuff();
+    }
 
-/**
- * Sample base intializable contract that is a human
- */
-contract SampleHuman is Initializable {
-    bool public isHuman;
+// Original: contracts/18/contracts/mocks/SingleInheritanceInitializableMocks.sol lines 14-16 function/modifier initialize
+    function initialize(uint256 value) public payable initializer {
+        x = value;
+    }
+
+// Original: contracts/18/contracts/mocks/MultipleInheritanceInitializableMocks.sol lines 24-26 function/modifier initialize
+    function initialize() public initializer {
+        __SampleHuman_init();
+    }
+
+// Original: contracts/18/contracts/mocks/MultipleInheritanceInitializableMocks.sol lines 45-47 function/modifier initialize
+    function initialize(uint256 value) public virtual initializer {
+        __SampleMother_init(value);
+    }
+
+// Original: contracts/18/contracts/mocks/MultipleInheritanceInitializableMocks.sol lines 67-69 function/modifier initialize
+    function initialize(string memory value) public virtual initializer {
+        __SampleGramps_init(value);
+    }
+
+// Original: contracts/18/contracts/mocks/MultipleInheritanceInitializableMocks.sol lines 89-91 function/modifier initialize
+    function initialize(string memory _gramps, uint256 _father) public initializer {
+        __SampleFather_init(_gramps, _father);
+    }
+
+// Original: contracts/18/contracts/proxy/utils/Initializable.sol lines 62-62 state declaration
+    uint8 private _initialized;
+
+// Original: contracts/18/contracts/proxy/utils/Initializable.sol lines 67-67 state declaration
+    bool private _initializing;
+
+// Original: contracts/18/contracts/mocks/MultipleInheritanceInitializableMocks.sol lines 116-116 state declaration
+    ) public initializer {

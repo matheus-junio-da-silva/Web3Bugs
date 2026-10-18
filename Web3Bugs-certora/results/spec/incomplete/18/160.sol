@@ -1,5 +1,7 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/governance/Governor.sol lines 289-312 (callable)
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: RulesInProgress.spec:160-175 getTimestampOnlyChange
+
+// Original: contracts/18/contracts/governance/Governor.sol lines 289-311 function/modifier execute
     function execute(
         address[] memory targets,
         uint256[] memory values,
@@ -23,21 +25,3 @@
 
         return proposalId;
     }
-
-// Original: contracts/18/contracts/governance/extensions/GovernorCountingSimple.sol lines 12-27 (target context (no matched entrypoint))
- */
-abstract contract GovernorCountingSimple is Governor {
-    /**
-     * @dev Supported vote types. Matches Governor Bravo ordering.
-     */
-    enum VoteType {
-        Against,
-        For,
-        Abstain
-    }
-
-    struct ProposalVote {
-        uint256 againstVotes;
-        uint256 forVotes;
-        uint256 abstainVotes;
-        mapping(address => bool) hasVoted;

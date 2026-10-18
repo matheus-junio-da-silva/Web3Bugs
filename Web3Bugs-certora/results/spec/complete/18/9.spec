@@ -30,4 +30,4 @@ rule unexpectedBalanceChange(method f, env e)
     uint256 balanceAfter = balanceOf(from, id);
 
     assert balanceBefore == balanceAfter, "How you dare to take my money?";
-}
+}   

@@ -1,88 +1,92 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/governance/extensions/GovernorPreventLateQuorum.sol lines 19-34 (target context (no matched entrypoint))
- */
-abstract contract GovernorPreventLateQuorum is Governor {
-    using SafeCast for uint256;
-    using Timers for Timers.BlockNumber;
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: GovernorPreventLateQuorum.spec:186-214 hasVotedCorrelationNonzero
 
-    uint64 private _voteExtension;
-    mapping(uint256 => Timers.BlockNumber) private _extendedDeadlines;
-
-    /// @dev Emitted when a proposal deadline is pushed back due to reaching quorum late in its voting period.
-    event ProposalExtended(uint256 indexed proposalId, uint64 extendedDeadline);
-
-    /// @dev Emitted when the {lateQuorumVoteExtension} parameter is changed.
-    event LateQuorumVoteExtensionSet(uint64 oldVoteExtension, uint64 newVoteExtension);
-
-    /**
-     * @dev Initializes the vote extension parameter: the number of blocks that are required to pass since a proposal
-
-// Original: contracts/18/contracts/governance/Governor.sol lines 182-205 (callable)
+// Original: contracts/18/contracts/governance/Governor.sol lines 182-184 function/modifier proposalSnapshot
     function proposalSnapshot(uint256 proposalId) public view virtual override returns (uint256) {
         return _proposals[proposalId].voteStart.getDeadline();
     }
 
-    /**
-     * @dev See {IGovernor-proposalDeadline}.
-     */
-    function proposalDeadline(uint256 proposalId) public view virtual override returns (uint256) {
-        return _proposals[proposalId].voteEnd.getDeadline();
-    }
-
-    /**
-     * @dev Part of the Governor Bravo's interface: _"The number of votes required in order for a voter to become a proposer"_.
-     */
-    function proposalThreshold() public view virtual returns (uint256) {
-        return 0;
-    }
-
-    /**
-     * @dev Amount of votes already cast passes the threshold limit.
-     */
-    function _quorumReached(uint256 proposalId) internal view virtual returns (bool);
-
-    /**
-
-// Original: contracts/18/contracts/governance/Governor.sol lines 395-418 (callable)
+// Original: contracts/18/contracts/governance/Governor.sol lines 395-397 function/modifier getVotes
     function getVotes(address account, uint256 blockNumber) public view virtual override returns (uint256) {
         return _getVotes(account, blockNumber, _defaultParams());
     }
 
-    /**
-     * @dev See {IGovernor-getVotesWithParams}.
-     */
-    function getVotesWithParams(
+// Original: contracts/18/contracts/governance/extensions/GovernorCountingSimple.sol lines 43-45 function/modifier hasVoted
+    function hasVoted(uint256 proposalId, address account) public view virtual override returns (bool) {
+        return _proposalVotes[proposalId].hasVoted[account];
+    }
+
+// Original: contracts/18/contracts/governance/extensions/GovernorPreventLateQuorum.sol lines 56-78 function/modifier _castVote
+    function _castVote(
+        uint256 proposalId,
         address account,
-        uint256 blockNumber,
+        uint8 support,
+        string memory reason,
         bytes memory params
-    ) public view virtual override returns (uint256) {
-        return _getVotes(account, blockNumber, params);
+    ) internal virtual override returns (uint256) {
+        uint256 result = super._castVote(proposalId, account, support, reason, params);
+
+        Timers.BlockNumber storage extendedDeadline = _extendedDeadlines[proposalId];
+
+        if (extendedDeadline.isUnset() && _quorumReached(proposalId)) {
+            uint64 extendedDeadlineValue = block.number.toUint64() + lateQuorumVoteExtension();
+
+            if (extendedDeadlineValue > proposalDeadline(proposalId)) {
+                emit ProposalExtended(proposalId, extendedDeadlineValue);
+            }
+
+            extendedDeadline.setDeadline(extendedDeadlineValue);
+        }
+
+        return result;
     }
 
-    /**
-     * @dev See {IGovernor-castVote}.
-     */
-    function castVote(uint256 proposalId, uint8 support) public virtual override returns (uint256) {
-        address voter = _msgSender();
-        return _castVote(proposalId, voter, support, "");
+// Original: contracts/18/contracts/governance/Governor.sol lines 500-507 function/modifier _castVote
+    function _castVote(
+        uint256 proposalId,
+        address account,
+        uint8 support,
+        string memory reason
+    ) internal virtual returns (uint256) {
+        return _castVote(proposalId, account, support, reason, _defaultParams());
     }
 
-    /**
+// Original: contracts/18/contracts/governance/Governor.sol lines 515-535 function/modifier _castVote
+    function _castVote(
+        uint256 proposalId,
+        address account,
+        uint8 support,
+        string memory reason,
+        bytes memory params
+    ) internal virtual returns (uint256) {
+        ProposalCore storage proposal = _proposals[proposalId];
+        require(state(proposalId) == ProposalState.Active, "Governor: vote not currently active");
 
-// Original: contracts/18/contracts/mocks/GovernorPreventLateQuorumMock.sol lines 9-24 (target context (no matched entrypoint))
+        uint256 weight = _getVotes(account, proposal.voteStart.getDeadline(), params);
+        _countVote(proposalId, account, support, weight, params);
 
-contract GovernorPreventLateQuorumMock is
-    GovernorSettings,
-    GovernorVotes,
-    GovernorCountingSimple,
-    GovernorPreventLateQuorum
-{
-    uint256 private _quorum;
+        if (params.length == 0) {
+            emit VoteCast(account, proposalId, support, weight, reason);
+        } else {
+            emit VoteCastWithParams(account, proposalId, support, weight, reason, params);
+        }
 
-    constructor(
-        string memory name_,
-        IVotes token_,
-        uint256 votingDelay_,
-        uint256 votingPeriod_,
-        uint256 quorum_,
-        uint64 voteExtension_
+        return weight;
+    }
+
+// Original: contracts/18/contracts/mocks/GovernorPreventLateQuorumMock.sol lines 52-60 function/modifier _castVote
+    function _castVote(
+        uint256 proposalId,
+        address account,
+        uint8 support,
+        string memory reason,
+        bytes memory params
+    ) internal virtual override(Governor, GovernorPreventLateQuorum) returns (uint256) {
+        return super._castVote(proposalId, account, support, reason, params);
+    }
+
+// Original: contracts/18/contracts/governance/extensions/GovernorCountingSimple.sol lines 27-27 state declaration
+        mapping(address => bool) hasVoted;
+
+// Original: contracts/18/contracts/governance/extensions/GovernorCountingSimple.sol lines 30-30 state declaration
+    mapping(uint256 => ProposalVote) private _proposalVotes;

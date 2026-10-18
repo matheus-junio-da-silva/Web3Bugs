@@ -1,50 +1,23 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Wrapper.sol lines 48-63 (callable)
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: ERC20Wrapper.spec:139-157 withdrawToSpecWrapper
+
+// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Wrapper.sol lines 48-52 function/modifier withdrawTo
     function withdrawTo(address account, uint256 amount) public virtual returns (bool) {
         _burn(_msgSender(), amount);
         SafeERC20.safeTransfer(underlying, account, amount);
         return true;
     }
 
-    /**
-     * @dev Mint wrapped token to cover any underlyingTokens that would have been transferred by mistake. Internal
-     * function that can be exposed with access control if desired.
-     */
-    function _recover(address account) internal virtual returns (uint256) {
-        uint256 value = underlying.balanceOf(address(this)) - totalSupply();
-        _mint(account, value);
-        return value;
+// Original: contracts/18/contracts/token/ERC20/ERC20.sol lines 101-103 function/modifier balanceOf
+    function balanceOf(address account) public view virtual override returns (uint256) {
+        return _balances[account];
     }
-}
 
-// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Wrapper.sol lines 56-63 (callable)
-     * function that can be exposed with access control if desired.
-     */
-    function _recover(address account) internal virtual returns (uint256) {
-        uint256 value = underlying.balanceOf(address(this)) - totalSupply();
-        _mint(account, value);
-        return value;
-    }
-}
+// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Wrapper.sol lines 19-19 state declaration
+    IERC20 public immutable underlying;
 
-// Original: contracts/18/contracts/token/ERC20/extensions/ERC20Wrapper.sol lines 58-63 (callable)
-    function _recover(address account) internal virtual returns (uint256) {
-        uint256 value = underlying.balanceOf(address(this)) - totalSupply();
-        _mint(account, value);
-        return value;
-    }
-}
+// Original: contracts/18/contracts/token/ERC20/ERC20.sol lines 36-36 state declaration
+    mapping(address => uint256) private _balances;
 
-// Original: contracts/18/contracts/mocks/ERC20WrapperMock.sol lines 6-17 (target context (no matched entrypoint))
-
-contract ERC20WrapperMock is ERC20Wrapper {
-    constructor(
-        IERC20 _underlyingToken,
-        string memory name,
-        string memory symbol
-    ) ERC20(name, symbol) ERC20Wrapper(_underlyingToken) {}
-
-    function recover(address account) public returns (uint256) {
-        return _recover(account);
-    }
-}
+// Original: contracts/18/contracts/token/ERC20/ERC20.sol lines 40-40 state declaration
+    uint256 private _totalSupply;

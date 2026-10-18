@@ -1,5 +1,7 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/governance/TimelockController.sol lines 214-237 (callable)
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: TimelockController.spec:245-261 onlyProposer
+
+// Original: contracts/18/contracts/governance/TimelockController.sol lines 214-225 function/modifier schedule
     function schedule(
         address target,
         uint256 value,
@@ -13,19 +15,7 @@
         emit CallScheduled(id, 0, target, value, data, predecessor, delay);
     }
 
-    /**
-     * @dev Schedule an operation containing a batch of transactions.
-     *
-     * Emits one {CallScheduled} event per transaction in the batch.
-     *
-     * Requirements:
-     *
-     * - the caller must have the 'proposer' role.
-     */
-    function scheduleBatch(
-        address[] calldata targets,
-
-// Original: contracts/18/contracts/governance/TimelockController.sol lines 236-259 (callable)
+// Original: contracts/18/contracts/governance/TimelockController.sol lines 236-252 function/modifier scheduleBatch
     function scheduleBatch(
         address[] calldata targets,
         uint256[] calldata values,
@@ -44,9 +34,32 @@
         }
     }
 
-    /**
-     * @dev Schedule an operation that is to becomes valid after a given delay.
-     */
-    function _schedule(bytes32 id, uint256 delay) private {
-        require(!isOperation(id), "TimelockController: operation already scheduled");
-        require(delay >= getMinDelay(), "TimelockController: insufficient delay");
+// Original: contracts/18/contracts/access/AccessControl.sol lines 96-98 function/modifier _checkRole
+    function _checkRole(bytes32 role) internal view virtual {
+        _checkRole(role, _msgSender());
+    }
+
+// Original: contracts/18/contracts/access/AccessControl.sol lines 107-120 function/modifier _checkRole
+    function _checkRole(bytes32 role, address account) internal view virtual {
+        if (!hasRole(role, account)) {
+            revert(
+                string(
+                    abi.encodePacked(
+                        "AccessControl: account ",
+                        Strings.toHexString(uint160(account), 20),
+                        " is missing role ",
+                        Strings.toHexString(uint256(role), 32)
+                    )
+                )
+            );
+        }
+    }
+
+// Original: contracts/18/contracts/governance/TimelockController.sol lines 28-28 state declaration
+    bytes32 public constant PROPOSER_ROLE = keccak256("PROPOSER_ROLE");
+
+// Original: contracts/18/contracts/governance/TimelockController.sol lines 221-221 state declaration
+    ) public virtual onlyRole(PROPOSER_ROLE) {
+
+// Original: contracts/18/contracts/governance/TimelockController.sol lines 243-243 state declaration
+    ) public virtual onlyRole(PROPOSER_ROLE) {

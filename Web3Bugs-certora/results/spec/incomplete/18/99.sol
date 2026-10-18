@@ -1,17 +1,30 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/mocks/ERC721VotesMock.sol lines 6-21 (target context (no matched entrypoint))
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: ERC721Votes.spec:220-234 delegate_contained
 
-contract ERC721VotesMock is ERC721Votes {
-    constructor(string memory name, string memory symbol) ERC721(name, symbol) EIP712(name, "1") {}
-
-    function getTotalSupply() public view returns (uint256) {
-        return _getTotalSupply();
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 47-49 function/modifier getVotes
+    function getVotes(address account) public view virtual override returns (uint256) {
+        return _delegateCheckpoints[account].latest();
     }
 
-    function mint(address account, uint256 tokenId) public {
-        _mint(account, tokenId);
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 88-90 function/modifier delegates
+    function delegates(address account) public view virtual override returns (address) {
+        return _delegation[account];
     }
 
-    function burn(uint256 tokenId) public {
-        _burn(tokenId);
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 127-133 function/modifier _delegate
+    function _delegate(address account, address delegatee) internal virtual {
+        address oldDelegate = delegates(account);
+        _delegation[account] = delegatee;
+
+        emit DelegateChanged(account, oldDelegate, delegatee);
+        _moveDelegateVotes(oldDelegate, delegatee, _getVotingUnits(account));
     }
+
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 38-38 state declaration
+    mapping(address => address) private _delegation;
+
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 39-39 state declaration
+    mapping(address => Checkpoints.History) private _delegateCheckpoints;
+
+// Original: contracts/18/contracts/governance/utils/Votes.sol lines 40-40 state declaration
+    Checkpoints.History private _totalCheckpoints;

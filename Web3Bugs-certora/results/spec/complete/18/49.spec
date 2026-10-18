@@ -31,4 +31,4 @@ rule singleTokenBurnBurnBatchEquivalence {
 
     assert burnBalanceChange == burnBatchBalanceChange, 
         "Burning a single token via burn or burnBatch must be equivalent";
-}
+}   

@@ -1,14 +1,7 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/token/ERC1155/extensions/ERC1155Pausable.sol lines 17-32 (target context (no matched entrypoint))
- */
-abstract contract ERC1155Pausable is ERC1155, Pausable {
-    /**
-     * @dev See {ERC1155-_beforeTokenTransfer}.
-     *
-     * Requirements:
-     *
-     * - the contract must not be paused.
-     */
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: ERC1155Pausable.spec:97-105 whenPausedModifierCausesRevertIfUnpaused
+
+// Original: contracts/18/contracts/token/ERC1155/extensions/ERC1155Pausable.sol lines 26-37 function/modifier _beforeTokenTransfer
     function _beforeTokenTransfer(
         address operator,
         address from,
@@ -16,39 +9,30 @@ abstract contract ERC1155Pausable is ERC1155, Pausable {
         uint256[] memory ids,
         uint256[] memory amounts,
         bytes memory data
+    ) internal virtual override {
+        super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
 
-// Original: contracts/18/contracts/mocks/ERC1155PausableMock.sol lines 7-22 (target context (no matched entrypoint))
-
-contract ERC1155PausableMock is ERC1155Mock, ERC1155Pausable {
-    constructor(string memory uri) ERC1155Mock(uri) {}
-
-    function pause() external {
-        _pause();
+        require(!paused(), "ERC1155Pausable: token transfer while paused");
     }
 
-    function unpause() external {
-        _unpause();
-    }
-
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 429-436 function/modifier _beforeTokenTransfer
     function _beforeTokenTransfer(
         address operator,
         address from,
         address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal virtual {}
 
-// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 19-34 (target context (no matched entrypoint))
- */
-contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
-    using Address for address;
-
-    // Mapping from token ID to account balances
-    mapping(uint256 => mapping(address => uint256)) private _balances;
-
-    // Mapping from account to operator approvals
-    mapping(address => mapping(address => bool)) private _operatorApprovals;
-
-    // Used as the URI for all token types by relying on ID substitution, e.g. https://token-cdn-domain/{id}.json
-    string private _uri;
-
-    /**
-     * @dev See {_setURI}.
-     */
+// Original: contracts/18/contracts/mocks/ERC1155PausableMock.sol lines 19-28 function/modifier _beforeTokenTransfer
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal virtual override(ERC1155, ERC1155Pausable) {
+        super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
+    }

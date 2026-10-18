@@ -1,5 +1,7 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/governance/Governor.sol lines 289-312 (callable)
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: GovernorBase.spec:331-341 executedOnlyAfterExecuteFunc
+
+// Original: contracts/18/contracts/governance/Governor.sol lines 289-311 function/modifier execute
     function execute(
         address[] memory targets,
         uint256[] memory values,
@@ -24,20 +26,5 @@
         return proposalId;
     }
 
-// Original: contracts/18/contracts/mocks/GovernorMock.sol lines 9-24 (target context (no matched entrypoint))
-
-contract GovernorMock is
-    GovernorProposalThreshold,
-    GovernorSettings,
-    GovernorVotesQuorumFraction,
-    GovernorCountingSimple
-{
-    constructor(
-        string memory name_,
-        IVotes token_,
-        uint256 votingDelay_,
-        uint256 votingPeriod_,
-        uint256 quorumNumerator_
-    )
-        Governor(name_)
-        GovernorSettings(votingDelay_, votingPeriod_, 0)
+// Original: contracts/18/contracts/governance/Governor.sol lines 47-47 state declaration
+    mapping(uint256 => ProposalCore) private _proposals;

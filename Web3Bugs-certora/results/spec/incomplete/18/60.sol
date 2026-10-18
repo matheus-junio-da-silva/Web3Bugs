@@ -1,37 +1,32 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/token/ERC1155/extensions/ERC1155Supply.sol lines 22-45 (callable)
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: ERC1155Supply.spec:11-31 token_totalSupply_independence
+
+// Original: contracts/18/contracts/token/ERC1155/extensions/ERC1155Supply.sol lines 22-24 function/modifier totalSupply
     function totalSupply(uint256 id) public view virtual returns (uint256) {
         return _totalSupply[id];
     }
 
-    /**
-     * @dev Indicates whether any token exist with a given id, or not.
-     */
-    function exists(uint256 id) public view virtual returns (bool) {
-        return ERC1155Supply.totalSupply(id) > 0;
-    }
-
-    /**
-     * @dev See {ERC1155-_beforeTokenTransfer}.
-     */
-    function _beforeTokenTransfer(
-        address operator,
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 134-146 function/modifier safeBatchTransferFrom
+    function safeBatchTransferFrom(
         address from,
         address to,
         uint256[] memory ids,
         uint256[] memory amounts,
         bytes memory data
-    ) internal virtual override {
-        super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
+    ) public virtual override {
+        require(
+            from == _msgSender() || isApprovedForAll(from, _msgSender()),
+            "ERC1155: caller is not token owner nor approved"
+        );
+        _safeBatchTransferFrom(from, to, ids, amounts, data);
+    }
 
-// Original: contracts/18/contracts/token/ERC1155/extensions/ERC1155Supply.sol lines 29-52 (callable)
+// Original: contracts/18/contracts/token/ERC1155/extensions/ERC1155Supply.sol lines 29-31 function/modifier exists
     function exists(uint256 id) public view virtual returns (bool) {
         return ERC1155Supply.totalSupply(id) > 0;
     }
 
-    /**
-     * @dev See {ERC1155-_beforeTokenTransfer}.
-     */
+// Original: contracts/18/contracts/token/ERC1155/extensions/ERC1155Supply.sol lines 36-63 function/modifier _beforeTokenTransfer
     function _beforeTokenTransfer(
         address operator,
         address from,
@@ -49,12 +44,29 @@
         }
 
         if (to == address(0)) {
+            for (uint256 i = 0; i < ids.length; ++i) {
+                uint256 id = ids[i];
+                uint256 amount = amounts[i];
+                uint256 supply = _totalSupply[id];
+                require(supply >= amount, "ERC1155: burn amount exceeds totalSupply");
+                unchecked {
+                    _totalSupply[id] = supply - amount;
+                }
+            }
+        }
+    }
 
-// Original: contracts/18/contracts/mocks/ERC1155SupplyMock.sol lines 7-21 (target context (no matched entrypoint))
+// Original: contracts/18/contracts/token/ERC1155/ERC1155.sol lines 429-436 function/modifier _beforeTokenTransfer
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal virtual {}
 
-contract ERC1155SupplyMock is ERC1155Mock, ERC1155Supply {
-    constructor(string memory uri) ERC1155Mock(uri) {}
-
+// Original: contracts/18/contracts/mocks/ERC1155SupplyMock.sol lines 11-20 function/modifier _beforeTokenTransfer
     function _beforeTokenTransfer(
         address operator,
         address from,
@@ -65,4 +77,6 @@ contract ERC1155SupplyMock is ERC1155Mock, ERC1155Supply {
     ) internal virtual override(ERC1155, ERC1155Supply) {
         super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
     }
-}
+
+// Original: contracts/18/contracts/token/ERC1155/extensions/ERC1155Supply.sol lines 17-17 state declaration
+    mapping(uint256 => uint256) private _totalSupply;

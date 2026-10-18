@@ -1,36 +1,28 @@
-// Historical Solidity excerpts; not a compilable harness.
-// Original: contracts/18/contracts/governance/Governor.sol lines 20-35 (target context (no matched entrypoint))
- *
- * This contract is abstract and requires several function to be implemented in various modules:
- *
- * - A counting module must implement {quorum}, {_quorumReached}, {_voteSucceeded} and {_countVote}
- * - A voting module must implement {_getVotes}
- * - Additionanly, the {votingPeriod} must also be implemented
- *
- * _Available since v4.3._
- */
-abstract contract Governor is Context, ERC165, EIP712, IGovernor, IERC721Receiver, IERC1155Receiver {
-    using DoubleEndedQueue for DoubleEndedQueue.Bytes32Deque;
-    using SafeCast for uint256;
-    using Timers for Timers.BlockNumber;
+// ORIGINAL HISTORICAL SOLIDITY excerpts; content copied literally from contracts/18
+// CVL property: GovernorBase.spec:159-169 executionOnlyIfQuoromReachedAndVoteSucceeded
 
-    bytes32 public constant BALLOT_TYPEHASH = keccak256("Ballot(uint256 proposalId,uint8 support)");
-    bytes32 public constant EXTENDED_BALLOT_TYPEHASH =
+// Original: contracts/18/contracts/governance/Governor.sol lines 203-203 function/modifier _quorumReached
+    function _quorumReached(uint256 proposalId) internal view virtual returns (bool);
 
-// Original: contracts/18/contracts/mocks/GovernorMock.sol lines 9-24 (target context (no matched entrypoint))
+// Original: contracts/18/contracts/governance/Governor.sol lines 208-208 function/modifier _voteSucceeded
+    function _voteSucceeded(uint256 proposalId) internal view virtual returns (bool);
 
-contract GovernorMock is
-    GovernorProposalThreshold,
-    GovernorSettings,
-    GovernorVotesQuorumFraction,
-    GovernorCountingSimple
-{
-    constructor(
-        string memory name_,
-        IVotes token_,
-        uint256 votingDelay_,
-        uint256 votingPeriod_,
-        uint256 quorumNumerator_
-    )
-        Governor(name_)
-        GovernorSettings(votingDelay_, votingPeriod_, 0)
+// Original: contracts/18/contracts/governance/extensions/GovernorCountingSimple.sol lines 67-71 function/modifier _quorumReached
+    function _quorumReached(uint256 proposalId) internal view virtual override returns (bool) {
+        ProposalVote storage proposalvote = _proposalVotes[proposalId];
+
+        return quorum(proposalSnapshot(proposalId)) <= proposalvote.forVotes + proposalvote.abstainVotes;
+    }
+
+// Original: contracts/18/contracts/governance/extensions/GovernorCountingSimple.sol lines 76-80 function/modifier _voteSucceeded
+    function _voteSucceeded(uint256 proposalId) internal view virtual override returns (bool) {
+        ProposalVote storage proposalvote = _proposalVotes[proposalId];
+
+        return proposalvote.forVotes > proposalvote.againstVotes;
+    }
+
+// Original: contracts/18/contracts/governance/Governor.sol lines 47-47 state declaration
+    mapping(uint256 => ProposalCore) private _proposals;
+
+// Original: contracts/18/contracts/governance/extensions/GovernorCountingSimple.sol lines 30-30 state declaration
+    mapping(uint256 => ProposalVote) private _proposalVotes;

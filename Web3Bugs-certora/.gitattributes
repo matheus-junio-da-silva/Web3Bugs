@@ -13,3 +13,8 @@ results/spec/incomplete/7/*.spec whitespace=-blank-at-eol,-space-before-tab
 /contracts/9/** -whitespace
 /results/spec/complete/9/*.spec -whitespace
 /results/spec/incomplete/9/*.spec -whitespace
+
+# Contributed Project 13 historical source and literal excerpt settings
+contracts/13/** -whitespace
+results/spec/incomplete/13/*.spec -whitespace
+results/spec/incomplete/13/*.sol -whitespace

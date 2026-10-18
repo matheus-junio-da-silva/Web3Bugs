@@ -1,0 +1,11 @@
+INCOMPLETE DEPENDENCY — Project 13 / Example 14
+CVL property: redeemNTokensMustDecreaseBalanceAndSupply
+Original CVL: certora/accountContext/Balances.spec:34-36
+Historically selected target: UNRESOLVED
+
+Missing historical verification TARGET: no script/.conf selects certora/accountContext/Balances.spec or identifies a concrete contract ABI implementing this rule. The supplied BalanceHandler.sol is library context, not a substitute target or complete proof harness.
+
+CVL closure: the .spec copies the selected property literally and only available supporting methods/definitions. Solidity declarations are not mistaken for implementations.
+
+Context only, NOT the grounds for dependency-incomplete status: the missing historical compiler, Prover and CLI flags limit reproduction, but these do not by themselves make a complete dependency closure incomplete.
+Search performed across contracts/13, certora scripts/.conf files, and recursively through actual import directives. No modern package substitution made.

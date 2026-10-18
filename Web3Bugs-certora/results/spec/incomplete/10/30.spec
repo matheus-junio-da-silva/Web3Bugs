@@ -1,4 +1,4 @@
-// Historical CVL property, Project 10, contracts/10/specs/hbalancer.spec:65-73
+// Historical CVL property, Project 10, contracts/10/specs/hbalancer.spec:65-73; helper contracts/10/specs/hbalancer.spec:75-79
 // Only available dependency declarations; no historic signature edits and no CVL migration.
 
 using Summary as summaryInstance // general summary for DeFi protocols

@@ -1,4 +1,4 @@
-// Historical CVL property, Project 10, contracts/10/specs/hmaker.spec:59-67
+// Historical CVL property, Project 10, contracts/10/specs/hmaker.spec:59-67; helper contracts/10/specs/hmaker.spec:69-73
 // Only available dependency declarations; no historic signature edits and no CVL migration.
 
 using Summary as summaryInstance // general summary for DeFi protocols

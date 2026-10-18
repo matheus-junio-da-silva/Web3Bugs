@@ -1,18 +1,18 @@
 # Project 10 — Furucombo: source-preserving Certora property catalog and closure audit
 
-## 2026-10-18 blocking semantic revision — CURRENT classification
+## 2026-10-18 final target-instance audit — CURRENT classification
 
-**Canonical current count:** 34 active CVL declarations, 128 target-aware examples, **2 complete and 126 incomplete** under the literal preserved-snapshot dependency criterion; 87 former complete examples have been reclassified. Only LibParamHarness examples 33 and 34 remain complete. All 87 new incomplete examples include a concrete missing-dependency `N.txt`; original CVL and contracts remain unchanged.
+**Canonical current count:** 34 active CVL declarations, **266 target-aware examples, 2 complete and 264 incomplete** under the literal preserved-snapshot dependency criterion. This includes the original 128 reviewed records and **138 additional independent incomplete report #27–32 source/handler contexts**, documented by source and target. The prior 87 complete→incomplete corrections are preserved. Only LibParamHarness examples 33 and 34 remain complete. All 87 new incomplete examples include a concrete missing-dependency `N.txt`; original CVL and contracts remain unchanged.
 
 Audit records:
 - `docs/spec_catalog_project_10_solidity_closure.md`: recursion through necessary Solidity imports for **all 89 formerly complete** source/target examples, exact dependency sites and per-example decisions.
-- `docs/spec_catalog_project_10_handler_27_32_decisions.md`: **138 separate report-cell decisions**, six source rules × 23 handlers, with PDF pages 26–31, script, source rule, target, dependencies, applicability and separate-example decision. These are *not* 138 new formal results or automatically generated examples.
+- `docs/spec_catalog_project_10_handler_27_32_decisions.md`: **138 separately documented report-cell decisions**, six source rules × 23 handlers, with PDF pp.26–31, original rule, driver, target, method/getter closure and distinct-context decision; **examples 129–266 are individually incomplete**, not new historical Prover results.
 - All 13 malformed report #26 citations now identify PDF **p. 25**, and all 13 undefined counterexamples are replaced by a falsifying-behavior condition read from the unchanged CVL assertion, not invented Prover executions.
 
-**Outstanding semantic gate:** report #27–32 target-specific reproduction and historically equivalent exact source/harnesses are unavailable. Structural checks do not waive the gap; **retain draft**. Historical status counts and validation notes later in this ledger describe *earlier commits* only and are superseded by this section for current numbers.
+**Provenance gate:** all 138 report #27–32 cells have a target-aware decision and incomplete artifact. However exact 2021 Solidity and harness/prover replay remain unavailable; keep draft for the orchestrator to review the explicitly documented soundness limitations, not for missing catalog entries. Historical status counts and validation notes later in this ledger describe *earlier commits* only and are superseded by this section for current numbers.
 
 
-> **Review status: DRAFT / STRUCTURAL CHECKS PASSED; HISTORICAL TARGET COVERAGE BLOCKED.** This ledger contains 128 target-aware examples for 34 active declarations (36 baseline plus 92 new handler/target contexts). It is not a reproduced 2021 verification result or a completed handler-by-handler execution matrix. Do not merge until the below blockers and validation have been reviewed.
+> **Review status: DRAFT / 266 INDEXED INSTANCES, FORMAL REPLAY NOT CLAIMED.** The 266 comprise 36 baseline cases, 92 handler contexts for #22/#23/#25/#26 and 138 incomplete contexts for #27–32, all for 34 CVL declarations. Every relevant property/handler pair has an individual catalog decision; no original Certora replay or outcome transfer is claimed. Do not merge until the below blockers and validation have been reviewed.
 
 ## 1. Identity, preservation and provenance
 
@@ -26,7 +26,7 @@ Audit records:
 
 | CVL file | Active declarations | Included examples |
 | --- | ---: | --- |
-| `specs/proxy.spec` | 17 (16 rules, 1 invariant) | 13–29 for the generic ProxyHarness context; handler-target variants remain to be reconciled |
+| `specs/proxy.spec` | 17 (16 rules, 1 invariant) | 13–29 generic ProxyHarness context; six handler-specific variants enumerated at 129–266 |
 | `specs/registry.spec` | 10 rules | 1–10 |
 | `specs/privileged.spec` | 1 rule | 11 (Registry) and 12 (Proxy), distinct scripts and targets |
 | `specs/hbalancer.spec` | 1 rule | 30, HBalancer **incomplete** |
@@ -35,9 +35,10 @@ Audit records:
 | `specs/libParam.spec` | 2 rules | 33 and 34 |
 | `specs/sanity.spec` | 1 diagnostic rule | 35 |
 | `specs/proxy.spec` — four handler-sensitive rules repeated per target | 0 additional declarations | 37–128 (92 source/target contexts) |
-| **Total** | **34 active declarations** | **128 source/target instantiations** |
+| `specs/proxy.spec` — six additional handler-applicable rules per target | 0 additional declarations | 129–266 (138 source/target contexts, all incomplete) |
+| **Total** | **34 active declarations** | **266 source/target instantiations** |
 
-Commented blocks `proxy.spec:558–578` containing `holdNoEth` and `onlyValidCaller` are **excluded** as inactive; the latter is nonetheless cited in a 2021 report finding. Do not turn that reference into a current active example. **2 dependency-complete and 126 incomplete examples** are indexed; neither class guarantees historical Prover reproducibility. Complete is a narrow non-built-in symbol-resolution status, not a proof run.
+Commented blocks `proxy.spec:558–578` containing `holdNoEth` and `onlyValidCaller` are **excluded** as inactive; the latter is nonetheless cited in a 2021 report finding. Do not turn that reference into a current active example. **2 dependency-complete and 264 incomplete examples** are indexed; neither class guarantees historical Prover reproducibility. Complete is a narrow non-built-in symbol-resolution status, not a proof run.
 
 The initial 36-example inventory was **not** a full Cartesian product of `proxy.spec` × handler scripts: the original handler-facing driver invokes `proxy.spec` with different target contracts. Each generic per-target invocation still needs per-handler assertion/result interpretation. No `VERIFIED` or `VIOLATED` is borrowed from one handler for another.
 
@@ -134,7 +135,7 @@ Bug Labels in the bug inventory classify the *documented concrete issue*. Bug La
 - `reports/10.md` — page-aligned textual extraction of 31-page original.
 - `results/spec/complete/10/` — examples not missing named declarations as assessed.
 - `results/spec/incomplete/10/` — examples with `N.spec`, `N.sol`, `N.md`, **`N.txt`** explaining a concrete missing symbol or target.
-- `results/spec/spec_buglabel.csv` — **128** indexed example rows for Project 10; `results/contests.csv` — one Project ID 10 row; `results/bugs.csv` — **14** 2021 finding rows.
+- `results/spec/spec_buglabel.csv` — **266** indexed example rows for Project 10; `results/contests.csv` — one Project ID 10 row; `results/bugs.csv` — **14** 2021 finding rows.
 - Each `N.spec` reproduces its active property and selected *available* CVL dependencies without rewriting the original assertion. Extra methods in the original full-model `methods{}` block may control symbolic dispatcher behavior; a minimal excerpt is **not** a stand-alone verifier job or a guarantee of model equivalence. The original full spec remains available in `contracts/10/specs/`.
 
 ## 7. Unresolved verification and release gates
@@ -335,3 +336,7 @@ CI run 39142595421 at commit 2a162f3 passed `check_contests_csv` and `check_cont
 The 23-row matrix for 2021 report properties #22–32, exact CVL source-rule relationships, script/target scopes, `N/A` exceptions, and unresolved historical-symbol constraints is maintained in [`docs/spec_catalog_project_10_handler_closure.md`](spec_catalog_project_10_handler_closure.md). This is a **source-target applicability ledger**, not a Cartesian proof claim. The six report checks #27–32 have no target-specific prover outcome and require independent closure assessment; do not infer 138 verified executions from 23 `None` cells per property family. The 92 target-specific source pairs for #22/#23/#25/#26 remain independently indexed without fabricating per-handler verification.
 
 The dedicated `.github/workflows/p10-complete-validation.yml` runs all four requested checks on a true checkout of the *pushed Project 10 branch commit*. Previously green generic `validate` jobs did **not** execute `check_specs.py` or the specified Git diff command. Only the dedicated workflow's actual output for the current SHA can establish those results.
+
+## Final handler-specific evidence and decision register (2026-10-18)
+
+The definitive current index has **266 examples (2 complete / 264 incomplete)**. Each of the 23 distinct handlers × the six handler-applicable report checks #27–32 was individually inspected against available original code, driver, getter injection and the report’s physical pages 26–31. No pair has an evidenced equivalence to the generic ProxyHarness proof, because the selected `method f` and target state transitions vary. **All 138 instances #129–266 were therefore indexed with individual N.spec/N.sol/N.md/N.txt**: 90 for 15 preserved nominal handler Solidity files, 48 for eight historically referenced but missing handler sources. They are *incomplete*, not invented proofs. The **138-cell matrix** is `docs/spec_catalog_project_10_handler_27_32_decisions.md`. Existing outcomes/labels were not inferred from these additions. The four DSProxy instances 30–32 and 36 have separately documented original `arbitrary(method f)` source ranges; the helper was already copied literally.

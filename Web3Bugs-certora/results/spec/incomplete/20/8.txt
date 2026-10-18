@@ -1,0 +1,5 @@
+Project 20 historical dependency gap for preserveTotalAssetsOfUser on BentoBoxHarness.
+The original source tree does not contain node_modules/@boringcrypto/boring-solidity.
+The historical target's Solidity import closure requires @boringcrypto modules such as BoringMath.sol, BoringERC20.sol, BoringOwnable.sol, BoringRebase.sol, BoringBatchable.sol, or BoringFactory.sol.
+The flattened copies in contracts/flat are useful evidence but are not the original @boringcrypto import paths for the target harness; equivalent historical compilation configuration is not established.
+The original run depends on historical compiler aliases, external link targets, and sometimes applied text rewrites. Do not infer reproducible verification from a local partial snapshot.

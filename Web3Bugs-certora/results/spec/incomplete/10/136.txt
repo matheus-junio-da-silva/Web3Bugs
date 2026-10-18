@@ -1,0 +1,13 @@
+Project 10 example 136; senderIsAlwaysCleanedUp / HAaveProtocol; report #28, p. 27.
+
+Status: incomplete. This is an applicable and materially distinct *source/target* specification context, not an individual executed historical Prover result.
+
+Required source and model inputs:
+- Selected `--verify HAaveProtocol:specs/proxy.spec`; launcher: contracts/10/specs/scripts/runHAave.sh.
+- CVL `arbitrary(method f)` at proxy.spec:580-584, relevant methods declaration, invariant/definitions and original rule; selected dependencies are literal in 136.spec.
+- Handler source: (missing) contracts/10/contracts/handlers/**/HAaveProtocol.sol. Missing entirely; no compiler/method universe reconstruction can be claimed.
+- getSender() injected and routed to Storage._getSender().
+- Target-reachable Solidity imports: original `@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol` and `@openzeppelin/contracts/access/Ownable.sol` are not vendored in the saved snapshot; `_runHandler.sh` rewrites one import to an equally absent OpenZeppelin `ERC20.sol`, and HandlerBase requires unresolved `IERC20`.
+- For #29/#30/#31/#32, original injected getter or storage symbols need the exact pre-2021 harness; preserved `_getCubeCounter`, `CUBE_COUNTER_KEY` and `stack_slot` do not provide a sound matching implementation.
+- The script selects target-dependent functions after transformations; no execution/trace/prover status was inferred from report `None`.
+- No replacement current libraries or invented handler contract included.

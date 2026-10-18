@@ -317,3 +317,9 @@ For report #27–32, all 23 historical handler cells are `None`. The existing so
 Added literal target-specific function ranges for examples 37 safeLockGem=170-201,freeETH=203-227; 82 addLiquidity=246-344. These methods are relevant to the historical #22/#23 handler observations; they do not constitute current Certora proofs. The per-example `.sol` and shared CSV reference the exact original later-snapshot lines.
 
 CI run 39142595421 at commit 2a162f3 passed `check_contests_csv` and `check_contracts`; it did **not** run `check_specs`. The separately generated 92 target-context entries passed `check_specs` on a local worktree, but not yet on an exact checkout of this published tree. Keep the PR draft.
+
+## 13. Full applicability matrix and pending verifier gates
+
+The 23-row matrix for 2021 report properties #22–32, exact CVL source-rule relationships, script/target scopes, `N/A` exceptions, and unresolved historical-symbol constraints is maintained in [`docs/spec_catalog_project_10_handler_closure.md`](spec_catalog_project_10_handler_closure.md). This is a **source-target applicability ledger**, not a Cartesian proof claim. The six report checks #27–32 have no target-specific prover outcome and require independent closure assessment; do not infer 138 verified executions from 23 `None` cells per property family. The 92 target-specific source pairs for #22/#23/#25/#26 remain independently indexed without fabricating per-handler verification.
+
+The dedicated `.github/workflows/p10-complete-validation.yml` runs all four requested checks on a true checkout of the *pushed Project 10 branch commit*. Previously green generic `validate` jobs did **not** execute `check_specs.py` or the specified Git diff command. Only the dedicated workflow's actual output for the current SHA can establish those results.

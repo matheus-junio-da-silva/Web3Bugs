@@ -1,0 +1,39 @@
+{
+  "project": 20,
+  "source_commit": "687f654c679ed45ab127b7949e2a29c8f5e491b9",
+  "destination_base_sha": "46670617ee77649217b9dbf64fd6955344cedcf7",
+  "validated_catalog_commit": "47e1973d00183bfe54669eb275176b383f8de5d7",
+  "source_tree_file_count": 66,
+  "source_pdf_sha256": "cbad16dfe3dbc89f8aa9302624930f748332c51ba5d2a3939bc1d0dd51713da5",
+  "literal_CVL_instances": 37,
+  "total_active_declarations": 34,
+  "distinct_target_instances": 37,
+  "source_byte_identity_count": 66,
+  "status": "37 incomplete (missing original @boringcrypto imports); do NOT treat as prover reproduction",
+  "checks": [
+    {
+      "command": "python3 scripts/check_specs.py .",
+      "exit_code": 0,
+      "stdout": "Check passed! 512 spec examples and 517 Bug Label relationships are structurally consistent.",
+      "stderr": ""
+    },
+    {
+      "command": "python3 scripts/check_contests_csv.py .",
+      "exit_code": 0,
+      "stdout": "Check passed!\n\n\t`./results/contests.csv` is consistant with `./reports`",
+      "stderr": ""
+    },
+    {
+      "command": "python3 scripts/check_contracts.py .",
+      "exit_code": 0,
+      "stdout": "Check passed!\n\n\t`./contracts` is consistant with `./reports`",
+      "stderr": ""
+    },
+    {
+      "command": "git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

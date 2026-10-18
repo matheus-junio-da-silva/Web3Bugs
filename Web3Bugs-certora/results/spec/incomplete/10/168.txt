@@ -8,7 +8,7 @@ Required source and model inputs:
 - Handler source: contracts/10/contracts/handlers/bprotocol/HBProtocol.sol. Nominal target source present; not proven equivalent to audited 2021 commit.
 - cache(key) Solidity mapping getter; MSG_SENDER_KEY() exists but CUBE_COUNTER_KEY() lacks a matching Solidity implementation.
 - Target-reachable Solidity imports: original `@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol` and `@openzeppelin/contracts/access/Ownable.sol` are not vendored in the saved snapshot; `_runHandler.sh` rewrites one import to an equally absent OpenZeppelin `ERC20.sol`, and HandlerBase requires unresolved `IERC20`.
-- For #29/#30/#31/#32, original injected getter or storage symbols need the exact pre-2021 harness; preserved `_getCubeCounter`, `CUBE_COUNTER_KEY` and `stack_slot` do not provide a sound matching implementation.
+- For #29/#30/#31/#32, intended but non-injected getter and historical storage symbols remain unresolved; preserved `_getCubeCounter`, `CUBE_COUNTER_KEY` and `stack_slot` do not provide a sound matching implementation.
 - The script selects target-dependent functions after transformations; no execution/trace/prover status was inferred from report `None`.
 - No replacement current libraries or invented handler contract included.
 

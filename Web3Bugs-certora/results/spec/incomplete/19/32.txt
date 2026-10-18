@@ -1,0 +1,4 @@
+Incomplete source dependency closure for privilegedOperation (Privileged.spec, UNSPECIFIED):
+- No run script or concrete target established for the generic Privileged.spec
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.

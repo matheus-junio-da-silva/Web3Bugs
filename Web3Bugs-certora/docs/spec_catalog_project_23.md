@@ -43,7 +43,7 @@ The original report (December 2022 to January 2023; reviewed commit 6fe9d38) exp
 | 12 | DripsHub.spec:788-806 | integrityOfCollectAll | S6-4 | NOT_STATED | NOT_STATED | Original using DripsHubHarness as DH requires missing DripsHubHarness.so… |
 | 13 | DripsHubBackup.spec:312-322 | sanity | UNMAPPED | NOT_STATED | NOT_STATED | Original using UpdateReceiverStatesHarness as DH requires missing Update… |
 | 14 | DripsHubBackup.spec:326-362 | whoChangedBalanceOfUserId | UNMAPPED | NOT_STATED | NOT_STATED | Original using UpdateReceiverStatesHarness as DH requires missing Update… |
-| 15 | DripsHubBackup.spec:365-389 | whoChangedBalanceOfToken | UNMAPPED | NOT_STATED | NOT_STATED | Original using UpdateReceiverStatesHarness as DH requires missing Update… |
+| 15 | DripsHubBackup.spec:365-389 | whoChangedBalanceOfToken | S3-2 | NOT_STATED | NOT_STATED | Original using UpdateReceiverStatesHarness as DH requires missing Update… |
 | 16 | DripsHubBackup.spec:392-490 | singleUserTimeUpdateNotChangingOtherUserBalance | S6-4 | NOT_STATED | NOT_STATED | Original using UpdateReceiverStatesHarness as DH requires missing Update… |
 | 17 | DripsHubBackup.spec:493-510 | helperTest | UNMAPPED | NOT_STATED | NOT_STATED | Original using UpdateReceiverStatesHarness as DH requires missing Update… |
 | 18 | DripsHubBackup.spec:513-562 | unrelatedUserBalanceNotChangingParametric | S6-4 | NOT_STATED | NOT_STATED | Original using UpdateReceiverStatesHarness as DH requires missing Update… |

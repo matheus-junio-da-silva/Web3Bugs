@@ -116,4 +116,3 @@
   function _getDefaultSigner(address account, bytes32 role) public view returns (address) {
     return defaultSigners[account][role];
   }
-

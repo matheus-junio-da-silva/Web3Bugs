@@ -112,5 +112,3 @@
     participationParameters.baseline = participationBaselineFrac;
     emit ParticipationBaselineUpdated(participationBaseline);
   }
-
-

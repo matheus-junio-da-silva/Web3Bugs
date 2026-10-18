@@ -102,4 +102,3 @@
   // override for performance - do nothing
   function dequeueProposalsIfReady() public {}
 }
-

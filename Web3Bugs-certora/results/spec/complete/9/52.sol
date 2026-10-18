@@ -124,4 +124,3 @@
     balances[account].nonvoting = balances[account].nonvoting.add(value);
     totalNonvoting = totalNonvoting.add(value);
   }
-

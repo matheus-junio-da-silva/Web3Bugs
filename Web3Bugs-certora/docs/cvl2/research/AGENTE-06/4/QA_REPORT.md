@@ -11,3 +11,7 @@
 - Próximo passo obrigatório antes de revisão para Fase 2: leitura individual dos N.spec, N.md, N.sol e transitive imports, reconstrução histórica com hashes upstream auditados, motivos N.txt e pesquisa official per-case.
 
 SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.
+
+## Atualização 2026-10-19: proveniência auditada
+
+Ver [AUDITED_SOURCE_PROVENANCE.md](AUDITED_SOURCE_PROVENANCE.md). O PDF identifica 4cf8837, expandido para 4cf8837121a4351cc0e21703bb1df76036205114; fontes base recuperáveis com blobs, mas harness gerado ainda ausente. Os N.md antigos podem registrar SHA não confirmado por propriedade, o que permanece válido para reconstrução completa. Nenhuma compilação/Prover foi executada.

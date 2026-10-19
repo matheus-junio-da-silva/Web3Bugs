@@ -14,7 +14,7 @@
 - `METHODS` and `SUMMARY` application requires receiver-specific ABI verification; `INVARIANT`, `ghost` and `hook` require inductive/vacuity audit; arbitrary `require_` narrowing forbidden. Unrolling limit 2 and assume-Aave-V3-Pool correctness remain historical constraints from report, not new assumptions.
 
 ## Checks not performed
-- No CLI version discovery, no solc or CVL compilation, no Prover/CVL1 verification, no experimental semantic equivalence. Repository's Python validators and `git diff --check` were not executed locally because the remote desktop device was offline; the GitHub PR diff is inspected separately for docs-only scope.
+- No CLI version discovery, no solc or CVL compilation, no Prover/CVL1 verification, no experimental semantic equivalence. Repository's Python validators and `git diff --check` were not executed locally because the remote desktop device was offline; the GitHub base-to-branch comparison found 206 changed files, all under the AGENTE-04 research path, with exactly 157 individual property dossiers; no original .spec, Solidity, scripts or catalogs were changed. This comparison is not equivalent to local `git diff --check`.
 - This is evidence-linked pre-migration research, NOT an approved Phase 2 implementation or final compilation bucket.
 
 **SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.**

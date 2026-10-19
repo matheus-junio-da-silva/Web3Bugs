@@ -1,25 +1,33 @@
-# AGENTE-03 — Fase 1, pesquisa pré-migração CVL2: Project 24 Rocket Joe
+# AGENTE-03 — Project 24 Rocket Joe: pesquisa pré-migração CVL2
 
-- Baseline Web3Bugs/main `2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3` (confirmado). PropertyGPT/main `687f654c679ed45ab127b7949e2a29c8f5e491b9` (confirmado).
-- Source: Project 24 Rocket Joe, 164 exemplos, **0 complete / 164 incomplete**, chaves únicas (24,incomplete,ID).
-- Inventário por CVL original: LEHighLevel.spec: 10; LEInProgress.spec: 3; LEPreset.spec: 1; LEValidStates.spec: 35; LEVarTran.spec: 19; LaunchEvent.spec: 76; Staking.spec: 19; sanity.spec: 1. Oito arquivos fonte CVL, 15 Solidity e PDF histórico errado preservados no snapshot.
-- Audited commit Rocket Joe: `ef2ef30248661b5509c52ab30af9bd0fc07f6657`. Os contratos arquivados LaunchEvent e RocketJoeStaking diferem do auditado.
-- PDF Rocket Joe correto: [Certora_Formal_Verification_Report_Rocket_Joe.pdf](https://github.com/matheus-junio-da-silva/Web3Bugs/blob/2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3/Web3Bugs-certora/resources/24/Certora_Formal_Verification_Report_Rocket_Joe.pdf), SHA256 f223d83ad55ec79376126a18219c0f417b732fea7d53cf4a743738840cdd43b4 (hash documental da proveniência).
-- O PDF OpenZeppelin incorreto em contracts/24/final-report-3.pdf NÃO fornece resultado Rocket Joe. **164 Result NOT_STATED** no catálogo; não reinstalar as antigas 53 atribuições VERIFIED.
+**164 exemplos originais: 0 complete, 164 incomplete. Fase 1 somente documental; nenhuma execução de verificação.**
 
-## Arquivos desta entrega
+## Revisão do coordenador
 
-- [properties.csv](properties.csv) — 164 identidades originais com status e evidência.
-- [properties/incomplete/](properties/incomplete/) — 164 dossiês originais por ID.
-- [patterns/](patterns/) — 10 análises CVL2 condicionais.
-- [evidence_register.csv](evidence_register.csv) — 17 fontes e bases.
-- [recovery_manifest.csv](recovery_manifest.csv) — 5 grupos de dependências.
-- [QA_REPORT.md](QA_REPORT.md) — conferências de contagem, riscos e limitações.
+O review no PR #36 devolveu a pesquisa para investigar PDF, harness, scripts e aplicabilidade individual. Este commit responde com 164 dossiês revisados e matrizes adicionais.
 
-## Estado
+## Descoberta histórica confirmada
 
-**164 UNRESOLVED_CANDIDATE (PROVISÓRIO)**. Import ../helpers/erc20.spec, Joe/Dummy harness, Certora .conf e sua identidade de versão não demonstrados. Os ajustes textuais de methods, selector, mathint, imports e invariants são apenas hipóteses fundamentadas, não prova de compilação.
-A árvore do auditado tem 94 entradas sem specs/harness de Certora. Hardhat 0.8.6 e OpenZeppelin ^4.4.1 não definem a execução Prover.
-O PDF correto foi analisado via proveniência pré-existente e página oficial; não foi reproduzida inspeção integral página a página nem execução formal nesta fase.
+- Fonte das regras e helpers: https://github.com/Certora/rocket-joe-1/blob/dba90f9f54e92a6628bd61a6dffb9d7abd9b9c10/certora/spec/LEHighLevel.spec (Certora/rocket-joe-1 @ dba90f9f54e92a6628bd61a6dffb9d7abd9b9c10), PR histórico https://github.com/lfj-gg/rocket-joe/pull/168 fechado sem merge.
+- **Oito .spec byte a byte idênticas** ao snapshot PropertyGPT/Web3Bugs.
+- Helper original erc20.spec, DummyERC20A/B/Impl, DummyWeth, LaunchEventHarness, RocketJoeStakingHarness, OwnerA/B e patch recuperados com blobs Git precisos; recovery_manifest.csv distingue recuperado de falta de prova de execução.
+- Scripts originais --link, solc8.6/solc6.12, --optimistic_loop, --loop_iter 1, flags e targets foram localizados. Não havia .conf no fork; alguns scripts têm paths divergentes; patch de 2732 linhas inclui fontes traderjoe mas NÃO foi aplicado.
+- Audited commit ef2ef30248661b5509c52ab30af9bd0fc07f6657 é ancestral do fork, porém LaunchEvent e RocketJoeStaking possuem mudanças comportamentais; ver source_provenance_matrix.csv.
 
-**SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.**
+## Relatório correto
+
+21 páginas diretamente examinadas, SHA256 f223d83ad55ec79376126a18219c0f417b732fea7d53cf4a743738840cdd43b4. PDF incorreto OpenZeppelin permanece intacto. Ver pdf_formula_review.md, páginas 1-21 e diferenças pontuais 2/5/7/147/150 etc. Não transferir resultados do PDF de outra revisão.
+
+## Entregas
+
+- properties.csv — índice 164 instâncias, separando status original de recuperação histórica.
+- source_provenance_matrix.csv — 164 confrontos source/fork/target/audit/PDF.
+- migration_applicability.csv — 164 verificações específicas dos padrões P01-P10, incluindo ausência de ocorrência.
+- properties/incomplete/N.md — 164 dossiês atualizados, com CVL literal, hash, evidência, PDF e condicionais CVL2.
+- evidence_register.csv — A1/A2/B1/C2 com fonte, versão, scope.
+- recovery_manifest.csv — arquivos rastreados e bloqueios residuais.
+- patterns/ — padrões corrigidos; P09 retirado da lista de patches CVL2.
+- pdf_formula_review.md — verificação direta p1-p21.
+- QA_REPORT.md — validações e pendências.
+
+**Todas as 164 permanecem UNRESOLVED_CANDIDATE PROVISÓRIAS, apesar da recuperação parcial de fontes históricas. SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.**

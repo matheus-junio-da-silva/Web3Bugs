@@ -31,3 +31,12 @@ Submeter como **DRAFT**, sem merge automático. A revisão independente deve ava
 <!-- AGENTE08-R2 -->
 ## Contrarrevisão P23: provedores de CVT não encontrados
 O PDF de seis páginas (sobretudo páginas 3-5) restringe a verificação formal a Splits.sol. A árvore do commit oficial Certora/drips-contracts@6fe9d38a30765df6aa3e4078634a37aeabbceef1 contém produção e testes, mas não os CVT wrappers esperados; isso não prova inexistência em servidores ou artefatos gerados históricos. DripsHubHarness (#1-12), UpdateReceiverStatesHarness (#13-18), ReserveHarness/mocks (#19-23), SlotTester/getters (#24) e wrappers Splits/Splits2 (#25-46) permanecem não recuperados. #36 VIOLATED/FINDING por arredondamento, #38 NOT_STATED/INCONCLUSIVE por timeout e #39-41 VERIFIED apenas nas suas instâncias Splits.spec. O limite de unrolling (2) e receiver weights (até 1000000) não foram ampliados.
+
+<!-- ROUND2-HISTORIC-DECISION -->
+## Fechamento documental apos segunda auditoria (2026-10-19)
+
+- Estado de implementacao: 46/46 UNRESOLVED_CANDIDATE. Preservado apos a segunda revisao, sem promover ou executar.
+- [HISTORICAL_BLOCKERS.md](HISTORICAL_BLOCKERS.md): evidencias, itens potencialmente recuperaveis, blockers e decisoes humanas.
+- [historical_status.csv](historical_status.csv): adjudicacao explicita por exemplo e Result/Detection Outcome historicos.
+- [RECOVERY_SEARCH_LOG.md](RECOVERY_SEARCH_LOG.md): escopo, consultas e resultados das buscas; ausencia de resultados nao significa impossibilidade.
+- A versao historica das regras, asserts/assumes, methods universe, harness e compatibilidade CVL2 nao foi modificada. Nao executar Prover sem autorizacao.

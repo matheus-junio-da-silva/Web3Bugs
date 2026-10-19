@@ -32,3 +32,12 @@ Submeter como **DRAFT**, sem merge automático. A revisão independente deve ava
 ## Contrarrevisão P13: targets, imports e 7 versus 5 VERIFIED
 O verify.sh original fixa solc7.5, @openzeppelin remapeado para Brownie OpenZeppelin/openzeppelin-contracts@3.4.0-solc-0.7, compound-finance como pacote Brownie e interfaces da árvore histórica. Fonte de destino e checksum das dependências carregadas pelo antigo auditor permanecem indisponíveis. scripts/applyHarness.sh altera Constants.sol de internal constant para public constant, afetando observabilidade do target.
 As 48 regras com target definido/inferido dependem de imports transitivos ausentes; os dez exemplos #8-17 de Balances.spec não têm ABI histórica selecionada nos scripts. O PDF original Notional1Nov2021.pdf (páginas 13-16) contém indicadores de provas: docs/spec_catalog_project_13.md menciona sete regras VERIFIED, mas o CSV atual registra #32/#34 NOT_STATED e consequentemente cinco VERIFIED. Esta divergência permanece documentada, sem corrigir silenciosamente o catálogo. #1/#58 são diagnósticos, #7/#57 tautologias, #39 contém um ramo contraditório.
+
+<!-- ROUND2-HISTORIC-DECISION -->
+## Fechamento documental apos segunda auditoria (2026-10-19)
+
+- Estado de implementacao: 58/58 UNRESOLVED_CANDIDATE. Preservado apos a segunda revisao, sem promover ou executar.
+- [HISTORICAL_BLOCKERS.md](HISTORICAL_BLOCKERS.md): evidencias, itens potencialmente recuperaveis, blockers e decisoes humanas.
+- [historical_status.csv](historical_status.csv): adjudicacao explicita por exemplo e Result/Detection Outcome historicos.
+- [RECOVERY_SEARCH_LOG.md](RECOVERY_SEARCH_LOG.md): escopo, consultas e resultados das buscas; ausencia de resultados nao significa impossibilidade.
+- A versao historica das regras, asserts/assumes, methods universe, harness e compatibilidade CVL2 nao foi modificada. Nao executar Prover sem autorizacao.

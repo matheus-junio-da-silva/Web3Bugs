@@ -32,3 +32,12 @@ Submeter como **DRAFT**, sem merge automático. A revisão independente deve ava
 ## Contrarrevisão P14: 31 promoções retiradas
 Foram revisitadas 34 instâncias e 510 ocorrências sintáticas. As 31 entradas antes DOCUMENTED_CANDIDATE foram reclassificadas UNRESOLVED_CANDIDATE por ausência de confirmação da ABI do target pós-mutation. Os dossiês registram original/proposto (placeholder documental não executável), linha, fonte A1 e risco de receiver, internal/external, overload, path revert e summaries. A menção [external|internal ABI_UNVERIFIED] NÃO É SINTAXE CVL2 VÁLIDA e não deve ser copiada como script de migração.
 O arquivo original contracts/14/specs/scripts/applyHarnesses.sh altera Controller.getProceed, getExcessCollateral, settleVault, _runActions, MarginPool transfer e interfaces/fields. runOrderOfOperations.sh conecta ControllerHarness, MarginPool, MarginCalculatorHarness, OtokenHarnesses e DummyERC20, com solc6.10. A existência de applyHarnesses.sh não prova sua execução em todas as runs, portanto a ABI exata não está confirmada. #1 preserva assert true condicional; #19 não herda solvência global; #25 tem sinvoke seguido de assert false e continua semanticamente bloqueada.
+
+<!-- ROUND2-HISTORIC-DECISION -->
+## Fechamento documental apos segunda auditoria (2026-10-19)
+
+- Estado de implementacao: 34/34 UNRESOLVED_CANDIDATE. Preservado apos a segunda revisao, sem promover ou executar.
+- [HISTORICAL_BLOCKERS.md](HISTORICAL_BLOCKERS.md): evidencias, itens potencialmente recuperaveis, blockers e decisoes humanas.
+- [historical_status.csv](historical_status.csv): adjudicacao explicita por exemplo e Result/Detection Outcome historicos.
+- [RECOVERY_SEARCH_LOG.md](RECOVERY_SEARCH_LOG.md): escopo, consultas e resultados das buscas; ausencia de resultados nao significa impossibilidade.
+- A versao historica das regras, asserts/assumes, methods universe, harness e compatibilidade CVL2 nao foi modificada. Nao executar Prover sem autorizacao.

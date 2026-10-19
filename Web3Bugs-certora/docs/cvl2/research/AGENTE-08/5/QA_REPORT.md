@@ -32,3 +32,12 @@ Submeter como **DRAFT**, sem merge automático. A revisão independente deve ava
 ## Contrarrevisão P5: scripts, remappings e ABI
 No commit 4c010c18b08703e4f367db1e0c642c76c25e551b, erc20.spec blob b12fec167edd76a2f59a64bc80bc33a9eeb04f65 contém somente methods ERC20 DISPATCHER(true). Os getters withdrawMessageStatus/bridgeRewardsMessageStatus aparecem no BridgeHarness.sol blob 850d5a63fa375ee6f9754c8377990d5d48c09c07, não no erc20.spec.
 Os scripts verifyBridge.sh e verifyBridgeConstIndex.sh fixam BridgeHarness e seus mocks, nove links, solc8.10, optimistic_loop, loop_iter 3 e settings -mediumTimeout=700,-depth=12. Comentário de texto diz 2 iterações; comando executável usa 3. Não há argumento packages/path explícito nos scripts; imports indiretos continuam exigindo fechamento. Makefile target munged copia contratos e aplica applyHarness.patch (blob f806c1e6957b164a0a8419fa6f5c8015de5dd95c), inclusive alterações virtual em Bridge.sol. O snapshot contém Bridge.sol de revisão posterior, e os 17 exemplos seguem incomplete. A recuperação dos blobs não prova ABI transitiva nem equivalência de prova.
+
+<!-- ROUND2-HISTORIC-DECISION -->
+## Fechamento documental apos segunda auditoria (2026-10-19)
+
+- Estado de implementacao: 17/17 UNRESOLVED_CANDIDATE. Preservado apos a segunda revisao, sem promover ou executar.
+- [HISTORICAL_BLOCKERS.md](HISTORICAL_BLOCKERS.md): evidencias, itens potencialmente recuperaveis, blockers e decisoes humanas.
+- [historical_status.csv](historical_status.csv): adjudicacao explicita por exemplo e Result/Detection Outcome historicos.
+- [RECOVERY_SEARCH_LOG.md](RECOVERY_SEARCH_LOG.md): escopo, consultas e resultados das buscas; ausencia de resultados nao significa impossibilidade.
+- A versao historica das regras, asserts/assumes, methods universe, harness e compatibilidade CVL2 nao foi modificada. Nao executar Prover sem autorizacao.

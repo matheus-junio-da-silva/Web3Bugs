@@ -12,8 +12,8 @@
 - Alteração **única**, na linha 4:
 
 ```diff
--definition divPrecisely(uint x, uint y) returns mathint 
-+definition divPrecisely(mathint x, mathint y) returns mathint 
+-definition divPrecisely(uint x, uint y) returns mathint
++definition divPrecisely(mathint x, mathint y) returns mathint
 ```
 
 O corpo matemático `= x*1000000000000000000 / y ;`, os requisitos e a assertion acima permanecem idênticos aos bytes da origem. Os demais campos não foram normalizados ou reformatados.

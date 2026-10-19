@@ -22,3 +22,7 @@ Recovered upstream Git blobs make targeted historical reconstruction *possible* 
 ## Safety/phase boundary
 
 **SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.** Only documentation is authored here. Future migrations must be derived and separately authorized, without touching source snapshots, `results/spec/`, `contracts/`, `reports/`, or original PDF. Proposed buckets are provisional research labels only.
+
+## Scope-of-review qualification
+
+All 266 dossiers have source/target identity, rule-specific assertion excerpts, historical Git SHA and documented candidate hypotheses. These do **not** substitute for a full reread of the 264 original N.txt or independent visual verification of the historical PDF; see QA_REPORT.md. Keep draft, no Fase 2 approval implied.

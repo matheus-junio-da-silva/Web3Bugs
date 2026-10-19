@@ -8,3 +8,13 @@
 - **Allowed validation:** GitHub tree/read-only file SHA check, source-line inspection, key reconciliation, official documentation review. No checked-in source change. Final Git diff and dossier counts to be reconciled after creation.
 - **Not run:** no Certora CLI, no Solidity compiler, no scripts modifying source, no CVL1 tests, no CVL2 compiler, no Prover. No claim of semantic equivalence, execution, VERIFIED or VIOLATED as a new result.
 - **Review decision:** keep PR draft; future Fase 2 requires explicit coordinator permission.
+## Final documentary reconciliation — 2026-10-19
+
+- Recount: exactly 266 per-example dossiers (264 incomplete, 2 complete), and 266 unique rows in properties.csv. 264 incomplete N.spec and 264 N.txt blob entries confirmed. GitHub compare showed exactly 277 added files, all inside the sole authorized research directory. Zero edits to historical artifacts.
+- Evidence: 20 registered entries; 32 recovery-manifest records; no orphan evidence IDs in the 266-row table. Every bucket provisional and ends with _CANDIDATE.
+- Audit SHA c90dec1046e5e26edf70f985dd86381403912482 retrieved from archived dinngo/furucombo-contract; package.json pins solc 0.6.12, OpenZeppelin 3.3.0, Truffle 5.1.60. All 22 distinct listed original target Solidity files have different audited versus saved blob SHAs. Two of eight source CVL files differ (proxy.spec and registry.spec).
+- Rule names nonExecutableWhenProxyIsBanned and nonExecutableWithInitializedSender are absent at the audited 2021 proxy.spec. Other old/current proxy rule bodies differ; 2021 outcomes are not transferable without proof.
+- Limitation: original eight CVL source texts and per-entry CSV metadata were reviewed, but 264 N.txt and 266 N.md were NOT each reread end-to-end in this new pass. Each dossier is a provisional source/target research entry, not certified dependency closure. This remains an explicit independent-review blocker.
+- Limitation: Certora report transcript reviewed; physical PDF table layout not visually verified. No current build/Prover version identified.
+- Execution: local execution environment reported ClientError, Desktop Commander device offline. Thus neither git diff --check nor Python catalog validators were executed; only GitHub contents/tree/compare API checks succeeded (no shell exit codes).
+- Phase boundary: SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1. Never promote candidate to compiled bucket or merge until independent review.

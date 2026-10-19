@@ -45,3 +45,11 @@
 ## Gate
 - Todas as 164 continuam UNRESOLVED_CANDIDATE e nenhuma classificação histórica foi promovida.
 - SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1. Sem merge; PR em DRAFT. Fase 2 somente com aprovação expressa.
+
+## Terceiro ciclo — revisão independente #5577010852
+- Diff completo commitado do baseline 2a03637... a 5ed0a04: EXIT 2, 64 trechos trailing whitespace em 41 arquivos Markdown (incluindo #78 e #95).
+- Normalizado só o Markdown, nunca o .spec histórico. Assertions, assumes, preserved e lógica permanecem. A reprodução Markdown não é byte-idêntica quando contém espaços finais; Git blobs canônicos ficam preservados no catálogo.
+- Patch --dry-run com cópia histórica: exit 0; aplicação em cópia descartável: exit 0. Na cópia híbrida com os dois contratos auditados patch --dry-run também exit 0, mas LaunchEvent requer fuzz 2. Isso NÃO prova identidade da execução.
+- OpenZeppelin auditado yarn.lock 4.4.1, fork yarn.lock 4.4.2. Pacotes não instalados, sem ABI compilada.
+- Matrizes adicionais: historical_artifact_provenance.csv (55 artefatos), historical_import_closure.csv (192 ocorrências), historical_run_config_matrix.csv (6 scripts).
+- 164/164 incompletas; bloqueio de reprodução do Prover registrado. As verificações do diff commitado completo baseline..HEAD serão registradas também no comentário ao coordenador após publicar o commit.

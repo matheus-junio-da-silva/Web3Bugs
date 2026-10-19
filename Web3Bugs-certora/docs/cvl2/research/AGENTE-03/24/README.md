@@ -31,3 +31,11 @@ O review no PR #36 devolveu a pesquisa para investigar PDF, harness, scripts e a
 - QA_REPORT.md — validações e pendências.
 
 **Todas as 164 permanecem UNRESOLVED_CANDIDATE PROVISÓRIAS, apesar da recuperação parcial de fontes históricas. SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.**
+
+## Contrarrevisão do diff completo e closure histórica
+- Falha do diff commitado baseline..HEAD: 64 trechos trailing whitespace em 41 arquivos de dossiês, corrigidos somente em Markdown; CVL original não alterado.
+- historical_closure_resolution.md: cenas de patch temporário e ABI não comprovada; OpenZeppelin auditado 4.4.1 vs fork 4.4.2.
+- historical_import_closure.csv: 192 ocorrências por script incluindo imports externos ausentes.
+- historical_run_config_matrix.csv: seis scripts com entry points, solc, linking e flags de fonte.
+- historical_artifact_provenance.csv: 55 arquivos com Git SHA por objeto e comparação auditado vs fork; não há prova de quais bytes foram efetivamente executados no Prover original.
+- 164 propriedades seguem incomplete/UNRESOLVED_CANDIDATE; nenhum teste CVL/Prover.

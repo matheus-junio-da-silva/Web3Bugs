@@ -1,0 +1,36 @@
+# Rocket Joe / Project 24 — patch scene, import closure, ABI e limites de proveniência
+
+**Fase documental exclusiva.** Pesquisa de fonte histórica, parsing estático e aplicação do patch em cópias descartáveis de contratos. Nenhum compilador Solidity, CVL1/CVL2, Certora Prover ou script de verificação foi executado. Nenhuma spec ou contrato versionado foi alterado.
+
+## Fontes imutáveis e diferença entre arquivo recuperado e prova do run
+
+- **Código da revisão mencionada no relatório Certora:** `ef2ef30248661b5509c52ab30af9bd0fc07f6657` de `lfj-gg/rocket-joe` (2022-02-03), confirmado pelo PDF correto pp.1 e 6. Evidência de contrato auditado; o relatório também declara hipóteses de bibliotecas, inicialização e contratos Joe-core, mas **não identifica os blobs dos harnesses/scripts efetivamente executados**.
+- **Fonte da spec arquivada e toolchain candidato:** [`Certora/rocket-joe-1` @ `dba90f9f54e92a6628bd61a6dffb9d7abd9b9c10`](https://github.com/Certora/rocket-joe-1/tree/dba90f9f54e92a6628bd61a6dffb9d7abd9b9c10/certora), HEAD da contribuição no [PR upstream #168](https://github.com/lfj-gg/rocket-joe/pull/168), fechada sem merge. Oito `.spec` têm Git blob SHA-1 igual ao snapshot. **Os demais arquivos do fork são candidatos historicamente rastreáveis, não evidência de terem sido usados no run auditado.**
+- **Baseline catalogado:** `2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3`. Todos os 164 exemplos permanecem `incomplete`. Contratos `LaunchEvent.sol` e `RocketJoeStaking.sol` mudaram entre o audited SHA e fork; há também divergência de blob em `LaunchEventLens.sol`, registrada em `historical_artifact_provenance.csv`.
+- `historical_artifact_provenance.csv`: 55 objetos com SHA por objeto Git e classificação explícita: 30 rastreados em `certora/` do fork, 20 materializados exclusivamente do patch numa cópia isolada e cinco contratos Solidity de nível superior. Comparação contra árvore audited: 50 não estão nessa árvore, três diferem em bytes, dois são byte-identical; **nenhuma linha afirma evidência do uso no Prover auditado**.
+
+## Patch scene reproduzível — evidência C1 local, sem Prover
+
+- Fonte: [`certora/applyHarness.patch`](https://github.com/Certora/rocket-joe-1/blob/dba90f9f54e92a6628bd61a6dffb9d7abd9b9c10/certora/applyHarness.patch) (2.732 linhas, Git blob `abfb1eae851307c9a3e7d17a7b3e913962952845`; SHA256 `e06f5a9d5503e82310ffccfab55214b9cb847d2146656f2558271e0777e27fdb`).
+- Cena A: `cp -a <fork>/contracts/. <scratch>/`; `patch --dry-run --batch -p0 -d <scratch> < <fork>/certora/applyHarness.patch` → **exit 0**; aplicação apenas em `<scratch>` com o mesmo comando sem `--dry-run` → **exit 0**, gerando 36 arquivos locais, incluindo `traderjoe/JoeFactory.sol`, `JoePair.sol`, `JoeRouter02.sol` e bibliotecas.
+- Cena B: nova cópia descartável, mas substituindo `LaunchEvent.sol` e `RocketJoeStaking.sol` por `git show ef2ef302:contracts/<name>.sol`; mesmo `patch --dry-run --batch -p0 -d <scratch-audit>` → **exit 0** com `Hunk #7 succeeded at 670 with fuzz 2` em `LaunchEvent.sol`. Não representa idêntica saída, e sim **compatibilidade textual permissiva do patch**, não resultado de auditoria.
+- Resultados transitivos reproduzíveis (escaneamento estático de `import` desde os `.sol` explícitos no script; não são uma compilação): `verifyLEHighLevel.sh` 34 arquivos locais e 10 referências externas; `verifyLEValidStates.sh` 34/10; `verifyLEVarTran.sh` 32/10 e **Owner.sol local ausente**; `verifyStaking.sh` 4/6; `stakingRule.sh` 3/6; `sanity.sh` 32/10.
+- `historical_import_closure.csv`: 192 ocorrências por script com dependência, classe e SHA local quando presente. **É grafo textual relativo aos scripts**, não assurance de build: a aplicação do patch foi testada só em cópias, não houve `node_modules`, compilação ou execução de import solc.
+
+## Solc, ABI e bibliotecas
+
+- Scripts: [`verifyLEHighLevel.sh`](https://github.com/Certora/rocket-joe-1/blob/dba90f9f54e92a6628bd61a6dffb9d7abd9b9c10/certora/scripts/verifyLEHighLevel.sh) referencia `LaunchEventHarness` e associa JoePair, JoeFactory, JoeRouter02, JoeLibrary a `solc6.12`, enquanto harness e Dummy* recebem `solc8.6` via `--solc_map`. `verifyStaking.sh` aponta `RocketJoeStakingHarness`, `--solc solc8.6`, `--solc_args '["--optimize"]'`, `--optimistic_loop --loop_iter 1`, `--link` para `DummyERC20Impl` e `RocketJoeToken`. A configuração exata executada na auditoria **não foi recuperada**.
+- O `hardhat.config.js` fixa Solidity `0.8.6` em ambas as revisões, mas **Hardhat não é a configuração do Prover**. Os `package.json` mantêm a faixa `^4.4.1` para OpenZeppelin, enquanto o **`yarn.lock` auditado resolve 4.4.1** e o **`yarn.lock` do fork resolve 4.4.2**; Git blobs diferentes: `49939a552262aef9fb0aab38f66b594011a99973` vs `2e5fe995f869eb0f386229a55ef5ef4765d00ccb`. Não substituir uma versão pela outra.
+- Os imports externos `@openzeppelin/contracts*` não foram materializados, apesar da indicação de versões nos locks; 6–10 referências externas por comando. Sem pacotes históricos instalados, ABI executável, linking efetivo, resolve de assinaturas e semântica de dispatcher **não demonstrados**.
+- O helper [`erc20.spec`](https://github.com/Certora/rocket-joe-1/blob/dba90f9f54e92a6628bd61a6dffb9d7abd9b9c10/certora/helpers/erc20.spec) existe no fork (Git blob `b12fec167edd76a2f59a64bc80bc33a9eeb04f65`) e contém `DISPATCHER(true)`; isso resolve ausência nominal no acervo arquivado, **não prova os receivers/summaries da ABI do run**.
+- Os getters públicos e overrides são legíveis em `LaunchEventHarness.sol` e `RocketJoeStakingHarness.sol`, e o patch expõe `WAVAX`, `factory`, `lpSupply` e outros estados. No entanto, um getter inferido do source **não substitui a ABI compilada**, sobretudo com herança, interface e patch-scene com versão divergente.
+- O `verifyLEVarTran.sh` referencia `certora/harness/Owner.sol` inexistente na árvore; `stakingRule.sh` aponta para `certora/spec/staking.spec` (case inexistente). Não corrigir esses caminhos de execução no dataset durante Fase 1.
+- Busca negativa rastreável: `git ls-tree -r --name-only <fork_sha> certora | grep -E '\.conf$'` → sem resultados; `git ls-tree -r --name-only <audit_sha> certora` → sem resultados. **Ausência nessas árvores não prova inexistência em máquinas históricas ou em CI privado.**
+
+## Conclusão e gate
+
+**RECOVERABLE_WITH_PROVENANCE** significa encontrar bytes e commit do fork. **NO_AUDITED_ARTIFACT / NOT_RECONSTRUCTED_BYTE_SOURCE** significa falta de evidência do *run* auditado, não permissão para sintetizar código. O `patch --dry-run` positivo não certifica compile, ABI, linkings ou semântica idênticos.
+
+**Todas 164/164 seguem `incomplete` e `UNRESOLVED_CANDIDATE`**. Fechamento documental do bloqueio: faltam evidências identificando exatamente o snapshot de cada execução CVL/Prover, a resolução de imports externos 4.4.1/4.4.2, o binário/versão de compilador de Joe-core e a ABI/linking do target realmente verificado. Sem essas provas, é incorreto promover o status ou autorizar Fase 2.
+
+Referências para reproduzir: `historical_run_config_matrix.csv`, `historical_import_closure.csv`, `historical_artifact_provenance.csv`, `source_provenance_matrix.csv`, `recovery_manifest.csv`, PDF correto `resources/24/Certora_Formal_Verification_Report_Rocket_Joe.pdf`.

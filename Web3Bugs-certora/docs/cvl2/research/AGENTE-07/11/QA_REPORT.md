@@ -4,7 +4,7 @@
 - CSV canônico Git blob SHA: `97e20443586540034a4c0305ce1db19b0d2f8cb5`; referências de metadata: 16; exemplos únicos após chave canônica: **16**.
 - Complete: **0**; incomplete: **16**; esperados 0/16.
 - Diretórios de artefatos de `results/spec` consultados no GitHub: 0 `.spec` complete + 16 `.spec` incomplete, e 16 `N.txt` incomplete.
-- Árvore documental intermediária confirmada com dossiês numerados sem lacunas para IDs atribuídos; commit/PR ainda dependem da publicação da árvore final.
+- Árvore documental publicada no PR #41 (draft); dossiês numerados sem lacunas para os IDs atribuídos, validados novamente após publicação.
 
 ## Riscos que impedem promoção para status definitivo
 - O catálogo identifica 46 blobs iguais ao branch histórico keep-ecdsa, mas o commit do relatório é distinto e não comparado. O harness pode alterar o vínculo de bond IDs e getters.
@@ -22,3 +22,6 @@
 ## Encaminhamento
 - Antes de qualquer Fase 2: fechamento do commit auditado, comparação ABI/harness, provabilidade dos axiomas e revisão humana de alterações candidatas. Nenhuma autorização de implementação inferida.
 - SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.
+
+## QA complementar de referências CVL2
+- `properties.csv` agora contém IDs P-... explícitos para cada dossiê com padrão detectado; IDs derivam das hipóteses documentadas, não representam alterações CVL2 aprovadas. Campo vazio significa sem padrão sinalizado nesta pesquisa, nunca compilação bem-sucedida.

@@ -4,7 +4,7 @@
 - CSV canônico Git blob SHA: `97e20443586540034a4c0305ce1db19b0d2f8cb5`; referências de metadata: 61; exemplos únicos após chave canônica: **61**.
 - Complete: **50**; incomplete: **11**; esperados 50/11.
 - Diretórios de artefatos de `results/spec` consultados no GitHub: 50 `.spec` complete + 11 `.spec` incomplete, e 11 `N.txt` incomplete.
-- Árvore documental intermediária confirmada com dossiês numerados sem lacunas para IDs atribuídos; commit/PR ainda dependem da publicação da árvore final.
+- Árvore documental publicada no PR #41 (draft); dossiês numerados sem lacunas para os IDs atribuídos, validados novamente após publicação.
 
 ## Riscos que impedem promoção para status definitivo
 - Três rules ativas de governance_old_rules.spec, mesmo com aviso Requires correction; também helpers sem linkage em incomplete, e estados ABI incompatíveis em exemplos específicos.
@@ -22,3 +22,6 @@
 ## Encaminhamento
 - Antes de qualquer Fase 2: fechamento do commit auditado, comparação ABI/harness, provabilidade dos axiomas e revisão humana de alterações candidatas. Nenhuma autorização de implementação inferida.
 - SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.
+
+## QA complementar de referências CVL2
+- `properties.csv` agora contém IDs P-... explícitos para cada dossiê com padrão detectado; IDs derivam das hipóteses documentadas, não representam alterações CVL2 aprovadas. Campo vazio significa sem padrão sinalizado nesta pesquisa, nunca compilação bem-sucedida.

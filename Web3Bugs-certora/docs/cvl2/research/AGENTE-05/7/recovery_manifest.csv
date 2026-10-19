@@ -1,29 +1,606 @@
-project_id,example_ids,missing_dependency_or_context,upstream_repository,upstream_commit,upstream_path,git_blob_sha,verification,uncertainty,status
-7,1,Missing source/ABI/import closure documented in original results/spec/incomplete/7/1.txt,,,Web3Bugs-certora/results/spec/incomplete/7/1.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,7,Missing source/ABI/import closure documented in original results/spec/incomplete/7/7.txt,,,Web3Bugs-certora/results/spec/incomplete/7/7.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,9,Missing source/ABI/import closure documented in original results/spec/incomplete/7/9.txt,,,Web3Bugs-certora/results/spec/incomplete/7/9.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,11,Missing source/ABI/import closure documented in original results/spec/incomplete/7/11.txt,,,Web3Bugs-certora/results/spec/incomplete/7/11.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,12,Missing source/ABI/import closure documented in original results/spec/incomplete/7/12.txt,,,Web3Bugs-certora/results/spec/incomplete/7/12.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,17,Missing source/ABI/import closure documented in original results/spec/incomplete/7/17.txt,,,Web3Bugs-certora/results/spec/incomplete/7/17.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,19,Missing source/ABI/import closure documented in original results/spec/incomplete/7/19.txt,,,Web3Bugs-certora/results/spec/incomplete/7/19.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,20,Missing source/ABI/import closure documented in original results/spec/incomplete/7/20.txt,,,Web3Bugs-certora/results/spec/incomplete/7/20.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,21,Missing source/ABI/import closure documented in original results/spec/incomplete/7/21.txt,,,Web3Bugs-certora/results/spec/incomplete/7/21.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,27,Missing source/ABI/import closure documented in original results/spec/incomplete/7/27.txt,,,Web3Bugs-certora/results/spec/incomplete/7/27.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,31,Missing source/ABI/import closure documented in original results/spec/incomplete/7/31.txt,,,Web3Bugs-certora/results/spec/incomplete/7/31.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,32,Missing source/ABI/import closure documented in original results/spec/incomplete/7/32.txt,,,Web3Bugs-certora/results/spec/incomplete/7/32.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,45,Missing source/ABI/import closure documented in original results/spec/incomplete/7/45.txt,,,Web3Bugs-certora/results/spec/incomplete/7/45.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,46,Missing source/ABI/import closure documented in original results/spec/incomplete/7/46.txt,,,Web3Bugs-certora/results/spec/incomplete/7/46.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,48,Missing source/ABI/import closure documented in original results/spec/incomplete/7/48.txt,,,Web3Bugs-certora/results/spec/incomplete/7/48.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,49,Missing source/ABI/import closure documented in original results/spec/incomplete/7/49.txt,,,Web3Bugs-certora/results/spec/incomplete/7/49.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,50,Missing source/ABI/import closure documented in original results/spec/incomplete/7/50.txt,,,Web3Bugs-certora/results/spec/incomplete/7/50.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,51,Missing source/ABI/import closure documented in original results/spec/incomplete/7/51.txt,,,Web3Bugs-certora/results/spec/incomplete/7/51.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,52,Missing source/ABI/import closure documented in original results/spec/incomplete/7/52.txt,,,Web3Bugs-certora/results/spec/incomplete/7/52.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,53,Missing source/ABI/import closure documented in original results/spec/incomplete/7/53.txt,,,Web3Bugs-certora/results/spec/incomplete/7/53.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,54,Missing source/ABI/import closure documented in original results/spec/incomplete/7/54.txt,,,Web3Bugs-certora/results/spec/incomplete/7/54.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,55,Missing source/ABI/import closure documented in original results/spec/incomplete/7/55.txt,,,Web3Bugs-certora/results/spec/incomplete/7/55.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,56,Missing source/ABI/import closure documented in original results/spec/incomplete/7/56.txt,,,Web3Bugs-certora/results/spec/incomplete/7/56.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,57,Missing source/ABI/import closure documented in original results/spec/incomplete/7/57.txt,,,Web3Bugs-certora/results/spec/incomplete/7/57.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,58,Missing source/ABI/import closure documented in original results/spec/incomplete/7/58.txt,,,Web3Bugs-certora/results/spec/incomplete/7/58.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,59,Missing source/ABI/import closure documented in original results/spec/incomplete/7/59.txt,,,Web3Bugs-certora/results/spec/incomplete/7/59.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,60,Missing source/ABI/import closure documented in original results/spec/incomplete/7/60.txt,,,Web3Bugs-certora/results/spec/incomplete/7/60.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
-7,74,Missing source/ABI/import closure documented in original results/spec/incomplete/7/74.txt,,,Web3Bugs-certora/results/spec/incomplete/7/74.txt,,Snapshot incomplete: reviewed metadata file present,Upstream authenticated hash/commit and transitive closure not established,UNRESOLVED
+project_id,example_ids,missing_dependency_or_context,upstream_repository,upstream_commit,upstream_path,git_blob_sha,verification,uncertainty,status,source_evidence_id
+7,1,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/AToken.spec` / property `totalSupplyEqualsSumAllBalance` / target `AToken`.
+Original source property and dependency ranges: `9;12-13;20-21;23;32-34;37-39;41-43;45-55`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- scaledBalanceOfToBalanceOf(uint256)
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The specification declares a converter as envfree, but no ABI-visible implementation or preserved harness providing this converter exists in the supplied target contract tree. The inherited scaled-balance storage accessors do not implement this independent converter.
+
+CVL methods declarations actually included in this example:
+- handleAction(address, uint256, uint256) => NONDET
+- getReserveNormalizedIncome(address u) returns (uint256) => gRNI()
+- scaledBalanceOfToBalanceOf(uint256)returns (uint256) envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-1-TXT
+7,7,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/AToken.spec` / property `integrityTransfer` / target `AToken`.
+Original source property and dependency ranges: `7;9;12-14;16;21;23;25;30;37-39;147-171`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- using SimpleERC20 as _underlyingAsset
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The source spec requires a linked SimpleERC20 alias for underlying-balance observations. No corresponding historical SimpleERC20 contract and linking configuration is present in the PropertyGPT Aave V3 snapshot. An IERC20 interface or later ERC20 token is not automatically equivalent to the named alias.
+
+CVL methods declarations actually included in this example:
+- handleAction(address, uint256, uint256) => NONDET
+- getReserveNormalizedIncome(address u) returns (uint256) => gRNI()
+- balanceOf(address) returns (uint256) envfree
+- finalizeTransfer(address, address, address, uint256, uint256, uint256) => NONDET
+
+CVL using aliases included: SimpleERC20 as _underlyingAsset.
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-7-TXT
+7,9,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/AToken.spec` / property `integrityBurn` / target `AToken`.
+Original source property and dependency ranges: `7;9;12-14;21;23;25;30;37-39;207-243`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- using SimpleERC20 as _underlyingAsset
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The source spec requires a linked SimpleERC20 alias for underlying-balance observations. No corresponding historical SimpleERC20 contract and linking configuration is present in the PropertyGPT Aave V3 snapshot. An IERC20 interface or later ERC20 token is not automatically equivalent to the named alias.
+
+CVL methods declarations actually included in this example:
+- handleAction(address, uint256, uint256) => NONDET
+- getReserveNormalizedIncome(address u) returns (uint256) => gRNI()
+- balanceOf(address) returns (uint256) envfree
+
+CVL using aliases included: SimpleERC20 as _underlyingAsset.
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-9-TXT
+7,11,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/AToken.spec` / property `burnNoChangeToOther` / target `AToken`.
+Original source property and dependency ranges: `9;12-15;21;23;37-39;271-287`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- additionalData(address)
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The rule observes an account's additional data. Although the underlying storage field exists in the tokenization implementation and the CVL has a methods declaration, the supplied target ABI does not expose a standalone additionalData(address) getter or preserved harness shim. A methods declaration is not an implementation.
+
+CVL methods declarations actually included in this example:
+- handleAction(address, uint256, uint256) => NONDET
+- getReserveNormalizedIncome(address u) returns (uint256) => gRNI()
+- balanceOf(address) returns (uint256) envfree
+- additionalData(address) returns uint128 envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-11-TXT
+7,12,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/AToken.spec` / property `mintNoChangeToOther` / target `AToken`.
+Original source property and dependency ranges: `9;12-15;21;23;37-39;292-306`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- additionalData(address)
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The rule observes an account's additional data. Although the underlying storage field exists in the tokenization implementation and the CVL has a methods declaration, the supplied target ABI does not expose a standalone additionalData(address) getter or preserved harness shim. A methods declaration is not an implementation.
+
+CVL methods declarations actually included in this example:
+- handleAction(address, uint256, uint256) => NONDET
+- getReserveNormalizedIncome(address u) returns (uint256) => gRNI()
+- balanceOf(address) returns (uint256) envfree
+- additionalData(address) returns uint128 envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-12-TXT
+7,17,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/ReserveConfiguration.spec` / property `setActiveIntegrity` / target `MockReserveConfiguration`.
+Original source property and dependency ranges: `1;10-11;57;85-88`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- setActive(bool)
+- getActive()
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The pure/in-memory ReserveConfiguration library methods exist, but the available MockReserveConfiguration contract does not expose the corresponding callable public wrapper pair. The internal library requires a ReserveConfigurationMap parameter, which is not the same ABI as the no-map-argument CVL declaration.
+
+CVL methods declarations actually included in this example:
+- setActive(bool) envfree
+- getActive() returns (bool) envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-17-TXT
+7,19,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/ReserveConfiguration.spec` / property `setPausedIntegrity` / target `MockReserveConfiguration`.
+Original source property and dependency ranges: `1;14-15;57;97-100`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- setPaused(bool)
+- getPaused()
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The pure/in-memory ReserveConfiguration library methods exist, but the available MockReserveConfiguration contract does not expose the corresponding callable public wrapper pair. The internal library requires a ReserveConfigurationMap parameter, which is not the same ABI as the no-map-argument CVL declaration.
+
+CVL methods declarations actually included in this example:
+- setPaused(bool) envfree
+- getPaused() returns (bool) envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-19-TXT
+7,20,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/ReserveConfiguration.spec` / property `setBorrowableInIsolationIntegrity` / target `MockReserveConfiguration`.
+Original source property and dependency ranges: `1;16-17;57;103-106`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- setBorrowableInIsolation(bool)
+- getBorrowableInIsolation()
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The pure/in-memory ReserveConfiguration library methods exist, but the available MockReserveConfiguration contract does not expose the corresponding callable public wrapper pair. The internal library requires a ReserveConfigurationMap parameter, which is not the same ABI as the no-map-argument CVL declaration.
+
+CVL methods declarations actually included in this example:
+- setBorrowableInIsolation(bool) envfree
+- getBorrowableInIsolation() returns (bool) envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-20-TXT
+7,21,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/ReserveConfiguration.spec` / property `setSiloedBorrowingIntegrity` / target `MockReserveConfiguration`.
+Original source property and dependency ranges: `1;18-19;57;109-112`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- setSiloedBorrowing(bool)
+- getSiloedBorrowing()
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The pure/in-memory ReserveConfiguration library methods exist, but the available MockReserveConfiguration contract does not expose the corresponding callable public wrapper pair. The internal library requires a ReserveConfigurationMap parameter, which is not the same ABI as the no-map-argument CVL declaration.
+
+CVL methods declarations actually included in this example:
+- setSiloedBorrowing(bool) envfree
+- getSiloedBorrowing() envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-21-TXT
+7,27,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/ReserveConfiguration.spec` / property `setDebtCeilingIntegrity` / target `MockReserveConfiguration`.
+Original source property and dependency ranges: `1;30-31;57;145-148`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- setDebtCeiling(uint256)
+- getDebtCeiling()
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The pure/in-memory ReserveConfiguration library methods exist, but the available MockReserveConfiguration contract does not expose the corresponding callable public wrapper pair. The internal library requires a ReserveConfigurationMap parameter, which is not the same ABI as the no-map-argument CVL declaration.
+
+CVL methods declarations actually included in this example:
+- setDebtCeiling(uint256) envfree
+- getDebtCeiling() returns (uint256) envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-27-TXT
+7,31,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/ReserveConfiguration.spec` / property `integrityAndIndependencyOfIntSetters` / target `MockReserveConfiguration`.
+Original source property and dependency ranges: `1;51-52;57;169-183`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- getIntSetterLowerBound(uint256)
+- getIntSetterUpperBound(uint256)
+- executeIntSetterById(uint256,uint256)
+- executeIntGetterById(uint256)
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The spec dispatches setters and getters through ID-indexed helper methods. Their CVL declarations exist but no matching concrete mock/harness implementations are present in the supplied snapshot. Showing a single illustrative setLtv/setActive library body does not close the ID dispatcher.
+
+CVL methods declarations actually included in this example:
+- executeIntSetterById(uint256, uint256) envfree
+- executeIntGetterById(uint256) returns uint256 envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-31-TXT
+7,32,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/ReserveConfiguration.spec` / property `integrityAndIndependencyOfBoolSetters` / target `MockReserveConfiguration`.
+Original source property and dependency ranges: `1;55-57;186-200`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- getBoolSetterCompare(uint256)
+- executeBoolSetterById(uint256,bool)
+- executeBoolGetterById(uint256)
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The spec dispatches setters and getters through ID-indexed helper methods. Their CVL declarations exist but no matching concrete mock/harness implementations are present in the supplied snapshot. Showing a single illustrative setLtv/setActive library body does not close the ID dispatcher.
+
+CVL methods declarations actually included in this example:
+- executeBoolSetterById(uint256, bool) envfree
+- executeBoolGetterById(uint256) returns bool envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-32-TXT
+7,45,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/StableDebtToken.spec` / property `burnNoChangeToOther` / target `StableDebtToken`.
+Original source property and dependency ranges: `1-3;5;8-10;12;22-42;44-83;85-103;292-307`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- additionalData(address)
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The rule observes an account's additional data. Although the underlying storage field exists in the tokenization implementation and the CVL has a methods declaration, the supplied target ABI does not expose a standalone additionalData(address) getter or preserved harness shim. A methods declaration is not an implementation.
+
+CVL methods declarations actually included in this example:
+- calculateCompoundedInterest(uint256 r, uint40 t0, uint256 t1) returns (uint256) => calculateCompoundedInterestSummary(r, t0, t1)
+- additionalData(address) returns uint128 envfree
+- handleAction(address, uint256, uint256) => NONDET
+- rayMul(uint256 x, uint256 y) returns (uint256) => rayMulSummariztion(x, y)
+- rayDiv(uint256 x, uint256 y) returns (uint256) => rayDivSummariztion(x, y)
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-45-TXT
+7,46,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/StableDebtToken.spec` / property `mintNoChangeToOther` / target `StableDebtToken`.
+Original source property and dependency ranges: `1-3;5;8-10;12;22-42;44-83;85-103;312-333`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- additionalData(address)
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The rule observes an account's additional data. Although the underlying storage field exists in the tokenization implementation and the CVL has a methods declaration, the supplied target ABI does not expose a standalone additionalData(address) getter or preserved harness shim. A methods declaration is not an implementation.
+
+CVL methods declarations actually included in this example:
+- calculateCompoundedInterest(uint256 r, uint40 t0, uint256 t1) returns (uint256) => calculateCompoundedInterestSummary(r, t0, t1)
+- additionalData(address) returns uint128 envfree
+- handleAction(address, uint256, uint256) => NONDET
+- rayMul(uint256 x, uint256 y) returns (uint256) => rayMulSummariztion(x, y)
+- rayDiv(uint256 x, uint256 y) returns (uint256) => rayDivSummariztion(x, y)
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-46-TXT
+7,48,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/UserConfiguration.spec` / property `setBorrowing` / target `UserConfiguration (library; historical harness unresolved)`.
+Original source property and dependency ranges: `1-2;5;16;20-24`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- setBorrowing(uint256, bool) envfree
+- isBorrowing(uint256) returns bool envfree
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+All referenced methods are library functions taking a DataTypes.UserConfigurationMap memory argument (and, in isolation/siloed cases, storage mappings). The property calls map-backed no-argument wrappers that are absent from the PropertyGPT contracts tree. An external historical UserConfigurationHarness exists in aave/aave-v3-core@a87d546 but is NOT preserved in the supplied snapshot, uses old Solidity source assumptions and may lack later methods. No synthetic wrapper has been substituted.
+
+CVL methods declarations actually included in this example:
+- setBorrowing(uint256, bool) envfree
+- isBorrowing(uint256) returns bool envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-48-TXT
+7,49,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/UserConfiguration.spec` / property `setBorrowingNoChangeToOther` / target `UserConfiguration (library; historical harness unresolved)`.
+Original source property and dependency ranges: `1-2;5-6;16;27-44`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- setBorrowing(uint256, bool) envfree
+- isBorrowing(uint256) returns bool envfree
+- isUsingAsCollateral(uint256) returns bool envfree
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+All referenced methods are library functions taking a DataTypes.UserConfigurationMap memory argument (and, in isolation/siloed cases, storage mappings). The property calls map-backed no-argument wrappers that are absent from the PropertyGPT contracts tree. An external historical UserConfigurationHarness exists in aave/aave-v3-core@a87d546 but is NOT preserved in the supplied snapshot, uses old Solidity source assumptions and may lack later methods. No synthetic wrapper has been substituted.
+
+CVL methods declarations actually included in this example:
+- setBorrowing(uint256, bool) envfree
+- isBorrowing(uint256) returns bool envfree
+- isUsingAsCollateral(uint256) returns bool envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-49-TXT
+7,50,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/UserConfiguration.spec` / property `setUsingAsCollateral` / target `UserConfiguration (library; historical harness unresolved)`.
+Original source property and dependency ranges: `1;3;6;16;47-51`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- setUsingAsCollateral(uint256, bool) envfree
+- isUsingAsCollateral(uint256) returns bool envfree
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+All referenced methods are library functions taking a DataTypes.UserConfigurationMap memory argument (and, in isolation/siloed cases, storage mappings). The property calls map-backed no-argument wrappers that are absent from the PropertyGPT contracts tree. An external historical UserConfigurationHarness exists in aave/aave-v3-core@a87d546 but is NOT preserved in the supplied snapshot, uses old Solidity source assumptions and may lack later methods. No synthetic wrapper has been substituted.
+
+CVL methods declarations actually included in this example:
+- setUsingAsCollateral(uint256, bool) envfree
+- isUsingAsCollateral(uint256) returns bool envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-50-TXT
+7,51,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/UserConfiguration.spec` / property `setCollateralNoChangeToOther` / target `UserConfiguration (library; historical harness unresolved)`.
+Original source property and dependency ranges: `1;3;5-6;16;54-71`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- setUsingAsCollateral(uint256, bool) envfree
+- isBorrowing(uint256) returns bool envfree
+- isUsingAsCollateral(uint256) returns bool envfree
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+All referenced methods are library functions taking a DataTypes.UserConfigurationMap memory argument (and, in isolation/siloed cases, storage mappings). The property calls map-backed no-argument wrappers that are absent from the PropertyGPT contracts tree. An external historical UserConfigurationHarness exists in aave/aave-v3-core@a87d546 but is NOT preserved in the supplied snapshot, uses old Solidity source assumptions and may lack later methods. No synthetic wrapper has been substituted.
+
+CVL methods declarations actually included in this example:
+- setUsingAsCollateral(uint256, bool) envfree
+- isBorrowing(uint256) returns bool envfree
+- isUsingAsCollateral(uint256) returns bool envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-51-TXT
+7,52,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/UserConfiguration.spec` / property `isUsingAsCollateralOrBorrowing` / target `UserConfiguration (library; historical harness unresolved)`.
+Original source property and dependency ranges: `1;4-6;16;81-82`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- isUsingAsCollateralOrBorrowing(uint256) returns bool envfree
+- isBorrowing(uint256) returns bool envfree
+- isUsingAsCollateral(uint256) returns bool envfree
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+All referenced methods are library functions taking a DataTypes.UserConfigurationMap memory argument (and, in isolation/siloed cases, storage mappings). The property calls map-backed no-argument wrappers that are absent from the PropertyGPT contracts tree. An external historical UserConfigurationHarness exists in aave/aave-v3-core@a87d546 but is NOT preserved in the supplied snapshot, uses old Solidity source assumptions and may lack later methods. No synthetic wrapper has been substituted.
+
+CVL methods declarations actually included in this example:
+- isUsingAsCollateralOrBorrowing(uint256) returns bool envfree
+- isBorrowing(uint256) returns bool envfree
+- isUsingAsCollateral(uint256) returns bool envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-52-TXT
+7,53,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/UserConfiguration.spec` / property `integrityOfisUsingAsCollateralOne` / target `UserConfiguration (library; historical harness unresolved)`.
+Original source property and dependency ranges: `1;6-7;16;91-93`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- isUsingAsCollateral(uint256) returns bool envfree
+- isUsingAsCollateralOne() returns bool envfree
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+All referenced methods are library functions taking a DataTypes.UserConfigurationMap memory argument (and, in isolation/siloed cases, storage mappings). The property calls map-backed no-argument wrappers that are absent from the PropertyGPT contracts tree. An external historical UserConfigurationHarness exists in aave/aave-v3-core@a87d546 but is NOT preserved in the supplied snapshot, uses old Solidity source assumptions and may lack later methods. No synthetic wrapper has been substituted.
+
+CVL methods declarations actually included in this example:
+- isUsingAsCollateral(uint256) returns bool envfree
+- isUsingAsCollateralOne() returns bool envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-53-TXT
+7,54,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/UserConfiguration.spec` / property `integrityOfisUsingAsCollateralAny` / target `UserConfiguration (library; historical harness unresolved)`.
+Original source property and dependency ranges: `1;6;8;16;103-104`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- isUsingAsCollateral(uint256) returns bool envfree
+- isUsingAsCollateralAny() returns bool envfree
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+All referenced methods are library functions taking a DataTypes.UserConfigurationMap memory argument (and, in isolation/siloed cases, storage mappings). The property calls map-backed no-argument wrappers that are absent from the PropertyGPT contracts tree. An external historical UserConfigurationHarness exists in aave/aave-v3-core@a87d546 but is NOT preserved in the supplied snapshot, uses old Solidity source assumptions and may lack later methods. No synthetic wrapper has been substituted.
+
+CVL methods declarations actually included in this example:
+- isUsingAsCollateral(uint256) returns bool envfree
+- isUsingAsCollateralAny() returns bool envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-54-TXT
+7,55,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/UserConfiguration.spec` / property `integrityOfisBorrowingOne` / target `UserConfiguration (library; historical harness unresolved)`.
+Original source property and dependency ranges: `1;5;9;16;113-114`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- isBorrowing(uint256) returns bool envfree
+- isBorrowingOne() returns (bool) envfree
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+All referenced methods are library functions taking a DataTypes.UserConfigurationMap memory argument (and, in isolation/siloed cases, storage mappings). The property calls map-backed no-argument wrappers that are absent from the PropertyGPT contracts tree. An external historical UserConfigurationHarness exists in aave/aave-v3-core@a87d546 but is NOT preserved in the supplied snapshot, uses old Solidity source assumptions and may lack later methods. No synthetic wrapper has been substituted.
+
+CVL methods declarations actually included in this example:
+- isBorrowing(uint256) returns bool envfree
+- isBorrowingOne() returns (bool) envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-55-TXT
+7,56,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/UserConfiguration.spec` / property `integrityOfisBorrowingAny` / target `UserConfiguration (library; historical harness unresolved)`.
+Original source property and dependency ranges: `1;5;10;16;124-125`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- isBorrowing(uint256) returns bool envfree
+- isBorrowingAny() returns bool envfree
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+All referenced methods are library functions taking a DataTypes.UserConfigurationMap memory argument (and, in isolation/siloed cases, storage mappings). The property calls map-backed no-argument wrappers that are absent from the PropertyGPT contracts tree. An external historical UserConfigurationHarness exists in aave/aave-v3-core@a87d546 but is NOT preserved in the supplied snapshot, uses old Solidity source assumptions and may lack later methods. No synthetic wrapper has been substituted.
+
+CVL methods declarations actually included in this example:
+- isBorrowing(uint256) returns bool envfree
+- isBorrowingAny() returns bool envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-56-TXT
+7,57,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/UserConfiguration.spec` / property `integrityOfEmpty` / target `UserConfiguration (library; historical harness unresolved)`.
+Original source property and dependency ranges: `1;4;10-11;16;134-135`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- isUsingAsCollateralOrBorrowing(uint256) returns bool envfree
+- isBorrowingAny() returns bool envfree
+- isEmpty() returns bool envfree
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+All referenced methods are library functions taking a DataTypes.UserConfigurationMap memory argument (and, in isolation/siloed cases, storage mappings). The property calls map-backed no-argument wrappers that are absent from the PropertyGPT contracts tree. An external historical UserConfigurationHarness exists in aave/aave-v3-core@a87d546 but is NOT preserved in the supplied snapshot, uses old Solidity source assumptions and may lack later methods. No synthetic wrapper has been substituted.
+
+CVL methods declarations actually included in this example:
+- isUsingAsCollateralOrBorrowing(uint256) returns bool envfree
+- isBorrowingAny() returns bool envfree
+- isEmpty() returns bool envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-57-TXT
+7,58,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/UserConfiguration.spec` / property `integrityOfIsolationModeState` / target `UserConfiguration (library; historical harness unresolved)`.
+Original source property and dependency ranges: `1;7;12;16;142-147`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- isUsingAsCollateralOne() returns bool envfree
+- getIsolationModeState() returns (bool, address, uint256) envfree
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+All referenced methods are library functions taking a DataTypes.UserConfigurationMap memory argument (and, in isolation/siloed cases, storage mappings). The property calls map-backed no-argument wrappers that are absent from the PropertyGPT contracts tree. An external historical UserConfigurationHarness exists in aave/aave-v3-core@a87d546 but is NOT preserved in the supplied snapshot, uses old Solidity source assumptions and may lack later methods. No synthetic wrapper has been substituted. getIsolationModeState also requires reservesData/reservesList mappings.
+
+CVL methods declarations actually included in this example:
+- isUsingAsCollateralOne() returns bool envfree
+- getIsolationModeState() returns (bool, address, uint256) envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-58-TXT
+7,59,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/UserConfiguration.spec` / property `integrityOfSiloedBorrowingState` / target `UserConfiguration (library; historical harness unresolved)`.
+Original source property and dependency ranges: `1;9;13;16;154-159`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- isBorrowingOne() returns (bool) envfree
+- getSiloedBorrowingState() returns (bool, address) envfree
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+All referenced methods are library functions taking a DataTypes.UserConfigurationMap memory argument (and, in isolation/siloed cases, storage mappings). The property calls map-backed no-argument wrappers that are absent from the PropertyGPT contracts tree. An external historical UserConfigurationHarness exists in aave/aave-v3-core@a87d546 but is NOT preserved in the supplied snapshot, uses old Solidity source assumptions and may lack later methods. No synthetic wrapper has been substituted. getSiloedBorrowingState requires reservesData/reservesList mappings and postdates the report's reviewed library revision.
+
+CVL methods declarations actually included in this example:
+- isBorrowingOne() returns (bool) envfree
+- getSiloedBorrowingState() returns (bool, address) envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-59-TXT
+7,60,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/VariableDebtToken.spec` / property `totalSupplyEqualsSumAllBalance` / target `VariableDebtToken`.
+Original source property and dependency ranges: `1;3;5-6;8;10;13-15;23-29;32-34;36-38;40-50`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- scaledBalanceOfToBalanceOf(uint256)
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The specification declares a converter as envfree, but no ABI-visible implementation or preserved harness providing this converter exists in the supplied target contract tree. The inherited scaled-balance storage accessors do not implement this independent converter.
+
+CVL methods declarations actually included in this example:
+- getReserveNormalizedVariableDebt(address asset) returns (uint256) => gRNVB()
+- handleAction(address, uint256, uint256) => NONDET
+- scaledBalanceOfToBalanceOf(uint256) returns (uint256) envfree
+
+CVL using aliases included: (none).
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-60-TXT
+7,74,"INCOMPLETE DEPENDENCY — audited 2026-10-17
+
+Project 7 / source `contracts/7/specs/pool.spec` / property `getReserveNormalizedVariableDebtCheck` / target `Pool`.
+Original source property and dependency ranges: `9;21;56;104;197-209`. The .spec preserves the literal rule or invariant, with no invented methods, ghost, hook or harness.
+
+UNRESOLVED SYMBOLS / REQUIRED CONTEXT
+- ATokenHarness as _aToken
+- getCurrScaledVariableDebt(address)
+
+WHY THE SELECTED SOURCE IS INSUFFICIENT
+The CVL using-alias requires ATokenHarness, absent from the project source. getCurrScaledVariableDebt(address) is declared in CVL but no callable implementation is preserved. Pool.supply/getReserveNormalizedVariableDebt are available; however, the getter's independent calldataarg is not constrained to the supplied asset, so the property does not unconditionally demonstrate same-asset index monotonicity.
+
+CVL methods declarations actually included in this example:
+- getCurrScaledVariableDebt(address) returns (uint256) envfree
+
+CVL using aliases included: ATokenHarness as _aToken.
+
+SEARCH AND BOUNDARY
+Verified against the supplied Aave V3 snapshot's six specs, the applicable token/mock/library ABI functions and the preserved 128-file contract subtree. The external Aave a87d546 harnesses are **context**, not automatically available snapshot dependencies. CVL2 syntax migration, compilation, and original historical re-verification have not been performed.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P7-incomplete-74-TXT

@@ -1,15 +1,23 @@
-# AGENTE-05 — honest QA coverage status: Project 6
+# AGENTE-05 QA REPORT — P6 / Final source-read audit
 
-## Structural reconciliation (finished)
-- At confirmed Web3Bugs SHA `2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3`, inventory contains 32 unique numeric .spec examples; properties.csv has exactly 32 records after proper canonical-key deduplication. Original Bug Labels, Result and Detection Outcome preserved from catalog CSV. README and evidence register contain version-pinned source pointers.
-- The same number of `properties/<status>/<N>.md` files exists in this research branch. **This does not mean their source-level semantic research is complete.**
+## Reconciliation
+- Project ID 6 contains 32 exactly unique source-indexed examples, including 0 complete and 32 incomplete. No duplicate (Project ID, Status, Example ID) key.
+- Full original .spec files read and property declarations located at source coordinates: 32/32. Full numbered N.spec, N.md, N.sol read: 32 each; numbered N.txt read: 32/32 applicable incomplete.
+- Individual property reports present: 32/32. Original Results, Detection Outcomes and Bug Labels copied without semantic reclassification; 148-project total is checked separately.
+- CVL1→CVL2 source-specific candidate snippets with line and A1 citations stored in dossiers. For methods-only cases with receiver ambiguity, candidate state stays unresolved. All future buckets are provisional.
+- Research statuses: {'UNRESOLVED_CANDIDATE': 32}. Every property retains some form of untested ABI/semantic equivalence uncertainty.
 
-## Depth of research at current commit
-- Direct reading of extracted .spec and N.txt: **8/32** cases; remaining **24** dossiers transparently describe metadata-level triage and explicitly mark missing line-specific migration evidence. For complete examples the N.txt does not exist.
-- Target/harness and original ABI lack authenticated linkages; source reviewed for first eight only.
-- Every record is **UNRESOLVED_CANDIDATE** and bucket 02_unresolved candidate, because no compiler/error log or semantic equivalence test has been run. No summary implies compile success. Specific source-reading progress must be revised as further direct reads are committed.
+## PDF and historical evidence
+- Historical PDF bytes hashed SHA256, and reports/6.md transcript searched for matching exact property names. Official web PDF pages checked visually: 2. Public PDF identity with archived resource is NOT proven.
+- Archived PDF transcript states ac92951; current official public PDF instead 51d46b1. Exact match of releases and historical harness target is unresolved.
 
-## Important limitations
-- The historical files remain unmodified. The per-example source links and Git blob hashes show provenance but are not proof that all bodies were reviewed.
-- Not run: CVL2 compiler, Certora Prover, CVL1 tests, source restoration, python validation scripts, git diff --check on a current checkout. Remote Desktop Commander device is offline and attached ZIP has stale main SHA. No invented exit codes.
-- Do not request Phase 2 or merge until each remaining N.spec and missing N.txt and N.md has a true per-case semantic analysis, plus independent QA and explicit coordinator approval.
+## Observed structural validation in WSL
+- CWD Web3Bugs-certora: python3 scripts/check_specs.py . returned exit 0, 1386 examples / 1390 Bug Label relationships.
+- CWD Web3Bugs-certora: python3 scripts/check_contests_csv.py . returned exit 0.
+- CWD Web3Bugs-certora: python3 scripts/check_contracts.py . returned exit 0.
+- CWD Web3Bugs: git diff --check returned exit 0 after documentary formatting changes, without modifying historical sources.
+- Staged diff check to be performed immediately before the Git commit.
+
+## Outstanding limitations
+- No Certora Prover, CVL1, CVL2 compilation, source reconversion, or experimental same-counterexample checks. No verified snapshot-to-reviewed-commit ABI or complete dependency reconstruction from source hashes. Direct original PDF pages for Projects 7 and 19 were not renderable; transcript is not a direct page check.
+- Strictly documentation-only changes under AGENTE-05/6/. Independent semantic and version/ABI review remains necessary before any merger or Phase 2.

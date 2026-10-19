@@ -1,9 +1,23 @@
-# QA — AGENTE-05 / P21
+# AGENTE-05 QA REPORT — P21 / Final source-read audit
 
-- Source HEAD 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3; PropertyGPT HEAD 687f654c679ed45ab127b7949e2a29c8f5e491b9. Branch research/cvl2-agente-05 isolada.
-- Directory listing `results/spec/incomplete/21/` verified: two numbered `.spec`, 2 `.md`, 2 `.txt` and 2 `.sol`. `complete/21/` absent, consistent with zero complete. Keys: (21,incomplete,1), (21,incomplete,2), no duplication.
-- Two dedicated dossiers; two CSV rows; both properties have explicit incomplete reasons; labels preserved as UNMAPPED. Names differ from PDF tests; no propagation of 18 published DSM verifications.
-- Evidence IDs A1 and H21 checked against source paths and official CVL2 documentation, but an official revision-pinned document and true audited harness commit were not recovered.
-- Main finding: non-revert rule tests positive success unconditionally; quorum invariant conflicts with intentionally permitted quorum setting in production code; **both need original harness before executable semantics may be established**.
-- Validation: documentary count by GitHub directory listing and metadata cross-check. **No repository validator, git diff --check, CVL compilation, Certora Prover or CVL1 test executed here**; GitHub remote connector has no running checkout and Desktop Commander device was offline.
-- Follow-up reviewer: require original harness plus source/commit, confirm ABI, then adjudicate whether any syntactic edits preserve all revert paths/quantifier spaces. Do not promote candidate status without experiments.
+## Reconciliation
+- Project ID 21 contains 2 exactly unique source-indexed examples, including 0 complete and 2 incomplete. No duplicate (Project ID, Status, Example ID) key.
+- Full original .spec files read and property declarations located at source coordinates: 2/2. Full numbered N.spec, N.md, N.sol read: 2 each; numbered N.txt read: 2/2 applicable incomplete.
+- Individual property reports present: 2/2. Original Results, Detection Outcomes and Bug Labels copied without semantic reclassification; 148-project total is checked separately.
+- CVL1→CVL2 source-specific candidate snippets with line and A1 citations stored in dossiers. For methods-only cases with receiver ambiguity, candidate state stays unresolved. All future buckets are provisional.
+- Research statuses: {'UNRESOLVED_CANDIDATE': 2}. Every property retains some form of untested ABI/semantic equivalence uncertainty.
+
+## PDF and historical evidence
+- Historical PDF bytes hashed SHA256, and reports/21.md transcript searched for matching exact property names. Official web PDF pages checked visually: 2. Public PDF identity with archived resource is NOT proven.
+- The two DSM rules do not match the 18 named PDF properties. Harness/getGuardianLength absent and authorized quorum may exceed guardian count.
+
+## Observed structural validation in WSL
+- CWD Web3Bugs-certora: python3 scripts/check_specs.py . returned exit 0, 1386 examples / 1390 Bug Label relationships.
+- CWD Web3Bugs-certora: python3 scripts/check_contests_csv.py . returned exit 0.
+- CWD Web3Bugs-certora: python3 scripts/check_contracts.py . returned exit 0.
+- CWD Web3Bugs: git diff --check returned exit 0 after documentary formatting changes, without modifying historical sources.
+- Staged diff check to be performed immediately before the Git commit.
+
+## Outstanding limitations
+- No Certora Prover, CVL1, CVL2 compilation, source reconversion, or experimental same-counterexample checks. No verified snapshot-to-reviewed-commit ABI or complete dependency reconstruction from source hashes. Direct original PDF pages for Projects 7 and 19 were not renderable; transcript is not a direct page check.
+- Strictly documentation-only changes under AGENTE-05/21/. Independent semantic and version/ABI review remains necessary before any merger or Phase 2.

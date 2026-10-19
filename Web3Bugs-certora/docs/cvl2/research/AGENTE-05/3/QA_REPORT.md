@@ -1,19 +1,23 @@
-# AGENTE-05 QA REPORT — Project 3
+# AGENTE-05 QA REPORT — P3 / Final source-read audit
 
-## Inventory reconciliation at 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3
-- GitHub directory listing: 3 numbered .spec files: 0 complete and 3 incomplete.
-- Proper CSV parse with double-quoted comma/newlines: 3 Bug Label relationships reduced to 3 unique keys (Project ID, original Status, Example ID). Dossiers created: 3, with mandatory .spec, .md and .txt for incomplete all read directly from HEAD.
-- There are 8 missing-source manifest records (one aggregate entry per incomplete plus independently traced historic assets where present).
-- Count of candidate syntax flags: {"SEMI":3,"METH":3,"INVARIANT":2}. Risk distribution: {"HIGH":2,"CRITICAL":1}.
+## Reconciliation
+- Project ID 3 contains 3 exactly unique source-indexed examples, including 0 complete and 3 incomplete. No duplicate (Project ID, Status, Example ID) key.
+- Full original .spec files read and property declarations located at source coordinates: 3/3. Full numbered N.spec, N.md, N.sol read: 3 each; numbered N.txt read: 3/3 applicable incomplete.
+- Individual property reports present: 3/3. Original Results, Detection Outcomes and Bug Labels copied without semantic reclassification; 148-project total is checked separately.
+- CVL1→CVL2 source-specific candidate snippets with line and A1 citations stored in dossiers. For methods-only cases with receiver ambiguity, candidate state stays unresolved. All future buckets are provisional.
+- Research statuses: {'UNRESOLVED_CANDIDATE': 3}. Every property retains some form of untested ABI/semantic equivalence uncertainty.
 
-## Critical decisions
-- Specs coincidem com Certora Review 33c1aeca; Solidity de PropertyGPT é master posterior. O relatório também cita mitigação c905eaf; não há versão única demonstrada para todos os resultados.
-- Historical BGD-Labs commit 33c1aeca28d6d61659c1b28775ad2644b7e2ac6e and five blob hashes of scripts/harnesses independently confirmed; recovery classification is separate from original incomplete status.
-- Textual edits are conditional and can alter receiver scope, revert paths or bounds; original Solidity excerpts are documentary and not stand-alone compile units.
+## PDF and historical evidence
+- Historical PDF bytes hashed SHA256, and reports/3.md transcript searched for matching exact property names. Official web PDF pages checked visually: 2. Public PDF identity with archived resource is NOT proven.
+- Historic BGD-Labs Certora Review commit 33c1aeca includes verified five Git blobs, but link package lib/solidity-utils is an uninitialized submodule and the PDF lists multiple revisions.
 
-## Executed vs not executed
-**Executed:** GitHub read-only queries for both repository HEADs, per-project contents inventories, full individual spec/md/txt documents, historical CSV parsing, deduplication by canonical key, current official CVL2 guidance research. Write: only documents in this AGENTE-05/3 directory, separate research branch.
+## Observed structural validation in WSL
+- CWD Web3Bugs-certora: python3 scripts/check_specs.py . returned exit 0, 1386 examples / 1390 Bug Label relationships.
+- CWD Web3Bugs-certora: python3 scripts/check_contests_csv.py . returned exit 0.
+- CWD Web3Bugs-certora: python3 scripts/check_contracts.py . returned exit 0.
+- CWD Web3Bugs: git diff --check returned exit 0 after documentary formatting changes, without modifying historical sources.
+- Staged diff check to be performed immediately before the Git commit.
 
-**Not executed:** `python3 scripts/check_specs.py .`, `python3 scripts/check_contests_csv.py .`, `python3 scripts/check_contracts.py .`, `git diff --check` on a current checkout; no relevant synced workstation was online and the user-provided ZIP is older than main. No compiler/solc/Certora Prover/CVL1 test, no in-place converter. Do not invent exit codes or equivalence/verification.
-
-**Independent review still needed:** full ABI/method receiver audit; audited-source hash and historical scripts; actual CVL2 errors and same-counterexample reasoning in a subsequently authorized Phase 2.
+## Outstanding limitations
+- No Certora Prover, CVL1, CVL2 compilation, source reconversion, or experimental same-counterexample checks. No verified snapshot-to-reviewed-commit ABI or complete dependency reconstruction from source hashes. Direct original PDF pages for Projects 7 and 19 were not renderable; transcript is not a direct page check.
+- Strictly documentation-only changes under AGENTE-05/3/. Independent semantic and version/ABI review remains necessary before any merger or Phase 2.

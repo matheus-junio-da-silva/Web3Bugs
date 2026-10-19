@@ -39,7 +39,8 @@
 - python3 scripts/check_contests_csv.py . => exit 0; Check passed! contests.csv consistent with reports.
 - python3 scripts/check_contracts.py . => exit 0; Check passed! contracts consistent with reports.
 - git diff --check em cwd da worktree => primeira tentativa exit 2 por CRLF em CSV e linha vazia extra; normalização somente documental; segunda tentativa exit 0.
-- git diff --cached --check e custom reconciliation serão executados antes do commit final e seu resultado será registrado no comentário do PR.
+- git diff --cached --check (inclui os três arquivos novos) => exit 0; sem violações após normalização.
+- python3 /home/mat/cvl2-agente03-notes/custom_qa.py => exit 0; 164 IDs e dossiês, 29 evidências, 15 grupos de recuperação, 8 blobs de specs históricos idênticos, SHA do PDF e vínculos de patterns conferidos.
 
 ## Gate
 - Todas as 164 continuam UNRESOLVED_CANDIDATE e nenhuma classificação histórica foi promovida.

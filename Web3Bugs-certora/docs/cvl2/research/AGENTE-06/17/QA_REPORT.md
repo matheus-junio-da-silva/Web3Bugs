@@ -39,3 +39,8 @@ Identificado commit upstream e 5 arquivos byte-idênticos aos archived originals
 - git diff --check passou após remoção de whitespace gerado; log em ../logs/git-diff-check.log. Reexecutar depois desta escrita, antes do push.
 - Não houve execução de solc/CVL1/CVL2/Certora Prover. O resultado histórico VERIFIED/NOT_STATED e a classificação original complete/incomplete permanecem intactos.
 - **PENDÊNCIA QUE IMPEDE CONCLUSÃO SEMÂNTICA TOTAL:** Specify 2019 com aliases .spclnk JSON, ambientes, sinvoke/invoke, havoc local e static_assert/static_require não equivale a CVL1 usual. Falta prova da semântica histórica do engine e reversão.
+
+
+## Segunda revisao independente — fechamento historico
+
+Triagem documental 41 propriedades. Estados conclusivos por familia e condicoes de reabertura no documento HISTORICAL_BLOCKER_CLOSURE.md. Confirmar que historical_blocked e evidencia ausente, enquanto UNRESOLVED_CANDIDATE continua hipotese de CVL2. Nenhuma Fase 2.

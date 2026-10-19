@@ -39,3 +39,8 @@ Certora branch upstream 3cb9cb7279a3fb1790b55251a029bb3065606dc8 matches six exa
 - git diff --check passou após remoção de whitespace gerado; log em ../logs/git-diff-check.log. Reexecutar depois desta escrita, antes do push.
 - Não houve execução de solc/CVL1/CVL2/Certora Prover. O resultado histórico VERIFIED/NOT_STATED e a classificação original complete/incomplete permanecem intactos.
 - **PENDÊNCIA QUE IMPEDE CONCLUSÃO SEMÂNTICA TOTAL:** O runner preservado fixa --verify PopsicleV3Optimizer:spec/PopsicleV3Optimizer.spec com --rule $1, --solc solc7.6, --loop_iter 1 e --link tokens/pool. Sem prova de execução de FullMathWrapper, PoolActions ou sanity. Wrapper sem getter totalSupply.
+
+
+## Segunda revisao independente — fechamento historico
+
+Triagem documental 21 propriedades. Estados conclusivos por familia e condicoes de reabertura no documento HISTORICAL_BLOCKER_CLOSURE.md. Confirmar que historical_blocked e evidencia ausente, enquanto UNRESOLVED_CANDIDATE continua hipotese de CVL2. Nenhuma Fase 2.

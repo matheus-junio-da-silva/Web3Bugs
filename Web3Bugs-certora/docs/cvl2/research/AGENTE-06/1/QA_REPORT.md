@@ -39,3 +39,8 @@ Commit da revisão do relatório P1 comprovado por upstream: `303bd3e16c8d346532
 - git diff --check passou após remoção de whitespace gerado; log em ../logs/git-diff-check.log. Reexecutar depois desta escrita, antes do push.
 - Não houve execução de solc/CVL1/CVL2/Certora Prover. O resultado histórico VERIFIED/NOT_STATED e a classificação original complete/incomplete permanecem intactos.
 - **PENDÊNCIA QUE IMPEDE CONCLUSÃO SEMÂNTICA TOTAL:** O commit 303bd3 do Solidity do relatório não determina por si a configuração de cada rule. queue2/_mock e complexity.spec não receberam ABI ou runner originais demonstrados; os contratos de Polygon, Optimism e Arbitrum mantêm diferenças de autenticação.
+
+
+## Segunda revisao independente — fechamento historico
+
+Triagem documental 70 propriedades. Estados conclusivos por familia e condicoes de reabertura no documento HISTORICAL_BLOCKER_CLOSURE.md. Confirmar que historical_blocked e evidencia ausente, enquanto UNRESOLVED_CANDIDATE continua hipotese de CVL2. Nenhuma Fase 2.

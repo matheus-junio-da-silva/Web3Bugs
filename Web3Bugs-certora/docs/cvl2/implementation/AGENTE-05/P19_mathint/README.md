@@ -12,8 +12,8 @@
 **Única transformação em cada arquivo**, sem alterar mais nada:
 
 ```diff
--definition divPrecisely(uint x, uint y) returns mathint 
-+definition divPrecisely(mathint x, mathint y) returns mathint 
+-definition divPrecisely(uint x, uint y) returns mathint
++definition divPrecisely(mathint x, mathint y) returns mathint
 ```
 
 Target: `Web3Bugs-certora/contracts/19/spec/harnesses/Dummy.sol` (`contract Dummy {}`), inalterado. Nenhum source de `results/spec/complete/19/`, contrato, script, catálogo original ou outro ID modificado. Preservados tabs, comentários, corpo da definição, requires e ambas as asserts.

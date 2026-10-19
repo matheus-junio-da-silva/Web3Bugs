@@ -25,3 +25,17 @@ Identificado commit upstream e 5 arquivos byte-idênticos aos archived originals
 - Structural QA of property key uniqueness and count performed using GitHub fetch and CSV parsing in connector; Python validators and git diff --check still NOT executed on live PR branch.
 - GitHub changes are restricted to docs/cvl2/research/AGENTE-06; no changes to contracts, result CSV, specs or scripts.
 - **SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.**
+
+
+## AGENTE-06 — QA da contrarrevisão / Fase 1
+
+- 159 no agregado, projeto 17: 41 dossiês individualizados; 31 complete, 10 incomplete; chaves únicas confirmadas.
+- N.spec, N.md, N.sol lidos individualmente (hash SHA256 por property no CSV e dossier); N.txt lido para os 10 incompletos e registrado com SHA no recovery_manifest.
+- Commit apontado pelo relatório: f385d71983ae5c5799faae9b2dfea43e5cf75262 (P22 NOT_CONFIRMED; não confundir branch upstream pós-auditoria com revisão auditada).
+- Escopo de fonte/runner examinado: contracts/17/spec/formal/*.cvl; contracts/17/spec/formal/*.spclnk (JSON aliases).
+- Padrões CVL lexicalmente identificados para avaliação, sem edit aplicada: {'E-A2-METHODS': 41, 'E-A2-CALL': 41, 'E-A2-STATIC': 41, 'E-A2-HAVOC': 41, 'E-A2-RULE': 41}.
+- PDF original lido textualmente, correspondências exatas do nome da property: 35/41; demais 6 não mapeados literalmente. PDF não foi relido visualmente por todas as páginas/fórmulas; ausência de nome não é prova de ausência da obrigação.
+- Resultado dos comandos executados em worktree isolada: python3 scripts/check_specs.py . exit 0; python3 scripts/check_contracts.py . exit 0; python3 scripts/check_contests_csv.py . exit 0. Logs em ../logs/{specs,contracts,contests}.log.
+- git diff --check passou após remoção de whitespace gerado; log em ../logs/git-diff-check.log. Reexecutar depois desta escrita, antes do push.
+- Não houve execução de solc/CVL1/CVL2/Certora Prover. O resultado histórico VERIFIED/NOT_STATED e a classificação original complete/incomplete permanecem intactos.
+- **PENDÊNCIA QUE IMPEDE CONCLUSÃO SEMÂNTICA TOTAL:** Specify 2019 com aliases .spclnk JSON, ambientes, sinvoke/invoke, havoc local e static_assert/static_require não equivale a CVL1 usual. Falta prova da semântica histórica do engine e reversão.

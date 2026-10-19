@@ -25,3 +25,17 @@ Certora branch upstream 3cb9cb7279a3fb1790b55251a029bb3065606dc8 matches six exa
 - Structural QA of property key uniqueness and count performed using GitHub fetch and CSV parsing in connector; Python validators and git diff --check still NOT executed on live PR branch.
 - GitHub changes are restricted to docs/cvl2/research/AGENTE-06; no changes to contracts, result CSV, specs or scripts.
 - **SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.**
+
+
+## AGENTE-06 — QA da contrarrevisão / Fase 1
+
+- 159 no agregado, projeto 22: 21 dossiês individualizados; 19 complete, 2 incomplete; chaves únicas confirmadas.
+- N.spec, N.md, N.sol lidos individualmente (hash SHA256 por property no CSV e dossier); N.txt lido para os 2 incompletos e registrado com SHA no recovery_manifest.
+- Commit apontado pelo relatório: NOT_CONFIRMED (P22 NOT_CONFIRMED; não confundir branch upstream pós-auditoria com revisão auditada).
+- Escopo de fonte/runner examinado: contracts/22/spec/scripts/verifyPopsicleV3Optimizer.sh; contracts/22/spec/*.spec.
+- Padrões CVL lexicalmente identificados para avaliação, sem edit aplicada: {'E-A2-TYPES': 3, 'E-A2-METHODS': 11, 'E-A2-RECEIVER': 11, 'E-A2-INVARIANT': 10}.
+- PDF original lido textualmente, correspondências exatas do nome da property: 0/21; demais 21 não mapeados literalmente. PDF não foi relido visualmente por todas as páginas/fórmulas; ausência de nome não é prova de ausência da obrigação.
+- Resultado dos comandos executados em worktree isolada: python3 scripts/check_specs.py . exit 0; python3 scripts/check_contracts.py . exit 0; python3 scripts/check_contests_csv.py . exit 0. Logs em ../logs/{specs,contracts,contests}.log.
+- git diff --check passou após remoção de whitespace gerado; log em ../logs/git-diff-check.log. Reexecutar depois desta escrita, antes do push.
+- Não houve execução de solc/CVL1/CVL2/Certora Prover. O resultado histórico VERIFIED/NOT_STATED e a classificação original complete/incomplete permanecem intactos.
+- **PENDÊNCIA QUE IMPEDE CONCLUSÃO SEMÂNTICA TOTAL:** O runner preservado fixa --verify PopsicleV3Optimizer:spec/PopsicleV3Optimizer.spec com --rule $1, --solc solc7.6, --loop_iter 1 e --link tokens/pool. Sem prova de execução de FullMathWrapper, PoolActions ou sanity. Wrapper sem getter totalSupply.

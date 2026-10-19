@@ -25,3 +25,17 @@ Commit da revisão do relatório P1 comprovado por upstream: `303bd3e16c8d346532
 - Structural QA of property key uniqueness and count performed using GitHub fetch and CSV parsing in connector; Python validators and git diff --check still NOT executed on live PR branch.
 - GitHub changes are restricted to docs/cvl2/research/AGENTE-06; no changes to contracts, result CSV, specs or scripts.
 - **SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.**
+
+
+## AGENTE-06 — QA da contrarrevisão / Fase 1
+
+- 159 no agregado, projeto 1: 70 dossiês individualizados; 36 complete, 34 incomplete; chaves únicas confirmadas.
+- N.spec, N.md, N.sol lidos individualmente (hash SHA256 por property no CSV e dossier); N.txt lido para os 34 incompletos e registrado com SHA no recovery_manifest.
+- Commit apontado pelo relatório: 303bd3e16c8d3465325389a72564126c3bacc4f9 (P22 NOT_CONFIRMED; não confundir branch upstream pós-auditoria com revisão auditada).
+- Escopo de fonte/runner examinado: contracts/1/specs/PolygonBridge.spec; contracts/1/specs/Optimism_ArbitrumBridge.spec; contracts/1/specs/complexity.spec.
+- Padrões CVL lexicalmente identificados para avaliação, sem edit aplicada: {'E-A2-METHODS': 29, 'E-A2-RECEIVER': 14, 'E-A2-SELECTOR': 4, 'E-A2-INVARIANT': 8}.
+- PDF original não preservado no diretório resources/1; transcript reports/1.md analisado, sem alegar leitura visual do binário ausente.
+- Resultado dos comandos executados em worktree isolada: python3 scripts/check_specs.py . exit 0; python3 scripts/check_contracts.py . exit 0; python3 scripts/check_contests_csv.py . exit 0. Logs em ../logs/{specs,contracts,contests}.log.
+- git diff --check passou após remoção de whitespace gerado; log em ../logs/git-diff-check.log. Reexecutar depois desta escrita, antes do push.
+- Não houve execução de solc/CVL1/CVL2/Certora Prover. O resultado histórico VERIFIED/NOT_STATED e a classificação original complete/incomplete permanecem intactos.
+- **PENDÊNCIA QUE IMPEDE CONCLUSÃO SEMÂNTICA TOTAL:** O commit 303bd3 do Solidity do relatório não determina por si a configuração de cada rule. queue2/_mock e complexity.spec não receberam ABI ou runner originais demonstrados; os contratos de Polygon, Optimism e Arbitrum mantêm diferenças de autenticação.

@@ -15,3 +15,7 @@ A chave é (Project ID, Status, Example ID), não property name. Risco específi
 Arquivos: properties.csv, properties/, patterns/, evidence_register.csv, recovery_manifest.csv, QA_REPORT.md.
 
 SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.
+
+## Atualização 2026-10-19 / escopo real da Fase 1
+
+A triagem inicial foi ampliada por leitura documental dos N.spec, N.md, N.sol e N.txt e de PDF preservado onde disponível. A cobertura de leitura é 21/21; **cobertura de equivalência ou verificação da rule não é 100%**. Nenhuma conversão foi aprovada, nenhuma execução CVL2 foi realizada. Veja QA_REPORT.md, evidence_register.csv, recovery_manifest.csv e PDF_SOURCE_ANALYSIS.md quando disponível.

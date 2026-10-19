@@ -1,20 +1,24 @@
-# AGENTE-01 — QA Report (FASE 1)
+# QA AGENTE-01 — Revisão independente P10
 
-- Input Web3Bugs/main: `2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3`; PropertyGPT/main: `687f654c679ed45ab127b7949e2a29c8f5e491b9` (both checked 2026-10-19).
-- Reconciliation in `results/spec/spec_buglabel.csv`: 266 Project ID 10 rows, 266 unique keys, 2 complete / 264 incomplete; status/Example ID uniqueness checked in-memory with a CSV-quote-aware parser. 31 unique property names represent 34 CVL declarations and target expansions.
-- Source repository verified at archived upstream `dinngo/furucombo-contract` SHA `c90dec1046e5e26edf70f985dd86381403912482`. Git tree comparisons: 22/22 distinct P10 target Solidity original-source paths have **different** Git blob SHAs from snapshot (do not treat as identical); `proxy.spec` and `registry.spec` differ; other six original source spec paths have identical blobs.
-- The original 2021 report is the authority for audit scope; text `reports/10.md` was consulted, but the PDF's physical table layout was **not independently visually revalidated** in this run. This is a remaining limit.
-- **Critical risks:** missing exact compiler + Prover run reconstruction; pinned but unvendored OpenZeppelin 3.3.0; per-handler Perl-transformed ABI and injected getter source; summary receiver/sighash changes; later rules absent at original audit SHA; multi-target proof inflation.
-- **Allowed validation:** GitHub tree/read-only file SHA check, source-line inspection, key reconciliation, official documentation review. No checked-in source change. Final Git diff and dossier counts to be reconciled after creation.
-- **Not run:** no Certora CLI, no Solidity compiler, no scripts modifying source, no CVL1 tests, no CVL2 compiler, no Prover. No claim of semantic equivalence, execution, VERIFIED or VIOLATED as a new result.
-- **Review decision:** keep PR draft; future Fase 2 requires explicit coordinator permission.
-## Final documentary reconciliation — 2026-10-19
+- Base Web3Bugs 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3; upstream auditado c90dec1046e5e26edf70f985dd86381403912482.
+- 266 N.spec, 266 N.sol, 266 N.md e 264 N.txt lidos integralmente e vinculados por ID, property, target e blob no individual_source_audit.csv.
+- 264 incomplete + 2 complete; 266 dossiês atualizados. Páginas 26–31 de resources/10/FurucomboMay2021.pdf lidas diretamente de seus streams e mapeamento ToUnicode; 23 células None por página, 138 pares, registrados sem individual VERIFIED.
+- 22 fontes Solidity distintas do catálogo divergentes do commit auditado; target_revision_matrix.csv registra cada comparação e import closure do target root. A closure completa dos demais seeds e o ABI post-Perl permanecem NÃO comprovados.
+- Código fonte não alterado. Nenhum script histórico de transformação, Solidity compilation, CVL1, CVL2 ou Prover foi executado.
+- Para métodos com overload/multiline, posição e candidato são esqueleto textual, exigindo reconciliação manual; nenhuma visibilidade external/internal ou receiver declarada equivalente sem ABI.
+- Comandos de validação e exit codes serão acrescentados abaixo somente após execução real.
 
-- Recount: exactly 266 per-example dossiers (264 incomplete, 2 complete), and 266 unique rows in properties.csv. 264 incomplete N.spec and 264 N.txt blob entries confirmed. GitHub compare showed exactly 277 added files, all inside the sole authorized research directory. Zero edits to historical artifacts.
-- Evidence: 20 registered entries; 32 recovery-manifest records; no orphan evidence IDs in the 266-row table. Every bucket provisional and ends with _CANDIDATE.
-- Audit SHA c90dec1046e5e26edf70f985dd86381403912482 retrieved from archived dinngo/furucombo-contract; package.json pins solc 0.6.12, OpenZeppelin 3.3.0, Truffle 5.1.60. All 22 distinct listed original target Solidity files have different audited versus saved blob SHAs. Two of eight source CVL files differ (proxy.spec and registry.spec).
-- Rule names nonExecutableWhenProxyIsBanned and nonExecutableWithInitializedSender are absent at the audited 2021 proxy.spec. Other old/current proxy rule bodies differ; 2021 outcomes are not transferable without proof.
-- Limitation: original eight CVL source texts and per-entry CSV metadata were reviewed, but 264 N.txt and 266 N.md were NOT each reread end-to-end in this new pass. Each dossier is a provisional source/target research entry, not certified dependency closure. This remains an explicit independent-review blocker.
-- Limitation: Certora report transcript reviewed; physical PDF table layout not visually verified. No current build/Prover version identified.
-- Execution: local execution environment reported ClientError, Desktop Commander device offline. Thus neither git diff --check nor Python catalog validators were executed; only GitHub contents/tree/compare API checks succeeded (no shell exit codes).
-- Phase boundary: SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1. Never promote candidate to compiled bucket or merge until independent review.
+## Recovery update: official OpenZeppelin 3.3.0 tag
+- 28 target rows, 6 unique tagged OpenZeppelin Solidity imports reachable from all documented 2021 script seeds, hashes recorded in recovery_manifest.csv.
+- Only a documentary source recovery; exact npm tarball/Perl-transformed ABI/Prover not reconstructed.
+
+## Execução real dos checks não-Prover
+
+- cwd `/home/mat/cvl2-agent01-isolated/Web3Bugs/Web3Bugs-certora`:
+  - `python3 scripts/check_specs.py .` — exit code **0**; log `/home/mat/cvl2-agent01-isolated/qa_logs/check_specs.log`; últimas linhas: Check passed! 1386 spec examples and 1390 Bug Label relationships are structurally consistent.
+  - `python3 scripts/check_contracts.py .` — exit code **0**; log `/home/mat/cvl2-agent01-isolated/qa_logs/check_contracts.log`; últimas linhas: Check passed! /  / 	'./contracts' is consistant with './reports'
+  - `python3 scripts/check_contests_csv.py .` — exit code **0**; log `/home/mat/cvl2-agent01-isolated/qa_logs/check_contests_csv.log`; últimas linhas: Check passed! /  / 	'./results/contests.csv' is consistant with './reports'
+- cwd `/home/mat/cvl2-agent01-isolated/Web3Bugs`: `git diff --check` — exit code **0** após normalização de CSV CRLF e espaços à direita nos documentos desta pasta; log `/home/mat/cvl2-agent01-isolated/qa_logs/git_diff_check_final.log` (arquivo vazio).
+- Checkout dedicado: `/home/mat/cvl2-agent01-isolated/Web3Bugs`, branch `research/cvl2-agente-01`; status original preservado e outros agentes não impactados.
+- Reconciliação: 28 targets nomeados, 20 caminhos Solidity distintos; 28 targets com diferenças de SHA.
+- cwd `/home/mat/cvl2-agent01-isolated/Web3Bugs`: `git diff --cached --check` (incluindo 277 arquivos staged, todos na pasta autorizada) — exit code **0**, log `/home/mat/cvl2-agent01-isolated/qa_logs/git_diff_cached_check.log` vazio. Nenhum Prover ou compilador executado.

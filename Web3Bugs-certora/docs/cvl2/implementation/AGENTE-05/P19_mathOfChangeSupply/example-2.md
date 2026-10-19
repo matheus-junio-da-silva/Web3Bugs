@@ -46,7 +46,7 @@ Então `T-NR=2^128-2 > 10^18`, e `RCPT=floor(10^18/(2^128-2))=0`. A premissa `RC
 - O valor matemático `x*10^18/y` permanece escrito **literalmente igual**. Mudança de domínio formal pode afetar a interpretação de bordas; a análise não constitui prova formal de equivalência.
 - Docs: [mathematical operations return mathint](https://docs.certora.com/en/latest/docs/cvl/cvl2/changes.html#mathematical-operations-return-mathint), [implicit casting](https://docs.certora.com/en/latest/docs/cvl/cvl2/changes.html#implicit-and-explicit-casting), [migration type errors](https://docs.certora.com/en/latest/docs/cvl/cvl2/migration.html#type-errors-in-arithmetic-and-casts).
 - Revisão [PR #44](https://github.com/matheus-junio-da-silva/Web3Bugs/pull/44#pullrequestreview-5577673176): original exit 1, candidata exit **0**, CLI `8.19.0`, `solc 0.8.7`, `--compilation_steps_only`, timeout 60s. O coordenador não documentou uma duração individual da variante candidata; **não inventar duração**.
-- **Esta sessão:** SHA-256 e diff da transformação checados; execução de Certora e validadores **não realizada** (dispositivo remoto offline, execução local indisponível). O estado do teste do coordenador **não** é falsamente atribuído a esta sessão. [Instruções reproduzíveis](REPRODUCE.md).
+- **Esta sessão:** SHA-256 e diff da única alteração autorizada checados; nenhuma nova compilação Certora (dispositivo offline). Os três validadores oficiais rodaram na CI GitHub com exit 0 cada; o whitespace check retornou exit 2 devido a espaços históricos preservados ([CI](CI_VALIDATION.md)). O resultado de compilação do coordenador **não** é atribuído a uma nova execução local. [Runbook](REPRODUCE.md).
 
 ## Classificação de migração
 

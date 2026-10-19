@@ -1,0 +1,5 @@
+project_id,example_ids,missing_dependency,upstream_source,upstream_commit,path,blob_sha,verification,uncertainty,status
+21,1;2,DepositSecurityModuleHarness / DSMH.Signature,,,,,not recovered,"No authenticated harness, ABI or runtime configuration",UNRESOLVED
+21,1,depositBufferedEtherHarness,,,,,not recovered,Must not replace with production depositBufferedEther,UNRESOLVED
+21,2,getGuardianLength(),,,,,not recovered,"Getter missing, getGuardians is not proven equivalent",UNRESOLVED
+21,1;2,../common/lib/ECDSA.sol,,,,,not recovered,Transitive import unavailable in archival snapshot; compatible revision unverified,UNRESOLVED

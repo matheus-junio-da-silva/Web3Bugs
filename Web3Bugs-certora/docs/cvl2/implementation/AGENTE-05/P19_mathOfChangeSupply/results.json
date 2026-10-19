@@ -41,12 +41,26 @@
       "different preserved assertions"
     ],
     "git_diff_check": {
-      "status": "NOT_EXECUTED",
-      "note": "Literal git diff --check requires working Git terminal, unavailable this session. New specs preserve original trailing spaces; the strict check can flag them. No byte changes to remove historical whitespace authorized."
+      "status": "FAILED_GITHUB_ACTIONS",
+      "exit_code": 2,
+      "command": "git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD",
+      "head_sha": "82674b18e8c54aacf8d41166e7db5f3fe1505561",
+      "notes": "Ten original trailing-whitespace lines retained in new, byte-preserved specs: 4,7,17,20,22 in each. See CI_VALIDATION.md. Local git check not executed."
     },
     "catalog_validators": {
-      "status": "NOT_EXECUTED",
-      "reason": "local execution backend unavailable and authorized remote device offline"
+      "status": "PASS_GITHUB_ACTIONS",
+      "run_id": 39333784639,
+      "head_sha": "82674b18e8c54aacf8d41166e7db5f3fe1505561",
+      "exit_codes": {
+        "check_specs": 0,
+        "check_contests_csv": 0,
+        "check_contracts": 0
+      },
+      "check_git_principal_workflow": {
+        "run_id": 39333784635,
+        "conclusion": "success"
+      },
+      "local_terminal_execution": "NOT_EXECUTED"
     }
   },
   "coordinator_independent_experiment": {
@@ -123,5 +137,25 @@
     "https://docs.certora.com/en/latest/docs/cvl/cvl2/changes.html#mathematical-operations-return-mathint",
     "https://docs.certora.com/en/latest/docs/cvl/cvl2/changes.html#implicit-and-explicit-casting",
     "https://docs.certora.com/en/latest/docs/cvl/cvl2/migration.html#type-errors-in-arithmetic-and-casts"
-  ]
+  ],
+  "github_actions": {
+    "reference_commit": "82674b18e8c54aacf8d41166e7db5f3fe1505561",
+    "official_validators_job": {
+      "run_id": 39333784639,
+      "job_id": 118338099471,
+      "conclusion": "failure_due_only_to_git_diff_check",
+      "validator_exit_codes": [
+        0,
+        0,
+        0
+      ],
+      "git_diff_check_exit_code": 2
+    },
+    "principal_workflow": {
+      "run_id": 39333784635,
+      "job_id": 118338099297,
+      "conclusion": "success"
+    },
+    "details": "CI_VALIDATION.md"
+  }
 }

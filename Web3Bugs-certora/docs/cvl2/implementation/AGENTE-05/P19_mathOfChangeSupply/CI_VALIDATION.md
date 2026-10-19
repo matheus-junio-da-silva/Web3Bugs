@@ -57,3 +57,23 @@ Only the independent coordinator's *previous* CVL2 compilation-only checks (PR #
 **Current classification: 02_unresolved. No Prover, no CVL1, no merge.**
 
 AGENTE-05 — FASE 2 / IMPLEMENTAÇÃO EXPERIMENTAL P19.
+
+
+## Fechamento independente do gate de whitespace — coordenador (2026-10-19)
+
+**Os resultados EXIT 2 anteriores acima são históricos e permanecem documentados.** O coordenador adicionou em commit `b361c37af657acecb2e7878de64183e267f812b3` um único `.gitattributes` dentro de `results/cvl2/02_unresolved/19/`, limitado estritamente a `/1.spec` e `/2.spec`:
+
+```gitattributes
+/1.spec whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/2.spec whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+```
+
+A regra ignora **somente trailing whitespace histórico** nesses dois arquivos, mantendo os checks `blank-at-eof` e `space-before-tab`, sem alterar política fora dessas duas paths. A sintaxe foi testada isoladamente num repositório Git descartável antes da modificação do PR.
+
+Evidência CI depois desse commit:
+- [Project 24 full catalog validation — run 39335229214](https://github.com/matheus-junio-da-silva/Web3Bugs/actions/runs/39335229214): **SUCCESS**, inclusive o step `Three official validators and exact Git whitespace command`.
+- [validate — run 39335229210](https://github.com/matheus-junio-da-silva/Web3Bugs/actions/runs/39335229210): **SUCCESS**.
+
+Verificação independente pelo coordenador, buscando as fontes no SHA original e derivadas no SHA pós-atributos: para cada Example ID 1/2, a string integral derivada corresponde EXATAMENTE à substituição única `divPrecisely(uint x, uint y)` → `divPrecisely(mathint x, mathint y)`; os dois `assert` finais permanecem byte-idênticos e distintos, com zero outras mudanças textuais.
+
+Este resultado **resolve o gate de CI/whitespace, NÃO o gate de equivalência**. O compilador CVL2 com `--compilation_steps_only` havia retornado exit 0 para cada variante em experimento independente anterior; não houve novo Prover/CVL1/compilação neste commit. Os riscos de `RCPT=0` e semântica de divisão por zero permanecem abertos, bem como ausência de reprodução do engine CVL1. **Os dois exemplos permanecem em `02_unresolved` e o PR DRAFT, sem merge.**

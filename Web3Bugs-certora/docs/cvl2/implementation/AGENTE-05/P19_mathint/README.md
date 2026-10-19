@@ -6,8 +6,8 @@
 
 | Original | Derivada (02_unresolved) | SHA-256 derivada | Assertion preservada |
 | --- | --- | --- | --- |
-| `results/spec/complete/19/1.spec` | [1.spec](../../../results/cvl2/02_unresolved/19/1.spec) | `6dff6a352b42887fbf8c8679a16cb35c20489fefd668ce960146e701fe4ff4af` | `assert T2 <= MAX_SUPPLY();` |
-| `results/spec/complete/19/2.spec` | [2.spec](../../../results/cvl2/02_unresolved/19/2.spec) | `cffd0de64eef3d466acbd706967e4729fd8aa8ad12e2e3376ba241eafa9adac3` | `assert T2 <= T || T2 == NR;` |
+| `results/spec/complete/19/1.spec` | [1.spec](../../../../../results/cvl2/02_unresolved/19/1.spec) | `6dff6a352b42887fbf8c8679a16cb35c20489fefd668ce960146e701fe4ff4af` | `assert T2 <= MAX_SUPPLY();` |
+| `results/spec/complete/19/2.spec` | [2.spec](../../../../../results/cvl2/02_unresolved/19/2.spec) | `cffd0de64eef3d466acbd706967e4729fd8aa8ad12e2e3376ba241eafa9adac3` | `assert T2 <= T || T2 == NR;` |
 
 **Única transformação em cada arquivo**, sem alterar mais nada:
 
@@ -27,7 +27,6 @@ O coordenador compilou **separadamente** os dois hashes acima com `certora-cli 8
 - [Relatório específico do exemplo 1](example-1.md); [relatório específico do exemplo 2](example-2.md).
 - [Domínio, aritmética CVL1/CVL2 e divisão por zero](DOMAIN_ANALYSIS.md).
 - [Validações, limitações do ambiente e comandos reproduzíveis](VALIDATION.md).
-- [Manifesto estruturado de proveniência](results.json).
 - A [Certora CVL2 Changes](https://docs.certora.com/en/latest/docs/cvl/cvl2/changes.html#mathematical-operations-return-mathint) afirma que operadores aritméticos resultam em `mathint`; o [Migration Guide](https://docs.certora.com/en/latest/docs/cvl/cvl2/migration.html#type-errors-in-arithmetic-and-casts) recomenda cautela com `require_` casts.
 
 **Classificação permanece 02_unresolved.** Compilação não demonstra equivalência semântica, semântica de denominador zero, correção da propriedade ou VERIFIED. É obrigatória contrarrevisão independente antes de eventual autorização ampliada. **SEM CVL1, SEM PROVER, SEM MERGE.**

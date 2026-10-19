@@ -6,3 +6,6 @@
 - Applicability is **not** automatic. Some extracted .spec files include reusable auxiliary declarations not on an active path; inspect the literal rule, import closure, target ABI and summary receiver individually (dossiers hold local snippets).
 - Semantic failure conditions: a new assumption suppresses the old counterexample, a receiver changes, a quantified domain narrows, storage/revert paths differ, or induction becomes vacuous.
 - Status: INCOMPLETE provenance, **not compiled or proven**; no Phase 2 authorized.
+
+## Anotacao da contrarrevisao 2026-10-19
+Propostas por ocorrencia literal nos dossies individuais. Verificar [A1](https://docs.certora.com/en/latest/docs/cvl/cvl2/changes.html) e [A2](https://docs.certora.com/en/latest/docs/cvl/cvl2/migration.html); nao alterar receiver, summaries, args, quantificadores, storage, revert ou condicoes antes de fechar ABI historica.

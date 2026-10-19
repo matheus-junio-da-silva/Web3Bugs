@@ -10,3 +10,22 @@
 - No attempt was made to create Fase 2 code, alter source history or merge.
 
 **SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.**
+
+## Contrarrevisao 2026-10-19
+Cobertura 157/157 (P15 116, P12 26, P2 15). Commits auditados 15:ce49fb0c94cfebf0159222ceb288e4f9a55d305f, 12:750920303e33b66bc29862ea3b85206dda9ce786, 2:12296ce4c6f9bde6663e1baa02cf19f179c1048b. PDF 13+25+6 paginas examinados; novos B1 registros, scripts de epoca, lock npm, diferenca de constructor V2 e ausencia de helpers Por identificados sem reconstrucoes. Sem CVL1, CVL2, Prover e sem alterar specs/Solidity. Status de fonte e ferramenta ainda incompleto; PR continua Draft.
+
+
+## Validação estrutural em WSL após contrarrevisão — execução efetiva
+
+A afirmação antiga de que o desktop estava indisponível e de que os validadores não tinham sido executados descreve SOMENTE a primeira entrega; está **superada** pela retomada de 2026-10-19. Device remoto DESKTOP-5E26TVU online; checkout isolado em /tmp/cvl2-agent04-20261019/repo (não interfere nos demais agentes).
+
+Diretório de execução dos três validadores: /tmp/cvl2-agent04-20261019/repo/Web3Bugs-certora
+- python3 scripts/check_specs.py . — exit 0; saída: Check passed! 1386 spec examples and 1390 Bug Label relationships are structurally consistent.
+- python3 scripts/check_contests_csv.py . — exit 0; saída: Check passed! results/contests.csv consistent with reports.
+- python3 scripts/check_contracts.py . — exit 0; saída: Check passed! contracts consistent with reports.
+
+Diretório de execução Git: /tmp/cvl2-agent04-20261019/repo
+- git diff --check — após normalizar exclusivamente docs/cvl2/research/AGENTE-04, exit 0. O diff inicial contra base detectou whitespace nos dossiês originais; foi sanado APENAS em documentos.
+- O comando git diff --check origin/main...HEAD falhou com exit 128 por clone --single-branch sem ref origin/main. Não é resultado negativo do dataset. Para comparação final usar explicitamente o commit base 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3 e o novo SHA, cujo exit deve ser registrado após publicação.
+
+Nota sobre QA: o uso de 1386/1390 é a contagem da main congelada; os índices adicionais de pesquisa (157 chaves) não alteram o catálogo. Nenhuma execução de certoraRun, solc, CVL1, CVL2 ou Prover. Os status históricos continuam intocados.

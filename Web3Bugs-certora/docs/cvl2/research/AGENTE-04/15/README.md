@@ -23,3 +23,8 @@
 - Independent report-to-source mismatches (including absent timelock rule) are carried as historical context only, never reclassified as an active source instance.
 
 **SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.**
+
+## Contrarrevisao 2026-10-19
+O commit auditado fornece npm lock @aave/core-v3@1.17.2 com integridade SHA512, cinco scripts Certora de epoca e harnesses de GHO; .conf/CLI/binarios de epoca, pacote realmente instalado e munged execution nao foram reproduzidos. CSV fixo 63 VERIFIED versus 64 do catalogo antigo mantido sem mudanca.
+
+Dossies atualizados 116/116; entradas methods por instancia 1251; nomes literais encontrados em PDF 64. Propostas report-only e condicionais; nao houve compilacao, Prover, teste CVL1 ou modificacao de fonte. Buscas negativas nao demonstram inexistencia fora da arvore examinada.

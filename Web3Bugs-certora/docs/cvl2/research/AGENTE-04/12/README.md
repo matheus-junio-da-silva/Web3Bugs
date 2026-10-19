@@ -8,3 +8,8 @@
 - Arquivos: `properties.csv`, `properties/`, `patterns/`, `evidence_register.csv`, `recovery_manifest.csv`, `QA_REPORT.md`; `batches/` trilha dos lotes lidos.
 
 **SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.**
+
+## Contrarrevisao 2026-10-19
+StableDebtToken auditado contem constructor de cinco parametros, mas snapshot tem initialize de sete parametros e getter nao virtual com retorno interface; incompatibilidade de versao nao e defeito CVL2. Nenhum dos nove incomplete recebeu substituicao Solidity.
+
+Dossies atualizados 26/26; entradas methods por instancia 22; nomes literais encontrados em PDF 5. Propostas report-only e condicionais; nao houve compilacao, Prover, teste CVL1 ou modificacao de fonte. Buscas negativas nao demonstram inexistencia fora da arvore examinada.

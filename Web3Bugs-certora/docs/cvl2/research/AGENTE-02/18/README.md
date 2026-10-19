@@ -1,4 +1,6 @@
 # AGENTE-02 — Project 18 / OpenZeppelin — Fase 1 (CVL2)
+
+> **Terceira revisao independente (2026-10-19):** corrigido whitespace de 86 documentos existentes (144 linhas); readjudicadas ABIs/receivers/summary em 181 dossies, 339 observacoes em abi_resolution_matrix.csv e relatorio ABI_HISTORICAL_AUDIT.md. Consulte QA_REPORT.md para checagem do diff COMMITADO completo contra baseline — staged diff isolado nao basta. Buckets 50 lexicais e 131 bloqueados.
 > **Retorno da revisao 2026-10-19:** contagens e buckets anteriores neste README sao registro da primeira rodada e foram substituidos por properties.csv (50 DOCUMENTED_CANDIDATE exclusivamente lexicais; 131 UNRESOLVED_CANDIDATE). Consultar REVIEW_RESPONSE.md, pdf_page_review.md e source_comparison.csv. Nenhuma equivalencia de jobs/provas demonstrada.
 
 

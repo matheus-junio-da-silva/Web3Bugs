@@ -50,3 +50,9 @@ CWD de todos os comandos Python: /home/mat/cvl2-agente02-revision/repo/Web3Bugs-
 - git diff --cached --check (cwd raiz repo) => exit 0; 197 arquivos stageados, 0 fora de docs/cvl2/research/AGENTE-02/18/.
 - git diff --check (cwd raiz repo apos staging) => exit 0; sem changes unstaged.
 - QA nao valida semantic equivalence, solc/CVL2/Prover, original harness, historical findings.
+
+## Terceira revisao independente — saneamento e classificacao da ABI (antes do commit de correcao)
+- Coordenador reproduziu no HEAD 2f4d6d59753fa13dfe1370917a0f94e468d48140 o comando exato `git -c core.whitespace=cr-at-eol diff --check 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3...HEAD`: EXIT 2. Reproduzido autonomamente no WSL: EXIT 2, 288 linhas de log incluindo contexto e pares (path/line) em `round3_pre_whitespace.log` local, 86 dossies Markdown afetados.
+- Correcoes documentais: 144 linhas com espacos finais removidos em 86 arquivos Markdown sob docs/cvl2/research/AGENTE-02/18, incluindo incomplete/97.md e incomplete/99.md. Os caracteres terminais de espaco/tab no trecho *copiado* do CVL foram normalizados apenas no Markdown; nenhum .spec, Solidity, report, PDF ou arquivo de catalogo historico foi modificado. A sintaxe CVL nao depende de whitespace final; a fonte literal continua disponivel no snapshot imutavel.
+- Adicional: 181 dossies receberam rastros de ABI source-only, 339 entradas no abi_resolution_matrix.csv envolvendo 17 grupos target. Os 50 DOCUMENTED_CANDIDATE sao lexicais; nenhuma resolucao de summaries, receiver ou internal/external foi aprovada. Veja ABI_HISTORICAL_AUDIT.md.
+- O check do diff commitado contra base devera ser executado DEPOIS de publicar um commit com as correcoes. Nao tratar checks do index ou worktree como resultado de diff do PR.

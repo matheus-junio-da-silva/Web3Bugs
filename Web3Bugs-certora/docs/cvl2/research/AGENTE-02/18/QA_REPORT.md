@@ -26,3 +26,9 @@
 
 ## Limites e política
 Nenhuma fonte `.spec`, `.sol`, PDF, script, arquivo fora de `docs/cvl2/research/AGENTE-02/18/` foi editado. Sem CVL1 replay, migração in-place, compilar CVL2 ou Prover. PR permanecerá draft sem merge até revisão do coordenador.
+
+## Correção de revisão cruzada (Fase 1)
+- O índice `properties.csv` foi reconciliado por padrão individual; `P03` só foi mantido nas 16 declarações com literais de método tipados em código ativo, não comentários nem usos isolados de `f.selector`. IDs 122, 123, 124 e 126 tiveram o falso sinalizador P03 removido, preservando a prova histórica e o texto CVL.
+- `P07` foi registrado para 90–100 quando a spec possui `using`; `P08` para atribuições aritméticas condicionais 70 e 94. Evidência A1/A2 ainda não prova necessidade de um cast particular.
+- `recovery_manifest.csv` registra os hashes Git completos dos arquivos upstream recuperáveis no SHA auditado; recuperação de arquivo não prova replay do job.
+- GitHub Compare API: 194 arquivos novos, todos sob o diretório autorizado; nenhuma mudança em fontes históricas. Checar novamente após este commit.

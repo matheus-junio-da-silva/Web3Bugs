@@ -32,3 +32,21 @@ Nenhuma fonte `.spec`, `.sol`, PDF, script, arquivo fora de `docs/cvl2/research/
 - `P07` foi registrado para 90–100 quando a spec possui `using`; `P08` para atribuições aritméticas condicionais 70 e 94. Evidência A1/A2 ainda não prova necessidade de um cast particular.
 - `recovery_manifest.csv` registra os hashes Git completos dos arquivos upstream recuperáveis no SHA auditado; recuperação de arquivo não prova replay do job.
 - GitHub Compare API: 194 arquivos novos, todos sob o diretório autorizado; nenhuma mudança em fontes históricas. Checar novamente após este commit.
+
+
+## Reexecucao de validacao no checkout isolado em 2026-10-19
+CWD de todos os comandos Python: /home/mat/cvl2-agente02-revision/repo/Web3Bugs-certora
+- python3 scripts/check_specs.py . => exit 0, Check passed! 1386 spec examples and 1390 Bug Label relationships are structurally consistent.
+- python3 scripts/check_contests_csv.py . => exit 0, Check passed! results/contests.csv is consistent with reports.
+- python3 scripts/check_contracts.py . => primeira tentativa exit 1 (sparse checkout omitia outros IDs; nao falha da fonte). Com sparse checkout ampliado para contracts/ de todos IDs, **segunda tentativa exit 0**: contracts consistent with reports.
+- git diff --check: a registrar depois de staged diff; nenhuma compilacao nem Prover.
+- O PDF de 13 paginas foi lido diretamente, digest registrado em pdf_page_review.md; nao inferir simbolos graficos.
+- 181 dossies auditados pela ocurrencia textual; 7 DOCUMENTED e 12 INDIRECT anteriores rebaixados. Buckets: {'UNRESOLVED_CANDIDATE': 131, 'DOCUMENTED_CANDIDATE': 50}.
+- A comparacao byte a byte identificou 12 specs ausentes e 4 homonimas diferentes no commit 109778c. Scripts/harnesses recuperados nao equivalem a proveniencia completa.
+- O risco de selector fallback foi isolado em example 81; 15 propriedades tem assinatura tipada ativa, sem afirmar ABI em target.
+- Relevancia dos before/after depende de confirmacao do target e dos parametros/retornos; os 50 documentados sao candidatos lexicais, nao equivalencia semantica.
+
+## QA final do staged diff (2026-10-19)
+- git diff --cached --check (cwd raiz repo) => exit 0; 197 arquivos stageados, 0 fora de docs/cvl2/research/AGENTE-02/18/.
+- git diff --check (cwd raiz repo apos staging) => exit 0; sem changes unstaged.
+- QA nao valida semantic equivalence, solc/CVL2/Prover, original harness, historical findings.

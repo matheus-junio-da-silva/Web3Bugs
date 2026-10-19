@@ -1,4 +1,6 @@
 # AGENTE-02 — Project 18 / OpenZeppelin — Fase 1 (CVL2)
+> **Retorno da revisao 2026-10-19:** contagens e buckets anteriores neste README sao registro da primeira rodada e foram substituidos por properties.csv (50 DOCUMENTED_CANDIDATE exclusivamente lexicais; 131 UNRESOLVED_CANDIDATE). Consultar REVIEW_RESPONSE.md, pdf_page_review.md e source_comparison.csv. Nenhuma equivalencia de jobs/provas demonstrada.
+
 
 **Somente PESQUISA DOCUMENTAL.** Sem alterações em specs ou Solidity; **SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1**. Todo estado é PROVISÓRIO; nenhum dos buckets designa resultado de execução.
 

@@ -33,7 +33,11 @@ A linha original termina com **um espaço literal**; essa característica histó
 
 A revisão [#44](https://github.com/matheus-junio-da-silva/Web3Bugs/pull/44#pullrequestreview-5577673176) relata quatro typechecks independentes com `certora-cli 8.19.0`, `solc 0.8.7`, `--compilation_steps_only` e timeout GNU 60s. Ambos os originais falharam com exit 1 (dois erros `mathint` vs `uint256`), ambas as variantes derivadas tiveram **exit 0**. Este resultado é evidência **do coordenador**, não execução repetida pelo AGENTE-05 nesta sessão.
 
-**Limitação operacional de compilação:** o dispositivo remoto está offline e o backend local indisponível; as duas compilações Certora **não foram repetidas nesta sessão**. Porém, GitHub Actions executou os três validadores oficiais (**exit 0, 0, 0**) e o check Git estrito (**exit 2**, dez espaços históricos preservados); a CI principal passou. [Resultados detalhados](CI_VALIDATION.md) e [manifesto](results.json).
+**Compilação e CI têm escopos distintos:** a única compilação CVL2 das derivadas é o experimento independente anterior do coordenador no PR #44 (CLI 8.19.0, exit 0 nas duas; nenhuma nova compilação nesta investigação). Na HEAD `c2d10e3265765a61d50aa2c2d668b1a9e051cb27`, o coordenador confirmou ambas as GitHub Actions **SUCCESS**: [`validate` 39335709810](https://github.com/matheus-junio-da-silva/Web3Bugs/actions/runs/39335709810) e [`Project 24 full catalog validation` 39335709821](https://github.com/matheus-junio-da-silva/Web3Bugs/actions/runs/39335709821), inclusive whitespace após `.gitattributes` restrito. O exit 2 anterior é **histórico e solucionado**, não o estado atual. [Histórico e fechamento de CI](CI_VALIDATION.md).
+
+## Investigação semântica documental — evidências e bloqueios
+
+A [análise focalizada](SEMANTIC_REVIEW.md) separa: **documentado** (aritmética `mathint` CVL2 e coerções CVL1 dependentes de contexto), **deduzido matematicamente** (os quatro argumentos nas duas chamadas, `RCPT=0`, `V1⊊V2` no subdomínio de divisão positiva definida) e **não demonstrado** (precisão histórica CVL1 do intermediário, semântica operacional `mathint / 0` e igualdade dos universos de contraexemplos CVL1/CVL2). Fontes incluem documentação Certora de 2023, especificação histórica e PR #46. Não há inferência de VERIFIED/VIOLATED a partir de testemunhas aritméticas.
 
 ## Validade tipada da alteração — sem equivalência formal
 
@@ -51,4 +55,4 @@ Na primeira chamada `divPrecisely(RC, T-NR)`, `RC` é `uint256` e `T-NR` é mate
 
 ## Estado final
 
-**Duas specs derivadas implementadas; classificação 02_unresolved; compilação anterior confirmada pelo coordenador, recompilação nesta sessão pendente; catalog validators PASS no GitHub Actions; Git whitespace FAIL por bytes históricos; revisão independente necessária; SEM CVL1, SEM PROVER, SEM MERGE.**
+**Duas specs derivadas implementadas; classificação `02_unresolved`; gates CI/integridade PASS na HEAD revisada pelo coordenador; compilação CVL2 anterior PASS (somente typecheck); equivalência CVL1→CVL2 NÃO COMPROVADA segundo [revisão semântica documental](SEMANTIC_REVIEW.md). SEM CVL1, SEM PROVER, SEM MERGE.**

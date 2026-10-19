@@ -45,3 +45,15 @@ Environment: DESKTOP-5E26TVU; clean isolated clone under /home/mat/cvl2-agent07-
 - No CVL1, CVL2, Certora Prover, compilation, migration script, or equivalence experiment executed.
 
 **Research gate:** partial historical dependency recovery only. Manual ABI/receiver/summary verification, transitive imports, exact original compiler/harness/run and byte-to-PDF audit linkage remain blocked; no migration or Fase 2 authorization.
+
+## Terceira revisão — correção de whitespace (2026-10-19)
+
+- Baseline oficial: `2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3`.
+- Check CLI original contra `527e3d9d`: `git -c core.whitespace=cr-at-eol diff --check 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3...HEAD` retornou **EXIT 2**, com 15 diagnósticos `space before tab in indent`.
+- Commits de correção documentais na mesma branch: `e2478537ebafcb31f2b208004f93fe8112e2631f` e `0dca08521ab6b74c3a87b14f941a5f1e642df1cb`. Somente 10 dossiers de P9/P20; as 15 linhas modificadas mudaram exclusivamente os prefixos de indentação.
+- Comparação GitHub antes/depois com `trimStart()` em cada linha: **10/10 dossiês integralmente idênticos após remover indentação**. Nenhuma modificação em specs, contratos, catálogo ou axiomas.
+- Auditoria estática independente do diff integral BASE...HEAD exposto pelo GitHub no commit `0dca08521...`: **217 arquivos, 18.605 linhas adicionadas; 0 space-before-tab e 0 trailing whitespace**. É verificação do patch completo, NÃO resultado do processo Git CLI.
+- GitHub Actions `validate` na SHA `0dca08521...`, [execução 39325916294](https://github.com/matheus-junio-da-silva/Web3Bugs/actions/runs/39325916294): SUCCESS, com `check_contests_csv`, `check_contracts`, `check_git` completados. Este workflow não substitui o check do diff exigido.
+- **Limitação de execução:** o checkout isolado WSL (`DESKTOP-5E26TVU`) ficou offline após a publicação. O comando CLI exato no HEAD corrigido NÃO foi executado nem teve seu exit code observado; não se pode afirmar EXIT 0. A última execução literal observada continua sendo EXIT 2 no HEAD antigo.
+- Check CLI de fechamento pendente no checkout atualizado: `git -c core.whitespace=cr-at-eol diff --check 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3...HEAD`.
+- Bloqueios históricos continuam unresolved: P9 equivalência ABI/revisões Celo; P8 vacuidade W1/W2/W3; P20 scripts que reescrevem harness, `MAX_INT()` e closure das dependências; P11 imports transitivos e commit auditado. Sem Fase 2, migração CVL2 ou Prover.

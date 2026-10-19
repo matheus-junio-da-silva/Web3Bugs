@@ -1,0 +1,98 @@
+# ATLAS historical catalog validation
+# Baseline main: 80f551f23bbd86d7901c6a28e7f44c68aebae8fd
+# Executed UTC: 2026-10-18T22:10:37Z
+# Branch: fix/semantic-p08-p15-p19-atlas
+--- COMMAND: python scripts/check_specs.py .
+bash: line 1: python: command not found
+EXIT_CODE=127
+--- COMMAND: python scripts/check_contests_csv.py .
+bash: line 1: python: command not found
+EXIT_CODE=127
+--- COMMAND: python scripts/check_contracts.py .
+bash: line 1: python: command not found
+EXIT_CODE=127
+--- RETRY WITH python -> python3 (environment alias; no tracked source change)
+# Retried UTC: 2026-10-18T22:10:54Z
+--- COMMAND: python scripts/check_specs.py .
+Check passed! 1222 spec examples and 1227 Bug Label relationships are structurally consistent.
+EXIT_CODE=0
+--- COMMAND: python scripts/check_contests_csv.py .
+Check passed!
+
+	`./results/contests.csv` is consistant with `./reports`
+EXIT_CODE=0
+--- COMMAND: python scripts/check_contracts.py .
+Missing contract code: 18
+Missing contract code: 21
+Missing contract code: 23
+Missing contract code: 20
+Missing contract code: 6
+Missing contract code: 17
+Missing contract code: 5
+Missing contract code: 9
+Missing contract code: 13
+Missing contract code: 14
+Missing contract code: 10
+Missing contract code: 12
+Missing contract code: 3
+Missing contract code: 2
+Missing contract code: 7
+Missing contract code: 4
+Missing contract code: 22
+Missing contract code: 1
+EXIT_CODE=1
+--- RETRY check_contracts with all historical contest sources in sparse checkout
+# Retried UTC: 2026-10-18T22:11:19Z
+--- COMMAND: python scripts/check_contracts.py .
+Check passed!
+
+	`./contracts` is consistant with `./reports`
+EXIT_CODE=0
+--- COMMAND: git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+# Tested branch HEAD: 79dcefd7a4f7340194e2e2150fb2b2983b880fb5
+EXIT_CODE=0
+
+=== ATLAS FINAL RECONCILIATION against 2026-10-18 main ===
+# main_sha=9d0a65faf2ba378c131c956605580ee540da4cdc
+# start_utc=2026-10-18T23:37:09Z
+# branch=fix/semantic-p08-p15-p19-atlas
+# merge=origin/main into existing correction branch; staging tree includes all 14 main merges
+--- COMMAND: python3 scripts/check_specs.py .
+Check passed! 1386 spec examples and 1390 Bug Label relationships are structurally consistent.
+EXIT_CODE=0
+--- COMMAND: python3 scripts/check_contests_csv.py .
+Check passed!
+
+	`./results/contests.csv` is consistant with `./reports`
+EXIT_CODE=0
+--- COMMAND: python3 scripts/check_contracts.py .
+Check passed!
+
+	`./contracts` is consistant with `./reports`
+EXIT_CODE=0
+
+--- CSV PARSER / MAIN EXACT RECONCILIATION ---
+results/spec/spec_buglabel.csv: ROWS=1390, COLUMNS=17, BAD_WIDTH=0, EXTRA_COLUMNS=0, CHANGED_ROWS=3
+P24=164; 1387 NON-TARGET rows byte-equivalent as CSV records; 17 COLUMN schema preserved
+results/contests.csv: ROWS=23, COLUMNS=8, BAD_WIDTH=0, EXTRA_COLUMNS=0, CHANGED_ROWS=0
+results/bugs.csv: ROWS=97, COLUMNS=7, BAD_WIDTH=0, EXTRA_COLUMNS=0, CHANGED_ROWS=0
+SCHEMA_AND_COMPLETENESS_EXIT_CODE=0
+
+=== ATLAS FINAL VALIDATION / main 9d0a65f plus DELTA signoff ===
+# valid_source_commit=5a6ded29df1afb97c96ea1812f0b9086c46f4cbd
+# timestamp_utc=2026-10-18T23:40:49Z
+--- COMMAND: python3 scripts/check_specs.py .
+Check passed! 1386 spec examples and 1390 Bug Label relationships are structurally consistent.
+EXIT_CODE=0
+--- COMMAND: python3 scripts/check_contests_csv.py .
+Check passed!
+
+	`./results/contests.csv` is consistant with `./reports`
+EXIT_CODE=0
+--- COMMAND: python3 scripts/check_contracts.py .
+Check passed!
+
+	`./contracts` is consistant with `./reports`
+EXIT_CODE=0
+--- COMMAND: git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD
+EXIT_CODE=0

@@ -102,6 +102,6 @@ The catalog validators only validate the historical catalog; they do **not** pro
 
 ## Recorded status of this session
 
-The exact-byte checks were performed using the GitHub original contents and a standalone SHA-256 implementation; their two derived digests match the coordinator's independently recorded digests. **No Certora execution, shell validator, or literal `git diff --check` run occurred in this session** because the attached execution device is offline and the local execution backend was unavailable. The code blocks are reproducible commands, **not fabricated execution logs**.
+The exact-byte checks were performed using the GitHub original contents and a standalone SHA-256 implementation; derived digests match the coordinator's records. **No local Certora run or local shell validator execution was possible** because the execution device was offline. However, GitHub Actions then executed the three official validators (**exit 0 each**) and Git whitespace check (**exit 2**, inherited whitespace). See [CI_VALIDATION.md](CI_VALIDATION.md). The code blocks are reproducible commands, **not fabricated Certora execution logs**.
 
 **Restriction: do not run full Prover, CVL1, or merge; keep both examples in 02_unresolved.**

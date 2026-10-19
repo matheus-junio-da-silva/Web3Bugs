@@ -1,0 +1,15 @@
+WARNING: contract name Dummy is the same as the file name and can be omitted from Dummy.sol:Dummy
+Compiling Dummy.sol...
+Traceback (most recent call last):
+
+  File "/home/mat/.local/bin/solc", line 5, in <module>
+
+    from solc_select.__main__ import solc
+
+ModuleNotFoundError: No module named 'solc_select'
+
+Error: Failed to run /home/mat/.local/bin/solc --version, exit code 1
+
+Failed to run /home/mat/.local/bin/solc --version
+
+Failed to run /home/mat/.local/bin/solc --version, exit code 1

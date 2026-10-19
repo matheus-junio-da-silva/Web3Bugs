@@ -1,11 +1,15 @@
-# AGENTE-05 QA REPORT — P6
+# AGENTE-05 — honest QA coverage status: Project 6
 
-Source repository HEAD `2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3` matches assignment baseline. GitHub directory enumeration: **32 numbered .spec**, 0 complete, 32 incomplete; 32 unique catalog CSV keys; 33 original Bug Label relationship rows; each unique key has matching original N.md, and each incomplete N.txt. Project metadata and source contracts have not been changed.
+## Structural reconciliation (finished)
+- At confirmed Web3Bugs SHA `2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3`, inventory contains 32 unique numeric .spec examples; properties.csv has exactly 32 records after proper canonical-key deduplication. Original Bug Labels, Result and Detection Outcome preserved from catalog CSV. README and evidence register contain version-pinned source pointers.
+- The same number of `properties/<status>/<N>.md` files exists in this research branch. **This does not mean their source-level semantic research is complete.**
 
-**Critical caveats:** Exact StaticATokenLMHarness and verify scripts unavailable, external ERC20/AToken/RewardsController dependency graph incomplete. Supplied StaticATokenLM.sol matches 13a004738c533f11710400c1757b9570ef1e0466 rather than later report revision ac92951. Preserve 32 source instances vs 24 PropertyGPT CSV.
+## Depth of research at current commit
+- Direct reading of extracted .spec and N.txt: **8/32** cases; remaining **24** dossiers transparently describe metadata-level triage and explicitly mark missing line-specific migration evidence. For complete examples the N.txt does not exist.
+- Target/harness and original ABI lack authenticated linkages; source reviewed for first eight only.
+- Every record is **UNRESOLVED_CANDIDATE** and bucket 02_unresolved candidate, because no compiler/error log or semantic equivalence test has been run. No summary implies compile success. Specific source-reading progress must be revised as further direct reads are committed.
 
-**Document-level checks performed:** GitHub directory listing; strict matching per example of .spec/.md and .txt as appropriate; parse of catalog relationships including duplicate label rows; source URLs and Git blob SHA metadata; official CVL2 docs consulted.
-
-**Not performed:** Certora Prover, CVL1 replay, CVL2 compilation, Solidity compilation, `git diff --check` or Python validators against up-to-date checkout. Remote workstation disconnected; user ZIP snapshots an older main. No exit codes invented.
-
-**Coordinator review:** demand exact audited source commit/ABI, validate each dossier's candidate change against explicit source line, rebuild historical missing dependencies only with provenance and run a separate phase once expressly approved.
+## Important limitations
+- The historical files remain unmodified. The per-example source links and Git blob hashes show provenance but are not proof that all bodies were reviewed.
+- Not run: CVL2 compiler, Certora Prover, CVL1 tests, source restoration, python validation scripts, git diff --check on a current checkout. Remote Desktop Commander device is offline and attached ZIP has stale main SHA. No invented exit codes.
+- Do not request Phase 2 or merge until each remaining N.spec and missing N.txt and N.md has a true per-case semantic analysis, plus independent QA and explicit coordinator approval.

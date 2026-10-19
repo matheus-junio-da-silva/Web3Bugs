@@ -51,3 +51,11 @@ Então `T-NR=2^128-2 > 10^18`, e `RCPT=floor(10^18/(2^128-2))=0`. A premissa `RC
 ## Classificação de migração
 
 `02_unresolved` — derivado tipável de acordo com experimento independente, mas **equivalência semântica não demonstrada**, incluindo possível divisão por zero. Nenhuma inferência de VERIFIED, VIOLATED ou equivalência histórica. Não promover para `01_documented` nem `00_unchanged` antes de parecer independente.
+
+---
+
+### Adendo específico — assertion do exemplo 2 (2026-10-19)
+
+A disjunção `assert T2 <= T || T2 == NR;` é **mais restritiva**, no modelo de divisão inteira positiva definido (`q=RCPT>0`), do que `assert T2 <= MAX_SUPPLY();`. A fórmula matemática dá `T2>=T>NR`, então `T2 == NR` é impossível nesse subdomínio. Com `T=500000000000000002, NR=1, RC=1`, resulta `q=1` e `T2=1000000000000000001`; neste modelo, a assertion 2 é **falsa** enquanto a 1 é verdadeira. Não se atribui isso ao Prover ou ao CVL1 histórico. A segunda divisão com `RCPT=0` continua sem semântica interversões demonstrada. [Análise e fontes completas](SEMANTIC_REVIEW.md).
+
+**Gate atual:** CI/integridade PASS conforme [coordenador no PR #46](https://github.com/matheus-junio-da-silva/Web3Bugs/pull/46#pullrequestreview-5578571091); exit 2 de whitespace citado acima é histórico. **Equivalência não comprovada; `02_unresolved`, DRAFT.**

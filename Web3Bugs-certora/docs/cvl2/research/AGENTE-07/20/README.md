@@ -22,3 +22,6 @@ Sem evidência de reexecução CVL1 ou CVL2; complete histórico não significa 
 - `QA_REPORT.md`: reconciliação, fontes ausentes e validações efetivamente realizadas.
 
 SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.
+
+## Full-source follow-up
+See full_spec_audit.csv and the integral-source appendix in each property dossier. It records full extracted source hashes, exact lines, and conditional CVL2 candidates without altering originals.

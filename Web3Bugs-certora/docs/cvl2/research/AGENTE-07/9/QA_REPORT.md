@@ -25,3 +25,23 @@
 
 ## QA complementar de referências CVL2
 - `properties.csv` agora contém IDs P-... explícitos para cada dossiê com padrão detectado; IDs derivam das hipóteses documentadas, não representam alterações CVL2 aprovadas. Campo vazio significa sem padrão sinalizado nesta pesquisa, nunca compilação bem-sucedida.
+
+
+## Integral-source follow-up — 2026-10-19
+- Full extracted N.spec and N.txt files inspected for 61/61 examples, without excerpt cutoff. Exact byte hashes and all structural token line anchors in full_spec_audit.csv and each dossier.
+- Inspection is static textual and reproducible; not CVL parsing, imported ABI closure, satisfiable model or historical Prover proof. Historical dependency closures remain incomplete.
+- Changes are conditional text proposals with source line + A1/A2 link. No sources/historical status modified, and no CVL1/CVL2 run.
+
+## Executed independent checks — WSL / 2026-10-19
+Environment: DESKTOP-5E26TVU; clean isolated clone under /home/mat/cvl2-agent07-isolated/Web3Bugs, branch research/cvl2-agente-07, starting HEAD e617417ff27571baa7e008474c55f18c41dc9811.
+
+- python3 Web3Bugs-certora/scripts/check_specs.py Web3Bugs-certora => EXIT 0; 1,386 examples / 1,390 bug-label relationships valid.
+- python3 Web3Bugs-certora/scripts/check_contracts.py Web3Bugs-certora => EXIT 0.
+- python3 Web3Bugs-certora/scripts/check_contests_csv.py Web3Bugs-certora => EXIT 0.
+- bash Web3Bugs-certora/scripts/check_git.sh Web3Bugs-certora => EXIT 0. Initial call with no path was a usage error (EXIT 1), subsequently corrected; no successful result inferred from that first call.
+- git diff --check => EXIT 0, after removal of CSV CRLF/trailing Markdown spaces introduced in the working documentation edits.
+- Independent canonical-index/hash check => PASS: all 156 rows correspond to a full extracted source SHA-256 and property dossier; all existing properties.csv fields, identity, original_status and historical result unchanged from branch starting HEAD; all changed files in AGENTE-07.
+- Three lockfile npm packages independently fetched and SHA-512 verified (P11); 22 directly referenced external import paths found inside those archives. Not proof of nested graph/compiler closure.
+- No CVL1, CVL2, Certora Prover, compilation, migration script, or equivalence experiment executed.
+
+**Research gate:** partial historical dependency recovery only. Manual ABI/receiver/summary verification, transitive imports, exact original compiler/harness/run and byte-to-PDF audit linkage remain blocked; no migration or Fase 2 authorization.

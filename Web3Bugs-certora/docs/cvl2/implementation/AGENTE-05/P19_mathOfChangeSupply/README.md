@@ -33,7 +33,7 @@ A linha original termina com **um espaço literal**; essa característica histó
 
 A revisão [#44](https://github.com/matheus-junio-da-silva/Web3Bugs/pull/44#pullrequestreview-5577673176) relata quatro typechecks independentes com `certora-cli 8.19.0`, `solc 0.8.7`, `--compilation_steps_only` e timeout GNU 60s. Ambos os originais falharam com exit 1 (dois erros `mathint` vs `uint256`), ambas as variantes derivadas tiveram **exit 0**. Este resultado é evidência **do coordenador**, não execução repetida pelo AGENTE-05 nesta sessão.
 
-**Limitação operacional desta sessão:** o dispositivo de execução autorizado está offline e o ambiente de execução local não respondeu. Por isso, os dois comandos locais de compilação e os validadores foram documentados para reprodução, mas **não são reportados como executados agora**. Não são inventados logs, durações, exit codes ou nova versão de ferramentas. Ver [`results.json`](results.json) e [`REPRODUCE.md`](REPRODUCE.md).
+**Limitação operacional de compilação:** o dispositivo remoto está offline e o backend local indisponível; as duas compilações Certora **não foram repetidas nesta sessão**. Porém, GitHub Actions executou os três validadores oficiais (**exit 0, 0, 0**) e o check Git estrito (**exit 2**, dez espaços históricos preservados); a CI principal passou. [Resultados detalhados](CI_VALIDATION.md) e [manifesto](results.json).
 
 ## Validade tipada da alteração — sem equivalência formal
 
@@ -51,4 +51,4 @@ Na primeira chamada `divPrecisely(RC, T-NR)`, `RC` é `uint256` e `T-NR` é mate
 
 ## Estado final
 
-**Duas specs derivadas implementadas; classificação 02_unresolved; compilação previamente confirmada pelo coordenador, recompilação nesta sessão pendente por ausência de ambiente; validação semântica independente obrigatória; SEM CVL1, SEM PROVER, SEM MERGE.**
+**Duas specs derivadas implementadas; classificação 02_unresolved; compilação anterior confirmada pelo coordenador, recompilação nesta sessão pendente; catalog validators PASS no GitHub Actions; Git whitespace FAIL por bytes históricos; revisão independente necessária; SEM CVL1, SEM PROVER, SEM MERGE.**

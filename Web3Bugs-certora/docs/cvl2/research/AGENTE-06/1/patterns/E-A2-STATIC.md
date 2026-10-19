@@ -1,0 +1,8 @@
+# AGENTE-06 / P1 / E-A2-STATIC
+
+Tier A2: https://docs.certora.com/en/latest/docs/cvl/cvl2/changes.html
+Section: Removed static_assert/static_require, consultado 2026-10-19 (latest não pinado).
+
+Aliases map to assert and require.
+
+Este é um padrão para investigar, NÃO uma classificação de mudança de todos os exemplos. Atribuir somente após leitura literal da propriedade, ABI, dependências e controle de vacuity. Alternativa conservadora: manter UNRESOLVED_CANDIDATE.

@@ -21,3 +21,10 @@
 - Consulte QA_REPORT.md para saidas reais dos validadores e git diff --check.
 
 **PR #37 permanece DRAFT. Sem merge.**
+
+## Terceira revisao independente — resposta ao coordenador (2026-10-19)
+- O feedback sobre o difffull foi reproduzido em HEAD 2f4d6d5: exit 2, com 144 linhas de whitespace final em 86 docs Markdown. Corrigido somente no escopo autorizado; 97.md e 99.md incluidos.
+- Commit de correcao 34c4eb3dc73d12e5380034e8bdb2b9054f097ae9: **git -c core.whitespace=cr-at-eol diff --check 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3...HEAD = exit 0**, sem saida.
+- ABI_HISTORICAL_AUDIT.md, abi_resolution_matrix.csv e 181 dossies aprofundam visibilidade, calls, summaries, receivers e proveniencia: 339 registros em 17 targets. Exemplo complete/23 documentado via ERC1155Mock.sol:10 e ERC1155.sol:110/117. Declaracao Solidity public **nao** resolve automatico internal/external do CVL2.
+- TimelockController.schedule(bytes32 no spec vs bytes calldata em Solidity) permanece incompatibilidade preexistente. Todas as dependencias de harness e patch ausentes mantidas como bloqueios.
+- Nenhuma equivalencia semantica ou readiness aprovada: buckets inalterados 50 apenas lexicais / 131 nao resolvidos. PR DRAFT; sem merge ou Fase 2.

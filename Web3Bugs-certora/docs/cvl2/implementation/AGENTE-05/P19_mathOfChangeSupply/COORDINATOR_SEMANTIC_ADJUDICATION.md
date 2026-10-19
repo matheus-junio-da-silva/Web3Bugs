@@ -1,8 +1,8 @@
 # Revisão semântica independente do coordenador — P19/1 e P19/2
 
-**Data:** 2026-10-19  
-**PR:** [#46](https://github.com/matheus-junio-da-silva/Web3Bugs/pull/46)  
-**Fonte histórica imutável:** `Web3Bugs-certora/results/spec/complete/19/{1,2}.spec` no commit `2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3`  
+**Data:** 2026-10-19
+**PR:** [#46](https://github.com/matheus-junio-da-silva/Web3Bugs/pull/46)
+**Fonte histórica imutável:** `Web3Bugs-certora/results/spec/complete/19/{1,2}.spec` no commit `2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3`
 **Status:** `02_unresolved` para ambas. **Não houve Prover formal ou teste CVL1 nesta revisão.**
 
 ## 1. Escopo documental e independência

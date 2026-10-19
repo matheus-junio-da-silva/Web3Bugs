@@ -22,3 +22,22 @@
 - Checkout dedicado: `/home/mat/cvl2-agent01-isolated/Web3Bugs`, branch `research/cvl2-agente-01`; status original preservado e outros agentes não impactados.
 - Reconciliação: 28 targets nomeados, 20 caminhos Solidity distintos; 28 targets com diferenças de SHA.
 - cwd `/home/mat/cvl2-agent01-isolated/Web3Bugs`: `git diff --cached --check` (incluindo 277 arquivos staged, todos na pasta autorizada) — exit code **0**, log `/home/mat/cvl2-agent01-isolated/qa_logs/git_diff_cached_check.log` vazio. Nenhum Prover ou compilador executado.
+
+## Segunda revisão independente — proveniência e condições de mudança (19/10/2026)
+- Revisão lida: https://github.com/matheus-junio-da-silva/Web3Bugs/pull/39#pullrequestreview-5577009787
+- Exatos 266 pares status/ID mantidos, 2 complete e 264 incomplete. Original historical files não alterados.
+- semantic_candidate_gate_matrix.csv: 988 ocorrências textuais, não 988 propriedades/compilações. Cada linha inclui o N.spec/linha, original, candidata quando fundamentada, classificação REQUIRED/BLOCKED/PRESERVE/NO_CAST, source evidence e risco.
+- perl_getter_scope_matrix.csv: 28 contextos de target; comparação do Perl auditado e do snapshot. A aplicação literal de injeção está documentada separadamente de ABI efetivamente compilada.
+- Exemplo complete/33: 2 methods do target external justificados por specs/harnesses/LibParamHarness.sol:10 e :14. LibParamHarness usa specs/scripts/libParam.sh sem Perl de handlers. O selector getParams requer sig, sem mudar o ramo com duas assumptions.
+- Exemplo complete/34: preserve N.spec:9 require false, que exclui selector getParams. N.spec:13 assert !lastReverted é booleano; alerta de cast genérico removido. N.spec:34 não inclui methods block próprio.
+- Busca negativa no checkout do commit auditado: find *.abi, *.bin, *certora*.json, *certora*.conf, *certora*.log, package-lock.json, yarn.lock, além de git ls-tree e grep nos scripts; nenhum ABI/bin/lock de tais nomes, porém scripts certoraRun/--verify/--settings localizados. Resultado documentado em patterns/PAT-08-independent-second-review.md; log de execução do WSL em /home/mat/cvl2-agent01-isolated/qa_logs/negative_historical_search.log.
+- Não executado: Perl, solc, CLI CVL1/CVL2, Prover, teste de equivalência. Source ABI parcial de complete/33 e 34 recuperada; demais ABI post-Perl e receivers são bloqueios, não condições automaticamente satisfeitas.
+
+### Checks desta segunda rodada — execução real e logs
+- WSL device DESKTOP-5E26TVU, working tree isolado /home/mat/cvl2-agent01-isolated/Web3Bugs, subdiretório Web3Bugs-certora.
+- python3 scripts/check_specs.py . — exit 0; log /home/mat/cvl2-agent01-isolated/qa_logs/second_round/check_specs.log (1.386 exemplos e 1.390 relações).
+- python3 scripts/check_contracts.py . — exit 0; log /home/mat/cvl2-agent01-isolated/qa_logs/second_round/check_contracts.log.
+- python3 scripts/check_contests_csv.py . — exit 0; log /home/mat/cvl2-agent01-isolated/qa_logs/second_round/check_contests_csv.log.
+- git diff --cached --check — exit 0 após normalização de whitespace apenas nos documentos; log /home/mat/cvl2-agent01-isolated/qa_logs/second_round/staged_diff_check_final.log, vazio.
+- git -c core.whitespace=cr-at-eol diff --check 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3 — exit 0 antes do commit; log /home/mat/cvl2-agent01-isolated/qa_logs/second_round/full_base_diff_check.log.
+- Status final dos três validadores será novamente verificado após o commit. Comparação baseline...HEAD integral a ser executada e registrada antes do retorno à revisão.

@@ -11,3 +11,7 @@
 - Próximo passo obrigatório antes de revisão para Fase 2: leitura individual dos N.spec, N.md, N.sol e transitive imports, reconstrução histórica com hashes upstream auditados, motivos N.txt e pesquisa official per-case.
 
 SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.
+
+## Snapshot provenance update 2026-10-19
+
+Certora branch upstream 3cb9cb7279a3fb1790b55251a029bb3065606dc8 matches six exact Git blobs, including the four original source .spec files and runner. It is NOT declared audited commit because the report ends verification in October and upstream commit is dated November 4. See [AUDITED_SOURCE_PROVENANCE.md](AUDITED_SOURCE_PROVENANCE.md).

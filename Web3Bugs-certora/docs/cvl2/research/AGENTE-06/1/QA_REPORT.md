@@ -11,3 +11,7 @@
 - Próximo passo obrigatório antes de revisão para Fase 2: leitura individual dos N.spec, N.md, N.sol e transitive imports, reconstrução histórica com hashes upstream auditados, motivos N.txt e pesquisa official per-case.
 
 SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.
+
+## Pesquisa histórica atualizada 2026-10-19
+
+Commit da revisão do relatório P1 comprovado por upstream: `303bd3e16c8d3465325389a72564126c3bacc4f9`. Cinco contratos comparados; diferenças de pragma/comment documentadas em [AUDITED_SOURCE_PROVENANCE.md](AUDITED_SOURCE_PROVENANCE.md). Target/verificação CVL específicos ainda não reconstruídos. Sem replay.

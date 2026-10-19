@@ -43,3 +43,7 @@ Reexecutar com checkout disponível os três validadores `python3 scripts/check_
 As duas specs derivadas preservam whitespace do arquivo original porque somente uma linha foi autorizada para edição. Com arquivos novos, `git diff --check` pode sinalizar trailing whitespace herdado; essa falha deverá ser registrada explicitamente, não corrigida alterando linhas não autorizadas ou escondida como PASS.
 
 **Status 02_unresolved; SEM PROVER, CVL1, merge ou modificação adicional.**
+
+## Evidência adicional de CI do PR experimental
+
+O GitHub Actions executou os validadores oficiais no run [39327492221](https://github.com/matheus-junio-da-silva/Web3Bugs/actions/runs/39327492221): `check_specs` exit 0 (1386 exemplos e 1390 relações), `check_contests_csv` exit 0 e `check_contracts` exit 0. O comando `git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD` terminou com exit 2, por trailing whitespace original nas duas specs copiadas (linhas 4, 7, 17, 20 e 22 de cada uma), além de espaços nas representações Markdown do diff, posteriormente corrigidas sem modificar as specs. A regra de alteração exclusiva da assinatura impede normalizar as demais linhas das specs. O workflow `validate` concluiu com sucesso. Essa verificação por CI é separada da compilação CVL2 (não repetida pelo agente porque o WSL permaneceu offline).

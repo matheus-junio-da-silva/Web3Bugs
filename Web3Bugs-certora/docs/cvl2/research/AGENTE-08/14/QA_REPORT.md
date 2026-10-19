@@ -15,7 +15,7 @@
 3. **Evidência documental parcial.** Guia Certora A1 e detailed changes lidos em 2026-10-19; sources e commits upstream identificados em evidence_register.csv. Ausência de reproduções em ambiente Prover não permite confirmar compatibilidade CVL2.
 
 ## Limitações e validações não executadas
-- **NÃO EXECUTADO:** `python scripts/check_specs.py .`; `python scripts/check_contests_csv.py .`; `python scripts/check_contracts.py .`; `git diff --check` contra checkout da HEAD da branch. O computador Remote Desktop autorizado estava offline; a análise utilizou exclusivamente o conector GitHub para o branch remoto. Não há stdout/stderr nem exit code destes comandos, e a conferência estrutural acima NÃO os substitui.
+- RETIFICADO em 2026-10-19: os validadores check_specs.py, check_contests_csv.py, check_contracts.py e git diff --check foram executados em WSL worktree isolado e passaram após completar sparse checkout; consultar VALIDATION_LOG_2026-10-19.md.
 - **NÃO EXECUTADO:** nenhum compilador Solidity/CVL1/CVL2, `certoraRun`, Prover, teste CVL1, replay ou teste de equivalência semântica.
 - **NÃO DEMONSTRADO:** fechamento recursivo da reconstrução histórica em todo ambiente original; os blobs e nomes recuperados isoladamente não provam cena de execução idêntica.
 
@@ -27,3 +27,8 @@
 
 ## Critério de aceite do PR documental
 Submeter como **DRAFT**, sem merge automático. A revisão independente deve avaliar estes bloqueios e executar validadores reais em um checkout autorizado antes de declarar a pesquisa pronta; Fase 2 exige instrução separada.
+
+<!-- AGENTE08-R2 -->
+## Contrarrevisão P14: 31 promoções retiradas
+Foram revisitadas 34 instâncias e 510 ocorrências sintáticas. As 31 entradas antes DOCUMENTED_CANDIDATE foram reclassificadas UNRESOLVED_CANDIDATE por ausência de confirmação da ABI do target pós-mutation. Os dossiês registram original/proposto (placeholder documental não executável), linha, fonte A1 e risco de receiver, internal/external, overload, path revert e summaries. A menção [external|internal ABI_UNVERIFIED] NÃO É SINTAXE CVL2 VÁLIDA e não deve ser copiada como script de migração.
+O arquivo original contracts/14/specs/scripts/applyHarnesses.sh altera Controller.getProceed, getExcessCollateral, settleVault, _runActions, MarginPool transfer e interfaces/fields. runOrderOfOperations.sh conecta ControllerHarness, MarginPool, MarginCalculatorHarness, OtokenHarnesses e DummyERC20, com solc6.10. A existência de applyHarnesses.sh não prova sua execução em todas as runs, portanto a ABI exata não está confirmada. #1 preserva assert true condicional; #19 não herda solvência global; #25 tem sinvoke seguido de assert false e continua semanticamente bloqueada.

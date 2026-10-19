@@ -15,7 +15,7 @@
 3. **Evidência documental parcial.** Guia Certora A1 e detailed changes lidos em 2026-10-19; sources e commits upstream identificados em evidence_register.csv. Ausência de reproduções em ambiente Prover não permite confirmar compatibilidade CVL2.
 
 ## Limitações e validações não executadas
-- **NÃO EXECUTADO:** `python scripts/check_specs.py .`; `python scripts/check_contests_csv.py .`; `python scripts/check_contracts.py .`; `git diff --check` contra checkout da HEAD da branch. O computador Remote Desktop autorizado estava offline; a análise utilizou exclusivamente o conector GitHub para o branch remoto. Não há stdout/stderr nem exit code destes comandos, e a conferência estrutural acima NÃO os substitui.
+- RETIFICADO em 2026-10-19: os validadores check_specs.py, check_contests_csv.py, check_contracts.py e git diff --check foram executados em WSL worktree isolado e passaram após completar sparse checkout; consultar VALIDATION_LOG_2026-10-19.md.
 - **NÃO EXECUTADO:** nenhum compilador Solidity/CVL1/CVL2, `certoraRun`, Prover, teste CVL1, replay ou teste de equivalência semântica.
 - **NÃO DEMONSTRADO:** fechamento recursivo da reconstrução histórica em todo ambiente original; os blobs e nomes recuperados isoladamente não provam cena de execução idêntica.
 
@@ -27,3 +27,8 @@
 
 ## Critério de aceite do PR documental
 Submeter como **DRAFT**, sem merge automático. A revisão independente deve avaliar estes bloqueios e executar validadores reais em um checkout autorizado antes de declarar a pesquisa pronta; Fase 2 exige instrução separada.
+
+<!-- AGENTE08-R2 -->
+## Contrarrevisão P5: scripts, remappings e ABI
+No commit 4c010c18b08703e4f367db1e0c642c76c25e551b, erc20.spec blob b12fec167edd76a2f59a64bc80bc33a9eeb04f65 contém somente methods ERC20 DISPATCHER(true). Os getters withdrawMessageStatus/bridgeRewardsMessageStatus aparecem no BridgeHarness.sol blob 850d5a63fa375ee6f9754c8377990d5d48c09c07, não no erc20.spec.
+Os scripts verifyBridge.sh e verifyBridgeConstIndex.sh fixam BridgeHarness e seus mocks, nove links, solc8.10, optimistic_loop, loop_iter 3 e settings -mediumTimeout=700,-depth=12. Comentário de texto diz 2 iterações; comando executável usa 3. Não há argumento packages/path explícito nos scripts; imports indiretos continuam exigindo fechamento. Makefile target munged copia contratos e aplica applyHarness.patch (blob f806c1e6957b164a0a8419fa6f5c8015de5dd95c), inclusive alterações virtual em Bridge.sol. O snapshot contém Bridge.sol de revisão posterior, e os 17 exemplos seguem incomplete. A recuperação dos blobs não prova ABI transitiva nem equivalência de prova.

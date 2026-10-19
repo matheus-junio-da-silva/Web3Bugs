@@ -27,3 +27,8 @@ Para cada transformação, reabrir o N.spec, sua original source range e N.txt; 
 - **Regras duplicadas `depositWithdrawReversed` e `integrityOfDepositExpanded`**: resultados agregados do relatório não identificam qual instance de spec é destinatária; preservar NOT_STATED onde registrado.
 - **Bridge.sol mais recente** no snapshot diverge do verificado (balanceOf versus scaledBalanceOf, approve versus safeApprove). A migração CVL2 não deve usar a implementação errada como alvo.
 - **Índices ray, mocks de L2, `--optimistic_loop`, `--loop_iter 3`, solc8.10, links de alvo** precisam ser preservados ao comparar semântica. O comentário de script sobre 2 iterações diverge do flag executável; valor histórico comprovado é 3.
+
+<!-- AGENTE08-R2 -->
+## Contrarrevisão P5: scripts, remappings e ABI
+No commit 4c010c18b08703e4f367db1e0c642c76c25e551b, erc20.spec blob b12fec167edd76a2f59a64bc80bc33a9eeb04f65 contém somente methods ERC20 DISPATCHER(true). Os getters withdrawMessageStatus/bridgeRewardsMessageStatus aparecem no BridgeHarness.sol blob 850d5a63fa375ee6f9754c8377990d5d48c09c07, não no erc20.spec.
+Os scripts verifyBridge.sh e verifyBridgeConstIndex.sh fixam BridgeHarness e seus mocks, nove links, solc8.10, optimistic_loop, loop_iter 3 e settings -mediumTimeout=700,-depth=12. Comentário de texto diz 2 iterações; comando executável usa 3. Não há argumento packages/path explícito nos scripts; imports indiretos continuam exigindo fechamento. Makefile target munged copia contratos e aplica applyHarness.patch (blob f806c1e6957b164a0a8419fa6f5c8015de5dd95c), inclusive alterações virtual em Bridge.sol. O snapshot contém Bridge.sol de revisão posterior, e os 17 exemplos seguem incomplete. A recuperação dos blobs não prova ABI transitiva nem equivalência de prova.

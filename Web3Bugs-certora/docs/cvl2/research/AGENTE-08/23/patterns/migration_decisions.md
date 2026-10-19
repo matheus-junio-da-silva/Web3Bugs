@@ -27,3 +27,7 @@ Para cada transformação, reabrir o N.spec, sua original source range e N.txt; 
 - **P23/25–41:** Splits.sol com métodos internos e wrappers CVT gerados; só as propriedades identificadas no PDF receberam históricos VERIFIED/VIOLATED. P23/36 é VIOLATED/FINDING por arredondamento; P23/38 teve timeout (NOT_STATED/INCONCLUSIVE).
 - **P23/42–46:** Splits2.spec é distinta, não herda os resultados de nomes homônimos em Splits.spec.
 - O commit [6fe9d38](https://github.com/Certora/drips-contracts/commit/6fe9d38a30765df6aa3e4078634a37aeabbceef1) mostra produção e testes, sem comprovar conteúdo/ABI do harness de verificação original.
+
+<!-- AGENTE08-R2 -->
+## Contrarrevisão P23: provedores de CVT não encontrados
+O PDF de seis páginas (sobretudo páginas 3-5) restringe a verificação formal a Splits.sol. A árvore do commit oficial Certora/drips-contracts@6fe9d38a30765df6aa3e4078634a37aeabbceef1 contém produção e testes, mas não os CVT wrappers esperados; isso não prova inexistência em servidores ou artefatos gerados históricos. DripsHubHarness (#1-12), UpdateReceiverStatesHarness (#13-18), ReserveHarness/mocks (#19-23), SlotTester/getters (#24) e wrappers Splits/Splits2 (#25-46) permanecem não recuperados. #36 VIOLATED/FINDING por arredondamento, #38 NOT_STATED/INCONCLUSIVE por timeout e #39-41 VERIFIED apenas nas suas instâncias Splits.spec. O limite de unrolling (2) e receiver weights (até 1000000) não foram ampliados.

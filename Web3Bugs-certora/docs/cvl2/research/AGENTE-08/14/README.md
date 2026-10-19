@@ -15,7 +15,7 @@
 ## Riscos e reconstrução histórica
 Dependency-complete is a documentation criterion, not a successful CVL2 compile. #1 has selector-ordered assert true branch, #15–19 narrower solvency cases, and scripts apply harness changes. Changes to methods receiver and summaries can alter proof model.
 
-- Estágio de decisão documental: 31 DOCUMENTED_CANDIDATE and 3 UNRESOLVED_CANDIDATE (#1, #19, #25), all provisional.
+- Estágio de decisão documental: 34 UNRESOLVED_CANDIDATE (apos revisao de 31 promocoes anteriores; #1, #19 e #25 seguem bloqueados), all provisional.
 - Proveniência e recuperação: 6 registered sources, including original runOrderOfOperations.sh blob 358435625300bed273971f8058e0219e516fb88c; empty recovery_manifest.csv by design.
 
 ## Conteúdo desta pasta
@@ -30,3 +30,8 @@ Dependency-complete is a documentation criterion, not a successful CVL2 compile.
 Fontes originais `.spec`, Solidity, PDFs, configs, CSVs do catálogo e contracts/ históricos permanecem intactos. Trechos `N.sol` são documentos, não alvos compiláveis. Não executar o script de migração in-place em contratos históricos. Compilar futuramente um arquivo sem prova de mesma ABI, overrides, receiver, assumptions e paths de revert não demonstra equivalência.
 
 **Próxima etapa apenas com autorização expressa do coordenador:** revisar origin/harness/prova de import closure, selecionar alterações textuais mínimas documentadas, construir derivados separados e só então executar compilação e provas.
+
+<!-- AGENTE08-R2 -->
+## Contrarrevisão P14: 31 promoções retiradas
+Foram revisitadas 34 instâncias e 510 ocorrências sintáticas. As 31 entradas antes DOCUMENTED_CANDIDATE foram reclassificadas UNRESOLVED_CANDIDATE por ausência de confirmação da ABI do target pós-mutation. Os dossiês registram original/proposto (placeholder documental não executável), linha, fonte A1 e risco de receiver, internal/external, overload, path revert e summaries. A menção [external|internal ABI_UNVERIFIED] NÃO É SINTAXE CVL2 VÁLIDA e não deve ser copiada como script de migração.
+O arquivo original contracts/14/specs/scripts/applyHarnesses.sh altera Controller.getProceed, getExcessCollateral, settleVault, _runActions, MarginPool transfer e interfaces/fields. runOrderOfOperations.sh conecta ControllerHarness, MarginPool, MarginCalculatorHarness, OtokenHarnesses e DummyERC20, com solc6.10. A existência de applyHarnesses.sh não prova sua execução em todas as runs, portanto a ABI exata não está confirmada. #1 preserva assert true condicional; #19 não herda solvência global; #25 tem sinvoke seguido de assert false e continua semanticamente bloqueada.

@@ -28,3 +28,8 @@ Para cada transformação, reabrir o N.spec, sua original source range e N.txt; 
 - **P14/20:** Whitelist target e summaries de privilégio demandam conferência de receiver.
 - **P14/21–34:** ControllerHarness com scripts, mocks, links e `applyHarnesses.sh` que pode mutar contratos antes da execução; snapshot sem alterações não é necessariamente input histórico do Prover.
 - Os 34 estados originais `complete` significam apenas fechamento documental das dependências; nenhum foi compilado nesta fase.
+
+<!-- AGENTE08-R2 -->
+## Contrarrevisão P14: 31 promoções retiradas
+Foram revisitadas 34 instâncias e 510 ocorrências sintáticas. As 31 entradas antes DOCUMENTED_CANDIDATE foram reclassificadas UNRESOLVED_CANDIDATE por ausência de confirmação da ABI do target pós-mutation. Os dossiês registram original/proposto (placeholder documental não executável), linha, fonte A1 e risco de receiver, internal/external, overload, path revert e summaries. A menção [external|internal ABI_UNVERIFIED] NÃO É SINTAXE CVL2 VÁLIDA e não deve ser copiada como script de migração.
+O arquivo original contracts/14/specs/scripts/applyHarnesses.sh altera Controller.getProceed, getExcessCollateral, settleVault, _runActions, MarginPool transfer e interfaces/fields. runOrderOfOperations.sh conecta ControllerHarness, MarginPool, MarginCalculatorHarness, OtokenHarnesses e DummyERC20, com solc6.10. A existência de applyHarnesses.sh não prova sua execução em todas as runs, portanto a ABI exata não está confirmada. #1 preserva assert true condicional; #19 não herda solvência global; #25 tem sinvoke seguido de assert false e continua semanticamente bloqueada.

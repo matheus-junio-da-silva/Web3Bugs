@@ -30,3 +30,8 @@
 Fontes originais `.spec`, Solidity, PDFs, configs, CSVs do catálogo e contracts/ históricos permanecem intactos. Trechos `N.sol` são documentos, não alvos compiláveis. Não executar o script de migração in-place em contratos históricos. Compilar futuramente um arquivo sem prova de mesma ABI, overrides, receiver, assumptions e paths de revert não demonstra equivalência.
 
 **Próxima etapa apenas com autorização expressa do coordenador:** revisar origin/harness/prova de import closure, selecionar alterações textuais mínimas documentadas, construir derivados separados e só então executar compilação e provas.
+
+<!-- AGENTE08-R2 -->
+## Contrarrevisão P13: targets, imports e 7 versus 5 VERIFIED
+O verify.sh original fixa solc7.5, @openzeppelin remapeado para Brownie OpenZeppelin/openzeppelin-contracts@3.4.0-solc-0.7, compound-finance como pacote Brownie e interfaces da árvore histórica. Fonte de destino e checksum das dependências carregadas pelo antigo auditor permanecem indisponíveis. scripts/applyHarness.sh altera Constants.sol de internal constant para public constant, afetando observabilidade do target.
+As 48 regras com target definido/inferido dependem de imports transitivos ausentes; os dez exemplos #8-17 de Balances.spec não têm ABI histórica selecionada nos scripts. O PDF original Notional1Nov2021.pdf (páginas 13-16) contém indicadores de provas: docs/spec_catalog_project_13.md menciona sete regras VERIFIED, mas o CSV atual registra #32/#34 NOT_STATED e consequentemente cinco VERIFIED. Esta divergência permanece documentada, sem corrigir silenciosamente o catálogo. #1/#58 são diagnósticos, #7/#57 tautologias, #39 contém um ramo contraditório.

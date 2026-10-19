@@ -27,3 +27,8 @@ Para cada transformação, reabrir o N.spec, sua original source range e N.txt; 
 - **P13/1, 58:** `assert false` diagnostica alcançabilidade, não constitui propriedade de segurança verificada.
 - **P13/7, 57:** implicações tautológicas documentadas devem permanecer distinguíveis por source e target.
 - **P13 com target identificado:** scripts históricos e imports transitivos de OpenZeppelin 3.4, Compound, Chainlink e Notional precisam de origem exata, checksums e remappings. Não aplicar automaticamente semântica de bibliotecas contemporâneas.
+
+<!-- AGENTE08-R2 -->
+## Contrarrevisão P13: targets, imports e 7 versus 5 VERIFIED
+O verify.sh original fixa solc7.5, @openzeppelin remapeado para Brownie OpenZeppelin/openzeppelin-contracts@3.4.0-solc-0.7, compound-finance como pacote Brownie e interfaces da árvore histórica. Fonte de destino e checksum das dependências carregadas pelo antigo auditor permanecem indisponíveis. scripts/applyHarness.sh altera Constants.sol de internal constant para public constant, afetando observabilidade do target.
+As 48 regras com target definido/inferido dependem de imports transitivos ausentes; os dez exemplos #8-17 de Balances.spec não têm ABI histórica selecionada nos scripts. O PDF original Notional1Nov2021.pdf (páginas 13-16) contém indicadores de provas: docs/spec_catalog_project_13.md menciona sete regras VERIFIED, mas o CSV atual registra #32/#34 NOT_STATED e consequentemente cinco VERIFIED. Esta divergência permanece documentada, sem corrigir silenciosamente o catálogo. #1/#58 são diagnósticos, #7/#57 tautologias, #39 contém um ramo contraditório.

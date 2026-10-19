@@ -15,3 +15,13 @@ SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.
 ## Atualização auditada 2026-10-19
 
 Identificado commit upstream e 5 arquivos byte-idênticos aos archived originals; detalhes em [AUDITED_SOURCE_PROVENANCE.md](AUDITED_SOURCE_PROVENANCE.md). O status incomplete de dez exemplos permanece; sem CVL2 ou Prover.
+
+## Reconciliation update 2026-10-19 — supersedes earlier inventory-only note
+
+- 41 original legacy Specify/CVL source blocks individually inspected; report-confirmed SHA f385d71983ae5c5799faae9b2dfea43e5cf75262; two Solidity and three .cvl files exactly match audited repo; absent synthetic ABI calls and conversion of Specify remain blockers.
+- **Confirmed CVL first-pass coverage**: 41/41 individual dossiers now have a source-specific CVL body inspection flag in properties.csv; no `INVENTORY_ONLY_PENDING_SEMANTIC_INSPECTION` remains.
+- This only demonstrates documentary reading of archived CVL and candidate-level syntax triage; **not** line-by-line confirmation of complete Solidity dependency closure, not compiler success, not semantic equivalence, and not a historical Certora replay.
+- Historical Result and Detection Outcome preserved without promoting original complete/incomplete into compiled/verified CVL2 statuses.
+- Structural QA of property key uniqueness and count performed using GitHub fetch and CSV parsing in connector; Python validators and git diff --check still NOT executed on live PR branch.
+- GitHub changes are restricted to docs/cvl2/research/AGENTE-06; no changes to contracts, result CSV, specs or scripts.
+- **SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.**

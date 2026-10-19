@@ -15,3 +15,13 @@ SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.
 ## Atualização 2026-10-19: proveniência auditada
 
 Ver [AUDITED_SOURCE_PROVENANCE.md](AUDITED_SOURCE_PROVENANCE.md). O PDF identifica 4cf8837, expandido para 4cf8837121a4351cc0e21703bb1df76036205114; fontes base recuperáveis com blobs, mas harness gerado ainda ausente. Os N.md antigos podem registrar SHA não confirmado por propriedade, o que permanece válido para reconstrução completa. Nenhuma compilação/Prover foi executada.
+
+## Reconciliation update 2026-10-19 — supersedes earlier inventory-only note
+
+- 27 original CVL bodies individually inspected, all historically incomplete. Original PDF reviewed on pages 1 and 3, audited SHA 4cf8837121a4351cc0e21703bb1df76036205114; audited src recovered with blobs but munged/harness not recovered; modeling limitations retained.
+- **Confirmed CVL first-pass coverage**: 27/27 individual dossiers now have a source-specific CVL body inspection flag in properties.csv; no `INVENTORY_ONLY_PENDING_SEMANTIC_INSPECTION` remains.
+- This only demonstrates documentary reading of archived CVL and candidate-level syntax triage; **not** line-by-line confirmation of complete Solidity dependency closure, not compiler success, not semantic equivalence, and not a historical Certora replay.
+- Historical Result and Detection Outcome preserved without promoting original complete/incomplete into compiled/verified CVL2 statuses.
+- Structural QA of property key uniqueness and count performed using GitHub fetch and CSV parsing in connector; Python validators and git diff --check still NOT executed on live PR branch.
+- GitHub changes are restricted to docs/cvl2/research/AGENTE-06; no changes to contracts, result CSV, specs or scripts.
+- **SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.**

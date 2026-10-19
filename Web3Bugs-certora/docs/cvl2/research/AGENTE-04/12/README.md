@@ -13,3 +13,6 @@
 StableDebtToken auditado contem constructor de cinco parametros, mas snapshot tem initialize de sete parametros e getter nao virtual com retorno interface; incompatibilidade de versao nao e defeito CVL2. Nenhum dos nove incomplete recebeu substituicao Solidity.
 
 Dossies atualizados 26/26; entradas methods por instancia 22; nomes literais encontrados em PDF 5. Propostas report-only e condicionais; nao houve compilacao, Prover, teste CVL1 ou modificacao de fonte. Buscas negativas nao demonstram inexistencia fora da arvore examinada.
+
+## Segunda auditoria do coordenador (2026-10-19)
+As observacoes antigas de que N.md e PDF nao haviam sido revisitados refletem a PRIMEIRA etapa: 100% dos N.md desta familia foram lidos na etapa posterior, com SHA256 e contexto em dossies, e todas as paginas PDF extraidas (P15 13; P12 25; P2 6). Estudo de pacote/harness/ABI atualizado no diretorio deste projeto. Os indices distinguem SINTAXE, ABI, DEPENDENCIA e RISCO SEMANTICO para cada propriedade. Nao promover DOCUMENTED a READY.

@@ -13,3 +13,6 @@
 PDF p.1 indica commit 12296ce agora resolvido integralmente. Quatro Solidity do snapshot coincidem byte-a-byte com commit auditado; tree nao contem specs/auxiliares CVL. PDF summary arbitario e invariants agregadas nao individualizadas sem origem CVL.
 
 Dossies atualizados 15/15; entradas methods por instancia 50; nomes literais encontrados em PDF 10. Propostas report-only e condicionais; nao houve compilacao, Prover, teste CVL1 ou modificacao de fonte. Buscas negativas nao demonstram inexistencia fora da arvore examinada.
+
+## Segunda auditoria do coordenador (2026-10-19)
+As observacoes antigas de que N.md e PDF nao haviam sido revisitados refletem a PRIMEIRA etapa: 100% dos N.md desta familia foram lidos na etapa posterior, com SHA256 e contexto em dossies, e todas as paginas PDF extraidas (P15 13; P12 25; P2 6). Estudo de pacote/harness/ABI atualizado no diretorio deste projeto. Os indices distinguem SINTAXE, ABI, DEPENDENCIA e RISCO SEMANTICO para cada propriedade. Nao promover DOCUMENTED a READY.

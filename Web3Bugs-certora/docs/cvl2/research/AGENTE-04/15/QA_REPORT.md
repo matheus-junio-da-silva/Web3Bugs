@@ -39,3 +39,6 @@ Diretório de execução Git: /tmp/cvl2-agent04-20261019/repo
 - O comando git diff --check origin/main...HEAD falhou com exit 128 por clone --single-branch sem ref origin/main. Não é resultado negativo do dataset. Para comparação final usar explicitamente o commit base 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3 e o novo SHA, cujo exit deve ser registrado após publicação.
 
 Nota sobre QA: o uso de 1386/1390 é a contagem da main congelada; os índices adicionais de pesquisa (157 chaves) não alteram o catálogo. Nenhuma execução de certoraRun, solc, CVL1, CVL2 ou Prover. Os status históricos continuam intocados.
+
+## Segunda auditoria do coordenador (2026-10-19)
+As observacoes antigas de que N.md e PDF nao haviam sido revisitados refletem a PRIMEIRA etapa: 100% dos N.md desta familia foram lidos na etapa posterior, com SHA256 e contexto em dossies, e todas as paginas PDF extraidas (P15 13; P12 25; P2 6). Estudo de pacote/harness/ABI atualizado no diretorio deste projeto. Os indices distinguem SINTAXE, ABI, DEPENDENCIA e RISCO SEMANTICO para cada propriedade. Nao promover DOCUMENTED a READY.

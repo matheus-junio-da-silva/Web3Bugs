@@ -28,3 +28,6 @@
 O commit auditado fornece npm lock @aave/core-v3@1.17.2 com integridade SHA512, cinco scripts Certora de epoca e harnesses de GHO; .conf/CLI/binarios de epoca, pacote realmente instalado e munged execution nao foram reproduzidos. CSV fixo 63 VERIFIED versus 64 do catalogo antigo mantido sem mudanca.
 
 Dossies atualizados 116/116; entradas methods por instancia 1251; nomes literais encontrados em PDF 64. Propostas report-only e condicionais; nao houve compilacao, Prover, teste CVL1 ou modificacao de fonte. Buscas negativas nao demonstram inexistencia fora da arvore examinada.
+
+## Segunda auditoria do coordenador (2026-10-19)
+As observacoes antigas de que N.md e PDF nao haviam sido revisitados refletem a PRIMEIRA etapa: 100% dos N.md desta familia foram lidos na etapa posterior, com SHA256 e contexto em dossies, e todas as paginas PDF extraidas (P15 13; P12 25; P2 6). Estudo de pacote/harness/ABI atualizado no diretorio deste projeto. Os indices distinguem SINTAXE, ABI, DEPENDENCIA e RISCO SEMANTICO para cada propriedade. Nao promover DOCUMENTED a READY.

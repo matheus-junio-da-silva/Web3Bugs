@@ -29,3 +29,6 @@ Diretório de execução Git: /tmp/cvl2-agent04-20261019/repo
 - O comando git diff --check origin/main...HEAD falhou com exit 128 por clone --single-branch sem ref origin/main. Não é resultado negativo do dataset. Para comparação final usar explicitamente o commit base 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3 e o novo SHA, cujo exit deve ser registrado após publicação.
 
 Nota sobre QA: o uso de 1386/1390 é a contagem da main congelada; os índices adicionais de pesquisa (157 chaves) não alteram o catálogo. Nenhuma execução de certoraRun, solc, CVL1, CVL2 ou Prover. Os status históricos continuam intocados.
+
+## Segunda revisao independente - gate Fase 2
+157/157 com campos separados de sintaxe, ABI pendente, dependencia historica, risco semantico e phase2 readiness. Todos UNRESOLVED, inclusive os 18 DOCUMENTED_CANDIDATE (17 P12 e 1 P2). Estudos: [GHO](15/HISTORICAL_PACKAGE_CLOSURE.md); [AAVE V2](12/HISTORICAL_HARNESS_COMPARISON.md); [Proof of Reserve](2/HISTORICAL_ABI_SEARCH.md). Buscas negativas encerradas nas fontes examinadas sem inventar runtime. Sem Fase 2, sem mudar codigo original.

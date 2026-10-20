@@ -1,0 +1,63 @@
+# AGENTE-07 — RODADA 6 / Plano de consistência e pesquisa de dependências
+
+**Escopo:** P8 (42), P9 (61), P20 (37), P11 (16), 156 instâncias. Baseline imutável `main@2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3`, upstream PropertyGPT `687f654c679ed45ab127b7949e2a29c8f5e491b9`. HEAD de partida `a4a9a32d0c320189ffbab0faf05fd0a506e10a32`.
+
+**Consulta documental prévia:** `docs/spec_catalog.md`, `docs/spec_catalog_workflow.md`, `docs/spec_catalog_project_1.md`, `docs/standard.md` lidos integralmente; comparados exemplos `results/spec/complete/1/1.spec,10.spec` e `incomplete/1/1.spec,10.spec`. A distinção complete/incomplete é de *closure no snapshot*, não compatibilidade CVL2. Revisão mais recente do coordenador no PR #41: `pullrequestreview-5589230053`; painel `ROUND5_DASHBOARD.md` do PR #47 em `5835165642875f52de43227cb20334bae66edb77`. Documentação consultada: [migração](https://docs.certora.com/en/latest/docs/cvl/cvl2/migration.html), [mudanças](https://docs.certora.com/en/latest/docs/cvl/cvl2/changes.html), [ghosts](https://docs.certora.com/en/latest/docs/cvl/ghosts.html), [hooks](https://docs.certora.com/en/latest/docs/cvl/hooks.html), [reverts](https://docs.certora.com/en/latest/docs/cvl/statements.html).
+
+## Resultados: nenhum gate novo de CVL2
+
+- Para os **156 exemplos deste agente**: zero `COMPILE_OK`, zero `COMPILE_ERROR` CVL2, zero `PREFLIGHT_AUTH_BLOCKED` observado, **156 `NOT_RUN`** nesta Rodada 6; zero `SEMANTIC_PROVEN`, zero `MIGRATED_COMPLETE`. Na contabilidade global do painel: 4 compilações CVL2 exit 0, 11 erros reais exit 1, 1.371 sem teste, nenhuma equivalência. Esses 15 resultados são de **outros projetos**, não de P8/P9/P20/P11.
+- Os diagnósticos Solidity de `solc-js 0.5.13` do P9 **pertencem à Rodada 5** e não são `certoraRun --compilation_steps_only`. O Certora CLI direto `/home/mat/certora-ac-audit/certora_venv/bin/certoraRun --version` foi observado como `certora-cli 8.19.0`; apenas version check, sem Prover.
+- Durante o setup do worktree da Rodada 6, o WSL passou a retornar `Bus error` em `python3` e `Input/output error` em `df` e leitura de `.git/objects/info/alternates`. **Nenhuma compilação e nenhuma mutação de originals foram realizadas**; por segurança, não se executou comando de escrita nesse filesystem instável. Os artefatos documentais foram publicados diretamente na branch de pesquisa via GitHub, depois de confirmar a HEAD e exclusivamente na pasta autorizada. Isso é um blocker de execução local, não um `COMPILE_ERROR` nem `PREFLIGHT_AUTH_BLOCKED` de CVL2.
+
+## P8 — consistência W1/W2/W3: plano de investigação SEM Prover
+
+**Evidência independente prévia:** `ROUND5_P8_AXIOM_42.csv` identificou, verificou por SHA e localizou em **22/22** `results/spec/incomplete/8/{14..35}.spec` os dois termos no mesmo `ghost rayMul_g`. Com `x=1,y=0`, a equação `rayMul_g(1,0)==0` contradiz `1 <= rayMul_g(1,0)`. Os originais relacionados são `contracts/8/specs/fees_LEQ_ATokenBal.spec:26–33`, `lastVaultBal_LEQ_ATokenBalThis.spec:20–27` e `positiveSupply_imply_positiveAssets.spec:29–36`.
+**P8/1:** no `contracts/8/specs/accrueYieldCheck.spec:11–21`, W2 exige `0<0` em `(x,y,denominator,rounding)=(0,0,0,1)`; W3 (`:29–31`) exige `0<0` em `x=y=0`, sendo `y/2=0/2` definido. **Os outros 19 P8 não estão certificados livres de qualquer outra inconsistência**, apenas não exibem essas testemunhas específicas.
+
+**Hipótese de alcance versus hipótese de consistência:** a contradição matemática da fórmula universal, se integralmente assumida, implica que o conjunto de interpretações é vazio. A documentação atual de [ghost axioms](https://docs.certora.com/en/latest/docs/cvl/ghosts.html) distingue axiomas que o verificador assume *quando utiliza um ghost*. Logo, a mera presença textual de um `ghost` no N.spec, ou um relatório `VERIFIED` antigo, **não demonstra** que uma instância concreta da regra assumiu ambos os termos, nem que o Prover histórico aceitou premissas impossíveis. Não equiparar dedução matemática com vacuidade de um run versionado.
+
+**Plano condicionado ao gate humano, por etapa:**
+1. Congelar SHA-256 de cada N.spec (tabela da Rodada 5) e da spec de origem; separar quatro famílias: W1 IDs 14–35 (22), W2/W3 ID 1 (1), outros IDs 2–13 e 36–42 (19). Conferir alcance estático de `ghost rayMul_g` em regra, summaries e hooks por instância; não supor que quantificador/summary se instancia sem chamada.
+2. O coordenador deverá fornecer `certoraRun` e configuração realmente usados (versão, `--verify`, contratos/harness, settings, flags para axiomas/sanity, imported specs e links) ou declarar o escopo histórico desconhecido. Reconciliar cada regra com sua cena e resultado histórico sem reescrever `Result/Detection Outcome`.
+3. **Somente com autorização nova**, preparar specs *derivadas e separadas* em scratch, uma para cada W1, W2 e W3, preservando os quantificadores originais e variáveis, e acrescentar teste explícito de satisfatibilidade/modelo inicial sem alterar a property histórica. Um teste de consistência que usa Prover requer gate específico: **NÃO FOI EXECUTADO NESTA RODADA**.
+4. Antes de qualquer interpretação de um PASS, comparar semântica CVL histórica e CVL2 para ghost/summaries, geração de estados e filtros, distinguir hipótese rejeitada/inconsistente, erro de parsing e falta de models. Se o verificador reportar vacuity, estabelecer cena e versão; não inferir que o Prover original foi vacuous.
+5. Não alterar `ghost`, `hook`, `require`, `assert`, casts, receivers ou guardar `denominator>0` em apenas uma versão para fabricar satisfatibilidade. Nenhuma aprovação de property migrada sem evidência individual.
+
+**Alerta P8: VERMELHO** por risco lógico; estado de migração individual permanece unresolved.
+
+## P9 — Celo: imports exatos `mento-core` e fases 1/2
+
+- **Fase 2 auditada:** `celo-org/celo-monorepo@a46ce55ebd3867fa69290bf3be040846d433525d`, `packages/protocol/contracts/common/UsingRegistry.sol` Git blob `cee300411c82433085cc8429ab4018f376fd5aed`. As importações dessa **revisão exata** referenciam `../stability/interfaces/IExchange.sol`, `IReserve.sol` e `IStableToken.sol`, NÃO `lib/mento-core`. O `packages/protocol/package.json` no mesmo commit tem blob `b82d12ee9fc0201ada26758527d666f404f7c703`, dependência `openzeppelin-solidity:^2.5.0` (range, não lock de instalação final). A árvore Git recursiva tinha 4.086 entradas, `truncated=false` e não apresentou os três caminhos `mento-core`.
+- **Snapshot Web3Bugs:** `contracts/9/contracts/common/UsingRegistry.sol:20–22` importa `../../lib/mento-core/contracts/interfaces/{IExchange,IReserve,IStableToken}.sol`, resolvidos como `contracts/9/lib/mento-core/...`; essa pasta **não existe no snapshot**. `AccountsHarness.sol` é do snapshot e não pode ser combinado automaticamente com `Accounts.sol` da fase 2 para criar um audit run artificial.
+- **Rodada 5, referência auditável:** `ROUND5_P9_PHASE2_ACCOUNTS_ABI.json` produziu 53 itens ABI (40 funções) para Accounts phase2 por `solc-js@0.5.13`; `ROUND5_P9_SNAPSHOT_SOLC_ERRORS.json` contém três `ParserError` dos imports mento ausentes. P9/6 chama `authorizeSignerWithSignature`, não presente na ABI phase2. Não classificar o erro de Solidity do snapshot como erro do parser CVL2.
+- **Conclusão negativa delimitada:** os três imports **não puderam ser identificados como artefatos da revisão de fase 2**; a ausência desses caminhos nessa árvore e no snapshot impede recuperar os seus bytes exatos **a partir dessas duas fontes**. O `mento-protocol/mento-core` contemporâneo tem outras revisões e não deve substituir sem commit, `package-lock`/submodule ou SHA da auditoria. Isso **não prova inexistência em qualquer arquivo histórico**.
+- **Gate do coordenador:** indicar commit pós-migração de `UsingRegistry` no snapshot, versão de `mento-core`, SHA por import, post-harness ABI, solc, runner e mapeamento de cada exemplo Accounts para a fase auditada; se não disponíveis, manter P9/1–7 e demais 54 unresolved. **Alerta P9: LARANJA.**
+
+## P20 — BentoBox: efeitos dos cinco patches
+
+- `contracts/20/spec/scripts/applyHarnesses.sh` contém reescritas sobre `contracts/BentoBox.sol`, `contracts/strategies/CompoundStrategy.sol` e `node_modules/@boringcrypto/boring-solidity/contracts/{BoringBatchable,BoringFactory,interfaces/IERC20}.sol`. Na Rodada 4 a execução **somente em scratch** alterou exatamente esses cinco arquivos (exit 0); SHA antes/depois por arquivo em `ROUND4_EVIDENCE.md` e `ROUND5_P20_PATCH_SHA.csv`.
+- `BentoBox.sol` do snapshot, upstream auditado `sushiswap/bentobox@0c68f2aa38cd600b5959197416fe090baa6a2a3f` e pós-patch são **três hashes distintos**. Em `CompoundStrategy.sol`, o caminho consultado no commit auditado retornou 404 (ausência nesse caminho, não impossibilidade geral). Em contrapartida os três arquivos @boringcrypto pré-patch conferem ao commit `39fdd3b4c78be0380edc95fde98d198f4bac5b41`.
+- **Efeito semântico transversal:** `safeT` renomeado para `t` (potencial mudança de chamadas/identificadores), `virtual` introduzido, construtor reescrito, interfaces de token ampliadas e `try cToken.redeem(...) {} catch {}` convertido em chamada sem catch. O último patch pode converter exceções antes toleradas em reverts observáveis. `to.call{value:value}(data)` foi redirecionado a `Nothing(to).nop{value:value}(data)`; por isso o universo de chamadas e exceções no alvo experimental não pode ser presumido igual ao auditado.
+- **MAX_INT:** `contracts/20/spec/compoundStrategyAdditional.spec:65` chama `MAX_INT()` sem defini-lo; `compoundStrategy.spec:60` e `strategy.spec:43` possuem definições em arquivos irmãos, sem import/config de composição demonstrado. Não copiar a função entre specs por intuição.
+- **Aplicação por property ID:** todos os 37 casos têm target/scenario e blocker individuais na `ROUND6_MATRIX_156.csv`. Casos ligados a BentoBox e a estratégias podem ser influenciados por contratos distintos; uma prova sobre BentoBox não cobre automaticamente CompoundStrategy e vice-versa. Próximo gate: árvore auditada pós-script, hashes da fonte de CompoundStrategy e dos imports, receita exata de composição dos specs e flags de runner. **Alerta P20: LARANJA.**
+
+## P11 — Keep: closure de imports não equivale ao runner
+
+- A árvore de dependência `keep-network/keep-ecdsa@a5cd1713621d94868765d1570fae373f4a497521/solidity/package-lock.json` permitiu na Rodada 5 verificar **6/6 tarballs SHA-512 SRI**, inclusive `openzeppelin-solidity@2.3.0`, `openzeppelin-solidity@2.4.0` aninhado, `@openzeppelin/contracts@2.5.1`, `@openzeppelin/upgrades@2.7.2`. O grafo textual de **45 Solidity locais alcançou 104 nós, 204 imports, zero faltantes**.
+- A SHA auditada no relatório é `658b02f237e25c370feaba80a7a3b13824190c4`, não demonstrada como o commit da branch `a5cd171...`. Os metadados do lock não identificam uma receita de Prover, versão do solc, `--verify`, selectors/summaries ou hashes de harness alterado do run reportado. Uma lista de imports resolvidos textualmente não prova execução de compilador nem ABI.
+- O snapshot `contracts/11` examinado não expôs runner `.sh`/`.conf` com a cena original no nível consultado; ausência nesse diretório não significa que o Prover histórico nunca teve configuração externa. Não atribuir o runner de outra branch ao relatório. **Alerta P11: AMARELO apenas na closure textual / LARANJA no gate CVL2.**
+
+## Referências e próxima intervenção humana
+
+| Projeto/IDs | Evidência literal | Gate bloqueante |
+|---|---|---|
+| P8/14–35 | `fees_LEQ_ATokenBal.spec:26–33`, `lastVaultBal_LEQ_ATokenBalThis.spec:20–27`, `positiveSupply_imply_positiveAssets.spec:29–36`; `ROUND5_P8_AXIOM_42.csv` | Autorizar estudo de alcance/consistência em spec derivada e fornecer flags históricas |
+| P8/1 | `accrueYieldCheck.spec:11–21,29–31`; N.spec:24–45 | Autorizar estudo W2/W3 sem alterar axiomas |
+| P9/1–7 | `UsingRegistry.sol` snapshot:20–22; phase2 blob `cee300...`; `ROUND5_P9_ACCOUNTS_ABI_1_7.csv` | Recuperar commit/lock de mento-core, reconstituir ABI do harness e ranqueamento histórico |
+| P20/1–37 | `spec/scripts/applyHarnesses.sh`, `compoundStrategyAdditional.spec:65`, siblings:60/:43; hashes R5 | Fixar scene pós patch, resolver MAX_INT e exception paths |
+| P11/1–16 | lock keep-ecdsa branch `a5cd171...` versus SHA do relatório `658b02f...`; `ROUND4_EVIDENCE.md` | Obter runner versionado, solc/links e modelo efetivo da auditoria |
+
+**Próxima decisão solicitada ao coordenador:** priorizar estudo P8 de satisfatibilidade em ambiente derivado (não realizado) e pedir os arquivos e versões históricas pendentes; não autorizar Prover, implementação CVL2, nova pasta results/cvl2 ou merge com base apenas neste relatório.
+
+**AGENTE-07 — RODADA 6**

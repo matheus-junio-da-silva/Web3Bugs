@@ -1,0 +1,6 @@
+# Narrow whitespace rule for the two byte-faithful historical CVL derivatives.
+# Original source whitespace is intentionally preserved; only the documented
+# CVL2 mathint parameter signature differs. Do not disable checks globally.
+# Keep blank-at-eof and space-before-tab checks enabled for both files.
+/1.spec whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/2.spec whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

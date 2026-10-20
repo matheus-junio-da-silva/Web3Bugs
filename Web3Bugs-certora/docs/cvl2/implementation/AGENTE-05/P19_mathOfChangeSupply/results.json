@@ -1,0 +1,161 @@
+{
+  "schema": "agent05-cvl2-experimental-implementation-v1",
+  "signature": "AGENTE-05 — FASE 2 / IMPLEMENTAÇÃO EXPERIMENTAL P19",
+  "base_commit": "2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3",
+  "branch": "experiment/cvl2-p19-mathint-agent05-phase2",
+  "research_pr": "https://github.com/matheus-junio-da-silva/Web3Bugs/pull/44",
+  "authorization_review": "https://github.com/matheus-junio-da-silva/Web3Bugs/pull/44#pullrequestreview-5577673176",
+  "classification": "02_unresolved",
+  "authorized_change": {
+    "before": "definition divPrecisely(uint x, uint y) returns mathint",
+    "after": "definition divPrecisely(mathint x, mathint y) returns mathint",
+    "occurrences_per_spec": 1,
+    "other_byte_changes": 0
+  },
+  "scope": {
+    "examples": [
+      1,
+      2
+    ],
+    "total_catalog_examples": 1386,
+    "unaffected_examples": 1384,
+    "original_files_edited": false,
+    "solidity_edited": false,
+    "prover_executed": false,
+    "cvl1_executed": false,
+    "merged": false
+  },
+  "original_target": {
+    "path": "Web3Bugs-certora/contracts/19/spec/harnesses/Dummy.sol",
+    "contract": "Dummy",
+    "sha256": "11f334db4012673cfb05cd9d1aca8904e9f3a822080a4d3c1c52ed474665c875"
+  },
+  "integrity_current_session": {
+    "method": "GitHub fetch of base-commit contents, deterministic one-occurrence replacement, standalone SHA256 over complete ASCII bytes, compare with coordinator's independent SHA256",
+    "status": "PASS",
+    "checks": [
+      "original SHA256",
+      "derived SHA256",
+      "replace-inverse exact bytes",
+      "single signature occurrence",
+      "different preserved assertions"
+    ],
+    "git_diff_check": {
+      "status": "FAILED_GITHUB_ACTIONS",
+      "exit_code": 2,
+      "command": "git -c core.whitespace=cr-at-eol diff --check origin/main...HEAD",
+      "head_sha": "82674b18e8c54aacf8d41166e7db5f3fe1505561",
+      "notes": "Ten original trailing-whitespace lines retained in new, byte-preserved specs: 4,7,17,20,22 in each. See CI_VALIDATION.md. Local git check not executed."
+    },
+    "catalog_validators": {
+      "status": "PASS_GITHUB_ACTIONS",
+      "run_id": 39333784639,
+      "head_sha": "82674b18e8c54aacf8d41166e7db5f3fe1505561",
+      "exit_codes": {
+        "check_specs": 0,
+        "check_contests_csv": 0,
+        "check_contracts": 0
+      },
+      "check_git_principal_workflow": {
+        "run_id": 39333784635,
+        "conclusion": "success"
+      },
+      "local_terminal_execution": "NOT_EXECUTED"
+    }
+  },
+  "coordinator_independent_experiment": {
+    "reported_at": "2026-10-19",
+    "evidence_url": "https://github.com/matheus-junio-da-silva/Web3Bugs/pull/44#pullrequestreview-5577673176",
+    "toolchain": {
+      "certora_cli": "8.19.0",
+      "solc": "0.8.7",
+      "timeout": "GNU timeout --signal=TERM --kill-after=5s 60s",
+      "compilation_only": true
+    },
+    "original_exit_codes": [
+      1,
+      1
+    ],
+    "candidate_exit_codes": [
+      0,
+      0
+    ],
+    "candidate_durations_ms": null,
+    "logs_for_candidate": "not attached in review; do not invent",
+    "semantic_equivalence": "NOT_PROVEN"
+  },
+  "current_session_compilation": {
+    "status": "NOT_EXECUTED",
+    "exit_codes": null,
+    "durations_ms": null,
+    "stdout_logs": null,
+    "stderr_logs": null,
+    "reason": "Remote Desktop Commander device offline; local container backend unavailable",
+    "reproduction": "REPRODUCE.md",
+    "not_a_prover_run": true
+  },
+  "examples": [
+    {
+      "example_id": 1,
+      "property": "mathOfChangeSupply",
+      "original": "Web3Bugs-certora/results/spec/complete/19/1.spec",
+      "derived": "Web3Bugs-certora/results/cvl2/02_unresolved/19/1.spec",
+      "original_sha256": "279c6c956d9084cb576f9e3f99dba63936d27b6e07401f9878751ac22808016a",
+      "derived_sha256": "6dff6a352b42887fbf8c8679a16cb35c20489fefd668ce960146e701fe4ff4af",
+      "assertion": "assert T2 <= MAX_SUPPLY();",
+      "current_session_integrity": "PASS",
+      "coordinator_candidate_compilation_exit": 0,
+      "semantic_review": "PENDING"
+    },
+    {
+      "example_id": 2,
+      "property": "mathOfChangeSupply",
+      "original": "Web3Bugs-certora/results/spec/complete/19/2.spec",
+      "derived": "Web3Bugs-certora/results/cvl2/02_unresolved/19/2.spec",
+      "original_sha256": "132af5147a37652fe4318fc3fda8b6148fe6da0cc3195397c86d1527677c3df7",
+      "derived_sha256": "cffd0de64eef3d466acbd706967e4729fd8aa8ad12e2e3376ba241eafa9adac3",
+      "assertion": "assert T2 <= T || T2 == NR;",
+      "current_session_integrity": "PASS",
+      "coordinator_candidate_compilation_exit": 0,
+      "semantic_review": "PENDING"
+    }
+  ],
+  "semantic_risks": {
+    "denominator_zero": true,
+    "example": {
+      "T": "340282366920938463463374607431768211455",
+      "NR": "1",
+      "RC": "1",
+      "RCPT": "0"
+    },
+    "domain_for_defined_calculations": "old uint256 call arguments numerically within range under retained requires; not a CVL1/CVL2 proof",
+    "cvl1_v_cvl2_equivalence": "UNRESOLVED",
+    "additional_requires_added": false,
+    "additional_casts_added": false
+  },
+  "official_docs": [
+    "https://docs.certora.com/en/latest/docs/cvl/cvl2/changes.html#mathematical-operations-return-mathint",
+    "https://docs.certora.com/en/latest/docs/cvl/cvl2/changes.html#implicit-and-explicit-casting",
+    "https://docs.certora.com/en/latest/docs/cvl/cvl2/migration.html#type-errors-in-arithmetic-and-casts"
+  ],
+  "github_actions": {
+    "reference_commit": "82674b18e8c54aacf8d41166e7db5f3fe1505561",
+    "official_validators_job": {
+      "run_id": 39333784639,
+      "job_id": 118338099471,
+      "conclusion": "failure_due_only_to_git_diff_check",
+      "validator_exit_codes": [
+        0,
+        0,
+        0
+      ],
+      "git_diff_check_exit_code": 2
+    },
+    "principal_workflow": {
+      "run_id": 39333784635,
+      "job_id": 118338099297,
+      "conclusion": "success"
+    },
+    "details": "CI_VALIDATION.md"
+  }
+}

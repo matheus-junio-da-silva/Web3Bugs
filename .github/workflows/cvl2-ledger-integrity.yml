@@ -5,12 +5,14 @@ on:
     paths:
       - 'Web3Bugs-certora/docs/cvl2/coordination/**'
       - 'Web3Bugs-certora/scripts/check_cvl2_round*_progress.py'
+      - 'Web3Bugs-certora/scripts/check_cvl2_round8_attempts.py'
       - '.github/workflows/cvl2-ledger-integrity.yml'
   push:
     branches: [main]
     paths:
       - 'Web3Bugs-certora/docs/cvl2/coordination/**'
       - 'Web3Bugs-certora/scripts/check_cvl2_round*_progress.py'
+      - 'Web3Bugs-certora/scripts/check_cvl2_round8_attempts.py'
       - '.github/workflows/cvl2-ledger-integrity.yml'
   workflow_dispatch:
 
@@ -38,6 +40,7 @@ jobs:
           python scripts/check_cvl2_round5_progress.py
           python scripts/check_cvl2_round6_progress.py
           python scripts/check_cvl2_round7_progress.py
+          python scripts/check_cvl2_round8_attempts.py
       - name: Round 7 negative test rejects a fabricated result
         working-directory: Web3Bugs-certora
         run: |
@@ -63,4 +66,28 @@ jobs:
               print(result.stdout)
               assert result.returncode == 1, f"Expected fail-closed, got {result.returncode}: {result.stderr}"
               assert "errors" in result.stdout and "limited_cvl2_compile_ok" in result.stdout
+          PY
+      - name: Round 8 negative test rejects unproven semantic promotion
+        working-directory: Web3Bugs-certora
+        run: |
+          python - <<'PY'
+          import csv, subprocess, tempfile, sys
+          from pathlib import Path
+          with Path("docs/cvl2/coordination/ROUND8_COMPILATION_ATTEMPTS.csv").open(newline="") as f:
+              r = csv.DictReader(f)
+              rows, cols = list(r), r.fieldnames
+          assert len(rows) == 18
+          rows[-1]["semantic_equivalence"] = "PROVEN"
+          with tempfile.TemporaryDirectory() as d:
+              bad = Path(d) / "fake.csv"
+              with bad.open("w", newline="") as f:
+                  w = csv.DictWriter(f, fieldnames=cols)
+                  w.writeheader()
+                  w.writerows(rows)
+              out = subprocess.run([sys.executable, "scripts/check_cvl2_round8_attempts.py",
+                                    "--attempts", str(bad)],
+                                   text=True, capture_output=True, timeout=30)
+              print(out.stdout)
+              assert out.returncode == 1, out.stderr
+              assert "unsupported semantic promotion" in out.stdout
           PY

@@ -16,3 +16,6 @@ Testes externos restritos a scratch fora do checkout: cópia Opyn `applyHarnesse
 A checagem de diff **commitado** será registrada no comentário de publicação, com SHA final, `git -c core.whitespace=cr-at-eol diff --check BASE...HEAD`, contagem de arquivos e lista de exceções de escopo. O próprio arquivo não é prova de execução futura.
 
 A verificação dos scripts estruturais não equivale a compilação CVL2, equivalência semântica ou resultado do Prover.
+
+## Complemento P5 — fechamento textual, somente scratch
+Em checkout isolado de `aave-starknet-bridge@4c010c18`, dois tarballs Yarn foram baixados e validados `sha1sum -c`: `core-v3@1.16.2` OK, `protocol-v2@1.0.1` OK. As 11 seeds de `verifyBridge.sh` com `certora/munged/l1` do patch e `node_modules` extraído resultaram em 40 sources / 64 imports / 0 imports ausentes sob parser estático (regex, não solc). A evidência por arquivo SHA-256 está em `5/ROUND4_IMPORT_CLOSURE.csv`. Não foi feita compilação CVL, Prover ou instalação de packages no checkout de produção.

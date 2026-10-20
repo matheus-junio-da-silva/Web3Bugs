@@ -1,0 +1,90 @@
+{
+  "repo": "matheus-junio-da-silva/Web3Bugs",
+  "baseline_commit": "2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3",
+  "research_pr": "https://github.com/matheus-junio-da-silva/Web3Bugs/pull/40",
+  "certora_cli": "certora-cli 8.19.0",
+  "solidity_compiler": "solc 0.8.7+commit.e28d00a7.Linux.g++",
+  "python_version": "Python 3.14.4",
+  "timeout": "GNU timeout --signal=TERM --kill-after=5s 60s",
+  "compilation_only": true,
+  "run_prover": false,
+  "working_copy_root": "/home/mat/cvl2-agent05-pilot-20261019",
+  "results": [
+    {
+      "example_id": 1,
+      "source_path": "Web3Bugs-certora/results/spec/complete/19/1.spec",
+      "source_sha256": "279c6c956d9084cb576f9e3f99dba63936d27b6e07401f9878751ac22808016a",
+      "copy_sha256": "279c6c956d9084cb576f9e3f99dba63936d27b6e07401f9878751ac22808016a",
+      "source_byte_identical": true,
+      "target_path": "Web3Bugs-certora/contracts/19/spec/harnesses/Dummy.sol",
+      "target_sha256": "11f334db4012673cfb05cd9d1aca8904e9f3a822080a4d3c1c52ed474665c875",
+      "target_copy_sha256": "11f334db4012673cfb05cd9d1aca8904e9f3a822080a4d3c1c52ed474665c875",
+      "target_byte_identical": true,
+      "status": "COMPILE_ERROR",
+      "exit_code": 1,
+      "duration_ms": 3224,
+      "timeout": false,
+      "stderr_bytes": 0,
+      "stdout_bytes": 828,
+      "error_sites": [
+        {
+          "line": 18,
+          "col": 34,
+          "expression": "(T - NR)",
+          "expression_type": "mathint",
+          "expected_type": "uint256"
+        },
+        {
+          "line": 21,
+          "col": 32,
+          "expression": "RCPT",
+          "expression_type": "mathint",
+          "expected_type": "uint256"
+        }
+      ],
+      "typechecker": "local CVL2 checker; not formal proof",
+      "assertion": "assert T2 <= MAX_SUPPLY();"
+    },
+    {
+      "example_id": 2,
+      "source_path": "Web3Bugs-certora/results/spec/complete/19/2.spec",
+      "source_sha256": "132af5147a37652fe4318fc3fda8b6148fe6da0cc3195397c86d1527677c3df7",
+      "copy_sha256": "132af5147a37652fe4318fc3fda8b6148fe6da0cc3195397c86d1527677c3df7",
+      "source_byte_identical": true,
+      "target_path": "Web3Bugs-certora/contracts/19/spec/harnesses/Dummy.sol",
+      "target_sha256": "11f334db4012673cfb05cd9d1aca8904e9f3a822080a4d3c1c52ed474665c875",
+      "target_copy_sha256": "11f334db4012673cfb05cd9d1aca8904e9f3a822080a4d3c1c52ed474665c875",
+      "target_byte_identical": true,
+      "status": "COMPILE_ERROR",
+      "exit_code": 1,
+      "duration_ms": 3419,
+      "timeout": false,
+      "stderr_bytes": 0,
+      "stdout_bytes": 828,
+      "error_sites": [
+        {
+          "line": 18,
+          "col": 34,
+          "expression": "(T - NR)",
+          "expression_type": "mathint",
+          "expected_type": "uint256"
+        },
+        {
+          "line": 21,
+          "col": 32,
+          "expression": "RCPT",
+          "expression_type": "mathint",
+          "expected_type": "uint256"
+        }
+      ],
+      "typechecker": "local CVL2 checker; not formal proof",
+      "assertion": "assert T2 <= T || T2 == NR;"
+    }
+  ],
+  "preflight_environment_error": {
+    "example": 1,
+    "exit_code": 1,
+    "duration_ms": 2320,
+    "cause": "solc shim depended on Python user site solc_select with HOME isolated; recovered by selecting already installed native solc binary (no spec edit)"
+  }
+}

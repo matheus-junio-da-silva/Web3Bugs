@@ -1,0 +1,623 @@
+# Round5 compiler stdout/stderr (local scratch; no Prover or CVL1, 2026-10-20)
+# P5 first attempt symlink-denied exit 1; P5 retry exit 0.
+# P14 four patched targets + unpatched Controller all exit 0.
+
+======== BEGIN P5/stdout.txt bytes=0 sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+======== END P5/stdout.txt
+
+======== BEGIN P5/stderr.txt bytes=5463 sha256=5f51f2e5e659aaeea821b3124aebdaf06a385f8258de118f8a291f9bf0edf8d2
+Error: Source "certora/munged/l1/Bridge.sol" not found: File outside of allowed directories.
+ --> certora/harness/BridgeHarness.sol:4:1:
+  |
+4 | import "../munged/l1/Bridge.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "certora/munged/l1/interfaces/IATokenWithPool.sol" not found: File outside of allowed directories.
+ --> certora/harness/BridgeHarness.sol:8:1:
+  |
+8 | import {IATokenWithPool} from "../munged/l1/interfaces/IATokenWithPool.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/BridgeL2Harness.sol
+
+Error: Source "certora/munged/l1/interfaces/IBridge.sol" not found: File outside of allowed directories.
+ --> certora/harness/BridgeL2Harness.sol:5:1:
+  |
+5 | import {IBridge} from "../munged/l1/interfaces/IBridge.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/IncentivesControllerMock_L1.sol
+
+Error: Source "certora/munged/l1/Bridge.sol" not found: File outside of allowed directories.
+ --> certora/harness/IncentivesControllerMock_L1.sol:5:1:
+  |
+5 | import {Bridge} from "../munged/l1/Bridge.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/SymbolicLendingPoolL1.sol
+
+Error: Source "certora/munged/l1/interfaces/IAToken.sol" not found: File outside of allowed directories.
+ --> certora/harness/SymbolicLendingPoolL1.sol:5:1:
+  |
+5 | import {IAToken} from "../munged/l1/interfaces/IAToken.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/ATokenWithPool.sol
+
+Error: Source "certora/munged/l1/interfaces/IAaveIncentivesController.sol" not found: File outside of allowed directories.
+ --> certora/harness/ATokenWithPool.sol:8:1:
+  |
+8 | import {IAaveIncentivesController} from "../munged/l1/interfaces/IAaveIncentivesController.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "certora/munged/l1/interfaces/ILendingPool.sol" not found: File outside of allowed directories.
+ --> certora/harness/ATokenWithPool.sol:9:1:
+  |
+9 | import {ILendingPool} from "../munged/l1/interfaces/ILendingPool.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/IBridge_L2.sol
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/IStaticAToken.sol
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/IERC20_Extended.sol
+
+Error: Source "certora/munged/l1/interfaces/IBridge.sol" not found: File outside of allowed directories.
+ --> certora/harness/DummyStaticATokenImpl.sol:8:1:
+  |
+8 | import {IBridge} from "../munged/l1/interfaces/IBridge.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/IATokenWithPool.sol
+
+Error: Source "certora/munged/l1/interfaces/IAaveIncentivesController.sol" not found: File outside of allowed directories.
+ --> certora/harness/IATokenWithPool.sol:3:1:
+  |
+3 | import {IAaveIncentivesController} from "../munged/l1/interfaces/IAaveIncentivesController.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+======== END P5/stderr.txt
+
+======== BEGIN P5/stdout_copy.txt bytes=0 sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+======== END P5/stdout_copy.txt
+
+======== BEGIN P5/stderr_copy.txt bytes=10315 sha256=52448c77fd755f3f753a84f3839339d17594e792195df69a413a1d4d5065c9c0
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/BridgeL2Harness.sol
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/IncentivesControllerMock_L1.sol
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/SymbolicLendingPoolL1.sol
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/ATokenWithPool.sol
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/IBridge_L2.sol
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/IStaticAToken.sol
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/IERC20_Extended.sol
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> certora/harness/IATokenWithPool.sol
+
+Warning: This declaration shadows an existing declaration.
+  --> certora/harness/DummyERC20Impl.sol:22:18:
+   |
+22 |     function add(uint256 a, uint256 b) internal pure returns (uint256) {
+   |                  ^^^^^^^^^
+Note: The shadowed declaration is here:
+ --> certora/harness/DummyERC20Impl.sol:7:5:
+  |
+7 |     mapping(address => mapping(address => uint256)) a;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: This declaration shadows an existing declaration.
+  --> certora/harness/DummyERC20Impl.sol:22:29:
+   |
+22 |     function add(uint256 a, uint256 b) internal pure returns (uint256) {
+   |                             ^^^^^^^^^
+Note: The shadowed declaration is here:
+ --> certora/harness/DummyERC20Impl.sol:6:5:
+  |
+6 |     mapping(address => uint256) b;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: This declaration shadows an existing declaration.
+  --> certora/harness/DummyERC20Impl.sol:28:18:
+   |
+28 |     function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+   |                  ^^^^^^^^^
+Note: The shadowed declaration is here:
+ --> certora/harness/DummyERC20Impl.sol:7:5:
+  |
+7 |     mapping(address => mapping(address => uint256)) a;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: This declaration shadows an existing declaration.
+  --> certora/harness/DummyERC20Impl.sol:28:29:
+   |
+28 |     function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+   |                             ^^^^^^^^^
+Note: The shadowed declaration is here:
+ --> certora/harness/DummyERC20Impl.sol:6:5:
+  |
+6 |     mapping(address => uint256) b;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/ATokenWithPool.sol:202:9:
+    |
+202 |         address target,
+    |         ^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> certora/harness/SymbolicLendingPoolL1.sol:27:9:
+   |
+27 |         uint16 referralCode
+   |         ^^^^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:173:9:
+    |
+173 |         address l1Token,
+    |         ^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:174:9:
+    |
+174 |         uint256 l2sender,
+    |         ^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:175:9:
+    |
+175 |         address recipient,
+    |         ^^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:176:9:
+    |
+176 |         uint256 amount,
+    |         ^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:177:9:
+    |
+177 |         uint256 l2RewardsIndex,
+    |         ^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:178:9:
+    |
+178 |         uint256 toUnderlyingAsset
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:185:9:
+    |
+185 |         address l1Token,
+    |         ^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:186:9:
+    |
+186 |         address from,
+    |         ^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:187:9:
+    |
+187 |         uint256 blockNumber,
+    |         ^^^^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:196:9:
+    |
+196 |         uint256 l2sender,
+    |         ^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:197:9:
+    |
+197 |         address recipient,
+    |         ^^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:198:9:
+    |
+198 |         uint256 amount
+    |         ^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:271:9:
+    |
+271 |         address l1Token,
+    |         ^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:272:9:
+    |
+272 |         uint256 amount,
+    |         ^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:273:9:
+    |
+273 |         uint256 l2Recipient,
+    |         ^^^^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:274:9:
+    |
+274 |         uint256 rewardsIndex,
+    |         ^^^^^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:275:9:
+    |
+275 |         uint256 blockNumber,
+    |         ^^^^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:285:9:
+    |
+285 |         uint256 l2Recipient,
+    |         ^^^^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> certora/harness/BridgeHarness.sol:287:9:
+    |
+287 |         uint256 blockNumber,
+    |         ^^^^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> certora/harness/IncentivesControllerMock_L1.sol:48:9:
+   |
+48 |         address[] calldata assets,
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> certora/harness/IncentivesControllerMock_L1.sol:64:32:
+   |
+64 |     function getRewardsBalance(address[] calldata assets, address user)
+   |                                ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: Function state mutability can be restricted to view
+  --> certora/harness/DummyERC20Impl.sol:18:5:
+   |
+18 |     function myAddress() public returns (address) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> certora/harness/BridgeHarness.sol:172:5:
+    |
+172 |     function _consumeMessage(
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> certora/harness/BridgeHarness.sol:195:5:
+    |
+195 |     function _consumeBridgeRewardMessage(
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+
+======== END P5/stderr_copy.txt
+
+======== BEGIN P14/ControllerHarness.stdout bytes=0 sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+======== END P14/ControllerHarness.stdout
+
+======== BEGIN P14/ControllerHarness.stderr bytes=3634 sha256=bbf0815e3abb3056678e5ccdfd37a2c2d2d7b184b85fdb08ec1c043b73f8cb80
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> specs/harness/ControllerHarness.sol
+
+Warning: This declaration shadows an existing declaration.
+  --> specs/harness/ControllerHarness.sol:81:8:
+   |
+81 |     (, bool isValidVault) = calculator.getExcessCollateral(
+   |        ^^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+  --> specs/harness/ControllerHarness.sol:79:3:
+   |
+79 |   function isValidVault(address owner, uint256 vaultId) external view returns (bool) {
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> specs/harness/ControllerHarness.sol:68:25:
+   |
+68 |   function isValidAsset(address asset) external view returns (bool) {
+   |                         ^^^^^^^^^^^^^
+
+Warning: Function state mutability can be restricted to pure
+  --> specs/harness/ControllerHarness.sol:68:3:
+   |
+68 |   function isValidAsset(address asset) external view returns (bool) {
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+  --> specs/harness/ControllerHarness.sol:90:3:
+   |
+90 |   function getVaultCollateralAmount(
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+  --> specs/harness/ControllerHarness.sol:99:3:
+   |
+99 |   function getVaultCollateralAsset(
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/ControllerHarness.sol:108:3:
+    |
+108 |   function getVaultLongAmount(
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/ControllerHarness.sol:117:3:
+    |
+117 |   function getVaultLongOtoken(
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/ControllerHarness.sol:126:3:
+    |
+126 |   function getVaultShortAmount(
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/ControllerHarness.sol:135:3:
+    |
+135 |   function getVaultShortOtoken(
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Contract code size exceeds 24576 bytes (a limit introduced in Spurious Dragon). This contract may not be deployable on mainnet. Consider enabling the optimizer (with a low "runs" value!), turning off revert strings, or using libraries.
+  --> contracts/core/Controller.sol:66:1:
+   |
+66 | contract Controller is Initializable, OwnableUpgradeSafe, ReentrancyGuardUpgradeSafe {
+   | ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Contract code size exceeds 24576 bytes (a limit introduced in Spurious Dragon). This contract may not be deployable on mainnet. Consider enabling the optimizer (with a low "runs" value!), turning off revert strings, or using libraries.
+  --> specs/harness/ControllerHarness.sol:10:1:
+   |
+10 | contract ControllerHarness is Controller {
+   | ^ (Relevant source part starts here and spans across multiple lines).
+
+
+======== END P14/ControllerHarness.stderr
+
+======== BEGIN P14/ControllerHarnessExtra.stdout bytes=0 sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+======== END P14/ControllerHarnessExtra.stdout
+
+======== BEGIN P14/ControllerHarnessExtra.stderr bytes=4418 sha256=1d4921b9c1c71e61eb757920d5e7c38f9305bca7b7f345bed2688564afd54f1c
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> specs/harness/ControllerHarnessExtra.sol
+
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> specs/harness/ControllerHarness.sol
+
+Warning: This declaration shadows an existing declaration.
+  --> specs/harness/ControllerHarness.sol:81:8:
+   |
+81 |     (, bool isValidVault) = calculator.getExcessCollateral(
+   |        ^^^^^^^^^^^^^^^^^
+Note: The shadowed declaration is here:
+  --> specs/harness/ControllerHarness.sol:79:3:
+   |
+79 |   function isValidVault(address owner, uint256 vaultId) external view returns (bool) {
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  --> specs/harness/ControllerHarness.sol:68:25:
+   |
+68 |   function isValidAsset(address asset) external view returns (bool) {
+   |                         ^^^^^^^^^^^^^
+
+Warning: Function state mutability can be restricted to pure
+  --> specs/harness/ControllerHarness.sol:68:3:
+   |
+68 |   function isValidAsset(address asset) external view returns (bool) {
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+  --> specs/harness/ControllerHarness.sol:90:3:
+   |
+90 |   function getVaultCollateralAmount(
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+  --> specs/harness/ControllerHarness.sol:99:3:
+   |
+99 |   function getVaultCollateralAsset(
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/ControllerHarness.sol:108:3:
+    |
+108 |   function getVaultLongAmount(
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/ControllerHarness.sol:117:3:
+    |
+117 |   function getVaultLongOtoken(
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/ControllerHarness.sol:126:3:
+    |
+126 |   function getVaultShortAmount(
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/ControllerHarness.sol:135:3:
+    |
+135 |   function getVaultShortOtoken(
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Contract code size exceeds 24576 bytes (a limit introduced in Spurious Dragon). This contract may not be deployable on mainnet. Consider enabling the optimizer (with a low "runs" value!), turning off revert strings, or using libraries.
+  --> contracts/core/Controller.sol:66:1:
+   |
+66 | contract Controller is Initializable, OwnableUpgradeSafe, ReentrancyGuardUpgradeSafe {
+   | ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Contract code size exceeds 24576 bytes (a limit introduced in Spurious Dragon). This contract may not be deployable on mainnet. Consider enabling the optimizer (with a low "runs" value!), turning off revert strings, or using libraries.
+  --> specs/harness/ControllerHarness.sol:10:1:
+   |
+10 | contract ControllerHarness is Controller {
+   | ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Contract code size exceeds 24576 bytes (a limit introduced in Spurious Dragon). This contract may not be deployable on mainnet. Consider enabling the optimizer (with a low "runs" value!), turning off revert strings, or using libraries.
+  --> specs/harness/ControllerHarnessExtra.sol:23:1:
+   |
+23 | contract ControllerHarnessExtra is ControllerHarness {
+   | ^ (Relevant source part starts here and spans across multiple lines).
+
+
+======== END P14/ControllerHarnessExtra.stderr
+
+======== BEGIN P14/MarginVaultHarness.stdout bytes=0 sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+======== END P14/MarginVaultHarness.stdout
+
+======== BEGIN P14/MarginVaultHarness.stderr bytes=4323 sha256=5a98af904be264c2e0c172df1334942a63c61e955a46f6133b7d0c9ea9f9c7f6
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> specs/harness/MarginVaultHarness.sol
+
+Warning: Function state mutability can be restricted to view
+  --> specs/harness/MarginVaultHarness.sol:65:3:
+   |
+65 |   function totalCollateral() external returns (uint256) {
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+  --> specs/harness/MarginVaultHarness.sol:74:3:
+   |
+74 |   function collateralAmountLength() external returns (uint256) {
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+  --> specs/harness/MarginVaultHarness.sol:78:3:
+   |
+78 |   function collateralAssetsLength() external returns (uint256) {
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+  --> specs/harness/MarginVaultHarness.sol:82:3:
+   |
+82 |   function getCollateralAmount(uint256 index) external returns (uint256) {
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+  --> specs/harness/MarginVaultHarness.sol:86:3:
+   |
+86 |   function getCollateralAsset(uint256 index) external returns (address) {
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+  --> specs/harness/MarginVaultHarness.sol:91:3:
+   |
+91 |   function totalShortAmount() external returns (uint256) {
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+  --> specs/harness/MarginVaultHarness.sol:99:3:
+   |
+99 |   function shortAmountLength() external returns (uint256) {
+   |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/MarginVaultHarness.sol:103:3:
+    |
+103 |   function shortOtokensLength() external returns (uint256) {
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/MarginVaultHarness.sol:107:3:
+    |
+107 |   function getShortOtoken(uint256 index) external returns (address) {
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/MarginVaultHarness.sol:111:3:
+    |
+111 |   function getShortAmount(uint256 index) external returns (uint256) {
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/MarginVaultHarness.sol:117:3:
+    |
+117 |   function totalLongAmount() external returns (uint256) {
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/MarginVaultHarness.sol:125:3:
+    |
+125 |   function longAmountLength() external returns (uint256) {
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/MarginVaultHarness.sol:129:3:
+    |
+129 |   function longOtokensLength() external returns (uint256) {
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/MarginVaultHarness.sol:133:3:
+    |
+133 |   function getLongOtoken(uint256 index) external returns (address) {
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+Warning: Function state mutability can be restricted to view
+   --> specs/harness/MarginVaultHarness.sol:137:3:
+    |
+137 |   function getLongAmount(uint256 index) external returns (uint256) {
+    |   ^ (Relevant source part starts here and spans across multiple lines).
+
+
+======== END P14/MarginVaultHarness.stderr
+
+======== BEGIN P14/Controller.stdout bytes=0 sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+======== END P14/Controller.stdout
+
+======== BEGIN P14/Controller.stderr bytes=460 sha256=6aaee7bd7a2ad2088f96b00865483ebc5d1849e6c64d90060629a074f2e6e3b6
+Warning: Contract code size exceeds 24576 bytes (a limit introduced in Spurious Dragon). This contract may not be deployable on mainnet. Consider enabling the optimizer (with a low "runs" value!), turning off revert strings, or using libraries.
+  --> contracts/core/Controller.sol:66:1:
+   |
+66 | contract Controller is Initializable, OwnableUpgradeSafe, ReentrancyGuardUpgradeSafe {
+   | ^ (Relevant source part starts here and spans across multiple lines).
+
+
+======== END P14/Controller.stderr
+
+======== BEGIN P14/ControllerOriginal.stdout bytes=0 sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+
+======== END P14/ControllerOriginal.stdout
+
+======== BEGIN P14/ControllerOriginal.stderr bytes=460 sha256=6aaee7bd7a2ad2088f96b00865483ebc5d1849e6c64d90060629a074f2e6e3b6
+Warning: Contract code size exceeds 24576 bytes (a limit introduced in Spurious Dragon). This contract may not be deployable on mainnet. Consider enabling the optimizer (with a low "runs" value!), turning off revert strings, or using libraries.
+  --> contracts/core/Controller.sol:66:1:
+   |
+66 | contract Controller is Initializable, OwnableUpgradeSafe, ReentrancyGuardUpgradeSafe {
+   | ^ (Relevant source part starts here and spans across multiple lines).
+
+
+======== END P14/ControllerOriginal.stderr

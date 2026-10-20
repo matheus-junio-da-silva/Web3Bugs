@@ -41,3 +41,14 @@
 - git diff --cached --check — exit 0 após normalização de whitespace apenas nos documentos; log /home/mat/cvl2-agent01-isolated/qa_logs/second_round/staged_diff_check_final.log, vazio.
 - git -c core.whitespace=cr-at-eol diff --check 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3 — exit 0 antes do commit; log /home/mat/cvl2-agent01-isolated/qa_logs/second_round/full_base_diff_check.log.
 - Status final dos três validadores será novamente verificado após o commit. Comparação baseline...HEAD integral a ser executada e registrada antes do retorno à revisão.
+
+## Quarta rodada — triagem documental e cross-audit (2026-10-20)
+
+- Checkout: `/home/mat/cvl2-agent01-isolated/Web3Bugs`, branch exclusiva `research/cvl2-agente-01`, entrada `763f3f38d28f1b37a4686c812e2bfc6699bbc35a`.
+- Relatório detalhado: `ROUND4_FINDINGS.md`. Matriz com **266 linhas**: `round4_progress_matrix.csv`, contendo identificação, URLs/commits/blobs, dependências, métodos, status de compilação `NOT_RUN_COORDINATOR_GATE_REQUIRED`, risco, bloqueio e próxima ação.
+- Leitura automatizada de 1.062 artefatos originais e reconciliação de hashes Git do corpus: **266 .spec, 266 .sol, 266 .md, 264 .txt**, todos iguais ao `individual_source_audit.csv`. Não confundir esse check de integridade com revisão humana individual completa nesta rodada.
+- `semantic_candidate_gate_matrix.csv`: 988 ocorrências iniciais validadas contra textos/linhas originais; **14** `sig:` falsamente ativos dentro do comentário multilinha de `incomplete/11` e `/12` reclassificados; **cinco** chamadas legadas (quatro `invoke`, uma `sinvoke`) incluídas com gates, totalizando **993 registros**. Entrada `source_evidence` da sintaxe `sig:` em targets diversos deixa de usar o LibParamHarness como prova do método do target errado.
+- Fonte: `dinngo/furucombo-contract@c90dec1046e5e26edf70f985dd86381403912482`; `OpenZeppelin/openzeppelin-contracts@6be5ffe54fc8982b7c1d0f45d4cb7bbd313107cd` (tag v3.3.0, **não** prova pacote/ABI).
+- Triagem de compilação: só `complete/33–34` apresentam source/target/runner auditados e nenhum Perl para o target; contudo **nenhum gate individual autorizou spec derivada, mesmo temporária**. Todos os 266 marcados **NOT_RUN**. Nenhum Prover, CVL1, solc, Perl, CVL2 ou `--compilation_steps_only` executado; nenhum log de compilação existe.
+- Revisão cruzada read-only `PR #37`: `PR37_READONLY_AUDIT.md`; em checkout distinto, HEAD `3da04efedfe6d75b049b15fa37a040572260eca4`; 181 chaves, 339 observações ABI, 16 comparações source, dados sem divergências e diff commitado EXIT 0; sem alteração na branch do AGENTE-02.
+- **Validação final do commit da Rodada 4:** saída de logs locais `/home/mat/cvl2-agent01-isolated/qa_logs/round4/` e HEAD/exit codes comunicados no PR após o commit. Nunca tratar `git diff --cached --check` como verificação de BASE...HEAD.

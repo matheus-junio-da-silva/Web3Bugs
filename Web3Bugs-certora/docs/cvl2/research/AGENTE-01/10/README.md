@@ -9,3 +9,9 @@ Lidos integralmente: 266 N.spec, 266 N.sol, 266 N.md e 264 N.txt. Arquivos auxil
 ## Segunda revisão independente
 - Por ocorrência N.spec: semantic_candidate_gate_matrix.csv (classificações obrigatória / opcional / bloqueada / sem cast), perl_getter_scope_matrix.csv (28 targets) e patterns/PAT-08-independent-second-review.md (citações e resultados negativos).
 - Correção crítica 34: getParams com require false permanece excluído da propriedade; sem alerta genérico cast em lastReverted. No 33 external em dois getters está fundamentado no LibParamHarness original auditado. Nenhuma spec editada.
+
+## Rodada 4 (2026-10-20)
+- Progresso individual com 266 chaves e evidencias: round4_progress_matrix.csv; ver ROUND4_FINDINGS.md.
+- semantic_candidate_gate_matrix.csv: 993 ocorrencias, apos 14 seletores em comentarios reclassificados e 5 invocacoes legadas anotadas (sem execucao).
+- Auditoria independente somente leitura do AGENTE-02 PR #37: PR37_READONLY_AUDIT.md.
+- Sem implementacao CVL2, compilacao/Prover ou gate de Fase 2.

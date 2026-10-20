@@ -32,7 +32,7 @@ Os checks requeridos na raiz Web3Bugs-certora são exatamente:
 - python3 scripts/check_contracts.py .
 - no root git: git -c core.whitespace=cr-at-eol diff --check 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3...HEAD
 
-A execução **após commit** será registrada no arquivo [ROUND9_VALIDATION_RESULTS.json](ROUND9_VALIDATION_RESULTS.json), com exit, stdout/stderr e HEAD observada. O registro desse arquivo não substitui compilação CVL2. Na resposta final e comentário PR, declarar a HEAD final e somente checks que efetivamente tenham concluído com exit observado.
+Os quatro comandos FORAM EXECUTADOS após o primeiro commit documental 4abb8cf2a378a1a550f6b0978ea86357e8b08f4c, todos EXIT 0: check_specs (1386 propriedades e 1390 relações), check_contests_csv, check_contracts e git diff --check BASE...HEAD. A comparação registrou 270 arquivos alterados, todos sob AGENTE-06. [ROUND9_VALIDATION_RESULTS.json](ROUND9_VALIDATION_RESULTS.json) preserva argv, working directory, stdout/stderr, códigos de saída e SHA da HEAD efetivamente validada. Após adicionar este registro haverá um segundo commit; os checks devem ser repetidos sobre a HEAD final e relatados no comentário do PR. Nenhum desses checks prova compilação CVL2 ou equivalência semântica.
 
 ## Gate humano / semântica
 

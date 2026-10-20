@@ -1,0 +1,132 @@
+{
+  "compiler": "0.7.6+commit.7338295f.Emscripten.clang",
+  "soljson_sha256": "b94e69dfb056b3e26080f805ab43b668afbc0ac70bf124bfb7391ecfc0172ad2",
+  "input_sha256": "5c7132ca9b765d753e5ea60324c529c3ad647a40586842d4e378cb7ba1698602",
+  "inputs": {
+    "spec/harness/PoolActionsWrapper.sol": {
+      "sha256": "b65f025aa47b33060f417720ae432b938dcb10376b720fa7e17c08c60198a08a",
+      "bytes": 1756
+    },
+    "contracts/popsicle-v3-optimizer/interfaces/IUniswapV3Pool.sol": {
+      "sha256": "7d3d3fe72390b96e6f0c66f8ad35476b8dbd1ee6a889bab574a6e297368d29bf",
+      "bytes": 660
+    },
+    "contracts/popsicle-v3-optimizer/libraries/PoolVariables.sol": {
+      "sha256": "bcdecb702e71f1a14fd8df5a240d54e629169edf67e82c3ffacd63d80462469a",
+      "bytes": 8969
+    },
+    "contracts/popsicle-v3-optimizer/libraries/SafeCast.sol": {
+      "sha256": "af0967db2f7d12e6f19a86e5702e16391d1b5d1c0f44776554c6623d112f231d",
+      "bytes": 1333
+    },
+    "contracts/popsicle-v3-optimizer/libraries/PoolActions.sol": {
+      "sha256": "99fb81c86c3cd18d325a8b6e0cf43c4744940b63c9cdc9e4d2357111cecb0a2e",
+      "bytes": 2729
+    },
+    "contracts/popsicle-v3-optimizer/interfaces/pool/IUniswapV3PoolImmutables.sol": {
+      "sha256": "e9189ad473ac5e5c854e104b570018bf6b6de140fec607b285d299705f48fd72",
+      "bytes": 1033
+    },
+    "contracts/popsicle-v3-optimizer/interfaces/pool/IUniswapV3PoolState.sol": {
+      "sha256": "ad95e4e331111fde9f31560a03ad70be31f960b2757f7cb659b919f56a282151",
+      "bytes": 2730
+    },
+    "contracts/popsicle-v3-optimizer/interfaces/pool/IUniswapV3PoolDerivedState.sol": {
+      "sha256": "4be59a5b079463655df8cdc57fc45fccb9dcdd783e977c5e80c01ace45f3c3d7",
+      "bytes": 1568
+    },
+    "contracts/popsicle-v3-optimizer/interfaces/pool/IUniswapV3PoolActions.sol": {
+      "sha256": "c3e12be6c2fb2a3adc1b397de7ef211cae4eef3305df158345cec8075c998e0b",
+      "bytes": 4766
+    },
+    "contracts/popsicle-v3-optimizer/libraries/LiquidityAmounts.sol": {
+      "sha256": "ed46e510180b823130cf8726adeb999ad4e13c07f4e88bbc77b13d5f7bf5af8a",
+      "bytes": 6744
+    },
+    "contracts/popsicle-v3-optimizer/libraries/TickMath.sol": {
+      "sha256": "f4ec852cba69c2203222af09762da45e69148a374c290d33a0c961b9b2e35a37",
+      "bytes": 8682
+    },
+    "contracts/popsicle-v3-optimizer/libraries/PositionKey.sol": {
+      "sha256": "b0b88c6cf968e9a2a4b1d169a0a979ad514d37ba1b60fb8154b51ec47bc9ee69",
+      "bytes": 326
+    },
+    "contracts/popsicle-v3-optimizer/libraries/LowGasSafeMath.sol": {
+      "sha256": "4ce6964bca58e1c39ba29b6c0efdf6f15a5711dd6a24b09c4b6948d7a6b1fe8f",
+      "bytes": 4402
+    },
+    "contracts/popsicle-v3-optimizer/libraries/SqrtPriceMath.sol": {
+      "sha256": "0c79b64557f3884e6d36126714f8070b5442f7069fa750f796aff84b0612c9b7",
+      "bytes": 4761
+    },
+    "contracts/popsicle-v3-optimizer/libraries/FullMath.sol": {
+      "sha256": "8bb11e986e28c9d8d596f3078d870a6555205849923a917a4b4f440be5c2a7bc",
+      "bytes": 5183
+    },
+    "contracts/popsicle-v3-optimizer/libraries/FixedPoint96.sol": {
+      "sha256": "766c35294b745a9071a0ef4686baab0958b82ca784668355eb6189d12590f743",
+      "bytes": 379
+    },
+    "contracts/popsicle-v3-optimizer/libraries/UnsafeMath.sol": {
+      "sha256": "9ea29335d9380113da945b4a8e12fdd0c6393473261b2bce0bd85e0ff15a45b9",
+      "bytes": 1028
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.methodIdentifiers"
+        ]
+      }
+    }
+  },
+  "errors": [
+    {
+      "component": "general",
+      "errorCode": "1878",
+      "formattedMessage": "spec/harness/PoolActionsWrapper.sol: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing \"SPDX-License-Identifier: <SPDX-License>\" to each source file. Use \"SPDX-License-Identifier: UNLICENSED\" for non-open-source code. Please see https://spdx.org for more information.\n",
+      "message": "SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing \"SPDX-License-Identifier: <SPDX-License>\" to each source file. Use \"SPDX-License-Identifier: UNLICENSED\" for non-open-source code. Please see https://spdx.org for more information.",
+      "severity": "warning",
+      "sourceLocation": {
+        "end": -1,
+        "file": "spec/harness/PoolActionsWrapper.sol",
+        "start": -1
+      },
+      "type": "Warning"
+    },
+    {
+      "component": "general",
+      "errorCode": "6160",
+      "formattedMessage": "spec/harness/PoolActionsWrapper.sol:28:31: TypeError: Wrong argument count for function call: 7 arguments given but expected 6.\n        (amount0 , amount1) = PoolActions.burnLiquidityShare(pool, tickLower, tickUpper, \n                              ^ (Relevant source part starts here and spans across multiple lines).\n",
+      "message": "Wrong argument count for function call: 7 arguments given but expected 6.",
+      "severity": "error",
+      "sourceLocation": {
+        "end": 1231,
+        "file": "spec/harness/PoolActionsWrapper.sol",
+        "start": 1095
+      },
+      "type": "TypeError"
+    },
+    {
+      "component": "general",
+      "errorCode": "9582",
+      "formattedMessage": "spec/harness/PoolActionsWrapper.sol:40:31: TypeError: Member \"burnExactLiquidity\" not found or not visible after argument-dependent lookup in type(library PoolActions).\n        (amount0 , amount1) = PoolActions.burnExactLiquidity(pool, tickLower, tickUpper, liquidity, to);\n                              ^----------------------------^\n",
+      "message": "Member \"burnExactLiquidity\" not found or not visible after argument-dependent lookup in type(library PoolActions).",
+      "severity": "error",
+      "sourceLocation": {
+        "end": 1529,
+        "file": "spec/harness/PoolActionsWrapper.sol",
+        "start": 1499
+      },
+      "type": "TypeError"
+    }
+  ],
+  "contracts": {},
+  "solidity_compile_status": "SOLIDITY_ERROR",
+  "cvl2_compile_status": "NOT_RUN"
+}

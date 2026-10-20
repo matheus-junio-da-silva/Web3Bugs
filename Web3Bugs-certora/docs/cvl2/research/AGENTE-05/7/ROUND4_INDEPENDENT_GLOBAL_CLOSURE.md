@@ -48,7 +48,7 @@ O relatório de janeiro de 2022 refere-se a `aave/aave-v3-core@a87d546d57d4e49bc
 
 ## P7/3 como controle negativo
 
-Em `AToken.spec:7,12,32–43` há `using SimpleERC20 as _underlyingAsset`, `handleAction(...)= > NONDET` e hook Sstore de balance. `AToken.mint` → `_mintScaled` → `MintableIncentivizedERC20._mint` atinge Sstore e pode chamar `IAaveIncentivesController.handleAction`. Logo P7/3 não serve como exemplo de global irrelevante. Faltam a implementação secundária SimpleERC20 e a política autenticada de receiver/summary para chamadas externas ligadas. A assertion `amount==0 => lastReverted` não promete sucesso para amount não zero; `onlyPool` também pode reverter.
+Em `AToken.spec:7,12,32–43` há `using SimpleERC20 as _underlyingAsset`, `handleAction(...) => NONDET` e hook Sstore de balance. `AToken.mint` → `_mintScaled` → `MintableIncentivizedERC20._mint` atinge Sstore e pode chamar `IAaveIncentivesController.handleAction`. Logo P7/3 não serve como exemplo de global irrelevante. Faltam a implementação secundária SimpleERC20 e a política autenticada de receiver/summary para chamadas externas ligadas. A assertion `amount==0 => lastReverted` não promete sucesso para amount não zero; `onlyPool` também pode reverter.
 
 ## Decisão independente
 

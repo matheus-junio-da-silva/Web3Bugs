@@ -41,3 +41,14 @@ Cobertura 157/157 (P15 116, P12 26, P2 15). Commits auditados 15:ce49fb0c94cfebf
 - [Matriz individual dos 157 exemplos e os cinco gates](ROUND4_PROGRESS.csv).
 - [Confronto histórico P12 (17 candidaturas), P2 (1 candidatura), pacote P15 e contrarrevisão read-only de #40/#46](ROUND4_REVIEW.md).
 - Todas as compilações e preservações semânticas permanecem não demonstradas; PR #42 Draft, nenhum merge/Fase 2.
+
+## Rodada 5 — evidência CVL2 de 2026-10-20
+
+- [Matriz individual — 157 examples, SHA-256, ABI, closure, compilação, próximo gate](round5/ROUND5_PROGRESS.csv).
+- [Relatório técnico e tabela de fontes/linhas](round5/ROUND5_REVIEW.md).
+- [P12 — 23/25: ABI e dois erros typechecker, logs integrais](round5/P12_TARGET_ABI_AND_DIAGNOSTICS.md).
+- [P15 — lockfile, SRI, patch histórico e import closure de 5 famílias](round5/P15_PACKAGE_IMPORT_CLOSURE.md).
+- [P2 — hashes de quatro Solidity e buscas negativas de ABI/harness](round5/P2_ABI_AND_NEGATIVE_SEARCH.md).
+- [Cross-review read-only PRs #40/#46](round5/CROSS_AUDIT_PR40_46.md).
+
+**Dois diagnósticos CVL2 com EXIT 1; nenhum COMPILE_OK/SEMANTIC_PROVEN; não há implementação derivada.**

@@ -1,0 +1,10 @@
+WARNING: contract name UserConfigurationHarness is the same as the file name and can be omitted from specs/harness/UserConfigurationHarness.sol:UserConfigurationHarness
+ERROR: Failed to run Certora Prover typechecker locally.
+Please check the errors below for problems in the specifications (.spec files) or the prover_args defined in the .conf file.
+CRITICAL: [main] ERROR ALWAYS - Found errors in specs/25.spec:
+CRITICAL: [main] ERROR ALWAYS - Error in spec file (25.spec:5:2): Since CVL 2, methods block entries must begin with `function`
+CRITICAL: [main] ERROR ALWAYS - Error in spec file (25.spec:5:45): Since CVL 2, methods block entries must end with `;`
+CRITICAL: [main] ERROR ALWAYS - Error in spec file (25.spec:6:2): Since CVL 2, methods block entries must begin with `function`
+CRITICAL: [main] ERROR ALWAYS - Error in spec file (25.spec:6:51): Since CVL 2, methods block entries must end with `;`
+
+CVL syntax or type check failed, please fix the issue.

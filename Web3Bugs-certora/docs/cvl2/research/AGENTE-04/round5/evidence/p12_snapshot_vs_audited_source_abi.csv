@@ -1,0 +1,9 @@
+method,solc_snapshot_signature,audited_solidity_source_declaration_signature,same_signature,upstream_compiled
+init_state,init_state(),init_state(),YES,NO_IMPORT_FAILURE
+isBorrowing,isBorrowing(uint256),"isBorrowing(address,uint256)",NO,NO_IMPORT_FAILURE
+isBorrowingAny,isBorrowingAny(),isBorrowingAny(address),NO,NO_IMPORT_FAILURE
+isEmpty,isEmpty(),isEmpty(address),NO,NO_IMPORT_FAILURE
+isUsingAsCollateral,isUsingAsCollateral(uint256),"isUsingAsCollateral(address,uint256)",NO,NO_IMPORT_FAILURE
+isUsingAsCollateralOrBorrowing,isUsingAsCollateralOrBorrowing(uint256),"isUsingAsCollateralOrBorrowing(address,uint256)",NO,NO_IMPORT_FAILURE
+setBorrowing,"setBorrowing(uint256,bool)","setBorrowing(address,uint256,bool)",NO,NO_IMPORT_FAILURE
+setUsingAsCollateral,"setUsingAsCollateral(uint256,bool)","setUsingAsCollateral(address,uint256,bool)",NO,NO_IMPORT_FAILURE

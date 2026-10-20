@@ -18,7 +18,7 @@ Por ferramentas GitHub foram lidos: quatro documentos exigidos e amostras P1, pa
 | Catálogo P18, identidades únicas | **181** |
 | Pareamento Property / Target / Result / Detection Outcome / path N.spec | **181/181, zero divergências** |
 | Bug Labels históricos | **Preservados e reconciliados na geração da matriz** |
-| Manifests individuais `N.spec` em R7 herdados | **181/181**, Git SHA-1, ref fixa `4ceac5d5...` herdada do manifesto R7 |
+| Manifests individuais `N.spec` em R7 herdados | **181/181**, Git SHA-1, ref fixa `2477787fe3f4cddb650cb4f1a08760bdbd1fde13` herdada do manifesto R7 |
 | R8 methods: registros / colunas | **18 / 18**, nenhuma coluna perdida |
 | Colunas `source_or_report_fact` / `inference_semantic_risk` / `missing_proof` preenchidas | **181/181** |
 | `complete` / `incomplete` | **69 / 112** |
@@ -49,7 +49,7 @@ O administrador **não confirmou recuperação** do WSL DESKTOP-5E26TVU, afetado
 
 ## Próximos gates prioritários
 
-1. **Ação humana obrigatória (VERMELHO):** recuperar/atestar WSL e preservar caches e worktrees, teste de leitura/escrita apenas após liberação do administrador. Registrar saúde, versãos/hashes, HEAD, clean worktrees; rodar três validadores e o diff `BASE...HEAD` sem alterar originais.
+1. **Ação humana obrigatória (VERMELHO):** recuperar/atestar WSL e preservar caches e worktrees, teste de leitura/escrita apenas após liberação do administrador. Registrar saúde, versões/hashes, HEAD, clean worktrees; rodar três validadores e o diff `BASE...HEAD` sem alterar originais.
 2. **Experimento 1 para revisão do coordenador:** P18/complete/4, `AccessControlMock`, N.spec original, CLI direto Certora 8.19.0/solc 0.8.6, compile-only em scratch byte-idêntico com timeout e logs; depois comparação distinta com `AccessControl.spec` full. Sem variante implementada nem decisão auto sobre receiver.
 3. **Experimento 2 para revisão do coordenador:** P18/complete/53, `ERC1155PausableMock`, N.spec original, mesmo protocolo. Somente depois avaliar *proposta documental* `sig:`/visibilidade e prova de não-vacuidade/reverts, sem tocar `require`, `assert`, hook ou summary. P18/46 fica na próxima fila por exigir domínio `method f` do runner.
 4. **Ação semântica distinta (LARANJA):** recuperar spec/runner/ABI auditados, adjudicar `GovernorBase` PER_CALLEE_CONSTANT vs DISPATCHER, `Timelock.schedule(bytes32)` vs `bytes`, e closure de harnesses Initializable/Votes. Nenhum resultado pode receber `SEMANTIC_PROVEN` pela mera passagem no parser.

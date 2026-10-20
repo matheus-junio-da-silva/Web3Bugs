@@ -78,8 +78,8 @@ def analyze(catalog, observations):
                 else:
                     original_text = source_bytes.decode("utf-8")
                     candidate_text, replacements = re.subn(
-                        r"f.selector == (\\w+\\([^\\n]*?\\)\\.selector)",
-                        r"f.selector == sig:\\1",
+                        r"f.selector == (\w+\([^\n]*?\)\.selector)",
+                        r"f.selector == sig:\1",
                         original_text,
                     )
                     if replacements != 6:

@@ -10,6 +10,7 @@ from collections import Counter, defaultdict
 import csv
 import hashlib
 import json
+import re
 from pathlib import Path
 import sys
 
@@ -65,6 +66,26 @@ def analyze(catalog, observations):
                     errors.append("missing SHA256: " + field + " " + "/".join(key))
             if r["source_sha256"] == r["candidate_sha256"]:
                 errors.append("derived variant identical to source unexpectedly")
+            # Reproduce the exact six-prefix transformation directly from
+            # immutable N.spec; this must not rely on the author's report.
+            historical = Path(catalog).parent / r["original_status"] / r["project_id"] / (r["example_id"] + ".spec")
+            if not historical.is_file():
+                errors.append("missing source N.spec: " + str(historical))
+            else:
+                source_bytes = historical.read_bytes()
+                if hashlib.sha256(source_bytes).hexdigest() != r["source_sha256"]:
+                    errors.append("historical SHA256 mismatch: " + str(historical))
+                else:
+                    original_text = source_bytes.decode("utf-8")
+                    candidate_text, replacements = re.subn(
+                        r"f.selector == (\\w+\\([^\\n]*?\\)\\.selector)",
+                        r"f.selector == sig:\\1",
+                        original_text,
+                    )
+                    if replacements != 6:
+                        errors.append("not exactly six selectors: " + "/".join(key))
+                    if hashlib.sha256(candidate_text.encode("utf-8")).hexdigest() != r["candidate_sha256"]:
+                        errors.append("candidate SHA256 mismatch after regeneration: " + "/".join(key))
         per_property[key].add(outcome)
         counts[outcome] += 1
     metrics = {

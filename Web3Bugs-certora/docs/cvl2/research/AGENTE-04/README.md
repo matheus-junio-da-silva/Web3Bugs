@@ -34,3 +34,10 @@ Cobertura 157/157 (P15 116, P12 26, P2 15). Commits auditados 15:ce49fb0c94cfebf
 
 ## Segunda revisao independente - gate Fase 2
 157/157 com campos separados de sintaxe, ABI pendente, dependencia historica, risco semantico e phase2 readiness. Todos UNRESOLVED, inclusive os 18 DOCUMENTED_CANDIDATE (17 P12 e 1 P2). Estudos: [GHO](15/HISTORICAL_PACKAGE_CLOSURE.md); [AAVE V2](12/HISTORICAL_HARNESS_COMPARISON.md); [Proof of Reserve](2/HISTORICAL_ABI_SEARCH.md). Buscas negativas encerradas nas fontes examinadas sem inventar runtime. Sem Fase 2, sem mudar codigo original.
+
+
+## Rodada 4 — 2026-10-20
+
+- [Matriz individual dos 157 exemplos e os cinco gates](ROUND4_PROGRESS.csv).
+- [Confronto histórico P12 (17 candidaturas), P2 (1 candidatura), pacote P15 e contrarrevisão read-only de #40/#46](ROUND4_REVIEW.md).
+- Todas as compilações e preservações semânticas permanecem não demonstradas; PR #42 Draft, nenhum merge/Fase 2.

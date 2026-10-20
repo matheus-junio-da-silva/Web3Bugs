@@ -27,3 +27,14 @@
 **Sem discrepância estrutural identificada** nas 159 instâncias ou na distribuição de blockers; a classificação de fechamento histórico é sustentada pelas evidências amostradas. Este parecer é **revisão de integridade integral mais exame semântico seletivo**, não reexecução de 159 provas nem auditoria semântica exaustiva das 159 assertions. Recomendo manter PR #38 **Draft** e os 159 exemplos **UNRESOLVED**, conforme decisão anterior do coordenador. `historical_blocked` significa ausência de artefatos confiáveis no corpus conhecido, não impossibilidade matemática de migração.
 
 Não executei Prover, CVL1 ou qualquer compilação CVL2 para o PR #38; não criei comentários, commits, branches, alterações nem avaliações formais no PR do AGENTE-06. Relatório publicado unicamente na pasta do AGENTE-05, para rastreabilidade da contrarrevisão.
+
+## Adendo: HEAD concorrente do AGENTE-06 na Rodada 4
+
+Durante a revisão, o PR #38 avançou de `684bd419ee8e35f27ca7ee07138fced321160793` para **`3957390bedcdf8dcc70d753dfe3a437d16a5fbe8`**. O delta entre essas duas HEADs é **exclusivamente a adição** de `ROUND4_PROGRESS_159.csv`, `ROUND4_QA.md` e `ROUND4_TECHNICAL_FINDINGS.md`, todos em `docs/cvl2/research/AGENTE-06/`. A análise detalhada acima refere-se à base documental `684bd419`; o novo delta também foi examinado em modo somente leitura.
+
+- No novo `ROUND4_PROGRESS_159.csv`, os **159** registros têm chaves únicas idênticas às de `historical_closure_decisions.csv`, repartidas em 70/27/41/21. Os 159 registros declaram `MATCH` de integridade, `NOT_RUN_HISTORICAL_ABI_OR_TARGET_UNPROVEN`, `NOT_DEMONSTRATED` e `implementation_authorized=NO`.
+- `ROUND4_TECHNICAL_FINDINGS.md` mantém explícito que `queue2` não é `queue` (P1), `munged` requer patch/geração autenticados (P4), `Specify 2019` não pode ser convertido por simples sintaxe (P17), e a única runner capturada do Popsicle inclui `--rule $1` sem provar quais IDs rodaram (P22). A triagem P17 separa contagens lexicais de semântica efetiva; essa ressalva é necessária.
+- `git -c core.whitespace=cr-at-eol diff --check BASE...origin/research/cvl2-agente-06` foi reexecutado no **novo HEAD 3957390b**, com **EXIT 0**; o checkout usado para esse check pertence ao AGENTE-05 e não modificou a worktree do AGENTE-06.
+- A avaliação anterior de 159 hashes/artefatos diz respeito aos arquivos que permaneceram inalterados entre as duas HEADs. O novo CSV acrescenta evidência documental, **não** compilação CVL2 nem liberação de migração.
+
+**Parecer atualizado para a HEAD 3957390b:** sem divergência estrutural encontrada no delta; gate de Fase 2 continua fechado para 159/159. PR #38 permanece Draft. Nenhuma escrita no PR/branch/worktree do AGENTE-06 foi realizada nesta contrarrevisão.

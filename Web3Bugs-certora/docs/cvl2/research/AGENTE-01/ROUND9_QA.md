@@ -22,3 +22,12 @@ Três comandos Python oficiais e git -c core.whitespace=cr-at-eol diff --check B
 **AGENTE-01 — RODADA 9 / EVIDÊNCIAS, TESTES CONTROLADOS E CONTRARREVISÃO.**
 
 - Para evitar falsos positivos de git diff --check, somente as versões legíveis de 33_exact_diff, 34_exact_diff e storage_layout receberam prefixo [raw] por linha; as versões raw.b64 preservam integralmente os bytes do diff/layout original. O manifesto registra os dois SHA256 distintos.
+
+## Primeira bateria QA após commit d4aba118488518e3878a39ddd51d8339155c73bc
+
+- EXECUTADO: python3 scripts/check_specs.py . — EXIT 0, 1.386 exemplos / 1.390 relações Bug Label.
+- EXECUTADO: python3 scripts/check_contests_csv.py . — EXIT 0.
+- EXECUTADO: python3 scripts/check_contracts.py . — EXIT 0.
+- EXECUTADO: git -c core.whitespace=cr-at-eol diff --check BASE...HEAD — EXIT 2: apenas três trailing whitespaces em arquivo documental antigo desta mesma pasta AGENTE-01/10/ROUND6_QA_EXECUTION.md, linhas 3 a 5, incorporadas no diff histórico. Artefatos novos R9 haviam passado no diff staged. Corrigidos somente espaços de fim dessas três linhas, sem alteração de resultados, specs ou interpretação. Será executada nova bateria após o commit dessa correção.
+
+Logs de QA realmente executados em scratch isolado: /home/mat/cvl2-agent01-isolated/round9-scratch/logs/qa_postcommit/ .

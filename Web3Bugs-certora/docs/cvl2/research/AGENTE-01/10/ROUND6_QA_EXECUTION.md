@@ -1,8 +1,8 @@
 # AGENTE-01 — Rodada 6 / Registro fiel do QA
 
-**PR:** https://github.com/matheus-junio-da-silva/Web3Bugs/pull/39 (Draft)  
-**Base:** `2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3`  
-**Local WSL:** `/home/mat/cvl2-agent01-isolated/Web3Bugs` (branch local observada `research/cvl2-agente-01`, HEAD `e31e4fee3174bd91b99c2d62135fb095b1e0253a`).  
+**PR:** https://github.com/matheus-junio-da-silva/Web3Bugs/pull/39 (Draft)
+**Base:** `2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3`
+**Local WSL:** `/home/mat/cvl2-agent01-isolated/Web3Bugs` (branch local observada `research/cvl2-agente-01`, HEAD `e31e4fee3174bd91b99c2d62135fb095b1e0253a`).
 **Motivo do uso alternativo de GitHub Contents API para documentação:** falha de leitura `EIO` em arquivos do WSL e `Bus error` ao invocar Python/alguns comandos Git. Não foi aplicado reset, shutdown de WSL, merge ou rebase; nenhum arquivo histórico foi editado.
 
 ## QA solicitado: tentativa executada, check NÃO concluído

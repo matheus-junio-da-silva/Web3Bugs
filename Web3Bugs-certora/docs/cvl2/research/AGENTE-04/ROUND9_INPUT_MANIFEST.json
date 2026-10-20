@@ -1,0 +1,36 @@
+{
+  "created_from": "repo HEAD 06dca368f5f2324da45f156dd9bc206745f11af0 with GHO R5 authenticated source scene and target",
+  "p15_original_spec_sha256": "eee38425eb95100799fe30e8d5913f9593230763733197a3dae5dae95cb0073e",
+  "p15_derived_spec_sha256": "b75fd97e4e5fca063d66079b74db7abe89f2c6a179ed41bc5eda39893d578a8d",
+  "p12_23_orig_sha256": "a8b6271f0d0d5030fbe78e48becf28c1a66ad6754f70e5a9e722cf4690449560",
+  "p12_25_orig_sha256": "b91c97498f1b60f7664e279ca1520193c03644887463df4df7145a64ce85876b",
+  "input_sha256": {
+    "p15_original": {
+      "spec/36.spec": "eee38425eb95100799fe30e8d5913f9593230763733197a3dae5dae95cb0073e",
+      "certora/harness/GhoDiscountRateStrategyHarness.sol": "f2d96e04622aeedfbaf08f5fbdf3b1d81012b8fcd192ec4f45879890034d34e0",
+      "certora/munged/contracts/facilitators/aave/interestStrategy/GhoDiscountRateStrategy.sol": "0ca3b38fb9b994b83272ef44f48c48e8205e817fdbb6e68186f289b31a0b11f5",
+      "node_modules/@aave/core-v3/contracts/protocol/libraries/math/WadRayMath.sol": "fae5b995ec613cc213050c99ea6352c9c18ceebba106d03b1726cfa8f1f0124e",
+      "certora/munged/contracts/facilitators/aave/interestStrategy/interfaces/IGhoDiscountRateStrategy.sol": "ba36739805f81276acdf6a1432ed1b33c10d001e6fcfe28d218e8306b1420331"
+    },
+    "p15_candidate": {
+      "spec/36.spec": "b75fd97e4e5fca063d66079b74db7abe89f2c6a179ed41bc5eda39893d578a8d",
+      "certora/harness/GhoDiscountRateStrategyHarness.sol": "f2d96e04622aeedfbaf08f5fbdf3b1d81012b8fcd192ec4f45879890034d34e0",
+      "certora/munged/contracts/facilitators/aave/interestStrategy/GhoDiscountRateStrategy.sol": "0ca3b38fb9b994b83272ef44f48c48e8205e817fdbb6e68186f289b31a0b11f5",
+      "node_modules/@aave/core-v3/contracts/protocol/libraries/math/WadRayMath.sol": "fae5b995ec613cc213050c99ea6352c9c18ceebba106d03b1726cfa8f1f0124e",
+      "certora/munged/contracts/facilitators/aave/interestStrategy/interfaces/IGhoDiscountRateStrategy.sol": "ba36739805f81276acdf6a1432ed1b33c10d001e6fcfe28d218e8306b1420331"
+    },
+    "p12_23": {
+      "specs/23.spec": "a8b6271f0d0d5030fbe78e48becf28c1a66ad6754f70e5a9e722cf4690449560",
+      "specs/harness/UserConfigurationHarness.sol": "0bbda4db0ee80986a3c63672d50bd5858ab7fe62cb7a28d440a0e7320846c116",
+      "contracts/protocol/libraries/configuration/UserConfiguration.sol": "92895f53e79bd5d69a347f69880e3305adb0f1e13dcca40140345af42e466f6d",
+      "contracts/protocol/libraries/types/DataTypes.sol": "42073065b4a701e29d2a1b541060487c46e61fbd991235e24862a2fa270e8455"
+    },
+    "p12_25": {
+      "specs/25.spec": "b91c97498f1b60f7664e279ca1520193c03644887463df4df7145a64ce85876b",
+      "specs/harness/UserConfigurationHarness.sol": "0bbda4db0ee80986a3c63672d50bd5858ab7fe62cb7a28d440a0e7320846c116",
+      "contracts/protocol/libraries/configuration/UserConfiguration.sol": "92895f53e79bd5d69a347f69880e3305adb0f1e13dcca40140345af42e466f6d",
+      "contracts/protocol/libraries/types/DataTypes.sol": "42073065b4a701e29d2a1b541060487c46e61fbd991235e24862a2fa270e8455"
+    }
+  },
+  "strictly_lexical_edits": "P15/36 only: 6 x prefix function, external before returns, semicolon suffix, all envfree/rule/assert byte identical"
+}

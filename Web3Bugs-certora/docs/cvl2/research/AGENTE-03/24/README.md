@@ -39,3 +39,11 @@ O review no PR #36 devolveu a pesquisa para investigar PDF, harness, scripts e a
 - historical_run_config_matrix.csv: seis scripts com entry points, solc, linking e flags de fonte.
 - historical_artifact_provenance.csv: 55 arquivos com Git SHA por objeto e comparação auditado vs fork; não há prova de quais bytes foram efetivamente executados no Prover original.
 - 164 propriedades seguem incomplete/UNRESOLVED_CANDIDATE; nenhum teste CVL/Prover.
+
+## Rodada 4 — 2026-10-20
+
+- **round4_blocker_report.md**: classificação de causa dominante, evidência positiva/negativa, patch strict-fuzz vs permissivo, gate de ABI/imports e prioridades.
+- **round4_example_blocker_matrix.csv**: todas as 164 IDs com caminho/blobs das CVL imports, scripts, dependências Solidity, versões e gate individual.
+- **round4_patch_scene.log**: reprodução do patch exclusivamente em cópias descartáveis (fuzz=0 falha no target auditado; fuzz padrão não demonstra equivalência).
+- **round4_validation.log**: saídas efetivamente executadas dos três validadores do catálogo e QA de matriz.
+- Nenhuma spec CVL ou contrato foi alterado; nenhum Prover, compilador ou CVL1 foi executado.

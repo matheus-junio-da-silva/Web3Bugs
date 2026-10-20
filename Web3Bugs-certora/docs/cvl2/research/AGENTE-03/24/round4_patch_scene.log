@@ -1,0 +1,144 @@
+FORK_COMMIT=dba90f9f54e92a6628bd61a6dffb9d7abd9b9c10
+AUDITED_COMMIT=ef2ef30248661b5509c52ab30af9bd0fc07f6657
+PATCH_BLOB=abfb1eae851307c9a3e7d17a7b3e913962952845
+e06f5a9d5503e82310ffccfab55214b9cb847d2146656f2558271e0777e27fdb  /home/mat/cvl2-agente03-source-fork/certora/applyHarness.patch
+before fork sha
+1c70e9642a1e392d48ec4e54aa3ba591e678f26d60ac4580dfae0cd0b579bf7f  /home/mat/cvl2-agente03-round4-scratch/fork/LaunchEvent.sol
+53557e698e4c30d3ede18ddc5d6b11cca549083833669f35ecada50b68f0b6a1  /home/mat/cvl2-agente03-round4-scratch/fork/RocketJoeStaking.sol
+before audited sha
+920b63839d19ed53a733476c325559daaa7e363a23df48798c5abd9d3d1e4832  /home/mat/cvl2-agente03-round4-scratch/audited/LaunchEvent.sol
+7f2c297cdd2999f712cae63f60e3806d99a8363bec330a206ef21d2a189e6c57  /home/mat/cvl2-agente03-round4-scratch/audited/RocketJoeStaking.sol
+====== fork (dry-run fuzz0)
+checking file .gitignore
+checking file LaunchEvent.sol
+checking file RocketJoeStaking.sol
+checking file traderjoe/FarmLens.sol
+checking file traderjoe/interfaces/IERC20.sol
+checking file traderjoe/interfaces/IJoeCallee.sol
+checking file traderjoe/interfaces/IJoeERC20.sol
+checking file traderjoe/interfaces/IJoeFactory.sol
+checking file traderjoe/interfaces/IJoePair.sol
+checking file traderjoe/interfaces/IJoeRouter01.sol
+checking file traderjoe/interfaces/IJoeRouter02.sol
+checking file traderjoe/interfaces/IWAVAX.sol
+checking file traderjoe/JoeERC20.sol
+checking file traderjoe/JoeFactory.sol
+checking file traderjoe/JoePair.sol
+checking file traderjoe/JoeRouter02.sol
+checking file traderjoe/libraries/JoeLibrary.sol
+checking file traderjoe/libraries/Math.sol
+checking file traderjoe/libraries/SafeMath.sol
+checking file traderjoe/libraries/TransferHelper.sol
+checking file traderjoe/libraries/UQ112x112.sol
+checking file traderjoe/LICENSE
+checking file traderjoe/README.md
+dry_run_fuzz0_exit=0
+====== fork (dry-run default)
+checking file .gitignore
+checking file LaunchEvent.sol
+checking file RocketJoeStaking.sol
+checking file traderjoe/FarmLens.sol
+checking file traderjoe/interfaces/IERC20.sol
+checking file traderjoe/interfaces/IJoeCallee.sol
+checking file traderjoe/interfaces/IJoeERC20.sol
+checking file traderjoe/interfaces/IJoeFactory.sol
+checking file traderjoe/interfaces/IJoePair.sol
+checking file traderjoe/interfaces/IJoeRouter01.sol
+checking file traderjoe/interfaces/IJoeRouter02.sol
+checking file traderjoe/interfaces/IWAVAX.sol
+checking file traderjoe/JoeERC20.sol
+checking file traderjoe/JoeFactory.sol
+checking file traderjoe/JoePair.sol
+checking file traderjoe/JoeRouter02.sol
+checking file traderjoe/libraries/JoeLibrary.sol
+checking file traderjoe/libraries/Math.sol
+checking file traderjoe/libraries/SafeMath.sol
+checking file traderjoe/libraries/TransferHelper.sol
+checking file traderjoe/libraries/UQ112x112.sol
+checking file traderjoe/LICENSE
+checking file traderjoe/README.md
+dry_run_default_exit=0
+====== audited (dry-run fuzz0)
+checking file .gitignore
+checking file LaunchEvent.sol
+Hunk #7 FAILED at 670.
+1 out of 7 hunks FAILED
+checking file RocketJoeStaking.sol
+checking file traderjoe/FarmLens.sol
+checking file traderjoe/interfaces/IERC20.sol
+checking file traderjoe/interfaces/IJoeCallee.sol
+checking file traderjoe/interfaces/IJoeERC20.sol
+checking file traderjoe/interfaces/IJoeFactory.sol
+checking file traderjoe/interfaces/IJoePair.sol
+checking file traderjoe/interfaces/IJoeRouter01.sol
+checking file traderjoe/interfaces/IJoeRouter02.sol
+checking file traderjoe/interfaces/IWAVAX.sol
+checking file traderjoe/JoeERC20.sol
+checking file traderjoe/JoeFactory.sol
+checking file traderjoe/JoePair.sol
+checking file traderjoe/JoeRouter02.sol
+checking file traderjoe/libraries/JoeLibrary.sol
+checking file traderjoe/libraries/Math.sol
+checking file traderjoe/libraries/SafeMath.sol
+checking file traderjoe/libraries/TransferHelper.sol
+checking file traderjoe/libraries/UQ112x112.sol
+checking file traderjoe/LICENSE
+checking file traderjoe/README.md
+dry_run_fuzz0_exit=1
+====== audited (dry-run default)
+checking file .gitignore
+checking file LaunchEvent.sol
+Hunk #7 succeeded at 670 with fuzz 2.
+checking file RocketJoeStaking.sol
+checking file traderjoe/FarmLens.sol
+checking file traderjoe/interfaces/IERC20.sol
+checking file traderjoe/interfaces/IJoeCallee.sol
+checking file traderjoe/interfaces/IJoeERC20.sol
+checking file traderjoe/interfaces/IJoeFactory.sol
+checking file traderjoe/interfaces/IJoePair.sol
+checking file traderjoe/interfaces/IJoeRouter01.sol
+checking file traderjoe/interfaces/IJoeRouter02.sol
+checking file traderjoe/interfaces/IWAVAX.sol
+checking file traderjoe/JoeERC20.sol
+checking file traderjoe/JoeFactory.sol
+checking file traderjoe/JoePair.sol
+checking file traderjoe/JoeRouter02.sol
+checking file traderjoe/libraries/JoeLibrary.sol
+checking file traderjoe/libraries/Math.sol
+checking file traderjoe/libraries/SafeMath.sol
+checking file traderjoe/libraries/TransferHelper.sol
+checking file traderjoe/libraries/UQ112x112.sol
+checking file traderjoe/LICENSE
+checking file traderjoe/README.md
+dry_run_default_exit=0
+====== fork (apply once, scratch only)
+patching file .gitignore
+patching file LaunchEvent.sol
+patching file RocketJoeStaking.sol
+patching file traderjoe/FarmLens.sol
+patching file traderjoe/interfaces/IERC20.sol
+patching file traderjoe/interfaces/IJoeCallee.sol
+patching file traderjoe/interfaces/IJoeERC20.sol
+patching file traderjoe/interfaces/IJoeFactory.sol
+patching file traderjoe/interfaces/IJoePair.sol
+patching file traderjoe/interfaces/IJoeRouter01.sol
+patching file traderjoe/interfaces/IJoeRouter02.sol
+patching file traderjoe/interfaces/IWAVAX.sol
+patching file traderjoe/JoeERC20.sol
+patching file traderjoe/JoeFactory.sol
+patching file traderjoe/JoePair.sol
+patching file traderjoe/JoeRouter02.sol
+patching file traderjoe/libraries/JoeLibrary.sol
+patching file traderjoe/libraries/Math.sol
+patching file traderjoe/libraries/SafeMath.sol
+patching file traderjoe/libraries/TransferHelper.sol
+patching file traderjoe/libraries/UQ112x112.sol
+patching file traderjoe/LICENSE
+patching file traderjoe/README.md
+patch_apply_exit=0
+==== materialized
+20
+after fork sha
+e74bc68f15e5fb9a40974a8a723ded121dd0b68e7273cd0daf1672d1cf984d24  /home/mat/cvl2-agente03-round4-scratch/fork/LaunchEvent.sol
+af436d7d252e77224165211863d37160db0adf18484726fb46fe91492628e077  /home/mat/cvl2-agente03-round4-scratch/fork/RocketJoeStaking.sol
+source unmodified

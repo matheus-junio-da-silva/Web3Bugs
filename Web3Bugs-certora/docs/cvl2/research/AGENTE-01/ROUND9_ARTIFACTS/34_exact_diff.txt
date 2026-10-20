@@ -1,0 +1,11 @@
+[raw] --- 34.original.spec
+[raw] +++ 34.derived.spec
+[raw] @@ -5,7 +5,7 @@
+[raw]  	env e;
+[raw]  	require e.msg.value == 0;
+[raw]  	calldataarg arg;
+[raw] -	if (f.selector == getParams(bytes32).selector) {
+[raw] +	if (f.selector == sig:getParams(bytes32).selector) {
+[raw]  		require false;
+[raw]  	} else {
+[raw]  		f@withrevert(e, arg);

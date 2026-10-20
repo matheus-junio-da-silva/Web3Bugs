@@ -1,0 +1,21 @@
+[raw] --- 33.original.spec
+[raw] +++ 33.derived.spec
+[raw] @@ -2,15 +2,15 @@
+[raw]  // Only available dependency declarations; no historic signature edits and no CVL migration.
+[raw]
+[raw]  methods {
+[raw] -	isStatic(bytes32) returns (bool) envfree
+[raw] -	getNumOfReferences(bytes32) returns (uint256) envfree
+[raw] +	function LibParamHarness.isStatic(bytes32) external returns (bool) envfree;
+[raw] +	function LibParamHarness.getNumOfReferences(bytes32) external returns (uint256) envfree;
+[raw]  }
+[raw]
+[raw]  rule noThrow(method f) {
+[raw]  	env e;
+[raw]  	require e.msg.value == 0;
+[raw]  	calldataarg arg;
+[raw] -	if (f.selector == getParams(bytes32).selector) {
+[raw] +	if (f.selector == sig:getParams(bytes32).selector) {
+[raw]  		bytes32 x;
+[raw]  		require !isStatic(x);
+[raw]  		require getNumOfReferences(x) > 0;

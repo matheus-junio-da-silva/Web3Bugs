@@ -1,0 +1,16 @@
+[raw]
+[raw] ======= contracts/Config.sol:Config =======
+[raw] Contract Storage Layout:
+[raw] {"storage":[],"types":null}
+[raw]
+[raw] ======= contracts/Storage.sol:Storage =======
+[raw] Contract Storage Layout:
+[raw] {"storage":[{"astId":16,"contract":"contracts/Storage.sol:Storage","label":"stack","offset":0,"slot":"0","type":"t_array(t_bytes32)dyn_storage"},{"astId":20,"contract":"contracts/Storage.sol:Storage","label":"cache","offset":0,"slot":"1","type":"t_mapping(t_bytes32,t_bytes32)"}],"types":{"t_array(t_bytes32)dyn_storage":{"base":"t_bytes32","encoding":"dynamic_array","label":"bytes32[]","numberOfBytes":"32"},"t_bytes32":{"encoding":"inplace","label":"bytes32","numberOfBytes":"32"},"t_mapping(t_bytes32,t_bytes32)":{"encoding":"mapping","key":"t_bytes32","label":"mapping(bytes32 => bytes32)","numberOfBytes":"32","value":"t_bytes32"}}}
+[raw]
+[raw] ======= contracts/lib/LibCache.sol:LibCache =======
+[raw] Contract Storage Layout:
+[raw] {"storage":[],"types":null}
+[raw]
+[raw] ======= contracts/lib/LibStack.sol:LibStack =======
+[raw] Contract Storage Layout:
+[raw] {"storage":[],"types":null}

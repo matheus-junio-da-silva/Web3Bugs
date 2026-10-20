@@ -25,3 +25,7 @@ SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.
 
 ## Full-source follow-up
 See full_spec_audit.csv and the integral-source appendix in each property dossier. It records full extracted source hashes, exact lines, and conditional CVL2 candidates without altering originals.
+
+## Rodada 4 — evidência técnica (2026-10-20)
+
+Ver [matriz combinada dos 156 exemplos](../ROUND4_MATRIX.csv) e [revisão de fontes/scripts/imports](../ROUND4_EVIDENCE.md). Classificações históricas preservadas; nenhum COMPILE_OK ou SEMANTIC_SUPPORTED demonstrado.

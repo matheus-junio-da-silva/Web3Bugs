@@ -21,19 +21,22 @@
 
 **Integridade da classificação R9:** `ROUND9_MATRIX_155.csv` foi criada a partir de `ROUND8_MATRIX_155.csv` sem mudar Property, Target, Bug Label, Result, Detection Outcome, Original Spec e N.spec SHA256. Requer exatamente 155 chaves únicas `(project_id,original_status,example_id)`: P5 17, P13 58, P14 34, P23 46. Um `COMPILE_ERROR` P5/14, **154 `NOT_RUN`**, 0 `COMPILE_OK`, 0 equivalências demonstradas. Tentativas originais = **1**, derivadas = **0**, não somar essas contagens como duas properties.
 
-## Verificações após a publicação
+## QA LOCAL realmente EXECUTADO APÓS commit e push
 
-As verificações obrigatórias estão planejadas para **depois do primeiro commit/push** da R9 e devem ser registradas na revisão final do PR e no complemento deste arquivo. Os resultados abaixo **não serão presumidos**, só declarados após comandos concluídos:
+**HEAD validada no primeiro passe pós-push:** `b370be6815af5cd943d6951112330182af3a0405`. Quatro comandos foram executados no checkout isolado da Rodada 9, logs integrais preservados apenas no scratch externo `/home/mat/cvl2-agente08-round9-20261020/logs/postcommit_qa_first/` (não em `results/`), sem credenciais:
 
-```bash
-cd Web3Bugs-certora
-python3 scripts/check_specs.py .
-python3 scripts/check_contests_csv.py .
-python3 scripts/check_contracts.py .
-cd ..
-git -c core.whitespace=cr-at-eol diff --check 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3...HEAD
-```
+| Comando executado | Exit real | Evidência STDOUT |
+| --- | ---: | --- |
+| `cd Web3Bugs-certora && python3 scripts/check_specs.py .` | **0** | `Check passed! 1386 spec examples and 1390 Bug Label relationships are structurally consistent.` |
+| `python3 scripts/check_contests_csv.py .` | **0** | `Check passed!`; `./results/contests.csv is consistant with ./reports` |
+| `python3 scripts/check_contracts.py .` | **0** | `Check passed!`; `./contracts is consistant with ./reports` |
+| `git -c core.whitespace=cr-at-eol diff --check 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3...HEAD` | **0** | STDOUT e STDERR vazios |
+| `git diff --name-only BASE...HEAD` e checagem de prefixo | **0** | **223 paths, 0 fora** de `Web3Bugs-certora/docs/cvl2/research/AGENTE-08/` |
 
-CI GitHub `validate` é separado: estrutural, nunca prova CVL2. Após HEAD final, confirmar por GitHub que o PR #43 está Draft e que `BASE...HEAD` contém somente arquivos em `Web3Bugs-certora/docs/cvl2/research/AGENTE-08/`, com worktree limpa.
+A worktree estava limpa após esses comandos. O primeiro check de whitespace no diff **staged** detectou uma linha vazia adicional no fim do **stdout bruto** (não era erro CVL); por isso o stdout foi empacotado **losslessly** em `ROUND9_P5_N14_stdout.log.b64`. `base64 -d` recompõe os bytes com SHA256 `cbf24143137931fcd317c00fd3c175e440fcbf5a16b9efc945ce21f49e4269f8`. O arquivo bruto do scratch não foi alterado. Esse empacotamento permite `git diff --check` sem manipular a evidência.
+
+O QA estrutural **não prova** que a property compila em CVL2 ou que CVL1 e CVL2 tenham o mesmo universo de contraexemplos. O único resultado CVL2 desta rodada continua a ser `COMPILE_ERROR, exit 1`, P5/incomplete/14 original. **Não houve segunda compilação derivada**.
+
+Após este registro documental adicional, os quatro comandos precisam ser **reexecutados na HEAD final**; os resultados definitivos devem ser reportados no comentário final do PR, sem presumir que um `CI success` substitua a execução local. O CI GitHub `validate`, se executado, será relatado separadamente como QA remoto.
 
 **Alerta semântico:** VERMELHO para equivalência não demonstrada, filtros e reverts; **QA de catálogo não equivale a migração CVL2**.

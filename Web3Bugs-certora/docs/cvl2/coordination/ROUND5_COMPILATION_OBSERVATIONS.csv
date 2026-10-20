@@ -1,0 +1,16 @@
+project_id,original_status,example_id,cvl2_compile_only_observed,executor,snapshot_target,limitation,evidence
+10,complete,33,COMPILE_ERROR,AGENTE-01,P10 LibParamHarness,CVL2 methods/selector legacy,AG01 #39 ROUND5_EVIDENCE.md
+10,complete,34,COMPILE_ERROR,AGENTE-01,P10 LibParamHarness,CVL2 typed selector legacy,AG01 #39 ROUND5_EVIDENCE.md
+12,complete,23,COMPILE_ERROR,AGENTE-04,P12 UserConfigurationHarness,CVL2 methods legacy function and semicolon,AG04 #42 round5/ROUND5_REVIEW.md
+12,complete,25,COMPILE_ERROR,AGENTE-04,P12 UserConfigurationHarness,CVL2 methods legacy function and semicolon,AG04 #42 round5/ROUND5_REVIEW.md
+7,complete,36,COMPILE_ERROR,AGENTE-05,P7 StableDebtToken,CVL2 selector sig syntax,AG05 #40 7/ROUND5_ABI_METHOD_DOMAIN_AND_COMPILE.md
+7,complete,41,COMPILE_ERROR,AGENTE-05,P7 StableDebtToken,CVL2 selector sig syntax,AG05 #40 7/ROUND5_ABI_METHOD_DOMAIN_AND_COMPILE.md
+7,complete,47,COMPILE_ERROR,AGENTE-05,P7 StableDebtToken,CVL2 selector sig syntax,AG05 #40 7/ROUND5_ABI_METHOD_DOMAIN_AND_COMPILE.md
+7,complete,63,COMPILE_ERROR,AGENTE-05,P7 VariableDebtToken,CVL2 selector sig syntax,AG05 #40 7/ROUND5_ABI_METHOD_DOMAIN_AND_COMPILE.md
+7,complete,73,COMPILE_ERROR,AGENTE-05,P7 VariableDebtToken,CVL2 selector sig syntax,AG05 #40 7/ROUND5_ABI_METHOD_DOMAIN_AND_COMPILE.md
+18,complete,3,COMPILE_ERROR,COORDENADOR,P18 AccessControlMock,CVL2 methods function and semicolon errors,WSL /tmp/cvl2-coord-r5-p18-3-20261020
+18,complete,23,COMPILE_ERROR,COORDENADOR,P18 ERC1155Mock,CVL2 methods function and semicolon errors,WSL /tmp/cvl2-coord-r5-p18-23-20261020
+7,complete,37,COMPILE_OK,COORDENADOR,P7 StableDebtToken,Fragment only; source globals not included,PR #40 COORDINATOR_CVL2_COMPILATION_DIAGNOSTIC_P7.md
+7,complete,65,COMPILE_OK,COORDENADOR,P7 VariableDebtToken,Fragment only; source globals not included,PR #40 COORDINATOR_CVL2_COMPILATION_DIAGNOSTIC_P7.md
+19,complete,1,COMPILE_OK,COORDENADOR,P19 Dummy,Derived only: uint uint -> mathint mathint; zero divisor risk,PR #46 COORDINATOR_SEMANTIC_ADJUDICATION.md
+19,complete,2,COMPILE_OK,COORDENADOR,P19 Dummy,Derived only: uint uint -> mathint mathint; zero divisor risk,PR #46 COORDINATOR_SEMANTIC_ADJUDICATION.md

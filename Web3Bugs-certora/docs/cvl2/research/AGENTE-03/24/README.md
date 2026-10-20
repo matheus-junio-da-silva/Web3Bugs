@@ -47,3 +47,13 @@ O review no PR #36 devolveu a pesquisa para investigar PDF, harness, scripts e a
 - **round4_patch_scene.log**: reprodução do patch exclusivamente em cópias descartáveis (fuzz=0 falha no target auditado; fuzz padrão não demonstra equivalência).
 - **round4_validation.log**: saídas efetivamente executadas dos três validadores do catálogo e QA de matriz.
 - Nenhuma spec CVL ou contrato foi alterado; nenhum Prover, compilador ou CVL1 foi executado.
+
+## Rodada 5 — QA de evidências / 2026-10-20
+
+- round5_quality_report.md — fontes/linhas, análise do Hunk #7 e do override, blockers e gate do coordenador.
+- round5_example_evidence.csv — 164/164 chaves e hashes de N.spec/N.sol/N.md/N.txt canônicos, fontes CVL, resultado original, situação real e próximo passo.
+- round5_oz_package_provenance.csv — quatro tarballs OpenZeppelin 4.4.1 e 4.4.2 com SRI verificado contra os locks fixados.
+- round5_import_resolution.csv — importação OpenZeppelin estática transitiva dos seis scripts em ambas as versões, explicitamente não equivalente à cena auditada.
+- round5_crossreview_pr42.md — inspeção somente leitura da HEAD AGENTE-04.
+- round5_precommit_checks.log — verificações efetivamente executadas antes de commitar. Comandos exigidos novamente executados e publicados em comentário após commit.
+- Não houve certoraRun, compilação solc/CVL2, Prover nem CVL1; não foram alterados originais.

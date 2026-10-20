@@ -1,0 +1,28 @@
+AGENTE-06 RODADA 5 - DOCUMENTARY CHECKS / 2026-10-20
+WORKTREE /home/mat/agente06-round5-20261020
+START_HEAD e075395f28f81a0b19917a0aff566da1638f43e1
+=== check_specs.py ===
+Check passed! 1386 spec examples and 1390 Bug Label relationships are structurally consistent.
+EXIT check_specs.py=0
+=== check_contests_csv.py ===
+Check passed!
+
+	`./results/contests.csv` is consistant with `./reports`
+EXIT check_contests_csv.py=0
+=== check_contracts.py ===
+Check passed!
+
+	`./contracts` is consistant with `./reports`
+EXIT check_contracts.py=0
+=== round5 matrix crosscheck ===
+MATRIX_OK: 159/159 canonical unique+SHA, P17=41, P4=37, 0 COMPILE_OK, 0 SEMANTIC_PROVEN
+EXIT round5 matrix crosscheck=0
+=== original paths changed check (precommit working tree) ===
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-06/ROUND5_EVIDENCE.md
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-06/ROUND5_MATRIX_159.csv
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-06/ROUND5_P17_CONSTRUCTS_41.csv
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-06/ROUND5_P4_PATCH_REPLAY.log
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-06/ROUND5_P4_SCRATCH_FILE_HASHES.csv
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-06/ROUND5_PR41_READONLY_REVIEW.md
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-06/ROUND5_VALIDATION.log
+No original files should be staged, edited, committed.

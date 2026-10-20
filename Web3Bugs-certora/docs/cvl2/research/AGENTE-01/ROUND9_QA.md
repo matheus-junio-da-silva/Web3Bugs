@@ -31,3 +31,17 @@ Três comandos Python oficiais e git -c core.whitespace=cr-at-eol diff --check B
 - EXECUTADO: git -c core.whitespace=cr-at-eol diff --check BASE...HEAD — EXIT 2: apenas três trailing whitespaces em arquivo documental antigo desta mesma pasta AGENTE-01/10/ROUND6_QA_EXECUTION.md, linhas 3 a 5, incorporadas no diff histórico. Artefatos novos R9 haviam passado no diff staged. Corrigidos somente espaços de fim dessas três linhas, sem alteração de resultados, specs ou interpretação. Será executada nova bateria após o commit dessa correção.
 
 Logs de QA realmente executados em scratch isolado: /home/mat/cvl2-agent01-isolated/round9-scratch/logs/qa_postcommit/ .
+
+## Segunda bateria QA pós-commit — HEAD 073fd8fe16c364e16edb5750f4f7df4eb72e822a
+
+**EXECUTADOS localmente, não inferidos do CI:**
+
+- python3 scripts/check_specs.py . — **EXIT 0**, 1386 exemplos, 1390 relações Bug Label.
+- python3 scripts/check_contests_csv.py . — **EXIT 0**.
+- python3 scripts/check_contracts.py . — **EXIT 0**.
+- git -c core.whitespace=cr-at-eol diff --check 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3...HEAD — **EXIT 0**, log de erros vazio.
+- git diff --name-only BASE...HEAD — **338 arquivos**, 0 fora de Web3Bugs-certora/docs/cvl2/research/AGENTE-01/.
+- git status --porcelain — **limpo**.
+- Logs completos desta bateria no scratch WSL /home/mat/cvl2-agent01-isolated/round9-scratch/logs/qa_073fd8f/ (não são resultados Certora nem CI).
+
+O commit que incorpora esta seção ainda exige a repetição dos quatro checks após publicação. Nunca tratar sucesso estrutural como prova de equivalência.

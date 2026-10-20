@@ -47,3 +47,15 @@ O runner da revisão Keep `a5cd171...` está recuperado e os três harnesses e f
 Contrarrevisão **READ-ONLY** de PR [#43](https://github.com/matheus-junio-da-silva/Web3Bugs/pull/43) HEAD `f38d9089e6ceeb85b1c54d2df07a44f7cea577ce`: produção Radicle `6fe9d38` versus branch posterior `8d1db123`; mesmos scripts `SplitsHarness` mas com `--send_only`; overrides vazios e CVT não atestado. Nenhuma edição em arquivos de outros agentes.
 
 **AGENTE-07 — RODADA 9 / EVIDÊNCIAS, TESTES CONTROLADOS E CONTRARREVISÃO**
+
+## Rechecagem efetiva após o primeiro commit da R9
+
+Após a publicação do commit documental local `3e55891a68f49974bc80c24841bf72807a24fd5f`, **antes do push**, os quatro comandos obrigatórios foram executados novamente na própria worktree (sem erro de I/O):
+
+- `timeout 120 python3 scripts/check_specs.py .` — **EXIT 0**, exatamente `1386 spec examples and 1390 Bug Label relationships are structurally consistent`.
+- `timeout 120 python3 scripts/check_contests_csv.py .` — **EXIT 0**, arquivo de concursos consistente com reports.
+- `timeout 120 python3 scripts/check_contracts.py .` — **EXIT 0**, árvore contracts consistente com reports.
+- `git -c core.whitespace=cr-at-eol diff --check 2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3...HEAD`, executado do root Git — **EXIT 0**, nenhuma linha impressa.
+- `git status --porcelain` — nenhuma alteração; `git diff --name-only dc737f64...HEAD` exibiu **somente os cinco documentos de R9** na pasta autorizada.
+
+Como a inclusão deste registro gera um segundo commit, os checks contra a **HEAD final** serão repetidos depois dele e seus códigos publicados no comentário formal do PR #41; o CI será verificado à parte.

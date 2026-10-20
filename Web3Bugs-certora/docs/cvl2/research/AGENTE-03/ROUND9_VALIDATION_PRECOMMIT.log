@@ -1,0 +1,22 @@
+AGENTE-03 ROUND9 VALIDATION PRE-COMMIT — ACTUALLY EXECUTED
+cwd=/home/mat/cvl2-agente03-round9-20261020/Web3Bugs-certora
+head=cfaf119579ec3c1718bcd32b6e637c03ea4cd174
+COMMAND=python3 scripts/check_specs.py .
+Check passed! 1386 spec examples and 1390 Bug Label relationships are structurally consistent.
+EXIT_check_specs=0
+COMMAND=python3 scripts/check_contests_csv.py .
+Check passed!
+
+	`./results/contests.csv` is consistant with `./reports`
+EXIT_check_contests_csv=0
+COMMAND=python3 scripts/check_contracts.py .
+Check passed!
+
+	`./contracts` is consistant with `./reports`
+EXIT_check_contracts=0
+CMD=git status --porcelain
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/ROUND9_EVIDENCE.md
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/ROUND9_MATRIX_164.csv
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/ROUND9_PATCH_FUZZ0_APPLY.log
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/ROUND9_PATCH_FUZZ0_DRYRUN.log
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/ROUND9_VALIDATION_PRECOMMIT.log

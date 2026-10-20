@@ -52,3 +52,15 @@
 - Triagem de compilação: só `complete/33–34` apresentam source/target/runner auditados e nenhum Perl para o target; contudo **nenhum gate individual autorizou spec derivada, mesmo temporária**. Todos os 266 marcados **NOT_RUN**. Nenhum Prover, CVL1, solc, Perl, CVL2 ou `--compilation_steps_only` executado; nenhum log de compilação existe.
 - Revisão cruzada read-only `PR #37`: `PR37_READONLY_AUDIT.md`; em checkout distinto, HEAD `3da04efedfe6d75b049b15fa37a040572260eca4`; 181 chaves, 339 observações ABI, 16 comparações source, dados sem divergências e diff commitado EXIT 0; sem alteração na branch do AGENTE-02.
 - **Validação final do commit da Rodada 4:** saída de logs locais `/home/mat/cvl2-agent01-isolated/qa_logs/round4/` e HEAD/exit codes comunicados no PR após o commit. Nunca tratar `git diff --cached --check` como verificação de BASE...HEAD.
+
+## Quinta rodada — 2026-10-20 / qualidade CVL2
+
+- Política consultada antes da escrita: spec_catalog.md, spec_catalog_workflow.md, spec_catalog_project_1.md e standard.md; documentação Certora CVL2 migration/changes; PR #39 mais recente e painel de coordenação PR #47. Baseline e fontes históricas no ROUND5_EVIDENCE.md.
+- Fonte cena: commit 2021 Furucombo c90dec1046e5e26edf70f985dd86381403912482. LibParamHarness -> LibParam, dois Solidity em closure, zero imports OZ. sha1(blob) e sha256 copiados na round5/source_manifest.csv. Compilador oficial Solidity 0.6.12 verificado por digest f6cb519b01dabc61cab4c184a3db11aa591d18151e362fcae850e42cffdfb09a.
+- EXECUTADO: certora-cli 8.19.0, certoraRun --compilation_steps_only, timeout 85s, cópias CVL originais completas 33 e 34 separadas, sem patch. Dois EXIT 1, erros literais de CVL1 no parser; logs completos e checksums em round5/logs e round5/diagnostics.csv. Não executado: CVL1, Prover, migration script, Perl, patches, scene derivada ou reexecução de resultados históricos.
+- EXECUTADO: parser de comentários em 266 arquivos N.spec; 13 seletores tipados ativos, 15 comentados; 1 extra no N.spec incomplete/23 corrigido nesta rodada, além dos 14 da Rodada 4. Sem alterar source.
+- Round5_progress_matrix.csv: 266 chaves, 2 testados com erro, 264 não executados, 0 COMPILE_OK, 0 SEMANTIC_PROVEN, 0 MIGRATED_COMPLETE. P1 29, P2 234 (164 Perl e 70 sem wrapper Perl), P3 1, P0 2.
+- Auditoria cruzada read-only do PR #37 HEAD 2c32e08521a1a709cad9f86f4c9d2c7cb0954251: complete/3,5,23,46,53 no AGENTE-02; ver PR37_FIVE_CANDIDATES.md e round5/pr37_five_candidate_audit.csv. Nada na branch do AGENTE-02 modificado.
+- Comandos de QA estrutural e git diff --check registrados no comentário de entrega com HEAD/exit codes executados após commit/push. Não registrar saída futura como se tivesse rodado agora.
+
+- Integridade dos logs: arquivos .log legíveis sem linhas vazias terminais e cópias originais exatas em .log.b64; conferir colunas raw_log_sha256/readable_log_sha256 no round5/diagnostics.csv. Ajuste motivado exclusivamente pelo diff --check.

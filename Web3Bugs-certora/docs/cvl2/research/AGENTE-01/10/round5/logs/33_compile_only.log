@@ -1,0 +1,9 @@
+ERROR: Failed to run Certora Prover typechecker locally.
+Please check the errors below for problems in the specifications (.spec files) or the prover_args defined in the .conf file.
+CRITICAL: [main] ERROR ALWAYS - Found errors in specs/extracted/33.spec:
+CRITICAL: [main] ERROR ALWAYS - Error in spec file (33.spec:5:2): Since CVL 2, methods block entries must begin with `function`
+CRITICAL: [main] ERROR ALWAYS - Error in spec file (33.spec:5:42): Since CVL 2, methods block entries must end with `;`
+CRITICAL: [main] ERROR ALWAYS - Error in spec file (33.spec:6:2): Since CVL 2, methods block entries must begin with `function`
+CRITICAL: [main] ERROR ALWAYS - Error in spec file (33.spec:6:55): Since CVL 2, methods block entries must end with `;`
+
+CVL syntax or type check failed, please fix the issue.

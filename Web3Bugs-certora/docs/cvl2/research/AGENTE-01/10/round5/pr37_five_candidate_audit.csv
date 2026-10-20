@@ -1,0 +1,6 @@
+status,example_id,property,target,bucket,active_selector_literals,methods_entry_count,summary_in_extracted_methods,compiled_abi,semantic_equivalence,finding
+complete,3,grantRoleEffect,AccessControlMock,DOCUMENTED_CANDIDATE,0,SEE_FULL_CVL_AND_DOSSIER,NO,NO,NOT_PROVEN,grantRole and hasRole are Solidity public; two paths internal/external; only source-import graph known
+complete,5,unexpectedAllowanceChange,ERC1155Mock,DOCUMENTED_CANDIDATE,1,SEE_FULL_CVL_AND_DOSSIER,NO,NO,NOT_PROVEN,filtered depends on active setApprovalForAll method literal; public wrapper cannot be guessed
+complete,23,noTransferEffectOnApproval,ERC1155Mock,DOCUMENTED_CANDIDATE,0,SEE_FULL_CVL_AND_DOSSIER,NO,NO,NOT_PROVEN,safeTransferFrom takes bytes memory internally vs calldata in interface; scope/ABI unresolved
+complete,46,onlyHolderOrApprovedCanReduceBalance,ERC1155BurnableMock,DOCUMENTED_CANDIDATE,0,SEE_FULL_CVL_AND_DOSSIER,NO,NO,NOT_PROVEN,balanceOf/isApprovedForAll inherited from ERC1155; parametric f method universe unproven
+complete,53,transferMethodsRevertWhenPaused,ERC1155PausableMock,DOCUMENTED_CANDIDATE,2,SEE_FULL_CVL_AND_DOSSIER,NO,NO,NOT_PROVEN,"paused() public source at Pausable.sol:64 found by ABI appendix, but earlier dossier says not located; clarify documentary inconsistency; two typed active selectors"

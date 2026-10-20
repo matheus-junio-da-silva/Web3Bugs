@@ -1,0 +1,8 @@
+Compiling specs/harnesses/LibParamHarness.sol...
+Compiling specs/harnesses/LibParamHarness.sol to expose internal function information and local variables...
+ERROR: Failed to run Certora Prover typechecker locally.
+Please check the errors below for problems in the specifications (.spec files) or the prover_args defined in the .conf file.
+CRITICAL: [main] ERROR ALWAYS - Found errors in specs/extracted/34.spec:
+CRITICAL: [main] ERROR ALWAYS - Error in spec file (34.spec:8:30): Variable `bytes32` has not been declared.  Did you forget to use `sig:` for a method selector?
+
+CVL syntax or type check failed, please fix the issue.

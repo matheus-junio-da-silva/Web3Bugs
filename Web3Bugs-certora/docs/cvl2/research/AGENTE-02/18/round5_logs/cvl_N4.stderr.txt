@@ -1,0 +1,3 @@
+[1;31mERRO FATAL: Chave do Certora (CERTORAKEY) ausente ou com valor padrão![0m
+O valor atual é: ''
+[1;33mPor favor, edite o arquivo .env na raiz do projeto e insira uma chave válida do Certora Prover antes de continuar.[0m

@@ -1,0 +1,6 @@
+script,root_inputs,file_reachable,imports,unresolved,missing_sample,root_source_paths
+verifyFlashMinter.sh,4,51,111,0,,certora/munged/contracts/facilitators/flashMinter/GhoFlashMinter.sol;certora/munged/contracts/facilitators/aave/tokens/GhoAToken.sol;certora/munged/contracts/gho/GhoToken.sol;certora/harness/MockFlashBorrower.sol
+verifyGhoAToken.sh,6,50,97,0,,certora/munged/contracts/facilitators/aave/tokens/GhoAToken.sol;certora/munged/contracts/facilitators/aave/tokens/GhoVariableDebtToken.sol;certora/munged/contracts/gho/GhoToken.sol;certora/harness/GhoTokenHarness.sol;certora/harness/DummyERC20A.sol;certora/harness/DummyERC20B.sol
+verifyGhoDiscountRateStrategy.sh,1,4,4,0,,certora/harness/GhoDiscountRateStrategyHarness.sol
+verifyGhoToken.sh,2,15,17,0,,certora/harness/GhoTokenHarness.sol;certora/munged/contracts/gho/GhoToken.sol
+verifyGhoVariableDebtToken.sh,6,32,55,0,,certora/harness/ghoVariableDebtTokenHarness.sol;certora/harness/DummyPool.sol;certora/harness/DummyERC20WithTimedBalanceOf.sol;certora/munged/contracts/facilitators/aave/interestStrategy/GhoDiscountRateStrategy.sol;certora/harness/DummyERC20A.sol;certora/harness/DummyERC20B.sol

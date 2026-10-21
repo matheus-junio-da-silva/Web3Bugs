@@ -1,0 +1,4 @@
+VERIFIED @aave/core-v3 1.17.2 sha256 1a1307d7cfae3027fd475fa76dd251206c1c65fd2466b60036da6cadc8ef54e9 files 1581
+VERIFIED @aave/periphery-v3 2.0.1 sha256 b48e664f06dbbc34e3e3af2dc13fd6dc4fd34fa116e5bfc98362d62f6c741320 files 398
+VERIFIED @openzeppelin/contracts 4.8.1 sha256 d45d540b9b1c60707b01c8981ccfb1ce9b7e156492c9ab85a46fa520960da065 files 331
+ROOT_SCENE /home/mat/cvl2-agent04-round5/scratch/gho-scene

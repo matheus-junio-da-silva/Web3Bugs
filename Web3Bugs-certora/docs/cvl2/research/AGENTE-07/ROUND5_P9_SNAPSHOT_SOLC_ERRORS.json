@@ -1,0 +1,26 @@
+{
+  "mode": "snapshot",
+  "compiler": "0.5.13+commit.5b0b510c.Emscripten.clang",
+  "input_sha256": "294e2ddb29672ec8928b242dcc189b545c81a8a412052093410a12ac9359e73d",
+  "errors": [
+    {
+      "severity": "error",
+      "type": "ParserError",
+      "message": "contracts/common/UsingRegistry.sol:20:1: ParserError: Source \"lib/mento-core/contracts/interfaces/IExchange.sol\" not found: File import callback not supported\nimport \"../../lib/mento-core/contracts/interfaces/IExchange.sol\";\n^---------------------------------------------------------------^\n"
+    },
+    {
+      "severity": "error",
+      "type": "ParserError",
+      "message": "contracts/common/UsingRegistry.sol:21:1: ParserError: Source \"lib/mento-core/contracts/interfaces/IReserve.sol\" not found: File import callback not supported\nimport \"../../lib/mento-core/contracts/interfaces/IReserve.sol\";\n^--------------------------------------------------------------^\n"
+    },
+    {
+      "severity": "error",
+      "type": "ParserError",
+      "message": "contracts/common/UsingRegistry.sol:22:1: ParserError: Source \"lib/mento-core/contracts/interfaces/IStableToken.sol\" not found: File import callback not supported\nimport \"../../lib/mento-core/contracts/interfaces/IStableToken.sol\";\n^------------------------------------------------------------------^\n"
+    }
+  ],
+  "contract_keys": [],
+  "abi_available": false,
+  "abi_count": 0,
+  "abi": []
+}

@@ -51,3 +51,16 @@ Na R9, os quatro comandos tinham sido executados com EXIT 0 na HEAD fc668cc... a
 **Alerta infraestrutura VERMELHO:** administrador recuperar filesystem mantendo worktrees e logs; verificar saúde Git/Python e checksum dos arquivos, sincronizar sem reset e executar os quatro checks na HEAD R10. **Alerta semântico VERMELHO:** nenhuma equivalência histórica comprovada. Não permitir nova compilação, uso do Perl, Prover ou mudança de source até o host estar comprovadamente íntegro e o coordenador aprovar cenário por property.
 
 **AGENTE-01 — RODADA 10.**
+
+## Conferência remota POST-COMMIT efetivamente executada
+
+Na HEAD publicada dea59edb0d8b5c9a7198af60effec9cd7cde58c9, após a criação da matriz, evidências e QA:
+
+- GitHub Git Blob API recuperou o conteúdo integral de ROUND10_MATRIX_266.csv (1.064.898 caracteres; sha1 Git 1a05adf55ba22aab46ae27a0afe6b4870b1f6ad9). O GitHub Contents API retornou texto vazio para esse arquivo grande, por isso a validação independente foi feita no blob integral, não num resultado truncado.
+- Parser CSV em memória reconstruiu **266 linhas**, todas com **64 colunas**, **266 chaves únicas**, contra **266** registros P10 da baseline. Conferidos Property, Target, Result, Detection Outcome, Bug Label, Spec e SHAs Git dos N.spec/N.sol contra a matriz R9, com **zero diferenças**.
+- Status originais R5: **2 COMPILE_ERROR e 264 NOT_RUN**; derivados R9: **1 COMPILE_ERROR, 1 COMPILE_OK e 264 NOT_RUN**; R10: **266 NOT_RUN_INFRA_EIO e zero SEMANTIC_PROVEN**. Nenhum erro de token ou erro CVL2 novo.
+- GitHub Compare mostrou **341 arquivos alterados no PR acumulado**, todos sob docs/cvl2/research/AGENTE-01, **zero fora da pasta autorizada**.
+- Conferência textual dos dois arquivos Markdown R10 e CSV completo: **zero trailing whitespace**.
+- GitHub Actions workflow **validate: completed/success** nessa HEAD, **somente QA estrutural**, não os quatro checks locais nem equivalência CVL1→CVL2.
+
+Esta seção reflete verificações GitHub de uma HEAD documental intermediária já publicada. Após qualquer commit que altere este arquivo, verificar o novo HEAD e CI separadamente. Os quatro comandos locais continuam **NOT_RUN_INFRA_BLOCKED** por EIO.

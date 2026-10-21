@@ -1,0 +1,9 @@
+# P23 — registro de buscas delimitadas, 2026-10-19
+## Fontes verificadas
+1. Snapshot contracts/23/src: AddressApp.sol, Drips.sol, DripsHub.sol, Managed.sol, Reserve.sol e Splits.sol. Comando find contracts/23 -type f -name '*Harness*.sol': nenhum arquivo encontrado.
+2. Specs preservadas DripsHub.spec, DripsHubBackup.spec, Reserve.spec, SlotTester.spec, Splits.spec, Splits2.spec; N.spec/N.md/N.txt e PDF historico. O PDF delimita a prova formal reportada a Splits.sol.
+3. Commit de producao reportado 6fe9d38a30765df6aa3e4078634a37aeabbceef1 pesquisado anteriormente: nao prova disponibilidade do CVT output nem de harnesses.
+4. GitHub code search global: DripsHubHarness e UpdateReceiverStatesHarness retornaram referencias de texto em specs de [Pr0pertyGPT/PropertyGPT](https://github.com/Pr0pertyGPT/PropertyGPT/blob/24a80982a6d3d69ad70a114490847d4cccc0609e/certora_projects/radicle_drips/specs/DripsHub.spec), [DripsHubBackup](https://github.com/Pr0pertyGPT/PropertyGPT/blob/24a80982a6d3d69ad70a114490847d4cccc0609e/certora_projects/radicle_drips/specs/DripsHubBackup.spec), [BradMoonUESTC/propertyGPT-engine](https://github.com/BradMoonUESTC/propertyGPT-engine/blob/00d8e7dea8cd002b69dfd6372a8ecae03646f425/src/spec_extractor/radicle_drips/specs/DripsHub.spec) e copias de certora-ac-datasets. Nenhuma implementacao de harness foi identificada nos resultados inspecionados.
+5. GitHub code search global: 'ReserveHarness Drips' sem resultado indexado; 'Splits2.spec' mostra referencias ao arquivo spec e datasets, nao os wrappers CVT gerados.
+## Estado
+Busca publica indexada e snapshot delimitados examinados. Nao existem provas de que os artefatos gerados tenham sido publicos ou retidos. Encerrar investigacao repetitiva de indexacao sem nova pista; solicitar ao maintainer/custodiante runs CVT, logs e harness sources. Ausencia em busca nao equivale a impossibilidade de recuperacao fora desse conjunto.

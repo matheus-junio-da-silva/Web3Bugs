@@ -6,6 +6,7 @@ on:
       - 'Web3Bugs-certora/docs/cvl2/coordination/**'
       - 'Web3Bugs-certora/scripts/check_cvl2_round*_progress.py'
       - 'Web3Bugs-certora/scripts/check_cvl2_round8_attempts.py'
+      - 'Web3Bugs-certora/scripts/check_cvl2_round9_events.py'
       - '.github/workflows/cvl2-ledger-integrity.yml'
   push:
     branches: [main]
@@ -13,6 +14,7 @@ on:
       - 'Web3Bugs-certora/docs/cvl2/coordination/**'
       - 'Web3Bugs-certora/scripts/check_cvl2_round*_progress.py'
       - 'Web3Bugs-certora/scripts/check_cvl2_round8_attempts.py'
+      - 'Web3Bugs-certora/scripts/check_cvl2_round9_events.py'
       - '.github/workflows/cvl2-ledger-integrity.yml'
   workflow_dispatch:
 
@@ -41,6 +43,7 @@ jobs:
           python scripts/check_cvl2_round6_progress.py
           python scripts/check_cvl2_round7_progress.py
           python scripts/check_cvl2_round8_attempts.py
+          python scripts/check_cvl2_round9_events.py
       - name: Round 7 negative test rejects a fabricated result
         working-directory: Web3Bugs-certora
         run: |
@@ -90,4 +93,33 @@ jobs:
               print(out.stdout)
               assert out.returncode == 1, out.stderr
               assert "unsupported semantic promotion" in out.stdout
+          PY
+      - name: Round 9 negative test rejects false formal equivalence
+        working-directory: Web3Bugs-certora
+        run: |
+          python - <<'PY'
+          import csv
+          import subprocess
+          import tempfile
+          import sys
+          from pathlib import Path
+          path = Path("docs/cvl2/coordination/ROUND9_ATTEMPT_EVENTS.csv")
+          with path.open(newline="", encoding="utf-8") as f:
+              reader = csv.DictReader(f)
+              data, fields = list(reader), reader.fieldnames
+          assert len(data) == 33
+          data[-1]["semantic_equivalence"] = "PROVEN"
+          with tempfile.TemporaryDirectory(prefix="cvl2-r9-neg-") as temp:
+              dest = Path(temp) / "bad.csv"
+              with dest.open("w", newline="") as f:
+                  writer = csv.DictWriter(f, fieldnames=fields)
+                  writer.writeheader()
+                  writer.writerows(data)
+              run = subprocess.run([
+                  sys.executable, "scripts/check_cvl2_round9_events.py",
+                  "--events", str(dest),
+              ], text=True, capture_output=True, timeout=30)
+              print(run.stdout)
+              assert run.returncode == 1, run.stderr
+              assert "unsupported semantic promotion" in run.stdout
           PY

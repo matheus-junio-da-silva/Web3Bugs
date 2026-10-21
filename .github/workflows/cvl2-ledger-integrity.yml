@@ -123,3 +123,37 @@ jobs:
               assert run.returncode == 1, run.stderr
               assert "unsupported semantic promotion" in run.stdout
           PY
+
+      - name: Round 9 negative tests reject malformed SHA-256
+        working-directory: Web3Bugs-certora
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import csv, subprocess, tempfile, sys
+          with Path("docs/cvl2/coordination/ROUND9_ATTEMPT_EVENTS.csv").open(newline="", encoding="utf-8") as src:
+              reader = csv.DictReader(src)
+              rows, fields = list(reader), reader.fieldnames
+          assert len(rows) == 33
+          index = next(i for i, row in enumerate(rows) if row["event_id"] == "AG01_34")
+          for field, bad_value in [
+              ("candidate_sha256", "deadbeef"),
+              ("candidate_sha256", "F" * 64),
+              ("source_sha256", "SAME_AS_SOURCE"),
+              ("candidate_sha256", ""),
+          ]:
+              copied = [dict(row) for row in rows]
+              copied[index][field] = bad_value
+              with tempfile.TemporaryDirectory(prefix="cvl2-r9-hash-negative-") as folder:
+                  dest = Path(folder) / "bad.csv"
+                  with dest.open("w", newline="", encoding="utf-8") as out:
+                      writer = csv.DictWriter(out, fieldnames=fields)
+                      writer.writeheader()
+                      writer.writerows(copied)
+                  proc = subprocess.run([
+                      sys.executable, "scripts/check_cvl2_round9_events.py",
+                      "--events", str(dest)
+                  ], capture_output=True, text=True, timeout=30)
+                  print(field, repr(bad_value), proc.returncode)
+                  assert proc.returncode == 1, proc.stderr
+                  assert "invalid sha256" in proc.stdout, proc.stdout
+          PY

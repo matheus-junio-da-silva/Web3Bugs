@@ -1,0 +1,42 @@
+# AGENTE-05 — Rodada 6: proveniência cruzada P3/P6/P19/P21 e auditoria SOMENTE LEITURA do PR #38
+
+**Data:** 2026-10-20. **Baseline de originais:** `main@2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3`. O escopo deste documento é reconstrução de proveniência a partir de fontes versionadas e evidência recuperada, sem alteração de `contracts`, `results/spec`, `reports`, configs, asserts/requires ou derivados CVL2. A disponibilidade de um pacote **não** demonstra reprodução do job histórico.
+
+## Projetos próprios — buscas positivas e limites específicos
+
+| Projeto, exemplo | Origem/linhas auditadas | Resultado de pesquisa | Bloqueio / próximo gate |
+| --- | --- | --- | --- |
+| **P3/incomplete/1–2, LEND** | [fork Rescue @33c1aeca](https://github.com/bgd-labs/rescue-mission-phase-1/tree/33c1aeca28d6d61659c1b28775ad2644b7e2ac6e), `.gitmodules` e entrada gitlink `lib/solidity-utils`. `contracts/3/contracts/LendToAaveMigrator.sol:4` importa `solidity-utils/contracts/oz-common/interfaces/IERC20.sol`. | Confirmado na Rodada 5 o gitlink **`49f2bd22950cf8dfe32d3f01e30a221b1f2f95dd`**, upstream [bgd-labs/solidity-utils@49f2bd](https://github.com/bgd-labs/solidity-utils/commit/49f2bd22950cf8dfe32d3f01e30a221b1f2f95dd), tree `36cb441858e6d959387713deb832e47e4377efe5`, `IERC20.sol` Git blob `053588c2c388d41f281c5662f72c8c6e8b0f7192`. O runner `certora/scripts/verifyRescueLendMigrator.sh` usa `--packages`, `--link LEND/AAVE`, `--solc_map` e `--rule $1`. | A identidade do submódulo foi **resolvida**, não a cena auditoria nem o histórico de invocação por regra. Falta run hash por ID, referências exatas de tokens/harness e fechamento completo de import/compiler-map. Conservar **2 incomplete** no catálogo. |
+| **P3/incomplete/3, stkAAVE** | `contracts/3/specs/rescueSTKAAVE.spec`, target `StakedTokenV2Rev4`; fontes do mesmo fork. | Gitlink recuperado não comprova que runner/linking LEND aplique ao STK. | Obter comando por target, revisão auditada e identidades de token/reward/harness próprios. Conservar incomplete. |
+| **P19/incomplete/3–37** | `contracts/19/contracts/yarn.lock:522–530`; scripts `contracts/19/spec/scripts/applyHarnesses.sh:1–5`, `runOUSDSpec.sh:1`. | Rodada 5 recuperou tarballs exatos OZ contracts **2.5.0** e upgrades **2.8.0** (ambos SHA-512 batem com yarn.lock). Foram encontrados 38 imports diretos do primeiro e 8 do segundo, com arquivos correspondentes. **Nenhuma recompilação formal** foi feita na R6. | O script aplica transformação em OUSD e injeta `require` limitando `nonRebasingCreditsPerToken`; executá-lo sobre original mudaria semântica. Necessários bytes pós-script, fechamento transitivo, runners e ABI para cada uma das **35 incomplete**. P19/complete/1–2 `mathint` permanecem `02_unresolved` por `RCPT=0`, sem repetir #46. |
+| **P6/incomplete/1–32** | `reports/6.md:5–17,37–47`: transcript do PDF arquivado com última revisão `ac92951`; documento público analisado anteriormente registra `51d46b1`. `StaticATokenLM.sol` snapshot mais antigo `13a00473...`. | As buscas negativas da R5 tentaram os dois SHAs abreviados nos repositórios `aave/aave-v3-periphery`, `bgd-labs/aave-v3-periphery`, `aave/aave-v3-core`; nenhum identificou commit correspondente. **Não houve fonte nova autenticada na R6** para resolver a diferença. | Coordenador deve fornecer repositório/SHAs completos e PDF/runner que realmente correspondam ao catálogo. Não trocar a revisão auditada por outra publicação ou afirmar inexistência de commit. **32 incomplete** preservados. |
+| **P21/incomplete/1–2** | `contracts/21/specs/DSM.spec:3–6,11–38` invoca `DepositSecurityModuleHarness` e `getGuardianLength()`. `contracts/21/0.8.9/DepositSecurityModule.sol:214–235` expõe `getGuardianQuorum()` e `getGuardians()`, mas não getter length. | No snapshot preservado não há `DepositSecurityModuleHarness`. Em `DepositSecurityModule.sol:218–227` o contrato permite expressamente configurar quorum maior que a quantidade de guardians. Logo a interpretação natural do predicado `quorumLeGuardian` não é uma invariante válida do Solidity preservado. | Falta getter/harness histórico e mapeamento individual de duas rules ao relatório. **Não sintetizar** `getGuardianLength := getGuardians().length`, não modificar assertions, nem atribuir VIOLATED do Prover. |
+
+**Resultado geral destas famílias:** novas fontes confiáveis de P3/OZ vieram da R5, não há compilação CVL2 nova na R6, e os bloqueios de cena/harness/relatório continuam individuais. A ausência de dado no snapshot não é prova de inexistência absoluta.
+
+## Contrarrevisão PR #38 / AGENTE-06 — SOMENTE LEITURA
+
+**HEAD publicada examinada:** [`ad460c288729d881a8adfac212695415809fc07d`](https://github.com/matheus-junio-da-silva/Web3Bugs/pull/38), Draft. Foram lidos `ROUND5_EVIDENCE.md`, matriz de 159 exemplos e `ROUND5_P17_CONSTRUCTS_41.csv` da própria branch, e conferidos três artefatos do upstream público `aave/governance-crosschain-bridges@93c39de7065a7dc3bb08cddf7dadb466f9a393b8` mediante GitHub:
+- `certora/harness/L2BridgeExecutorHarness.sol:45–61` (Git blob `efca3b619ea35bcf81aa80d4a081749caade3764`) **implementa `queue2`**, trabalhando com arrays fixos de duas ações e chamando `_queue2`. **Não** é mera renomeação de `L2BridgeExecutor.queue` de arrays dinâmicos.
+- `certora/harness/OptimismHarness.sol:21` (blob `9a772d49180d23b435a21f4d399abd6ce1167d8e`) contém `_mock`; `verifyOptimism.sh:9–10` (blob `4327fbae7a4b700934d74f699ee38af7f0805573`) vincula `OptimismHarness:_mock=mockTarget`, solc8.10.
+- **Limite temporal:** estes artefatos são do commit publicado **19/09/2022**, enquanto o relatório AAVE Bridge atribui o período **junho/2022** e commit Solidity auditado `303bd3e...`. SHA idêntico das três specs no snapshot e no commit posterior **não autentica** ABI/harness/runner do job anterior. Esse é o ponto de controle decisivo para P1 queue2.
+
+**Specify P17, casos sujeitos a prova de domínio e estado:**
+
+| Exemplo | Fonte e construtos | O que NÃO é legítimo inferir |
+| --- | --- | --- |
+| P17/complete/8 `borrowFresh` | `results/spec/complete/17/8.spec:19–28` estabelece três ambientes `e0/e1/e2`, `havoc` e `static_require`; `:64–65` mistura `invoke borrowFreshPub`, igualdade do retorno e `lastReverted`; `:114–117` duas `static_assert` bidirecionais. | Trocar palavras por CVL2 não demonstra correlação de pre/post/storage, sucesso/revert, nem preservação das equivalências. `havoc other` é local e distinto do `havoc` de `env`. |
+| P17/complete/9 `repayBorrowFresh` | `results/spec/complete/17/9.spec:19–32,67–68` usa `payer`, `borrower`, `other`, `havoc`, `static_require`, retorno e `lastReverted`. | Restringir simbolicamente o caller/other ou podar reverts altera contraexemplos potenciais. |
+| P17/complete/39 `transferFrom` | `results/spec/complete/17/39.spec:21–32,69–80` inclui `doApprove` e `approvedAmount` locais sob `havoc`, `sinvoke approve` condicional e `invoke transferFrom` posterior. | `sinvoke approve` **pode modificar storage**; ignorar ramo `doApprove` ou equiparar `sinvoke` a leitura pura altera o modelo. |
+
+O relatório AGENTE-06 distingue presença **lexical** de construtos em 41 N.spec da semântica original de Specify 2019. Conclusão da contrarrevisão: **manter as 159 unresolved**, sem conversão automática, enquanto não existirem engine/gramática Specify, `.spclnk`, ABI e runtime de 2019; para P1, exigir run por rule da janela da auditoria de junho. Estes gates estão corretamente bloqueados na revisão mais recente do coordenador. **Nenhuma alteração foi feita na branch, arquivos ou PR do AGENTE-06**, nem foi executado Prover ou CVL1.
+
+## Próximo gate a cargo do coordenador
+
+1. Para P7/47,73 e P7/41,63,36: autorizar gate por property de sintaxe `sig:` apenas depois da recuperação ambiental e da distinção entre *compilação do fragmento* e *semântica da spec global*.
+2. Para P3, autenticar hashes/cenas/runner específicos para cada um dos três targets, além do submódulo cujo SHA já está conhecido.
+3. Para P19, autenticar árvore pós-script, `solc 0.5.11`, dependências transitivas e seleção do mesmo target/rule.
+4. Para P6 e P21, prover revisões e harness/getter originais. A interpretação natural de `quorumLeGuardian` tem tensão concreta com o Solidity.
+5. Para o PR #38, exigir artefatos de junho/2022 e runtime Specify 2019, mantendo revisão exclusivamente documental.
+
+**Decisão:** nenhum projeto `MIGRATED_COMPLETE`, nenhuma equivalência `SEMANTIC_PROVEN`; PR #40 permanece Draft e PR #38 não foi alterado.

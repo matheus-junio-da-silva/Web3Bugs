@@ -1,0 +1,312 @@
+project_id,example_ids,missing_dependency_or_context,upstream_repository,upstream_commit,upstream_path,git_blob_sha,verification,uncertainty,status,source_evidence_id
+19,3,"Incomplete source dependency closure for totalSupplyIsBelowMaxSupply (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-3-TXT
+19,4,"Incomplete source dependency closure for neverRevert_BalanceOf (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-4-TXT
+19,5,"Incomplete source dependency closure for rebasingCreditsPerTokenMustBeGreaterThan0 (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-5-TXT
+19,6,"Incomplete source dependency closure for totalSupplyIntegrity (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-6-TXT
+19,7,"Incomplete source dependency closure for senderCannotDecreaseOthersBalance (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-7-TXT
+19,8,"Incomplete source dependency closure for changesRebaseState (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-8-TXT
+19,9,"Incomplete source dependency closure for reverseOptInThenOut (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-9-TXT
+19,10,"Incomplete source dependency closure for additiveMint (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-10-TXT
+19,11,"Incomplete source dependency closure for mintDoesNotDecreaseBalance (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-11-TXT
+19,12,"Incomplete source dependency closure for zeroMintDoesNotIncreaseBalance (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-12-TXT
+19,13,"Incomplete source dependency closure for additiveBurn (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-13-TXT
+19,14,"Incomplete source dependency closure for burnDoesNotIncreaseBalance (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-14-TXT
+19,15,"Incomplete source dependency closure for zeroBurnDoesNotDecreaseBalance (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-15-TXT
+19,16,"Incomplete source dependency closure for transferCheckPreconditions (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-16-TXT
+19,17,"Incomplete source dependency closure for nonRebasingToNonRebasingTransferCheckEqualRatiosSpecific (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-17-TXT
+19,18,"Incomplete source dependency closure for nonRebasingToNonRebasingTransferCheckEqualRatiosGeneral (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-18-TXT
+19,19,"Incomplete source dependency closure for rebasingToRebasingTransferSimplified (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-19-TXT
+19,20,"Incomplete source dependency closure for rebasingToRebasingTransferGeneral (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-20-TXT
+19,21,"Incomplete source dependency closure for transferIntegrityCheck (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-21-TXT
+19,22,"Incomplete source dependency closure for rebasingToRebasingTransfer (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-22-TXT
+19,23,"Incomplete source dependency closure for optingInAndOutSyncdWithNonRebasingState (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-23-TXT
+19,24,"Incomplete source dependency closure for isRebasingPredicateSynchronized (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+- Harness requires applyHarnesses.sh modifications to expose MAX_SUPPLY and _isNonRebasingAccount; transformations not pre-applied
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-24-TXT
+19,25,"Incomplete source dependency closure for onceRebaseStateWasSelectedCannotUnsetIt (ousd.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-25-TXT
+19,26,"Incomplete source dependency closure for rebasingCreditsPerTokenMustBeGreaterThan0 (ousdExtras.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+- No project run script selecting ousdExtras.spec directly
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-26-TXT
+19,27,"Incomplete source dependency closure for additiveBurnRanges (ousdExtras.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+- No project run script selecting ousdExtras.spec directly
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-27-TXT
+19,28,"Incomplete source dependency closure for changesOne (ousdSum.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+- No proven build mapping of arbitrary-method quantification to OUSDHarness method set
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-28-TXT
+19,29,"Incomplete source dependency closure for changesTwo (ousdSum.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+- No proven build mapping of arbitrary-method quantification to OUSDHarness method set
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-29-TXT
+19,30,"Incomplete source dependency closure for sum1Test (ousdSum.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+- No proven build mapping of arbitrary-method quantification to OUSDHarness method set
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-30-TXT
+19,31,"Incomplete source dependency closure for sum2Test (ousdSum.spec, OUSDHarness):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+- No proven build mapping of arbitrary-method quantification to OUSDHarness method set
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-31-TXT
+19,32,"Incomplete source dependency closure for privilegedOperation (Privileged.spec, UNSPECIFIED):
+- No run script or concrete target established for the generic Privileged.spec
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-32-TXT
+19,33,"Incomplete source dependency closure for privilegedOperation (PrivilegedOUSD.spec, OUSD):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-33-TXT
+19,34,"Incomplete source dependency closure for privilegedOperation (PrivilegedVault.spec, VaultCore):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-34-TXT
+19,35,"Incomplete source dependency closure for privilegedOperation (PrivilegedVaultAdmin.spec, VaultAdmin):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-35-TXT
+19,36,"Incomplete source dependency closure for sanity (sanity.spec, OUSD):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-36-TXT
+19,37,"Incomplete source dependency closure for sanity (sanity.spec, VaultCore):
+- @openzeppelin/contracts/math/SafeMath.sol
+- @openzeppelin/contracts/token/ERC20/IERC20.sol
+- @openzeppelin/contracts/token/ERC20/SafeERC20.sol
+- @openzeppelin/contracts/utils/Address.sol
+- @openzeppelin/upgrades/contracts/Initializable.sol
+
+Missing npm imports are not vendored in the PropertyGPT snapshot. Installed dependencies or historical scripts outside this snapshot cannot be claimed as present. Missing scripts/harness assumptions are tracked independently. Status refers to the exact supplied snapshot, not Certora syntax migration.
+",,,,,"Original N.txt read, source snapshot absent; unproven external recovery",Transitive imports/verified audited commit and exact target unresolved,UNRESOLVED,P19-incomplete-37-TXT
+19,3-37 (target dependent),@openzeppelin/contracts 2.5.0; @openzeppelin/upgrades 2.8.0,yarn registry,,contracts/yarn.lock,NOT GIT BLOBS; tarball SHA1 recorded in OUSD-YARN-PINS,package.json + yarn.lock observed,"package bytes, license, remappings, transitive closure not proven",RETRIEVAL_CANDIDATE_NOT_RECOVERED,OUSD-YARN-PINS

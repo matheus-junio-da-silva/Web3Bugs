@@ -1,0 +1,30 @@
+# P7 — patterns observed in complete N.spec inspection
+
+Methodology: exact original/derived lines and minimal candidate text are in the numbered dossiers. No edits to historical .spec, Solidity, configs or snapshot.
+
+## A1-INVOKE: 4 actual syntax occurrences
+
+Occurrences: 7/complete/10:31, 7/complete/10:32, 7/complete/10:35, 7/complete/70:21.
+
+Official reference: https://docs.certora.com/en/latest/docs/cvl/cvl2/migration.html#step-2-run-the-migration-script
+
+## A1-METHODS: 183 actual syntax occurrences
+
+Occurrences: 7/incomplete/1:7, 7/incomplete/1:8, 7/incomplete/1:9, 7/complete/2:7, 7/complete/2:8, 7/complete/4:7, 7/complete/4:8, 7/complete/5:7, 7/complete/5:8, 7/complete/5:9, 7/complete/5:10, 7/complete/5:11, 7/complete/6:7, 7/complete/6:8, 7/complete/6:9, 7/incomplete/7:9, 7/incomplete/7:10, 7/incomplete/7:11, 7/incomplete/7:12, 7/complete/8:7, 7/complete/8:8, 7/complete/8:9, 7/complete/8:10, 7/incomplete/9:9, 7/incomplete/9:10, 7/incomplete/9:11, 7/complete/10:7, 7/complete/10:8, 7/complete/10:9, 7/incomplete/11:7, 7/incomplete/11:8, 7/incomplete/11:9, 7/incomplete/11:10, 7/incomplete/12:7, 7/incomplete/12:8, 7/incomplete/12:9, 7/incomplete/12:10, 7/complete/13:7, 7/complete/13:8, 7/complete/14:7, 7/complete/14:8, 7/complete/15:7, 7/complete/15:8, 7/complete/16:7, 7/complete/16:8, 7/incomplete/17:7, 7/incomplete/17:8, 7/complete/18:7, 7/complete/18:8, 7/incomplete/19:7, 7/incomplete/19:8, 7/incomplete/20:7, 7/incomplete/20:8, 7/incomplete/21:7, 7/incomplete/21:8, 7/complete/22:7, 7/complete/22:8, 7/complete/23:7, 7/complete/23:8, 7/complete/24:7, 7/complete/24:8, 7/complete/25:7, 7/complete/25:8, 7/complete/26:7, 7/complete/26:8, 7/incomplete/27:7, 7/incomplete/27:8, 7/complete/28:7, 7/complete/28:8, 7/complete/29:7, 7/complete/29:8, 7/complete/30:7, 7/complete/30:8, 7/incomplete/31:7, 7/incomplete/31:8, 7/incomplete/32:7, 7/incomplete/32:8, 7/complete/33:7, 7/complete/33:8, 7/complete/33:9, 7/complete/33:10, 7/complete/34:7, 7/complete/34:8, 7/complete/34:9, 7/complete/34:10, 7/complete/35:7, 7/complete/35:8, 7/complete/35:9, 7/complete/35:10, 7/complete/38:7, 7/complete/38:8, 7/complete/38:9, 7/complete/38:10, 7/complete/39:7, 7/complete/39:8, 7/complete/39:9, 7/complete/39:10, 7/complete/40:7, 7/complete/40:8, 7/complete/40:9, 7/complete/40:10, 7/complete/42:7, 7/complete/42:8, 7/complete/42:9, 7/complete/42:10, 7/complete/43:7, 7/complete/43:8, 7/complete/43:9, 7/complete/43:10, 7/complete/44:7, 7/complete/44:8, 7/complete/44:9, 7/complete/44:10, 7/incomplete/45:7, 7/incomplete/45:8, 7/incomplete/45:9, 7/incomplete/45:10, 7/incomplete/45:11, 7/incomplete/46:7, 7/incomplete/46:8, 7/incomplete/46:9, 7/incomplete/46:10, 7/incomplete/46:11, 7/incomplete/48:7, 7/incomplete/48:8, 7/incomplete/49:7, 7/incomplete/49:8, 7/incomplete/49:9, 7/incomplete/50:7, 7/incomplete/50:8, 7/incomplete/51:7, 7/incomplete/51:8, 7/incomplete/51:9, 7/incomplete/52:7, 7/incomplete/52:8, 7/incomplete/52:9, 7/incomplete/53:7, 7/incomplete/53:8, 7/incomplete/54:7, 7/incomplete/54:8, 7/incomplete/55:7, 7/incomplete/55:8, 7/incomplete/56:7, 7/incomplete/56:8, 7/incomplete/57:7, 7/incomplete/57:8, 7/incomplete/57:9, 7/incomplete/58:7, 7/incomplete/58:8, 7/incomplete/59:7, 7/incomplete/59:8, 7/incomplete/60:7, 7/incomplete/60:8, 7/incomplete/60:9, 7/complete/61:7, 7/complete/61:8, 7/complete/62:7, 7/complete/62:8, 7/complete/64:7, 7/complete/64:8, 7/complete/64:9, 7/complete/66:7, 7/complete/66:8, 7/complete/66:9, 7/complete/67:7, 7/complete/67:8, 7/complete/67:9, 7/complete/68:7, 7/complete/68:8, 7/complete/68:9, 7/complete/69:7, 7/complete/69:8, 7/complete/69:9, 7/complete/70:7, 7/complete/70:8, 7/complete/70:9, 7/complete/71:7, 7/complete/71:8, 7/complete/71:9, 7/complete/72:7, 7/complete/72:8, 7/complete/72:9, 7/incomplete/74:9.
+
+Official reference: https://docs.certora.com/en/latest/docs/cvl/cvl2/changes.html#function-and-required-for-methods-block-entries
+
+## A1-SELECTOR: 72 actual syntax occurrences
+
+Occurrences: 7/complete/33:16, 7/complete/33:17, 7/complete/33:18, 7/complete/33:19, 7/complete/33:20, 7/complete/33:21, 7/complete/36:7, 7/complete/36:8, 7/complete/36:9, 7/complete/36:10, 7/complete/36:11, 7/complete/36:12, 7/complete/40:16, 7/complete/40:17, 7/complete/40:18, 7/complete/40:19, 7/complete/40:20, 7/complete/40:21, 7/complete/40:119, 7/complete/40:120, 7/complete/41:7, 7/complete/41:8, 7/complete/41:9, 7/complete/41:10, 7/complete/41:11, 7/complete/41:12, 7/complete/41:23, 7/complete/43:16, 7/complete/43:17, 7/complete/43:18, 7/complete/43:19, 7/complete/43:20, 7/complete/43:21, 7/complete/47:7, 7/complete/47:8, 7/complete/47:9, 7/complete/47:10, 7/complete/47:11, 7/complete/47:12, 7/incomplete/60:19, 7/incomplete/60:20, 7/incomplete/60:21, 7/incomplete/60:22, 7/incomplete/60:23, 7/incomplete/60:24, 7/complete/61:18, 7/complete/61:19, 7/complete/61:20, 7/complete/61:21, 7/complete/61:22, 7/complete/61:23, 7/complete/61:35, 7/complete/61:36, 7/complete/62:18, 7/complete/62:19, 7/complete/62:20, 7/complete/62:21, 7/complete/62:22, 7/complete/62:23, 7/complete/63:7, 7/complete/63:8, 7/complete/63:9, 7/complete/63:10, 7/complete/63:11, 7/complete/63:12, 7/complete/63:23, 7/complete/73:7, 7/complete/73:8, 7/complete/73:9, 7/complete/73:10, 7/complete/73:11, 7/complete/73:12.
+
+Official reference: https://docs.certora.com/en/latest/docs/cvl/cvl2/changes.html#method-literals-require-sig
+
+## A1-SEMICOLON: 9 actual syntax occurrences
+
+Occurrences: 7/incomplete/7:6, 7/incomplete/9:6, 7/incomplete/52:12, 7/incomplete/53:11, 7/incomplete/54:11, 7/incomplete/55:11, 7/incomplete/56:11, 7/incomplete/57:12, 7/incomplete/74:6.
+
+Official reference: https://docs.certora.com/en/latest/docs/cvl/cvl2/changes.html#required-in-more-places
+
+## Negative findings and assumptions
+Compilation was not performed. Matching source text is not proof the receiver or ABI is correct. Summary reach, quantified domains, ghost storage, havoc, selector sig, imported ABI, revert paths and mathint casts require review. No require_ additions proposed.

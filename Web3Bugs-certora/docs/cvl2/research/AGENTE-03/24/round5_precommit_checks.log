@@ -1,0 +1,31 @@
+AGENTE-03 ROUND5 CHECKS BEFORE COMMIT
+repo=/home/mat/cvl2-agente03-round5-20261020
+base=2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3
+initial_head=1838bed460b471d860af1b1a1788c50d3b7d3c32
+CMD: timeout 120 python3 scripts/check_specs.py .
+Check passed! 1386 spec examples and 1390 Bug Label relationships are structurally consistent.
+exit_check_specs=0
+CMD: timeout 120 python3 scripts/check_contests_csv.py .
+Check passed!
+
+	`./results/contests.csv` is consistant with `./reports`
+exit_check_contests_csv=0
+CMD: timeout 120 python3 scripts/check_contracts.py .
+Check passed!
+
+	`./contracts` is consistant with `./reports`
+exit_check_contracts=0
+CMD: round5 additional matrix/package QA
+PASS 164 records & canonical SHA, 4 OZ integrity matches, 12 static import rows
+N.txt missing helper in snapshot 161
+Outcome {'NOT_STATED': 161, 'INCONCLUSIVE': 3}
+round5 matrix SHA256 c59120f0e6447c6cdfbdf44aa4892c1243adabe319cab1ad960b203579c33cec
+QA_exit=0
+staged_path_preview:
+ M Web3Bugs-certora/docs/cvl2/research/AGENTE-03/24/README.md
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/24/round5_crossreview_pr42.md
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/24/round5_example_evidence.csv
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/24/round5_import_resolution.csv
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/24/round5_oz_package_provenance.csv
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/24/round5_precommit_checks.log
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/24/round5_quality_report.md

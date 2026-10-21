@@ -1,0 +1,26 @@
+AGENTE-03 — RODADA 4 / EXECUTED COMMANDS
+branch_head_before_commit=9c962ac65013903b2f90fe63a106231dbd05549b
+==== python3 scripts/check_specs.py .
+Check passed! 1386 spec examples and 1390 Bug Label relationships are structurally consistent.
+check_specs exit=0
+==== python3 scripts/check_contests_csv.py .
+Check passed!
+
+	`./results/contests.csv` is consistant with `./reports`
+check_contests_csv exit=0
+==== python3 scripts/check_contracts.py .
+Check passed!
+
+	`./contracts` is consistant with `./reports`
+check_contracts exit=0
+==== MATRIX_QA
+QA 164 ids, dossies, properties, source SHA, 0 eligible: {'OZ_EXTERNAL_BYTES_AND_ABI': 46, 'NO_RUNNER_OR_IMPORT_PROVEN': 3, 'SPEC_WITHOUT_RECOVERED_RUNNER': 77, 'OWNER_SOL_ROOT_ABSENT': 19, 'STAKING_TWO_RUNNERS_DIFFERENT_TARGETS': 19}
+verifyAll explicit rows 45
+index sha256 e8563ee77945db2bf5e7712780fdfcb93d99a07c80b4a0df83c9e3c64c31c457
+matrix_QA exit=0
+==== git status porcelain (before staged commit)
+ M Web3Bugs-certora/docs/cvl2/research/AGENTE-03/24/README.md
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/24/round4_blocker_report.md
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/24/round4_example_blocker_matrix.csv
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/24/round4_patch_scene.log
+?? Web3Bugs-certora/docs/cvl2/research/AGENTE-03/24/round4_validation.log

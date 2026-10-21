@@ -1,0 +1,59 @@
+# AGENTE-03 — Project 24 Rocket Joe: pesquisa pré-migração CVL2
+
+**164 exemplos originais: 0 complete, 164 incomplete. Fase 1 somente documental; nenhuma execução de verificação.**
+
+## Revisão do coordenador
+
+O review no PR #36 devolveu a pesquisa para investigar PDF, harness, scripts e aplicabilidade individual. Este commit responde com 164 dossiês revisados e matrizes adicionais.
+
+## Descoberta histórica confirmada
+
+- Fonte das regras e helpers: https://github.com/Certora/rocket-joe-1/blob/dba90f9f54e92a6628bd61a6dffb9d7abd9b9c10/certora/spec/LEHighLevel.spec (Certora/rocket-joe-1 @ dba90f9f54e92a6628bd61a6dffb9d7abd9b9c10), PR histórico https://github.com/lfj-gg/rocket-joe/pull/168 fechado sem merge.
+- **Oito .spec byte a byte idênticas** ao snapshot PropertyGPT/Web3Bugs.
+- Helper original erc20.spec, DummyERC20A/B/Impl, DummyWeth, LaunchEventHarness, RocketJoeStakingHarness, OwnerA/B e patch recuperados com blobs Git precisos; recovery_manifest.csv distingue recuperado de falta de prova de execução.
+- Scripts originais --link, solc8.6/solc6.12, --optimistic_loop, --loop_iter 1, flags e targets foram localizados. Não havia .conf no fork; alguns scripts têm paths divergentes; patch de 2732 linhas inclui fontes traderjoe mas NÃO foi aplicado.
+- Audited commit ef2ef30248661b5509c52ab30af9bd0fc07f6657 é ancestral do fork, porém LaunchEvent e RocketJoeStaking possuem mudanças comportamentais; ver source_provenance_matrix.csv.
+
+## Relatório correto
+
+21 páginas diretamente examinadas, SHA256 f223d83ad55ec79376126a18219c0f417b732fea7d53cf4a743738840cdd43b4. PDF incorreto OpenZeppelin permanece intacto. Ver pdf_formula_review.md, páginas 1-21 e diferenças pontuais 2/5/7/147/150 etc. Não transferir resultados do PDF de outra revisão.
+
+## Entregas
+
+- properties.csv — índice 164 instâncias, separando status original de recuperação histórica.
+- source_provenance_matrix.csv — 164 confrontos source/fork/target/audit/PDF.
+- migration_applicability.csv — 164 verificações específicas dos padrões P01-P10, incluindo ausência de ocorrência.
+- properties/incomplete/N.md — 164 dossiês atualizados, com CVL literal, hash, evidência, PDF e condicionais CVL2.
+- evidence_register.csv — A1/A2/B1/C2 com fonte, versão, scope.
+- recovery_manifest.csv — arquivos rastreados e bloqueios residuais.
+- patterns/ — padrões corrigidos; P09 retirado da lista de patches CVL2.
+- pdf_formula_review.md — verificação direta p1-p21.
+- QA_REPORT.md — validações e pendências.
+
+**Todas as 164 permanecem UNRESOLVED_CANDIDATE PROVISÓRIAS, apesar da recuperação parcial de fontes históricas. SEM ALTERAÇÕES EM SPECS; SEM COMPILAÇÃO CVL2; SEM PROVER; SEM TESTE CVL1.**
+
+## Contrarrevisão do diff completo e closure histórica
+- Falha do diff commitado baseline..HEAD: 64 trechos trailing whitespace em 41 arquivos de dossiês, corrigidos somente em Markdown; CVL original não alterado.
+- historical_closure_resolution.md: cenas de patch temporário e ABI não comprovada; OpenZeppelin auditado 4.4.1 vs fork 4.4.2.
+- historical_import_closure.csv: 192 ocorrências por script incluindo imports externos ausentes.
+- historical_run_config_matrix.csv: seis scripts com entry points, solc, linking e flags de fonte.
+- historical_artifact_provenance.csv: 55 arquivos com Git SHA por objeto e comparação auditado vs fork; não há prova de quais bytes foram efetivamente executados no Prover original.
+- 164 propriedades seguem incomplete/UNRESOLVED_CANDIDATE; nenhum teste CVL/Prover.
+
+## Rodada 4 — 2026-10-20
+
+- **round4_blocker_report.md**: classificação de causa dominante, evidência positiva/negativa, patch strict-fuzz vs permissivo, gate de ABI/imports e prioridades.
+- **round4_example_blocker_matrix.csv**: todas as 164 IDs com caminho/blobs das CVL imports, scripts, dependências Solidity, versões e gate individual.
+- **round4_patch_scene.log**: reprodução do patch exclusivamente em cópias descartáveis (fuzz=0 falha no target auditado; fuzz padrão não demonstra equivalência).
+- **round4_validation.log**: saídas efetivamente executadas dos três validadores do catálogo e QA de matriz.
+- Nenhuma spec CVL ou contrato foi alterado; nenhum Prover, compilador ou CVL1 foi executado.
+
+## Rodada 5 — QA de evidências / 2026-10-20
+
+- round5_quality_report.md — fontes/linhas, análise do Hunk #7 e do override, blockers e gate do coordenador.
+- round5_example_evidence.csv — 164/164 chaves e hashes de N.spec/N.sol/N.md/N.txt canônicos, fontes CVL, resultado original, situação real e próximo passo.
+- round5_oz_package_provenance.csv — quatro tarballs OpenZeppelin 4.4.1 e 4.4.2 com SRI verificado contra os locks fixados.
+- round5_import_resolution.csv — importação OpenZeppelin estática transitiva dos seis scripts em ambas as versões, explicitamente não equivalente à cena auditada.
+- round5_crossreview_pr42.md — inspeção somente leitura da HEAD AGENTE-04.
+- round5_precommit_checks.log — verificações efetivamente executadas antes de commitar. Comandos exigidos novamente executados e publicados em comentário após commit.
+- Não houve certoraRun, compilação solc/CVL2, Prover nem CVL1; não foram alterados originais.

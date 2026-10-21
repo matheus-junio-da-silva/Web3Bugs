@@ -51,7 +51,13 @@ def check(catalog,events):
             if not row[col].strip():errors.append("missing "+col+": "+"/".join(k))
         for col in ("source_sha256","candidate_sha256"):
             s=row[col]
-            if len(s)==64 and any(ch not in "0123456789abcdef" for ch in s):
+            # Only these explicit provenance sentinels are allowed in lieu of a
+            # 64-character lowercase SHA-256. A short or empty hash must fail.
+            allowed={"NOT_CAPTURED_IN_COORDINATION_LEDGER"}
+            if col=="candidate_sha256":
+                allowed.add("SAME_AS_SOURCE")
+            if s not in allowed and (len(s)!=64 or
+                any(ch not in "0123456789abcdef" for ch in s)):
                 errors.append("invalid sha256: "+col+" "+row["event_id"])
         count[result]+=1
         per_property[k].add(result)

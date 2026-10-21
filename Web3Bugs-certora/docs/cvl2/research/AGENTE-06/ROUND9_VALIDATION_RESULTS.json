@@ -1,0 +1,60 @@
+{
+  "head": "4abb8cf2a378a1a550f6b0978ea86357e8b08f4c",
+  "baseline": "2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3",
+  "checked_utc": "2026-10-20T23:23:45.914860+00:00",
+  "checks": [
+    {
+      "check": "check_specs",
+      "argv": [
+        "python3",
+        "scripts/check_specs.py",
+        "."
+      ],
+      "cwd": "/home/mat/agente06-round9-20261020/Web3Bugs-certora",
+      "exit": 0,
+      "stdout": "Check passed! 1386 spec examples and 1390 Bug Label relationships are structurally consistent.\n",
+      "stderr": ""
+    },
+    {
+      "check": "check_contests_csv",
+      "argv": [
+        "python3",
+        "scripts/check_contests_csv.py",
+        "."
+      ],
+      "cwd": "/home/mat/agente06-round9-20261020/Web3Bugs-certora",
+      "exit": 0,
+      "stdout": "Check passed!\n\n\t`./results/contests.csv` is consistant with `./reports`\n",
+      "stderr": ""
+    },
+    {
+      "check": "check_contracts",
+      "argv": [
+        "python3",
+        "scripts/check_contracts.py",
+        "."
+      ],
+      "cwd": "/home/mat/agente06-round9-20261020/Web3Bugs-certora",
+      "exit": 0,
+      "stdout": "Check passed!\n\n\t`./contracts` is consistant with `./reports`\n",
+      "stderr": ""
+    },
+    {
+      "check": "git_diff_check",
+      "argv": [
+        "git",
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check",
+        "2a03637b7639d0a5ad4b5c54cf8a0a5ba647b6a3...HEAD"
+      ],
+      "cwd": "/home/mat/agente06-round9-20261020",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "changed_files_count": 270,
+  "outside_allowed_scope": []
+}

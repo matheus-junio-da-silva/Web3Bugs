@@ -1,0 +1,47 @@
+[
+  {
+    "experiment": "P4_SOLC_0_8_17",
+    "start_utc": "2026-10-20T23:15:13.753721+00:00",
+    "command": [
+      "timeout",
+      "60s",
+      "node",
+      "/tmp/ag06-r9-solc.js"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"solc\":\"0.8.17+commit.8df45f5f.Emscripten.clang\",\"compiler_hash\":\"04184dd4a976c37a64c8d6470e25983cfdbb09b10ff371da9178f50d6e132745\",\"inputFiles\":29,\"abiContracts\":29,\"errorCount\":0,\"warnings\":8,\"target\":{\"abiEntries\":112,\"selectors\":87},\"errors\":[],\"jsonSHA256\":\"8e2c3d378ad69c7ec3b56f70a77e35c8861952372e509eca675a283d283abb38\"}\n",
+    "stderr": "",
+    "result_json_sha256": "8e2c3d378ad69c7ec3b56f70a77e35c8861952372e509eca675a283d283abb38",
+    "result_file": "P4_ABI_RESULT.json"
+  },
+  {
+    "experiment": "P22_POOL_SOLC_0_7_6",
+    "start_utc": "2026-10-20T23:15:14.660180+00:00",
+    "command": [
+      "timeout",
+      "60s",
+      "node",
+      "/tmp/ag06-r9-p22-solc.js"
+    ],
+    "exit_code": 1,
+    "stdout": "{\"compiler\":\"0.7.6+commit.7338295f.Emscripten.clang\",\"inputFiles\":17,\"solidityErrors\":2,\"errors\":[\"spec/harness/PoolActionsWrapper.sol:28:31: TypeError: Wrong argument count for function call: 7 arguments given but expected 6.\\n        (amount0 , amount1) = PoolActions.burnLiquidityShare(pool, tickLower, tickUpper, \\n                              ^ (Relevant source part starts here and spans across multiple lines).\\n\",\"spec/harness/PoolActionsWrapper.sol:40:31: TypeError: Member \\\"burnExactLiquidity\\\" not found or not visible after argument-dependent lookup in type(library PoolActions).\\n        (amount0 , amount1) = PoolActions.burnExactLiquidity(pool, tickLower, tickUpper, liquidity, to);\\n                              ^----------------------------^\\n\"],\"warnings\":1,\"FullMath\":null,\"PoolActions\":null,\"json_sha256\":\"307c2ab2cfd8d1c02afea265e76baafa8eaeb3246b6e835df5c1838ea85eb828\"}\n",
+    "stderr": "",
+    "result_json_sha256": "307c2ab2cfd8d1c02afea265e76baafa8eaeb3246b6e835df5c1838ea85eb828",
+    "result_file": "P22_POOL_ERRORS.json"
+  },
+  {
+    "experiment": "P22_FULLMATH_SOLC_0_7_6",
+    "start_utc": "2026-10-20T23:15:15.265664+00:00",
+    "command": [
+      "timeout",
+      "60s",
+      "node",
+      "/tmp/ag06-round9/FULLMATH_compiler.js"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"compiler\":\"0.7.6+commit.7338295f.Emscripten.clang\",\"inputFiles\":2,\"solidityErrors\":0,\"errors\":[],\"warnings\":7,\"FullMath\":{\"functions\":[\"callMulDiv\",\"callMulDivRoundingUp\"],\"selectors\":{\"callMulDiv(uint256,uint256,uint256)\":\"3b46282d\",\"callMulDivRoundingUp(uint256,uint256,uint256)\":\"9056f536\"}},\"PoolActions\":null,\"json_sha256\":\"82dcc919d361424bdea9a58ef0bca7eede8bab53dd4fe5f1c36628d1d5b04161\"}\n",
+    "stderr": "",
+    "result_json_sha256": "82dcc919d361424bdea9a58ef0bca7eede8bab53dd4fe5f1c36628d1d5b04161",
+    "result_file": "P22_FULLMATH_ABI.json"
+  }
+]

@@ -1,0 +1,25 @@
+AGENTE-06 P4 SCRATCH REPLAY, 2026-10-20
+Audit SHA: 4cf8837121a4351cc0e21703bb1df76036205114
+Git tree: 61a8c68add4e31190507f0ff751b0cc8f53e91b6
+Source: git archive FETCH_HEAD src | tar -xf - -C scratch_original
+Working copy: cp -r scratch_original/src scratch_munged
+Patch: original contracts/4/certora/applyHarness.patch
+Patch SHA256: f77b4320ee1991fdb38c3557516717ab12ca8360a5b3d8804275f0adcd5258fc
+Command: timeout 15s patch --batch --fuzz=0 -p0 -d scratch_munged < applyHarness.patch
+EXIT CODE: 0
+STDOUT:
+patching file .gitignore
+patching file contracts/StakedTokenV2.sol
+patching file contracts/StakedTokenV3.sol
+STDERR: empty
+REJECT FILES: 0
+AUDITED SRC FILES: 36
+DERIVED FILES: 37
+UNCHANGED: 34
+MODIFIED: 2
+CREATED: 1
+SOURCE SORTED SHA256 MANIFEST DIGEST: 4db98ce709c8a7cf1600c974b53a7dbb16ce2a8ccc693bcd4335e58790da5d5c
+DERIVED SORTED SHA256 MANIFEST DIGEST: 838f9ae754de2e24542d96b381e3d586cf8376f70131fc3ad16ec3bae51d66aa
+Individual SHA256 per file: ROUND5_P4_SCRATCH_FILE_HASHES.csv
+CVL2 COMPILATION: NOT RUN
+HISTORICAL AUDIT TARGET/ABI: NOT AUTHENTICATED

@@ -1,0 +1,195 @@
+{
+  "compiler": "0.7.6+commit.7338295f.Emscripten.clang",
+  "soljson_sha256": "b94e69dfb056b3e26080f805ab43b668afbc0ac70bf124bfb7391ecfc0172ad2",
+  "input_sha256": "1169bb27fcdf88271a353292452c8ef49cab101f992f3402aace7f65e79658da",
+  "inputs": {
+    "spec/harness/FullMathWrapper.sol": {
+      "sha256": "4308094afe4197c1a8987e8310777e30c4a8b953ace01fb5b3b95b1092d04a59",
+      "bytes": 610
+    },
+    "contracts/popsicle-v3-optimizer/libraries/FullMath.sol": {
+      "sha256": "8bb11e986e28c9d8d596f3078d870a6555205849923a917a4b4f440be5c2a7bc",
+      "bytes": 5183
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.methodIdentifiers"
+        ]
+      }
+    }
+  },
+  "errors": [
+    {
+      "component": "general",
+      "errorCode": "1878",
+      "formattedMessage": "spec/harness/FullMathWrapper.sol: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing \"SPDX-License-Identifier: <SPDX-License>\" to each source file. Use \"SPDX-License-Identifier: UNLICENSED\" for non-open-source code. Please see https://spdx.org for more information.\n",
+      "message": "SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing \"SPDX-License-Identifier: <SPDX-License>\" to each source file. Use \"SPDX-License-Identifier: UNLICENSED\" for non-open-source code. Please see https://spdx.org for more information.",
+      "severity": "warning",
+      "sourceLocation": {
+        "end": -1,
+        "file": "spec/harness/FullMathWrapper.sol",
+        "start": -1
+      },
+      "type": "Warning"
+    },
+    {
+      "component": "general",
+      "errorCode": "5667",
+      "formattedMessage": "contracts/popsicle-v3-optimizer/libraries/FullMath.sol:15:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.\n        uint256 a,\n        ^-------^\n",
+      "message": "Unused function parameter. Remove or comment out the variable name to silence this warning.",
+      "severity": "warning",
+      "sourceLocation": {
+        "end": 776,
+        "file": "contracts/popsicle-v3-optimizer/libraries/FullMath.sol",
+        "start": 767
+      },
+      "type": "Warning"
+    },
+    {
+      "component": "general",
+      "errorCode": "5667",
+      "formattedMessage": "contracts/popsicle-v3-optimizer/libraries/FullMath.sol:16:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.\n        uint256 b,\n        ^-------^\n",
+      "message": "Unused function parameter. Remove or comment out the variable name to silence this warning.",
+      "severity": "warning",
+      "sourceLocation": {
+        "end": 795,
+        "file": "contracts/popsicle-v3-optimizer/libraries/FullMath.sol",
+        "start": 786
+      },
+      "type": "Warning"
+    },
+    {
+      "component": "general",
+      "errorCode": "5667",
+      "formattedMessage": "contracts/popsicle-v3-optimizer/libraries/FullMath.sol:17:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.\n        uint256 denominator\n        ^-----------------^\n",
+      "message": "Unused function parameter. Remove or comment out the variable name to silence this warning.",
+      "severity": "warning",
+      "sourceLocation": {
+        "end": 824,
+        "file": "contracts/popsicle-v3-optimizer/libraries/FullMath.sol",
+        "start": 805
+      },
+      "type": "Warning"
+    },
+    {
+      "component": "general",
+      "errorCode": "5667",
+      "formattedMessage": "contracts/popsicle-v3-optimizer/libraries/FullMath.sol:116:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.\n        uint256 a,\n        ^-------^\n",
+      "message": "Unused function parameter. Remove or comment out the variable name to silence this warning.",
+      "severity": "warning",
+      "sourceLocation": {
+        "end": 4877,
+        "file": "contracts/popsicle-v3-optimizer/libraries/FullMath.sol",
+        "start": 4868
+      },
+      "type": "Warning"
+    },
+    {
+      "component": "general",
+      "errorCode": "5667",
+      "formattedMessage": "contracts/popsicle-v3-optimizer/libraries/FullMath.sol:117:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.\n        uint256 b,\n        ^-------^\n",
+      "message": "Unused function parameter. Remove or comment out the variable name to silence this warning.",
+      "severity": "warning",
+      "sourceLocation": {
+        "end": 4896,
+        "file": "contracts/popsicle-v3-optimizer/libraries/FullMath.sol",
+        "start": 4887
+      },
+      "type": "Warning"
+    },
+    {
+      "component": "general",
+      "errorCode": "5667",
+      "formattedMessage": "contracts/popsicle-v3-optimizer/libraries/FullMath.sol:118:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.\n        uint256 denominator\n        ^-----------------^\n",
+      "message": "Unused function parameter. Remove or comment out the variable name to silence this warning.",
+      "severity": "warning",
+      "sourceLocation": {
+        "end": 4925,
+        "file": "contracts/popsicle-v3-optimizer/libraries/FullMath.sol",
+        "start": 4906
+      },
+      "type": "Warning"
+    }
+  ],
+  "contracts": {
+    "contracts/popsicle-v3-optimizer/libraries/FullMath.sol:FullMath": {
+      "abi": [],
+      "methodIdentifiers": {}
+    },
+    "spec/harness/FullMathWrapper.sol:FullMathWrapper": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "a",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "b",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "denominator",
+              "type": "uint256"
+            }
+          ],
+          "name": "callMulDiv",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "mulDivResult",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "a",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "b",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "denominator",
+              "type": "uint256"
+            }
+          ],
+          "name": "callMulDivRoundingUp",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "mulDivResult",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        }
+      ],
+      "methodIdentifiers": {
+        "callMulDiv(uint256,uint256,uint256)": "3b46282d",
+        "callMulDivRoundingUp(uint256,uint256,uint256)": "9056f536"
+      }
+    }
+  },
+  "solidity_compile_status": "SOLIDITY_OK",
+  "cvl2_compile_status": "NOT_RUN"
+}
